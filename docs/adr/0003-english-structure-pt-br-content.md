@@ -6,3 +6,7 @@ Skill names, frontmatter, instructions, repo docs and commits are in English; vo
 
 - All pt-BR, names as verb + object (`escrever-roteiro`): closest to how Salmo asks, but out of step with the ecosystem and odd for technical harness skills.
 - Harness in English, content in pt-BR: breaks the best practices' advice to keep one naming pattern across a collection.
+
+## Amendment: issues and research in pt-BR
+
+Issues (wayfinder maps and tickets) and research notes in `docs/research/` are written in pt-BR. They are planning conversation and study material whose main reader is Salmo, and the discussion happens in Portuguese. Skills, ADRs, `AGENTS.md` and commits stay in English.

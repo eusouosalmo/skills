@@ -26,7 +26,7 @@ Read these before deciding on a format or following a recommendation, and cite t
 Structure in English, content that is pt-BR stays pt-BR (see `docs/adr/0003`).
 
 - **English:** skill, folder and category names; frontmatter; `SKILL.md` instructions; this file; ADRs; commits (Conventional Commits); `README.md`.
-- **pt-BR:** voice material and examples (`examples.md` of content skills), the output of content skills (state it in the skill: "Write the output in pt-BR"), and `README.pt-BR.md`, which mirrors `README.md`.
+- **pt-BR:** issues (wayfinder maps and tickets); research notes in `docs/research/`; voice material and examples (`examples.md` of content skills), the output of content skills (state it in the skill: "Write the output in pt-BR"), and `README.pt-BR.md`, which mirrors `README.md`.
 - A `description` may add pt-BR trigger words when the user is likely to ask in Portuguese.
 
 ## Layout
