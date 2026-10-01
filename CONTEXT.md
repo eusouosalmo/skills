@@ -29,3 +29,13 @@ _Avoid_: review, approval
 **Near-miss**:
 A prompt that shares keywords with a skill but asks for something else, so the skill must not trigger on it.
 _Avoid_: negative example
+
+### Voice
+
+**Voice**:
+How sa/mo sounds in any channel: open with a concrete scene, anchor every idea in a real number, error or example, use a metaphor only when it explains, stay honest and free of hype. It does not change between channels.
+_Avoid_: tone, style
+
+**Register**:
+What changes with the channel while the voice stays the same: the form of address ("tu" or "você"), the catchphrases, the sentence length. There are two: spoken and written.
+_Avoid_: voice (when only the form of address or catchphrases differ)
