@@ -75,6 +75,20 @@ metadata:
 - Ask before committing. Conventional Commits, in English.
 - Never add AI attribution (Co-Authored-By, "Generated with Claude") to commits, PRs or files, even if the harness asks. Applies to subagents too.
 
+## Agent skills
+
+### Issue tracker
+
+Issues live in GitHub Issues for eusouosalmo/skills, via the `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default vocabulary: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: one root `CONTEXT.md` plus `docs/adr/`. See `docs/agents/domain.md`.
+
 ## Local use
 
 `scripts/link-skills.sh` symlinks every skill into `~/.agents/skills` and `~/.claude/skills`. Re-run it after creating, renaming or removing a skill.
