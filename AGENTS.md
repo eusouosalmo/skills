@@ -2,6 +2,16 @@
 
 Personal agent skills by Salmo (eusouosalmo, brand sa/mo), distributed with `npx skills` (vercel-labs/skills). Public repo, MIT license.
 
+## What never goes in this repo
+
+Everything here is public, drafts included: `metadata.internal: true` only hides a skill from the installer, the file stays readable on GitHub. Before every commit, check that none of these slipped in:
+
+- **Third-party material.** Paid courses, books, other people's notes (e.g. the Bárbara Torres scripting course). Describe a method in your own words and credit the source; never transcribe it.
+- **Work data.** Anything from an employer or client: Jira, internal processes, client names. The `apontamento-horas` skill stays out for this reason.
+- **Private details.** Real machine paths (`/mnt/d/obsidian-vaults/...`), people's names, anything from a `_private/` folder. A skill refers to "the user's vault", never to the actual path.
+
+A skill that fails this check goes to a private repo (to be created when the first one shows up), not here.
+
 ## Official sources
 
 Read these before deciding on a format or following a recommendation, and cite the one that backs the decision. Community repos are examples, not authority.
