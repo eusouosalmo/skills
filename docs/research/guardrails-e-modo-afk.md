@@ -2,7 +2,7 @@
 
 Resumo: nenhuma camada sozinha protege um repositório quando o agente roda sem supervisão. A doc oficial deixa claro que permission rules e hooks olham o texto do comando e podem ser contornados, e que só o isolamento (sandbox, container, VM) e as proteções do lado do servidor (branch protection, tokens com escopo) seguram de verdade. A comunidade combina várias camadas: hook que bloqueia git destrutivo, container, worktree, testes como backpressure, limite de iterações e revisão com contexto limpo.
 
-Pesquisa feita em 2026-10-01 para o ticket [#7](https://github.com/eusouosalmo/skills/issues/7). A doc do Claude Code muda rápido e cita versões (v2.1.x); confira a página antes de decidir.
+Pesquisa feita em 2026-10-01 para o ticket [#7](https://github.com/eusouosalmo/skills/issues/7); a seção 12 (outros agentes) foi acrescentada em 2026-10-02. A doc do Claude Code muda rápido e cita versões (v2.1.x); confira a página antes de decidir.
 
 ## Sumário
 
@@ -17,7 +17,8 @@ Pesquisa feita em 2026-10-01 para o ticket [#7](https://github.com/eusouosalmo/s
 9. [Deny rules x hooks](#9-deny-rules-x-hooks)
 10. [Onde as fontes concordam e divergem](#10-onde-as-fontes-concordam-e-divergem)
 11. [Perguntas abertas para o ticket de desenho](#11-perguntas-abertas-para-o-ticket-de-desenho)
-12. [Fontes](#12-fontes)
+12. [Guardrails em outros agentes](#12-guardrails-em-outros-agentes)
+13. [Fontes](#13-fontes)
 
 ## 1. Método e níveis de confiança
 
@@ -371,7 +372,7 @@ O ponto mais delicado é a última linha. Em AFK, um hook que falha aberto é pi
 | Expressividade | Prefixo com `*` | Qualquer lógica: parse, contexto, mensagem explicativa, log |
 | Mensagem ao modelo | Genérica | Customizável pelo stderr ou `permissionDecisionReason` |
 | Carregado com `--bare` | Só via `--settings` | Só via `--settings` |
-| Portabilidade para outros agentes | Só Claude Code | O script pode servir a outros agentes que aceitam hooks no formato do Claude Code (dcg e CC Safety Net fazem isso) |
+| Portabilidade para outros agentes | Só Claude Code; cada agente tem sintaxe própria (seção 12) | O script pode servir a outros agentes que aceitam hooks no formato do Claude Code (dcg e CC Safety Net fazem isso; seção 12) |
 
 As fontes convergem num ponto. Deny rule e hook são a mesma categoria de defesa, decisão sobre o texto antes de executar, e servem contra erro do modelo. Contra comando escrito de outro jeito, a doc oficial manda para sandbox e isolamento.
 
@@ -420,7 +421,102 @@ Sem decisão aqui; só o que precisa ser decidido.
 13. Como detectar a falha silenciosa (caminho errado, sem `chmod +x`, sem `jq`) num run AFK em que ninguém vê o aviso?
 14. Os evals da skill (formato ainda não definido no mapa) entram nesse teste ou ficam separados?
 
-## 12. Fontes
+## 12. Guardrails em outros agentes
+
+Pesquisa feita em 2026-10-02. A pergunta: a skill `setting-up-git-guardrails` consegue instalar, por projeto, o bloqueio de git destrutivo nos agentes que o `npx skills` atende, e não só no Claude Code? Fontes: README e código do vercel-labs/skills (via `gh api`), a doc oficial de cada agente, os READMEs e exemplos nos repositórios oficiais do Cline e do Gemini CLI, e os READMEs do dcg e do CC Safety Net.
+
+Essas docs mudam ainda mais rápido que a do Claude Code. Durante a pesquisa: a doc do Codex redireciona para learn.chatgpt.com, o Windsurf virou Devin Desktop (docs.devin.ai), o Kiro trocou o formato de hooks na CLI 3.0 e IDE 1.0, e o Cline levou a doc de hooks para o SDK. Confira cada link antes de implementar.
+
+### 12.1 O que o instalador faz e o que não faz
+
+- **O que é:** o `npx skills add` instala a pasta da skill no diretório de skills de cada agente escolhido. A tabela "Supported Agents" lista cerca de 70 agentes. Muitos dividem `.agents/skills/` no projeto (Amp, Codex, Cursor, Gemini CLI, GitHub Copilot, OpenCode, Cline, Kilo, Droid e outros); o Claude Code usa `.claude/skills/`, o Windsurf `.windsurf/skills/`, o Kiro CLI `.kiro/skills/`, o Roo `.roo/skills/`.
+- **Tabela "Compatibility" do README:** `allowed-tools` funciona em quase todos; `context: fork` só no Claude Code; a linha "Hooks" diz Yes só para Claude Code, Cline e Kiro CLI. O README não explica o que conta como "Hooks" nessa linha, e ela está atrás das docs dos agentes: Codex, Cursor, Gemini CLI e Copilot têm hooks hoje e aparecem como No. Leia como "o instalador não garante nada sobre hooks", não como "o agente não tem hooks".
+- **O que o código faz:** copia ou cria symlink da pasta para uma cópia canônica, pula `.git`, `__pycache__` e `metadata.json`, e aplica no destino o modo do arquivo de origem (`chmod`), então um `scripts/*.sh` executável chega executável. Além da pasta, grava só os lockfiles (`skills-lock.json` no projeto e `~/.agents/.skill-lock.json` no global). Não achei código que toque settings, hooks ou permissões de agente em `src/installer.ts`, `src/local-lock.ts` e `src/skill-lock.ts`.
+- **Fonte:** [vercel-labs/skills](https://github.com/vercel-labs/skills) (README e `src/`).
+- **Confiança:** confirmado.
+
+Consequências para o desenho:
+
+- Instalar a skill não instala o guardrail. Quem registra o hook é o agente, ao seguir a skill, editando o arquivo de config de cada agente.
+- O caminho do script muda por agente (`.claude/skills/...` ou `.agents/skills/...`), e com symlink aponta para a cópia canônica. Um hook que aponte para dentro da pasta da skill quebra se ela for removida ou movida, e na maioria dos agentes isso falha aberto (tabela da seção 12.2). Copiar o script para um caminho próprio do projeto evita a dependência; é inferência minha, nenhuma fonte trata disso.
+
+### 12.2 Tabela comparativa
+
+"Libera" quer dizer que o comando segue quando o hook sai com outro código, quebra ou estoura o tempo. "Por projeto" é o arquivo que pode ir commitado no repositório.
+
+| Agente | Hook pré-execução | Formato de entrada | Como bloqueia | Deny rules nativas | Onde configura por projeto | Fonte | Confiança |
+| :- | :- | :- | :- | :- | :- | :- | :- |
+| Claude Code | `PreToolUse`, matcher `Bash` | JSON no stdin, `tool_input.command` | Exit 2 com stderr, ou `hookSpecificOutput.permissionDecision: "deny"`; outro código libera | `permissions.deny`, `Bash(git push *)` | `.claude/settings.json` | Seção 3 | confirmado |
+| OpenAI Codex CLI | `PreToolUse`; cobre `Bash`, `apply_patch`, MCP | JSON no stdin, `tool_name: "Bash"`, `tool_input.command`, mais `turn_id` | Exit 2 com stderr, ou `permissionDecision: "deny"`; erro e timeout liberam | Rules (experimental) em Starlark: `prefix_rule(pattern = ["git", "push"], decision = "forbidden")` | `.codex/hooks.json` ou `.codex/config.toml`; rules em `.codex/rules/*.rules`. Só valem com o projeto confiável, e cada hook precisa ser revisado e confiado (por hash) | [hooks](https://learn.chatgpt.com/docs/hooks), [rules](https://learn.chatgpt.com/docs/agent-configuration/rules) | confirmado |
+| Cursor (IDE e CLI) | `beforeShellExecution` (shell e MCP) e `preToolUse` genérico; também roda hooks do Claude Code | `beforeShellExecution`: `command`, `cwd`, `sandbox` | Exit 2, ou `{"permission": "deny"}` com `user_message` e `agent_message`; outro código libera, a não ser com `failClosed: true` | Só o Cursor CLI: `permissions.deny` com `Shell(git push)` | `.cursor/hooks.json` (`version: 1`); ou `.claude/settings.json` via Third-Party Imports, ligado por padrão; deny do CLI em `.cursor/cli.json` | [hooks](https://cursor.com/docs/agent/hooks), [third-party hooks](https://cursor.com/docs/reference/third-party-hooks), [CLI permissions](https://cursor.com/docs/cli/reference/permissions) | confirmado |
+| Gemini CLI | `BeforeTool`, matcher regex, ferramenta `run_shell_command` | JSON no stdin, `tool_name`, `tool_input.command` | Exit 2 com stderr, ou exit 0 com `{"decision": "deny", "reason": ...}`; outro código só avisa; stdout que não é JSON vira allow | Policy engine em TOML (`commandPrefix`, `decision = "deny"`), mas a camada de workspace (`.gemini/policies/`) está desligada; só user e admin funcionam | `hooks` em `.gemini/settings.json`; o Gemini avisa quando um hook do projeto muda | [hooks](https://geminicli.com/docs/hooks/), [reference](https://geminicli.com/docs/hooks/reference/), [policy engine](https://geminicli.com/docs/reference/policy-engine/) | confirmado |
+| GitHub Copilot CLI (e cloud agent) | `preToolUse` (camelCase) ou `PreToolUse` (PascalCase, semântica do Claude) | camelCase: `toolName: "bash"`, `toolArgs.command`; PascalCase: `tool_name` com o nome do Claude e `tool_input` | `{"permissionDecision": "deny", "permissionDecisionReason": ...}`, ou exit 2. **Qualquer outro código não zero também nega**; só timeout libera | Só por sessão: `--deny-tool='shell(git push)'`, que vence `--allow-all`; aprovações ficam em `~/.copilot`, não no projeto | `.github/hooks/*.json` (`version: 1`); também lê `.claude/settings.json` e `.claude/settings.local.json` do repositório | [hooks configuration](https://docs.github.com/en/copilot/reference/hooks-configuration), [allowing tools](https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/allowing-tools) | confirmado |
+| GitHub Copilot no VS Code (agent, em Preview) | `PreToolUse` | `tool_name`, `tool_input`, `tool_use_id`. O nome da ferramenta de terminal não está documentado; o dcg relata `runTerminalCommand` e `run_in_terminal`, com `tool_input.command` | Exit 2, ou `hookSpecificOutput.permissionDecision: "deny"`; outro código só avisa | Não pesquisado | `.github/hooks/*.json`; `.claude/settings.json` só com `chat.useClaudeHooks`, que a doc diz vir desligado. No formato do Claude o matcher é ignorado: todo hook do evento roda | [hooks](https://code.visualstudio.com/docs/copilot/customization/hooks), [hooks reference](https://code.visualstudio.com/docs/agents/reference/hooks-reference) | confirmado (formato); relato (nome da ferramenta) |
+| OpenCode | Sem hook de comando; plugin JS/TS com `tool.execute.before` | `input.tool === "bash"`, `output.args.command` | Lançar um `Error` no plugin | `permission.bash` com glob: `{"*": "ask", "git push *": "deny"}`; a última regra que casa vence | `opencode.json`; plugins em `.opencode/plugins/` | [permissions](https://opencode.ai/docs/permissions/), [plugins](https://opencode.ai/docs/plugins/) | confirmado |
+| Windsurf, agora Devin Desktop (Cascade) | `pre_run_command` | JSON no stdin, `tool_info.command_line`, `tool_info.cwd` | Exit 2, o Cascade lê o stderr; outro código libera | Deny list de terminal só de usuário e de time (admin); no modo Turbo ela faz pedir aprovação, não bloqueia | `.devin/hooks.json` (legado `.windsurf/hooks.json`) | [Cascade hooks](https://docs.devin.ai/desktop/cascade/hooks), [terminal](https://docs.devin.ai/desktop/terminal) | confirmado |
+| Cline (extensão VS Code) | Arquivo executável `PreToolUse`, sem extensão, com shebang | JSON no stdin, `preToolUse.toolName`, `preToolUse.parameters` (nome da ferramenta de shell não documentado) | Stdout `{"cancel": true, "errorMessage": ...}`; exit code não bloqueia | Não pesquisado | `.clinerules/hooks/PreToolUse`, depois de ligar "Enable Hooks"; sem suporte a Windows | [.clinerules/hooks/README.md](https://github.com/cline/cline/blob/main/.clinerules/hooks/README.md) | confirmado (README no repositório oficial) |
+| Cline CLI e SDK | `PreToolUse` em `.cline/hooks/`, ou plugin TS com `beforeTool` | Exemplo oficial: `tool_call.name == "run_commands"`, `tool_call.input.command` | Stdout `{"cancel": true, "errorMessage": ...}` | Não pesquisado | `.cline/hooks/`, `.cline/plugins/` | [sdk/examples/hooks](https://github.com/cline/cline/tree/main/sdk/examples/hooks), [plugins](https://docs.cline.bot/customization/plugins) | relato (exemplo, não referência) |
+| Amp | Sem hook de comando; plugin TS com `amp.on('tool.call')` | `amp.helpers.shellCommandFromToolCall(event).command` | Retornar `{action: 'reject-and-continue', message}` | A doc atual de settings não tem regra de shell, só `amp.mcpPermissions` | Plugins em `.amp/plugins/`; settings em `.amp/settings.json` | [plugins](https://ampcode.com/docs/customize/plugins), [configuration](https://ampcode.com/docs/cli/settings) | confirmado |
+| Kiro (IDE 1.0+, CLI 3.0+) | `PreToolUse`, matcher `shell` ou `execute_bash` | JSON no stdin, `hook_event_name`, `cwd`, `tool_name`, `tool_input`. A doc só mostra o exemplo de MCP; `tool_input.command` para shell é inferência | Exit 2 com stderr (aba CLI); a aba IDE diz que qualquer código não zero bloqueia | `permissions` com `capability: shell`, `match: ["git push *"]`, `effect: deny`; deny vence sempre e separa compound commands | `.kiro/hooks/*.json` (`version: "v1"`); permissions no `permissions` de `.kiro/agents/*.json`. A camada de workspace fica fora do repositório (`~/.kiro/workspace-roots/<hash>/`) | [hooks](https://kiro.dev/docs/hooks/), [actions](https://kiro.dev/docs/hooks/actions/), [types](https://kiro.dev/docs/hooks/types/), [permissions](https://kiro.dev/docs/permissions/) | confirmado (formato parcial) |
+
+### 12.3 Compatibilidade com o formato do Claude Code
+
+- **Leem o `.claude/settings.json` do repositório:** Cursor (por padrão; troca `Bash` por `Shell` e aceita exit 2 e `hookSpecificOutput`), Copilot CLI (junto com `.github/copilot/settings.json`) e Copilot no VS Code (só com `chat.useClaudeHooks`, e ignorando o matcher). Confirmado. O dcg relata que o Grok também lê e que o VS Code atual já carrega `~/.claude/settings.json` por padrão, o que diverge da doc do VS Code. Relato.
+- **Mesmo formato, outro arquivo:** Codex, Gemini CLI e Kiro recebem `tool_name` e `tool_input` e bloqueiam com exit 2. O Gemini tem `gemini hooks migrate --from-claude`, que converte uma vez (`Bash` vira `run_shell_command`), e expõe `CLAUDE_PROJECT_DIR` como alias. O Codex rejeita campos desconhecidos na saída JSON, segundo o dcg; exit 2 evita o problema.
+- **Formato próprio:** Cursor nativo (`command`), Copilot camelCase (`toolArgs`), Windsurf (`tool_info.command_line`), Cline (`cancel` no stdout), OpenCode e Amp (plugin TS).
+
+Consequência: um único hook no `.claude/settings.json` já alcança Claude Code, Cursor e Copilot CLI. Mas o mesmo script recebe nomes de ferramenta diferentes (`Bash`, `Shell`, `bash`), e se o hook também estiver na config nativa do agente ele roda duas vezes.
+
+### 12.4 Sandbox por agente
+
+- **Claude Code:** seção 3.8.
+- **Codex:** `workspace-write` é o padrão em projeto versionado. Rede desligada por padrão, e `.git`, `.agents` e `.codex` ficam somente leitura dentro do workspace. Fonte: [agent approvals and security](https://learn.chatgpt.com/docs/agent-approvals-security). Confirmado. Inferência minha: isso barra o push (por rede) e o que precisa gravar em `.git` (commit, `reset`, `branch -D`), mas não o que só reescreve a árvore de trabalho, como `checkout -- .` ou `clean -f`.
+- **Cursor:** o sandbox de terminal bloqueia rede e acesso a arquivo não autorizado, com `sandbox.json` por projeto; a página não fala de `.git`. Fonte: [terminal](https://cursor.com/docs/agent/terminal). Confirmado quanto à existência.
+- **Gemini CLI:** `tools.sandbox` (docker, podman ou perfil Seatbelt) e `tools.sandboxNetworkAccess`, `false` por padrão. Fonte: [configuration](https://github.com/google-gemini/gemini-cli/blob/main/docs/reference/configuration.md). Confirmado.
+- **Copilot CLI:** a doc recomenda sandbox local ou sessão na nuvem antes de liberar tudo, sem sandbox embutido descrito. Confirmado.
+- **Kiro:** existe a capability `sandbox_network`; não aprofundei.
+- **Windsurf, Cline, Amp, OpenCode:** não achei sandbox de comando nas páginas lidas.
+
+### 12.5 Ferramentas multiagente da comunidade
+
+Só o padrão, não para adotar.
+
+- **dcg:** um binário que decide e várias entradas. Detecta o agente pelo payload (`turn_id` para Codex, `hookEventName` em camelCase para Grok, envelope `toolCall` para Antigravity) e troca a saída: para o Codex, só os campos de deny documentados; para o Hermes, `{"decision": "block"}`, porque lá código não zero não interrompe. No Cursor usa um script ponte que falha fechado; no OpenCode, um plugin. Para Aider e Continue diz que não há interceptação e sugere git pre-commit. Instala no escopo do usuário, não do projeto. Relata que os `PreToolUse` do Codex ainda não pegam todo caminho de `unified_exec`. Fonte: [README](https://github.com/Dicklesworthstone/destructive_command_guard). Relato.
+- **CC Safety Net:** um comando de hook com flag por agente (`cc-safety-net hook --cursor`), empacotado no formato de cada ecossistema: plugin do Amp, extensão do Gemini, marketplace para Claude Code, Codex e Copilot, plugin do OpenCode. No Cursor grava `failClosed: true`. A política vai versionada em `.cc-safety-net/`. Fontes: [README](https://github.com/kenryu42/cc-safety-net), [installation](https://ccsafetynet.com/docs/installation). Relato.
+- **Padrão comum:** um núcleo que decide e adaptadores finos de entrada e saída por agente. O agente é identificado pelo formato do payload (dcg) ou por uma flag explícita no comando registrado (CC Safety Net). Convenção (dois projetos independentes).
+
+### 12.6 Conclusão prática: adaptadores mínimos
+
+Exit 2 com motivo no stderr bloqueia em Claude Code, Codex, Gemini CLI, Cursor, Copilot (CLI e VS Code), Windsurf e Kiro. Então o script em bash precisa variar quase só na leitura da entrada. Adaptadores mínimos:
+
+| Adaptador | Agentes | Onde está o comando | Sinal de bloqueio | Falhar fechado |
+| :- | :- | :- | :- | :- |
+| Formato Claude | Claude Code, Codex, Gemini CLI, Kiro, Copilot PascalCase, VS Code, Cursor via `.claude` | `.tool_input.command` | Exit 2 com stderr | Exit 2 também em erro de parse |
+| Cursor nativo | Cursor | `.command` | Exit 2 | Exit 2, mais `failClosed: true` no `hooks.json` para crash e timeout |
+| Copilot camelCase | Copilot CLI e cloud agent | `.toolArgs.command` | Exit 2 | Já nega em qualquer código não zero |
+| Windsurf | Windsurf, Devin Desktop | `.tool_info.command_line` | Exit 2 | Exit 2 em erro de parse |
+| Cline | Cline (extensão) | `.preToolUse.parameters.command` | Stdout `{"cancel": true, "errorMessage": "..."}` | O script precisa pegar todo erro e imprimir `cancel`; exit code não bloqueia |
+| Plugin TS | OpenCode, Amp | `output.args.command`, `shellCommandFromToolCall(event)` | Wrapper que chama o script e converte exit 2 em `throw` ou `reject-and-continue` | Tratar falha ao chamar o script como bloqueio |
+
+Dois cuidados que valem para todos:
+
+1. **Filtrar pelo nome da ferramenta dentro do script.** O VS Code ignora o matcher no formato do Claude, o `preToolUse` do Cursor é genérico, e no Codex o `apply_patch` também traz `tool_input.command`, com o texto do patch. Nomes de shell vistos: `Bash`, `Shell`, `bash`, `run_shell_command`, `execute_bash`, `shell`, `runTerminalCommand`, `run_in_terminal`.
+2. **Ligar o hook no projeto pede um passo do usuário em vários agentes:** confiar o hook no `/hooks` do Codex, aceitar o aviso de fingerprint do Gemini, ligar "Enable Hooks" no Cline, ligar `chat.useClaudeHooks` no VS Code. Sem esse passo o guardrail não roda, e nada avisa num run AFK.
+
+Onde o hook local não resolve sozinho:
+
+- **Sem hook de shell por projeto:** OpenCode e Amp só por plugin TS. O OpenCode compensa com deny nativa por projeto (`opencode.json`). O Amp não tem regra de shell nativa.
+- **Sem deny nativa por projeto:** Gemini CLI (workspace policies desligadas), Copilot CLI (só flag por sessão), Windsurf (deny list de usuário ou time, e só pede aprovação). Nesses fica só o hook.
+- **Sem proteção local nenhuma:** Cline no Windows. Pelos relatos do dcg, também Aider e Continue. Os outros agentes da lista do instalador (Zed, Warp, Roo Code, Goose, Junie e afins) não foram verificados aqui. Para eles sobram a camada do servidor (seção 7) e o isolamento.
+
+Perguntas novas para o ticket de desenho:
+
+1. Quais agentes a skill suporta na primeira versão? Um recorte natural: os que bloqueiam com exit 2 e leem `tool_input.command`.
+2. O script fica dentro da pasta da skill (caminho varia por agente e pode sumir num `npx skills remove`) ou é copiado para um caminho fixo do projeto?
+3. Registrar só no `.claude/settings.json` e aproveitar a compatibilidade (Cursor, Copilot CLI) ou sempre na config nativa de cada agente, evitando execução dupla?
+4. OpenCode e Amp entram com wrapper TS, ou só com a deny nativa do OpenCode e um aviso de que o Amp fica sem guardrail local?
+
+## 13. Fontes
 
 Doc oficial do Claude Code (consultada em 2026-10-01):
 
@@ -455,6 +551,40 @@ Comunidade:
 - Geoffrey Huntley, Ralph: https://ghuntley.com/ralph/
 - destructive_command_guard: https://github.com/Dicklesworthstone/destructive_command_guard
 - CC Safety Net: https://github.com/kenryu42/cc-safety-net
+
+Outros agentes (consultados em 2026-10-02, seção 12):
+
+- vercel-labs/skills, README e código: https://github.com/vercel-labs/skills
+- Codex, hooks: https://learn.chatgpt.com/docs/hooks
+- Codex, rules: https://learn.chatgpt.com/docs/agent-configuration/rules
+- Codex, approvals e sandbox: https://learn.chatgpt.com/docs/agent-approvals-security
+- Cursor, hooks: https://cursor.com/docs/agent/hooks
+- Cursor, third-party hooks: https://cursor.com/docs/reference/third-party-hooks
+- Cursor, CLI permissions: https://cursor.com/docs/cli/reference/permissions
+- Cursor, terminal e sandbox: https://cursor.com/docs/agent/terminal
+- Gemini CLI, hooks: https://geminicli.com/docs/hooks/
+- Gemini CLI, hooks reference: https://geminicli.com/docs/hooks/reference/
+- Gemini CLI, policy engine: https://geminicli.com/docs/reference/policy-engine/
+- Gemini CLI, configuration: https://github.com/google-gemini/gemini-cli/blob/main/docs/reference/configuration.md
+- Gemini CLI, migração de hooks do Claude: https://github.com/google-gemini/gemini-cli/blob/main/packages/cli/src/commands/hooks/migrate.ts
+- GitHub Copilot, hooks configuration: https://docs.github.com/en/copilot/reference/hooks-configuration
+- GitHub Copilot CLI, allowing tools: https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/allowing-tools
+- VS Code, agent hooks: https://code.visualstudio.com/docs/copilot/customization/hooks
+- VS Code, hooks reference: https://code.visualstudio.com/docs/agents/reference/hooks-reference
+- OpenCode, permissions: https://opencode.ai/docs/permissions/
+- OpenCode, plugins: https://opencode.ai/docs/plugins/
+- Windsurf (Devin Desktop), Cascade hooks: https://docs.devin.ai/desktop/cascade/hooks
+- Windsurf (Devin Desktop), terminal: https://docs.devin.ai/desktop/terminal
+- Cline, hooks da extensão: https://github.com/cline/cline/blob/main/.clinerules/hooks/README.md
+- Cline, exemplos de hooks do SDK: https://github.com/cline/cline/tree/main/sdk/examples/hooks
+- Cline, plugins: https://docs.cline.bot/customization/plugins
+- Amp, plugins: https://ampcode.com/docs/customize/plugins
+- Amp, configuration: https://ampcode.com/docs/cli/settings
+- Kiro, hooks: https://kiro.dev/docs/hooks/
+- Kiro, hook actions: https://kiro.dev/docs/hooks/actions/
+- Kiro, hook types: https://kiro.dev/docs/hooks/types/
+- Kiro, permissions: https://kiro.dev/docs/permissions/
+- CC Safety Net, installation: https://ccsafetynet.com/docs/installation
 
 Outras:
 
