@@ -53,3 +53,17 @@ _Avoid_: rule, convention (a guardrail is enforced, not asked for)
 **Verification**:
 Something that tells whether the work is right or done: tests, type checks, lint, review, quality gates. Fed back to the agent so it can correct itself. A blocking verification needs a guardrail so the agent cannot disarm it (`--no-verify`, deleting tests).
 _Avoid_: guardrail, backpressure, sensor
+
+### Script
+
+**Script**:
+The production script for a short video: the spoken lines and the visual for each block, alternative hooks, and the claims to check before recording.
+_Avoid_: roteiro final, draft (a draft is any unreviewed version)
+
+**Teleprompter text**:
+Only the spoken lines of a script, one sentence per line, with no labels, plus the estimated duration. What is read while recording.
+_Avoid_: script (when only the lines are meant)
+
+**Hook**:
+The opening of a video that keeps the promise of its first frame or title, so the viewer stays. In a follower-question video, the question itself.
+_Avoid_: intro, gancho genérico
