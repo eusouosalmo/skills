@@ -7,7 +7,7 @@ A public collection of agent skills and the method used to create and evaluate t
 ### Creating a skill
 
 **Observed failure**:
-Something an agent got wrong while doing a real task without the skill (or with its previous version). The only valid reason to create or change a skill.
+Something that went wrong when actually run, never only imagined: an agent doing a real task without the skill (or with its previous version), or, when there is no such case yet, the existing tool or community skill for the job run against realistic inputs. The only valid reason to create or change a skill.
 _Avoid_: imagined problem, nice-to-have
 
 **Baseline**:
