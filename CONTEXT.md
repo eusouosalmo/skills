@@ -39,3 +39,17 @@ _Avoid_: tone, style
 **Register**:
 What changes with the channel while the voice stays the same: the form of address ("tu" or "você"), the catchphrases, the sentence length. There are two: spoken and written.
 _Avoid_: voice (when only the form of address or catchphrases differ)
+
+### Harness
+
+**Harness**:
+Everything set up in a project around the coding agent so it gets things right more often: context and spec on the way in, the loop in the middle, verification on the way out, plus guardrails, state between iterations and observability. Built per project, improved from observed failures. Not the agent program itself.
+_Avoid_: setup, scaffolding
+
+**Guardrail**:
+Something that stops an action before it runs: a deny rule, a blocking hook, branch protection on the server. Says nothing about whether the work is right.
+_Avoid_: rule, convention (a guardrail is enforced, not asked for)
+
+**Verification**:
+Something that tells whether the work is right or done: tests, type checks, lint, review, quality gates. Fed back to the agent so it can correct itself. A blocking verification needs a guardrail so the agent cannot disarm it (`--no-verify`, deleting tests).
+_Avoid_: guardrail, backpressure, sensor
