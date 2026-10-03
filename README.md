@@ -24,11 +24,10 @@ npx skills@latest add eusouosalmo/skills --skill <name>
 
 ## Skills
 
-No skills published yet. They show up as the need shows up in real work.
+- [creating-skills](skills/harness/creating-skills/SKILL.md) (beta): creates or changes a skill from an observed failure, checked with evals.
 
 In draft, hidden from the installer:
 
-- [creating-skills](skills/harness/creating-skills/SKILL.md): creating or changing a skill from an observed failure, checked with evals.
 - [setting-up-git-guardrails](skills/harness/setting-up-git-guardrails/SKILL.md): per-project git guardrails for coding agents, with interactive and AFK profiles.
 
 | Category | What it holds |

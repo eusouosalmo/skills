@@ -2,8 +2,7 @@
 name: creating-skills
 description: Creates or changes an agent skill from an observed failure, checked with evals against a baseline. Use when the user asks to create a skill (criar skill), fix or improve an existing one, or turn instructions they keep repeating into a skill.
 metadata:
-  status: draft
-  internal: true
+  status: beta
 ---
 
 # Creating skills
