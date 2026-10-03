@@ -1,6 +1,6 @@
 ---
 name: writing-captions
-description: Writes Instagram captions for sa/mo videos from a script or a topic. Use when the user asks for a caption, legenda, or post text for a video.
+description: Writes Instagram captions for eusouosalmo videos from a script or a topic. Use when the user asks for a caption, legenda, or post text for a video.
 metadata:
   status: draft
   internal: true

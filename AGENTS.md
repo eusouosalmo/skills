@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Personal agent skills by Salmo (eusouosalmo, brand sa/mo), distributed with `npx skills` (vercel-labs/skills). Public repo, MIT license.
+Personal agent skills by Salmo (eusouosalmo), distributed with `npx skills` (vercel-labs/skills). Public repo, MIT license.
 
 ## What never goes in this repo
 
@@ -79,7 +79,7 @@ metadata:
 - **A skill never points to another skill's files.** Only the skill folder gets installed; to use another skill, call it by name ("use the `applying-voice` skill"). See `docs/adr/0002`.
 - No em dashes, no unicode arrows, no decorative emoji, in any language.
 - pt-BR text with full accents. Technical terms stay in English, without quotes or italics.
-- Never write "samo": the brand is "sa/mo", the handle is "eusouosalmo".
+- Refer to the user and their online profiles by the handle "eusouosalmo".
 
 ## Git
 

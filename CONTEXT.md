@@ -33,7 +33,7 @@ _Avoid_: negative example
 ### Voice
 
 **Voice**:
-How sa/mo sounds in any channel: open with a concrete scene, anchor every idea in a real number, error or example, use a metaphor only when it explains, stay honest and free of hype. It does not change between channels.
+How eusouosalmo sounds in any channel: open with a concrete scene, anchor every idea in a real number, error or example, use a metaphor only when it explains, stay honest and free of hype. It does not change between channels.
 _Avoid_: tone, style
 
 **Register**:
