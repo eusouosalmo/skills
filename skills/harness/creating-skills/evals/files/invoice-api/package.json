@@ -1,0 +1,4 @@
+{
+  "name": "invoice-api",
+  "scripts": { "format": "prettier --write .", "test": "vitest" }
+}

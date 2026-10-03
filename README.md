@@ -26,10 +26,12 @@ npx skills@latest add eusouosalmo/skills --skill <name>
 
 No skills published yet. They show up as the need shows up in real work.
 
+In draft, hidden from the installer: [creating-skills](skills/harness/creating-skills/SKILL.md), creating or changing a skill from an observed failure, checked with evals.
+
 | Category | What it holds |
 |---|---|
 | [content](skills/content/README.md) | Writing, video scripts, voice and brand. Output in pt-BR |
-| [harness](skills/harness/README.md) | Setting up a repo to work with AI safely, including unattended (AFK) runs |
+| [harness](skills/harness/README.md) | Setting up a repo to work with AI safely, including unattended (AFK) runs, and creating the skills it uses |
 
 ## How this repo works
 

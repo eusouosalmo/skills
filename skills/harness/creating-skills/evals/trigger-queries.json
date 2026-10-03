@@ -1,0 +1,8 @@
+[
+  { "query": "cria uma skill que transforma meus roteiros em legenda de Instagram", "should_trigger": true },
+  { "query": "the deploy skill keeps skipping the migration step, can you fix the skill?", "should_trigger": true },
+  { "query": "toda vez eu colo as mesmas instruções de release no chat, vira isso uma coisa reutilizável pro agente", "should_trigger": true },
+  { "query": "instala a skill find-skills do vercel-labs aqui no projeto", "should_trigger": false },
+  { "query": "usa a skill de code-review nessa branch", "should_trigger": false },
+  { "query": "atualiza o AGENTS.md para dizer que os commits seguem Conventional Commits", "should_trigger": false }
+]

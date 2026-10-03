@@ -1,0 +1,56 @@
+{
+  "skill_name": "creating-skills",
+  "evals": [
+    {
+      "id": 1,
+      "name": "create-without-observed-failure",
+      "prompt": "cria uma skill para revisar PR",
+      "setup": "Copy evals/files/invoice-api into a fresh git repository with no AGENTS.md or CLAUDE.md and run the prompt from its root. The repository has no pull requests.",
+      "files": [
+        "evals/files/invoice-api"
+      ],
+      "expected_output": "No SKILL.md is written from an imagined problem. The agent either asks for a real case (a past review that went wrong, a real PR) or runs the task without the skill on realistic input and records where it failed. Only after that does it write evals/evals.json, run the baseline in a clean-context subagent, and then write SKILL.md.",
+      "assertions": [
+        "Before any SKILL.md exists, the run shows an observed failure: either reported by the user or produced by running the task without the skill on realistic input",
+        "If a SKILL.md was written, evals/evals.json was written before it",
+        "If a SKILL.md was written, a baseline run (task without the skill, in a clean context) is recorded before it",
+        "Every description written follows the form 'Does X. Use when Y.'"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 2,
+      "name": "change-after-reported-failure",
+      "prompt": "a skill writing-captions errou: as hashtags da legenda saíram em inglês (tá em legenda-com-erro.md). ajusta",
+      "setup": "In a clone of this repository, place evals/files/writing-captions/SKILL.fixture.md at skills/content/writing-captions/SKILL.md, evals.fixture.json at skills/content/writing-captions/evals/evals.json and failing-caption.md at legenda-com-erro.md, commit, then run the prompt.",
+      "files": [
+        "evals/files/writing-captions"
+      ],
+      "expected_output": "A new eval scenario reproducing the English hashtags is added to the skill's evals.json. The current version is snapshotted and run on it as the baseline before SKILL.md changes. The SKILL.md change is the smallest one that fixes the failure. Every existing scenario is run again with the changed skill and still passes.",
+      "assertions": [
+        "The skill's evals.json gains a new scenario (new id) whose prompt reproduces the reported failure",
+        "The current version of the skill is run on the new scenario as the baseline before SKILL.md is edited",
+        "The SKILL.md diff touches only lines about hashtags",
+        "Every scenario that existed before the change is run again with the changed skill and its assertions pass"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 3,
+      "name": "request-that-is-not-a-skill",
+      "prompt": "cria uma skill para sempre rodar o formatter antes do commit",
+      "setup": "Copy evals/files/invoice-api into a fresh git repository with no AGENTS.md or CLAUDE.md and run the prompt from its root.",
+      "files": [
+        "evals/files/invoice-api"
+      ],
+      "expected_output": "The agent explains that running the formatter before every commit is mechanical and checkable by code, so it belongs in a git pre-commit hook or an agent hook, and offers to set that up. No skill is created or planned.",
+      "assertions": [
+        "No SKILL.md is created anywhere",
+        "The answer names a git pre-commit hook or an agent hook as the place for the rule",
+        "The answer gives the reason: the rule is mechanical and can be checked by code, so a skill cannot guarantee it",
+        "No next step in the answer is writing a skill"
+      ],
+      "human_feedback": ""
+    }
+  ]
+}

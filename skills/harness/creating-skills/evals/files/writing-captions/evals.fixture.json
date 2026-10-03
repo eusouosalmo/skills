@@ -1,0 +1,29 @@
+{
+  "skill_name": "writing-captions",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "escreve a legenda pro vídeo sobre por que eu parei de usar o modo YOLO do Claude Code. roteiro: abri o vídeo contando que o agente apagou minha pasta de testes numa sexta à noite; mostro o deny rule que adicionei e o hook que bloqueia rm -rf.",
+      "expected_output": "A pt-BR caption with a hook line, two or three short paragraphs grounded in the deleted-tests story, a closing question and 3 to 5 lowercase hashtags.",
+      "assertions": [
+        "The caption is in pt-BR",
+        "The caption is under 1,000 characters",
+        "The first line restates the hook (the deleted test folder)",
+        "The caption ends with a question before the hashtags",
+        "There are 3 to 5 hashtags, all lowercase"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 2,
+      "prompt": "legenda pro reels: 3 erros que eu cometi escrevendo AGENTS.md",
+      "expected_output": "Since there is no script, the skill asks for it or works from the topic, producing a pt-BR caption with the same structure.",
+      "assertions": [
+        "The caption is in pt-BR",
+        "The caption is under 1,000 characters",
+        "There are 3 to 5 hashtags, all lowercase"
+      ],
+      "human_feedback": ""
+    }
+  ]
+}

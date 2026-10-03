@@ -26,12 +26,14 @@ npx skills@latest add eusouosalmo/skills --skill <nome>
 
 Ainda não há skills publicadas. Elas aparecem conforme a necessidade aparece no trabalho real.
 
+Em draft, escondida do instalador: [creating-skills](skills/harness/creating-skills/SKILL.md), que cria ou altera uma skill a partir de uma falha observada, conferida com evals.
+
 As instruções das skills são escritas em inglês; as skills de conteúdo entregam o resultado em português.
 
 | Categoria | O que reúne |
 |---|---|
 | [content](skills/content/README.md) | Escrita, roteiro, voz e marca. Resultado em pt-BR |
-| [harness](skills/harness/README.md) | Setup de repositório para trabalhar com IA com segurança, inclusive em modo AFK |
+| [harness](skills/harness/README.md) | Setup de repositório para trabalhar com IA com segurança, inclusive em modo AFK, e criação das skills que o agente usa |
 
 ## Como o repositório funciona
 
