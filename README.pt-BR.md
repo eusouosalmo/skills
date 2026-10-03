@@ -26,7 +26,10 @@ npx skills@latest add eusouosalmo/skills --skill <nome>
 
 Ainda não há skills publicadas. Elas aparecem conforme a necessidade aparece no trabalho real.
 
-Em draft, escondida do instalador: [creating-skills](skills/harness/creating-skills/SKILL.md), que cria ou altera uma skill a partir de uma falha observada, conferida com evals.
+Em draft, escondidas do instalador:
+
+- [creating-skills](skills/harness/creating-skills/SKILL.md): cria ou altera uma skill a partir de uma falha observada, conferida com evals.
+- [setting-up-git-guardrails](skills/harness/setting-up-git-guardrails/SKILL.md): guardrails de git por projeto para agentes de código, com perfis interativo e AFK.
 
 As instruções das skills são escritas em inglês; as skills de conteúdo entregam o resultado em português.
 

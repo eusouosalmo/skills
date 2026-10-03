@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm test)"
+    ],
+    "deny": [
+      "Bash(git reset --hard*)",
+      "Bash(git clean -f*)",
+      "Bash(git checkout -- *)",
+      "Bash(git restore .*)",
+      "Bash(git branch -D *)",
+      "Bash(git stash drop*)",
+      "Bash(git stash clear*)",
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(git update-ref *)",
+      "Bash(rm -rf .git*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/git-guardrails.sh --agent claude --profile interactive"
+          }
+        ]
+      }
+    ]
+  }
+}

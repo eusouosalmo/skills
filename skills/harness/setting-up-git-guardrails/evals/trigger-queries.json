@@ -1,0 +1,8 @@
+[
+  { "query": "coloca guardrails de git neste projeto, pra o agente não fazer besteira com o repositório", "should_trigger": true },
+  { "query": "quero rodar o claude em loop sozinho de madrugada sem risco dele dar force push ou reset --hard", "should_trigger": true },
+  { "query": "deixa o agente dar push na main neste projeto", "should_trigger": true },
+  { "query": "configura um pre-commit que roda o lint antes de cada commit", "should_trigger": false },
+  { "query": "desfaz o último commit que eu fiz, ainda não dei push", "should_trigger": false },
+  { "query": "configura branch protection na main do GitHub exigindo review", "should_trigger": false }
+]
