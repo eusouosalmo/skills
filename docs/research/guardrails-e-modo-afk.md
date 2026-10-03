@@ -170,7 +170,7 @@ Ressalvas oficiais que importam para git:
 
 Três armadilhas para quem desenhar guardrails:
 
-1. **`--bare` desliga os hooks de guarda.** Ele não lê hooks de `~/.claude` nem do projeto. Um loop AFK com `--bare` precisa passar a política por `--settings`, senão roda sem o hook. A doc avisa que `--bare` "will become the default for `-p` in a future release".
+1. **`--bare` desliga os hooks de guarda, inclusive os passados por `--settings`.** A doc diz só que ele pula a descoberta de hooks e que settings entram por `--settings`; o `claude --help` diz "skip hooks (those defined in settings...)". Testei no Claude Code 2.1.288, em 2026-10-02: um hook vindo de `--settings` não dispara com `--bare` e dispara sem ele. Para um loop AFK isolado com hook, use `--setting-sources "" --settings <arquivo>`: carrega só os hooks do arquivo e pula os do usuário e do projeto (também testado, com PreToolUse numa sessão `-p` real). A doc avisa que `--bare` "will become the default for `-p` in a future release". Correção feita em 2026-10-02; a versão anterior desta nota dizia que `--settings` bastava.
 2. **Em `-p` não há diálogo de workspace trust.** Os hooks do `.claude/settings.json` de qualquer repositório rodam direto. Em repositório de terceiros, a doc sugere `--bare`, `--setting-sources user` ou `--settings '{"disableAllHooks": true}'`.
 3. **`disableAllHooks` do projeto vence o do usuário** por precedência. Um repositório pode religar ou desligar hooks com um `false` ou `true` no próprio settings. Só managed settings protegem hooks de serem desligados.
 
@@ -351,7 +351,7 @@ Em paralelo: um hook git local de pre-push protege pouco contra o agente, porque
 | `git push` | Pode ficar em `ask` (a doc sugere `permissions.ask` para checkpoint humano) | Bloquear, ou não ter credencial de push no ambiente |
 | Git destrutivo local | Hook bloqueia; o humano roda à mão se quiser | Hook bloqueia; o trabalho deve estar commitado em passos pequenos |
 | Isolamento | Opcional (sandbox do Bash reduz prompts) | Necessário com bypass; recomendado com auto |
-| Hooks carregados | Só depois do workspace trust | Em `-p`, sem trust; com `--bare`, nenhum hook a não ser via `--settings` |
+| Hooks carregados | Só depois do workspace trust | Em `-p`, sem trust; com `--bare`, nenhum hook, nem os de `--settings`; com `--setting-sources "" --settings`, só os do arquivo |
 | Limites ditos na conversa | Funcionam no auto mode, mas podem sumir na compactação | Não confiar; usar deny rule ou hook |
 | Verificação | O humano revisa | Testes, Stop hook ou `/goal`, revisor com contexto limpo, limite de iterações |
 | Falha de um hook | O humano vê o aviso de hook error | Ninguém vê; o guardrail some em silêncio |
@@ -371,7 +371,7 @@ O ponto mais delicado é a última linha. Em AFK, um hook que falha aberto é pi
 | Dependências | Nenhuma | `jq`, bash, o binário da ferramenta |
 | Expressividade | Prefixo com `*` | Qualquer lógica: parse, contexto, mensagem explicativa, log |
 | Mensagem ao modelo | Genérica | Customizável pelo stderr ou `permissionDecisionReason` |
-| Carregado com `--bare` | Só via `--settings` | Só via `--settings` |
+| Carregado com `--bare` | Só via `--settings` | Não carrega, nem via `--settings`; use `--setting-sources "" --settings` sem `--bare` |
 | Portabilidade para outros agentes | Só Claude Code; cada agente tem sintaxe própria (seção 12) | O script pode servir a outros agentes que aceitam hooks no formato do Claude Code (dcg e CC Safety Net fazem isso; seção 12) |
 
 As fontes convergem num ponto. Deny rule e hook são a mesma categoria de defesa, decisão sobre o texto antes de executar, e servem contra erro do modelo. Contra comando escrito de outro jeito, a doc oficial manda para sandbox e isolamento.
@@ -412,7 +412,7 @@ Sem decisão aqui; só o que precisa ser decidido.
 7. Escrever um script próprio, adaptar o do Matt (MIT) ou recomendar uma ferramenta pronta (dcg, CC Safety Net)? Se for próprio, regex ou parse?
 8. Falhar aberto ou fechado quando o script não consegue ler o comando (sem `jq`, JSON inesperado)?
 9. A skill deve também sugerir a camada do servidor (branch protection, token sem push) e a do container, ou fica só no Claude Code?
-10. Como garantir que o loop AFK não rode com `--bare` sem passar a política por `--settings`?
+10. Como garantir que o loop AFK não rode com `--bare`, que desliga o hook mesmo passado por `--settings`?
 
 **Como testar o bloqueio**
 
