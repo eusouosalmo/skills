@@ -29,6 +29,7 @@ npx skills@latest add eusouosalmo/skills --skill <name>
 In draft, hidden from the installer:
 
 - [setting-up-git-guardrails](skills/harness/setting-up-git-guardrails/SKILL.md): per-project git guardrails for coding agents, with interactive and AFK profiles.
+- [writing-as-eusouosalmo](skills/content/writing-as-eusouosalmo/SKILL.md): writes and reviews text in the voice of eusouosalmo, spoken or written register by channel.
 
 | Category | What it holds |
 |---|---|

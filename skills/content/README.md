@@ -1,5 +1,5 @@
 # content
 
-Writing, video scripts, voice and brand skills for sa/mo. Instructions in English, output in pt-BR.
+Writing, video scripts, voice and brand skills for eusouosalmo. Instructions in English, output in pt-BR.
 
-No skills yet.
+- [writing-as-eusouosalmo](writing-as-eusouosalmo/SKILL.md) (draft): writes and reviews text in the voice of eusouosalmo, picking the spoken or written register by channel.

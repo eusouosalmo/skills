@@ -29,7 +29,6 @@ npx skills@latest add eusouosalmo/skills --skill <nome>
 Em draft, escondida do instalador:
 
 - [setting-up-git-guardrails](skills/harness/setting-up-git-guardrails/SKILL.md): guardrails de git por projeto para agentes de código, com perfis interativo e AFK.
-- [writing-as-eusouosalmo](skills/content/writing-as-eusouosalmo/SKILL.md): escreve e revisa texto na voz do eusouosalmo, no registro falado ou escrito conforme o canal.
 
 As instruções das skills são escritas em inglês; as skills de conteúdo entregam o resultado em português.
 

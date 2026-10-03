@@ -1,0 +1,10 @@
+# Expressions that give away AI-written text, each one observed in a draft written
+# without this skill on the user's real material. One per line:
+# regex (Python, case-insensitive)<TAB>example from the draft<TAB>where it was observed
+# Add a line only for a failure seen in a real draft.
+sozinho não (resolve|faz)	Funciona. Mas o loop sozinho não resolve nada	eval loop-question-script, baseline
+não faz milagre	o loop não faz milagre sozinho	eval loop-question-script, baseline
+\bantes, [^.]*durante e [^.]*depois	spec boa antes, travas durante e revisão depois	eval loop-question-script, baseline
+\bsem [^,.]+, sem [^,.]+, sem\b	Sem textão, sem caçar a resposta no meio do output, sem opção inventada	eval jev-caption, baseline
+\bé simples:	A regra do repositório é simples:	eval repo-linkedin-post, baseline
+(^|[.!?]\s+)Nada de [^.!?]+[.!?]	Nada de skill escrita no abstrato.	eval repo-linkedin-post, baseline

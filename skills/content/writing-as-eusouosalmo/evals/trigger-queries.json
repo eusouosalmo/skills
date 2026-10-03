@@ -1,0 +1,8 @@
+[
+  { "query": "escreve a legenda do reel sobre blue green deploy que eu gravei", "should_trigger": true },
+  { "query": "revisa esse roteiro que o chat gerou, tá parecendo texto de IA, não parece eu falando", "should_trigger": true },
+  { "query": "monta um post de LinkedIn meu contando que lancei o BananaFi", "should_trigger": true },
+  { "query": "revisa a gramática deste e-mail de trabalho", "should_trigger": false },
+  { "query": "traduz esse README pro inglês", "should_trigger": false },
+  { "query": "transcreve o áudio desse reel do @lucureau", "should_trigger": false }
+]

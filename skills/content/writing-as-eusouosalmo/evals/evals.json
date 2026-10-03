@@ -1,0 +1,56 @@
+{
+  "skill_name": "writing-as-eusouosalmo",
+  "evals": [
+    {
+      "id": 1,
+      "name": "loop-question-script",
+      "prompt": "um seguidor perguntou 'modo em loop funciona bem em desenvolvimento com specs SDD?'. monta o roteiro de resposta pro reel, minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/loop-question/anotacoes.md into an empty folder and run the prompt from it. Run it as a separate session outside any repository (claude -p from that folder), so no project CLAUDE.md or AGENTS.md leaks writing rules into the run.",
+      "files": [
+        "evals/files/loop-question"
+      ],
+      "expected_output": "A short spoken script in pt-BR in the spoken register: addresses the viewer as 'tu', short sentences, no filler words, every fact taken from the notes and none added, closing by asking who tried something similar to tell how it went.",
+      "assertions": [
+        "The script never addresses the viewer as 'você' (an impersonal 'você' as subject is allowed)",
+        "The script has no em dash, en dash, unicode arrow, ellipsis character or emoji",
+        "Every fact in the script comes from anotacoes.md; nothing is added (no new reason, result or claim)"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 2,
+      "name": "jev-caption",
+      "prompt": "gravei o reel do Jev com esse roteiro (roteiro-jev.md). escreve a legenda pro post",
+      "setup": "Copy evals/files/jev-script/roteiro-jev.md into an empty folder and run the prompt from it. Run it as a separate session outside any repository (claude -p from that folder), so no project CLAUDE.md or AGENTS.md leaks writing rules into the run.",
+      "files": [
+        "evals/files/jev-script"
+      ],
+      "expected_output": "An Instagram caption in pt-BR in the spoken register: 'tu', no emoji, no forced catchphrase, every number taken from the script.",
+      "assertions": [
+        "The caption has no emoji",
+        "The caption has no em dash, en dash, unicode arrow or ellipsis character",
+        "The caption addresses the reader as 'tu', never 'você'",
+        "Every number in the caption appears in roteiro-jev.md"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 3,
+      "name": "repo-linkedin-post",
+      "prompt": "escreve um post pro LinkedIn anunciando meu repositório de skills. a base é o README.pt-BR.md",
+      "setup": "Copy evals/files/repo-readme/README.pt-BR.md into an empty folder and run the prompt from it. Run it as a separate session outside any repository (claude -p from that folder), so no project CLAUDE.md or AGENTS.md leaks writing rules into the run.",
+      "files": [
+        "evals/files/repo-readme"
+      ],
+      "expected_output": "A LinkedIn post in pt-BR in the written register: 'você', no catchphrase, no emoji, every claim taken from the README.",
+      "assertions": [
+        "The post has no emoji",
+        "The post has no em dash, en dash, unicode arrow or ellipsis character",
+        "The post addresses the reader as 'você' and never as 'tu'",
+        "The post has no catchphrase from the spoken register ('macho', 'bora lá', 'pô', 'ó')",
+        "Every claim in the post comes from README.pt-BR.md"
+      ],
+      "human_feedback": ""
+    }
+  ]
+}
