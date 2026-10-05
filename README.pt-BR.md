@@ -26,10 +26,11 @@ npx skills@latest add eusouosalmo/skills --skill <nome>
 
 - [creating-skills](skills/harness/creating-skills/SKILL.md) (beta): cria ou altera uma skill a partir de uma falha observada, conferida com evals.
 
-Em draft, escondida do instalador:
+Em draft, escondidas do instalador:
 
 - [setting-up-git-guardrails](skills/harness/setting-up-git-guardrails/SKILL.md): guardrails de git por projeto para agentes de código, com perfis interativo e AFK.
 - [writing-as-eusouosalmo](skills/content/writing-as-eusouosalmo/SKILL.md): escreve e revisa texto na voz do eusouosalmo, no registro falado ou escrito conforme o canal.
+- [writing-short-video-scripts](skills/content/writing-short-video-scripts/SKILL.md): escreve roteiros de vídeo curto a partir das anotações do autor, com gancho, um CTA falado e texto de teleprompter cronometrado.
 
 As instruções das skills são escritas em inglês; as skills de conteúdo entregam o resultado em português.
 

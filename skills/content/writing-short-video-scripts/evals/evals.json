@@ -1,0 +1,68 @@
+{
+  "skill_name": "writing-short-video-scripts",
+  "evals": [
+    {
+      "id": 1,
+      "name": "first-ask-book-chapter",
+      "prompt": "Eu quero falar sobre um capitulo que estou lendo do livro fundamentos de arquitetura. Vou descrever o que aprendi.\nNo capitulo 2 fala sobre pensamentos arquitetural.\n\nEu nao terminei, mas acredito que podemos trabalhar encima do que aprendi. No inicio fala sobre o papel do arquiteto e o papel do dev.\n\nO papel do arquiteto trabalhar em torno de 4 pilares (esqueci e estou sem minhas anotações),entender a diferença de design e arquiteura.. é decidir tecnologias, levantar requisitos com base no que entende do que vem do negocio, entender necessidades do produto e entao passar para o dev. E o do dev de definit objetos e classes, implementar, escrever testes/testar e alg assim.\n\nPorem o livro trás que o que é feito e se entende é algo de direção unica, o arquiteto pega essas informações e entrega ao dev. Causando problemas por exemplo de o dev (ou time) mudar alguma coisa e nao comunicas/dar feedback ao arquiteto como tambem do arquiteto nao mentorar ou ter esses feedbacks (acho que era isso).\n\nCom isso o livro propoe algo melhor e de via bidirecional.\n\nDepois o livro vai citando a questao do conhecimento do arquiteto que deve ser muito amplo para ele conhecer sobre muitas tecnologias, tecnicas e conseguir decidir. Porém, diferente do dev que precisa escolher algo e se aprofundar naquilo o arquiteto deve ser um conhecimneto mais amplo e nao tao profundo pois demandaria tempo ou esforço e aumentando a especialização que pode ser algo ruim. O dev por exemplo precisa se especializar e se atualizar contantemente naquela tecnologia ou conhecimento e o arquiteto é diferente. O livro mostra tambem alguma piramides bem interesses para ilustrar.\n\nBom, isso é tudo que lembro... talvez tenha deixado passar informações importantes mas sei que voce consegue verificar melhor. E como disse, estou sem minhas anotações (fiz no carderno) e nao il o capitulo todo ainda, mas ja da para criar um roteiro bem enriquecedor.\n\nLembrando que sao informações soltas e a ordem logica importa. Nao a ordem que trouxe aqui no texto.",
+      "setup": "Run the prompt from an empty folder, as a separate session outside any repository (claude -p from that folder), so no project CLAUDE.md or AGENTS.md leaks into the run. Allow reading ~/.claude/skills (--add-dir) so installed skills such as writing-as-eusouosalmo can load their files.",
+      "expected_output": "The request is read as a video script from book notes. Before writing, the agent asks for platform, duration and objective, and proposes the two ideas in the notes (breadth versus depth with the pyramid; the one-way flow between architect and team) as two separate videos.",
+      "assertions": [
+        "The output treats 'roteiro' as a video script, not as a study guide or chapter summary",
+        "Before any final script, the output asks for the video's platform or duration and for its objective",
+        "The two ideas in the notes (the architect's breadth versus the developer's depth; the one-way versus two-way flow) are proposed as separate videos, not merged into one text"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 2,
+      "name": "pyramid-reel",
+      "prompt": "monta o roteiro do reel sobre o conhecimento do arquiteto (a pirâmide), pro Instagram, de 60 a 90 segundos. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/pyramid-reel/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3.",
+      "files": [
+        "evals/files/pyramid-reel"
+      ],
+      "expected_output": "Close to the approved script: hook 'O melhor arquiteto de software não é o dev que mais sabe de uma tecnologia', the pyramid explained once and then plain developer words (especialista, stack, se aprofundar), the user's case with a [falta: ...] for the technologies, no mention of the book in the spoken lines, CTA 'E tu, hoje, é mais especialista ou generalista?', about 195 words, book credit for the caption and the pyramid's layers in a list to check.",
+      "assertions": [
+        "The hook (the spoken lines of the first block) says 'arquitetura de software' or 'arquiteto de software'",
+        "No spoken line mentions the book, its title, the chapter or the act of reading it",
+        "After the pyramid is explained, no later spoken line (CTA included) uses pyramid words as vocabulary: topo, meio, base, crescer, alargar, pra cima, pros lados",
+        "The spoken lines have at most 200 words (about 90 s at 130 words per minute), not counting [falta: ...] markers",
+        "The output has a teleprompter part with only the spoken lines, one sentence per line, no block labels, and an estimated duration",
+        "No spoken line says the author is or became an architect ('virei arquiteto', 'sou arquiteto', 'quando eu era arquiteto')",
+        "The hook says 'desenvolvedor' where it names the developer role, never 'dev'",
+        "Any spoken claim that the developer must stay updated all the time carries a concrete reason (a new version, a vulnerability, a new library) or is absent",
+        "Any spoken claim that specialising too much is a problem carries a concrete reason or is absent",
+        "Outside the hook and one turning-point line, no two consecutive spoken sentences stand in a cause or contrast relation without a connective (porque, então, por isso, mas, só que)",
+        "No spoken line ties the author's story to a current job or a date ('hoje', 'atual', 'na empresa onde eu tô', 'no meu trabalho atual')",
+        "Every spoken sentence where the narrator says they learned technologies names one from the notes or carries a [falta: ...] asking which"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 3,
+      "name": "two-way-reel",
+      "prompt": "monta o roteiro do reel sobre a arquitetura que só desce pro time e nunca volta, pro Instagram, de 60 a 90 segundos. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/two-way-reel/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3.",
+      "files": [
+        "evals/files/two-way-reel"
+      ],
+      "expected_output": "Close to the approved script: hook 'Tem decisão de arquitetura de software que desce pro time e nunca mais volta', the traditional model and the one-way problem in both directions, the pipeline case (db as a queue, talking to the people who had been on the team longer) as proof, no mention of the book in the spoken lines, CTA 'No teu time, quem decide a arquitetura conversa com quem implementa?', about 195 words.",
+      "assertions": [
+        "The hook (the spoken lines of the first block) says 'arquitetura de software' or 'arquiteto de software'",
+        "No spoken line mentions the book, its title, the chapter or the act of reading it",
+        "The CTA question can be answered without the hook's image: it does not ask whether the architecture 'desce', 'volta' or goes one way or both",
+        "The spoken lines have at most 200 words (about 90 s at 130 words per minute), not counting [falta: ...] markers",
+        "The output has a teleprompter part with only the spoken lines, one sentence per line, no block labels, and an estimated duration",
+        "The hook says 'desenvolvedor' where it names the developer role, never 'dev'",
+        "The hook has a person (the viewer or the author) in it and leaves a question open: it does not end on its own conclusion ('e nunca volta')",
+        "No spoken sentence rests on a vague reference with no concrete referent ('era coisa de quem viveu aquilo', 'isso', 'aquilo')",
+        "Outside the hook and one turning-point line, no two consecutive spoken sentences stand in a cause or contrast relation without a connective (porque, então, por isso, mas, só que)",
+        "No spoken line ties the author's story to a current job or a date ('hoje', 'atual', 'na empresa onde eu tô', 'no meu trabalho atual')",
+        "Every 'então' or 'por isso' in the spoken lines introduces a consequence of the previous sentence",
+        "After the sentence that explains an image or metaphor, the next sentence does not restate the same image"
+      ],
+      "human_feedback": ""
+    }
+  ]
+}

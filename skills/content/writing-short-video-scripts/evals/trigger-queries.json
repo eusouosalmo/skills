@@ -1,0 +1,8 @@
+[
+  { "query": "monta o roteiro do reel sobre o capítulo 2 do livro de arquitetura, minhas anotações tão em anotacoes.md", "should_trigger": true },
+  { "query": "um seguidor perguntou se vale a pena aprender Rust em 2026. faz o roteiro de resposta pro reels, uns 60 segundos", "should_trigger": true },
+  { "query": "quero gravar um short sobre p95 e p99, me ajuda a estruturar o vídeo com gancho e CTA", "should_trigger": true },
+  { "query": "monta um roteiro de viagem de 5 dias pra Lisboa", "should_trigger": false },
+  { "query": "revisa o tom desta legenda do Instagram, tá parecendo IA", "should_trigger": false },
+  { "query": "escreve um post pro LinkedIn anunciando meu repositório de skills", "should_trigger": false }
+]
