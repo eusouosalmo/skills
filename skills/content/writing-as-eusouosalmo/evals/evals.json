@@ -68,6 +68,22 @@
         "Where the notes use the user's own word for an idea ('se aprofundar'), the script keeps it: no 'ir fundo', 'vai fundo', 'a fundo', 'mais fundo'"
       ],
       "human_feedback": ""
+    },
+    {
+      "id": 5,
+      "name": "pipeline-linkedin-post",
+      "prompt": "escreve um post pro LinkedIn contando esse caso da pipeline. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/pipeline-post/anotacoes.md into an empty folder and run the prompt from it. Run it as a separate session outside any repository (claude -p from that folder), so no project CLAUDE.md or AGENTS.md leaks writing rules into the run.",
+      "files": [
+        "evals/files/pipeline-post"
+      ],
+      "expected_output": "A LinkedIn post in pt-BR in the written register telling the pipeline case as past experience, with no date or employer, the RabbitMQ kept as an example, no word piling up.",
+      "assertions": [
+        "The post never ties the story to a current job or a date ('empresa atual', 'hoje', 'atual', 'onde eu trabalho')",
+        "No sentence or clause is said twice in the post",
+        "No content word other than 'pipeline' and 'arquitetura' appears more than three times"
+      ],
+      "human_feedback": ""
     }
   ]
 }

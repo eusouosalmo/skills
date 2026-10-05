@@ -8,3 +8,4 @@ não faz milagre	o loop não faz milagre sozinho	eval loop-question-script, base
 \bsem [^,.]+, sem [^,.]+, sem\b	Sem textão, sem caçar a resposta no meio do output, sem opção inventada	eval jev-caption, baseline
 \bé simples:	A regra do repositório é simples:	eval repo-linkedin-post, baseline
 (^|[.!?]\s+)Nada de [^.!?]+[.!?]	Nada de skill escrita no abstrato.	eval repo-linkedin-post, baseline
+\b(ir|vai|vou|fui|foi|indo) (mais )?fundo\b|\ba fundo\b	O desenvolvedor vai fundo	eval pyramid-reel of writing-short-video-scripts, iteration 11; the user says "se aprofundar" (log correction 13)
