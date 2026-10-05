@@ -13,7 +13,8 @@
       "assertions": [
         "The script never addresses the viewer as 'você' (an impersonal 'você' as subject is allowed)",
         "The script has no em dash, en dash, unicode arrow, ellipsis character or emoji",
-        "Every fact in the script comes from anotacoes.md; nothing is added (no new reason, result or claim)"
+        "Every fact in the script comes from anotacoes.md; nothing is added (no new reason, result or claim)",
+        "The output has no [falta: ...] asking for an anecdote or outcome the input does not mention"
       ],
       "human_feedback": ""
     },
@@ -48,7 +49,23 @@
         "The post has no em dash, en dash, unicode arrow or ellipsis character",
         "The post addresses the reader as 'você' and never as 'tu'",
         "The post has no catchphrase from the spoken register ('macho', 'bora lá', 'pô', 'ó')",
-        "Every claim in the post comes from README.pt-BR.md"
+        "Every claim in the post comes from README.pt-BR.md",
+        "The output has no [falta: ...] asking for an anecdote or outcome the input does not mention"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 4,
+      "name": "architect-pyramid-script",
+      "prompt": "monta o roteiro do reel com o ângulo 'O melhor arquiteto de software não é o dev que mais sabe de uma tecnologia', de 60 a 90 segundos. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/architect-pyramid/anotacoes.md into an empty folder and run the prompt from it. Run it as a separate session outside any repository (claude -p from that folder), so no project CLAUDE.md or AGENTS.md leaks writing rules into the run.",
+      "files": [
+        "evals/files/architect-pyramid"
+      ],
+      "expected_output": "A spoken reel script in pt-BR that keeps the user's own words ('se aprofundar') and, where the notes only say the user learned 'mais tecnologias', asks for the concrete ones with a [falta: ...] while the text still stands without them.",
+      "assertions": [
+        "Every sentence where the narrator says they learned or used technologies names a concrete one from the input or carries a [falta: ...] asking for it",
+        "Where the notes use the user's own word for an idea ('se aprofundar'), the script keeps it: no 'ir fundo', 'vai fundo', 'a fundo', 'mais fundo'"
       ],
       "human_feedback": ""
     }

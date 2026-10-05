@@ -19,7 +19,7 @@ The **voice** is the same in every channel. The **register** changes with the ch
 
 | Register | Channels | Addresses the audience as | Catchphrases |
 |---|---|---|---|
-| spoken | video, teleprompter text, Instagram caption | "tu" ("teu", "tua", "te") | "bora lá", "macho", "o cara", "mandar a bala", "dar nome aos bois", at most one or two per text, where they fit |
+| spoken | video, teleprompter text, Instagram caption | "tu" ("teu", "tua", "te") | "bora lá", "macho", "o cara", "mandar a bala", "dar nome aos bois"; optional, at most one or two per text, only where eusouosalmo would say it anyway. None beats a forced one |
 | written | site, article, README, LinkedIn | "você" | none |
 
 An impersonal "você" as subject ("fica mais fácil você tirar uma ideia do papel") is fine in the spoken register; the viewer is still "tu".
@@ -32,7 +32,8 @@ Read [examples.md](examples.md) before writing in the spoken register.
 
 - **Facts come only from the input.** Every fact, number, reason and result traces to the user's notes or draft. When the text needs one the input lacks (how it ended, why something happened), write `[falta: ...]` and ask; leave the gap open.
 - **Open with a concrete scene or the question itself**: when it happened, what you wanted, what you did. The idea comes after the scene.
-- **Anchor every idea** in a real number, error or example from the input.
+- **Anchor every idea** in a real number, error or example from the input. A sentence that sums up specific things the user did or learned in a generic word ("fui aprendendo várias tecnologias") gets a `[falta: ...]` asking which ones; write it so it stands if the answer never comes, or cut it. Ask for nothing the text does not need: no new anecdote, no outcome the story works without, no example for a rule or principle the input states.
+- **Keep the user's own words.** When the input names an idea in the user's words ("se aprofundar"), every sentence about that idea uses that word, including the ones you add, such as the closing question; never a synonym of yours. When repeating it sounds heavy, rewrite the sentence so it needs the word once; never swap in a synonym for variety.
 - **Use a metaphor only when it explains** something the audience would otherwise miss, and explain technical terms for someone starting out.
 - **Tell it as one person talking**, in first person, sentences short enough to say in one breath. Plain words; honest about limits ("segundo a empresa", "não tem paper"); no hype, no guru promise, no academic jargon, no swearing.
 - **Plain characters only**: commas, periods, colons and parentheses. Hyphenated lists for lists. No emoji in any channel.
