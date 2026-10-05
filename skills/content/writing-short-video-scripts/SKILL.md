@@ -39,7 +39,7 @@ Five blocks, in this order:
 
 1. **Hook** (first 3 s): built from one of the patterns in [hooks.md](hooks.md) (read it now) and passing its five questions. It names the niche with full, unambiguous words the right viewer recognises as theirs ("testes automatizados", not "testes"; "desenvolvedor", not "dev"). The on-screen text repeats the hook without giving away the answer the spoken line leaves open.
 2. **Context** (1 or 2 sentences): what the hook is about.
-3. **Delivery**: the idea itself, with the author's case as proof. Use the case from the notes; when it sums up specific things in a generic word ("usei várias ferramentas") and the notes do not say which, write `[falta: ...]` asking for them, worded so the sentence stands if the answer never comes. The `[falta: ...]` goes in even when the sentence already holds, because the author decides whether a case exists. Only once the author says there is none, keep the general sentence when it holds on its own or cut the passage. Never invent the case.
+3. **Delivery**: the idea itself, with the author's case as proof. Use the case from the notes; when it sums up specific things in a generic word ("usei várias ferramentas") and the notes do not say which, write `[falta: ...]` asking for them, worded so the sentence stands if the answer never comes. The `[falta: ...]` goes in even when the sentence already holds, because the author decides whether a case exists. Only once the author says there is none, keep the general sentence when it holds on its own or cut the passage. Never invent the case. Ask only for specifics the notes sum up; a new anecdote or an outcome the story works without is not a gap.
 4. **Connection**: what the idea changes for the viewer.
 5. **CTA**: one spoken ask, a question born from the conclusion that the viewer answers in a word or a short sentence about themselves.
 
@@ -103,6 +103,6 @@ Crédito para a legenda: <source>
 Duração estimada: <words> palavras, <seconds> s a 130 palavras por minuto.
 ```
 
-List every `[falta: ...]` and question to the user after the file.
+After the file, list every `[falta: ...]` and question to the user, and each claim from step 4 with the concrete thing in its reason, so the author sees the check.
 
 Before handing it over, go through [checklist.md](checklist.md): every correction the author has made to a script, so the next one does not need it again. Done when the file follows this shape, the teleprompter part holds only the spoken lines, and every checklist item holds.
