@@ -1,0 +1,34 @@
+{
+ "assertion_results": [
+  {
+   "text": "The caption asks the viewer to follow and names the author's handle '@eusouosalmo' in that ask",
+   "passed": true,
+   "evidence": "'Me segue no @eusouosalmo pra ver o próximo da série...'"
+  },
+  {
+   "text": "The follow ask is tied to the next video of the series, naming its topic (where architecture ends and design begins)",
+   "passed": true,
+   "evidence": "'...sobre onde termina a arquitetura e começa o design.'"
+  },
+  {
+   "text": "The caption does not end with or contain the spoken CTA question (or a reworded version of it): its ask is different from the one in the speech",
+   "passed": true,
+   "evidence": "No comment question in the caption"
+  },
+  {
+   "text": "At most two caption sentences repeat a spoken line of the script almost word for word (hook included)",
+   "passed": true,
+   "evidence": "check-caption.py: no findings"
+  },
+  {
+   "text": "The book is credited in its own line at the end (e.g. 'Fonte: ...'), not as the subject of a body sentence ('o livro mostra', 'No capítulo 2, os autores usam...')",
+   "passed": true,
+   "evidence": "'Fonte: ...' on its own last line"
+  }
+ ],
+ "summary": {
+  "passed": 5,
+  "failed": 0,
+  "total": 5
+ }
+}

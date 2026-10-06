@@ -51,6 +51,37 @@
         "No next step in the answer is writing a skill"
       ],
       "human_feedback": ""
+    },
+    {
+      "id": 4,
+      "name": "verdict-brings-new-rule",
+      "prompt": "olhei a legenda da pirâmide no workspace (.scratch/writing-post-captions-workspace/iteration-1/eval-pyramid-caption/with_skill/report.md). achei ruim esse \"Tá na documentação oficial, seção 8.14.4\", é incomum em legendas. ajusta a skill writing-post-captions",
+      "setup": "In a clone of this repository with no remote, replace skills/content/writing-post-captions with evals/files/captions-in-progress/skill (renaming SKILL.fixture.md to SKILL.md), copy evals/files/captions-in-progress/workspace to .scratch/writing-post-captions-workspace, remove scripts/link-skills.sh, commit, and run the prompt from the clone root. Hide any installed writing-post-captions from the user's skills folder during the run, so nested runs load only the clone's version.",
+      "files": [
+        "evals/files/captions-in-progress"
+      ],
+      "expected_output": "Before writing the rule, the agent looks for what backs it (an official source, a study or a practitioner with data, including the repo's research notes), says whether that supports it, contradicts it or supports it only in part, or that nothing was found and the rule is the author's preference, and records the source in the skill's sources.md. Then it makes the smallest change and runs the scenarios again.",
+      "assertions": [
+        "Before the skill's SKILL.md is edited, the run looks for what backs the new rule: a web search, an official doc, a study or the repo's research notes",
+        "The final answer says whether what was found supports the rule, contradicts it or supports it only in part, or says nothing was found and the rule is the author's preference",
+        "The skill's sources.md gains an entry for the new rule"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 5,
+      "name": "assertions-contradict-ask-and-stop",
+      "prompt": "o cenário no-platform-caption da writing-post-captions tá em 1/4 (workspace em .scratch/writing-post-captions-workspace/iteration-1). corrige pra passar",
+      "setup": "In a clone of this repository with no remote, replace skills/content/writing-post-captions with evals/files/captions-in-progress/skill (renaming SKILL.fixture.md to SKILL.md), copy evals/files/captions-in-progress/workspace to .scratch/writing-post-captions-workspace, remove scripts/link-skills.sh, commit, and run the prompt from the clone root. Hide any installed writing-post-captions from the user's skills folder during the run, so nested runs load only the clone's version. Before committing, replace the skill's evals/evals.json with evals/files/captions-in-progress/evals-no-platform-original.json.",
+      "files": [
+        "evals/files/captions-in-progress"
+      ],
+      "expected_output": "The agent sees that the scenario's right behaviour is to ask for the platform and stop, so the assertions that demand a caption contradict its own expected output. It fixes the eval (keeps the asking assertions, drops or moves the ones about the caption) and leaves the skill's ask-and-wait as it is.",
+      "assertions": [
+        "The writing-post-captions SKILL.md still tells the agent to ask for a missing platform and wait; it does not tell it to assume one",
+        "In the skill's evals.json, the no-platform-caption scenario no longer asserts anything about the caption's content (follow ask, spoken CTA, retelling)"
+      ],
+      "human_feedback": ""
     }
   ]
 }

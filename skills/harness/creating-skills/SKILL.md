@@ -1,6 +1,6 @@
 ---
 name: creating-skills
-description: Creates or changes an agent skill from an observed failure, checked with evals against a baseline. Use when the user asks to create a skill (criar skill), fix or improve an existing one, or turn instructions they keep repeating into a skill.
+description: Creates or changes an agent skill from an observed failure, checked with evals against a baseline. Use when the user asks to create a skill (criar skill), fix or improve an existing one (including when its evals fail), or turn instructions they keep repeating into a skill.
 metadata:
   status: beta
 ---
@@ -35,10 +35,10 @@ Done when each failure is written as: prompt, what happened, what should have ha
 
 Read [references/evals-format.md](references/evals-format.md) now.
 
-1. Write three eval scenarios in `evals/evals.json` inside the skill folder, one per observed failure. For a change, add a new scenario for the new failure and keep the existing ones.
+1. Write three eval scenarios in `evals/evals.json` inside the skill folder, one per observed failure. For a change, add a new scenario for the new failure and keep the existing ones as they are, even when one of them has a similar prompt: the new scenario holds the failure as it was reported, and the old ones keep checking what they already checked.
 2. For a model-invoked skill, write `evals/trigger-queries.json`: three prompts that should trigger it and three near-misses.
 3. Run each scenario once in a fresh subagent with a clean context: without the skill, or for a change, with a snapshot of the current version. Save each report in the workspace.
-4. Write the assertions from what the baseline actually did, and grade the baseline.
+4. Write the assertions from what the baseline actually did, and grade the baseline. When a scenario's right behaviour is to ask and stop, its assertions check the question and that nothing was produced on assumptions; assertions about the product belong to a scenario that gives the missing context.
 
 Done when every scenario has a recorded baseline run that fails at least one assertion. A scenario the baseline already passes tests nothing: replace it. If every scenario passes, the skill adds nothing; tell the user and stop.
 
@@ -58,6 +58,8 @@ If the difference between the two runs is unclear, run that scenario again.
 
 ## 6. Iterate and finish
 
-Fix the cause, not the test case: the skill will meet prompts the scenarios never had. After each fix, run every scenario again.
+Fix the cause, not the test case: the skill will meet prompts the scenarios never had. When the right behaviour fails an assertion, because the assertion contradicts the scenario's expected output, the assertion is the bug: fix the eval and leave the skill as it is. After each fix, run every scenario again.
+
+A verdict that brings a rule the skill does not have yet, a matter of taste included, gets its ground before it is written. Search first, every time: the repo's research notes, then the official docs of the tool or platform, published studies and practitioners with their own data (use the `research` skill if available). Then tell the user whether what you found supports the rule, contradicts it or supports it only in part, and add the source to the skill's `sources.md`. Only when the search finds nothing, record the rule as the user's preference and name where you searched. A rule recorded as preference without a search hides whether a source exists, and the next author cannot tell a finding from a habit.
 
 Done when every assertion passes on every scenario, every `human_feedback` is empty, and [references/checklist.md](references/checklist.md) passes.

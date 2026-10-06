@@ -1,0 +1,34 @@
+{
+ "assertion_results": [
+  {
+   "text": "The caption asks the viewer to follow and names the author's handle '@eusouosalmo' in that ask",
+   "passed": true,
+   "evidence": "'Me segue no @eusouosalmo pra ver o próximo vídeo da série...'"
+  },
+  {
+   "text": "The caption does not end with or contain the spoken CTA question (or a reworded version of it): its ask is different from the one in the speech",
+   "passed": true,
+   "evidence": "No question for the comments; the ask is to follow"
+  },
+  {
+   "text": "At most two caption sentences repeat a spoken line of the script almost word for word (hook included)",
+   "passed": true,
+   "evidence": "check-caption.py with --script: no findings; first line is a new question"
+  },
+  {
+   "text": "The book is credited in its own line at the end (e.g. 'Fonte: ...'), not as the subject of a body sentence ('o livro mostra', 'No capítulo 2, os autores usam...')",
+   "passed": true,
+   "evidence": "'Fonte: Fundamentos da Arquitetura de Software, de Mark Richards e Neal Ford, capítulo 2 (link na bio)' on its own line"
+  },
+  {
+   "text": "The caption points to the bio for the book's link ('link na bio'), or the output asks the author whether the link goes in the bio; no URL in the caption",
+   "passed": true,
+   "evidence": "'(link na bio)' and asks whether the link is in the bio; no URL"
+  }
+ ],
+ "summary": {
+  "passed": 5,
+  "failed": 0,
+  "total": 5
+ }
+}

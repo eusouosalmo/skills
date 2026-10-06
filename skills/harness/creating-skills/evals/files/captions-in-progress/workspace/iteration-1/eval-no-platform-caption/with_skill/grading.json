@@ -1,0 +1,29 @@
+{
+ "assertion_results": [
+  {
+   "text": "The output asks the author which platform the caption is for, or gives one version per platform; it does not silently assume one",
+   "passed": true,
+   "evidence": "Asks 'Plataforma: Instagram Reels, TikTok, YouTube Shorts ou LinkedIn?'"
+  },
+  {
+   "text": "The caption asks the viewer to follow and names the author's handle '@eusouosalmo' in that ask",
+   "passed": false,
+   "evidence": "No caption in the output"
+  },
+  {
+   "text": "The caption does not end with or contain the spoken CTA question (or a reworded version of it): its ask is different from the one in the speech",
+   "passed": false,
+   "evidence": "No caption in the output"
+  },
+  {
+   "text": "At most two caption sentences repeat a spoken line of the script almost word for word (hook included)",
+   "passed": false,
+   "evidence": "No caption in the output"
+  }
+ ],
+ "summary": {
+  "passed": 1,
+  "failed": 3,
+  "total": 4
+ }
+}
