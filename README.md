@@ -31,6 +31,7 @@ In draft, hidden from the installer:
 - [setting-up-git-guardrails](skills/harness/setting-up-git-guardrails/SKILL.md): per-project git guardrails for coding agents, with interactive and AFK profiles.
 - [writing-as-eusouosalmo](skills/content/writing-as-eusouosalmo/SKILL.md): writes and reviews text in the voice of eusouosalmo, spoken or written register by channel.
 - [writing-short-video-scripts](skills/content/writing-short-video-scripts/SKILL.md): writes short video scripts from the author's notes, with hook, one spoken CTA and timed teleprompter text.
+- [writing-post-captions](skills/content/writing-post-captions/SKILL.md): writes the caption for a short video on Instagram, TikTok, YouTube Shorts or LinkedIn from its script, complementing the video with one ask, source credit and hashtags within the platform's limits.
 
 | Category | What it holds |
 |---|---|

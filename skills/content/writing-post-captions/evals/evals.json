@@ -1,0 +1,59 @@
+{
+  "skill_name": "writing-post-captions",
+  "evals": [
+    {
+      "id": 1,
+      "name": "pyramid-caption",
+      "prompt": "faz a legenda do reel da pirâmide pro Instagram. o roteiro tá em roteiro.md",
+      "setup": "Copy evals/files/pyramid-caption/roteiro.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3.",
+      "files": [
+        "evals/files/pyramid-caption"
+      ],
+      "expected_output": "Close to the approved caption of 2026-10-04, updated to the new script: first line with the current hook, one short paragraph with what did not fit the speech (the operators -> and @> written as symbols), a follow ask with @eusouosalmo tied to the series, and the book as a separate source line with the link in the bio.",
+      "assertions": [
+        "The caption asks the viewer to follow and names the author's handle '@eusouosalmo' in that ask",
+        "The caption does not end with or contain the spoken CTA question (or a reworded version of it): its ask is different from the one in the speech",
+        "At most two caption sentences repeat a spoken line of the script almost word for word (hook included)",
+        "The book is credited in its own line at the end (e.g. 'Fonte: ...'), not as the subject of a body sentence ('o livro mostra', 'No capítulo 2, os autores usam...')",
+        "The caption points to the bio for the book's link ('link na bio'), or the output asks the author whether the link goes in the bio; no URL in the caption",
+        "The caption holds no note on how a fact was checked (doc section, page, 'conferido', 'tá na documentação') outside the source line",
+        "Every technical fact in the caption is in the script file; nothing the script lacks (an extra operator, a definition from the source) is in the caption, even if flagged for checking"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 2,
+      "name": "two-way-caption",
+      "prompt": "faz a legenda do reel da mão dupla pro Instagram, roteiro em roteiro.md. o próximo da série vai ser sobre onde termina a arquitetura e começa o design",
+      "setup": "Copy evals/files/two-way-caption/roteiro.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3.",
+      "files": [
+        "evals/files/two-way-caption"
+      ],
+      "expected_output": "Close to the approved caption: first line with the current hook, the pipeline case in one short paragraph (db as a queue), 'Próximo da série: onde termina a arquitetura e começa o design' with a follow ask using @eusouosalmo, and the book as a separate source line with the link in the bio.",
+      "assertions": [
+        "The caption asks the viewer to follow and names the author's handle '@eusouosalmo' in that ask",
+        "The follow ask is tied to the next video of the series, naming its topic (where architecture ends and design begins)",
+        "The caption does not end with or contain the spoken CTA question (or a reworded version of it): its ask is different from the one in the speech",
+        "At most two caption sentences repeat a spoken line of the script almost word for word (hook included)",
+        "The book is credited in its own line at the end (e.g. 'Fonte: ...'), not as the subject of a body sentence ('o livro mostra', 'No capítulo 2, os autores usam...')",
+        "Every technical fact in the caption is in the script file; nothing the script lacks (an extra operator, a definition from the source) is in the caption, even if flagged for checking"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 3,
+      "name": "no-platform-caption",
+      "prompt": "escreve a legenda pra esse vídeo, o roteiro tá em roteiro.md",
+      "setup": "Copy evals/files/no-platform-caption/roteiro.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3.",
+      "files": [
+        "evals/files/no-platform-caption"
+      ],
+      "expected_output": "The agent asks which platform the caption is for (the register, links and hashtags change with it) before or alongside the caption, instead of silently assuming Instagram.",
+      "assertions": [
+        "The output asks the author which platform the caption is for, or gives one version per platform; it does not silently assume one",
+        "No final caption is written for an assumed platform before the author answers (a version per platform counts as answered)"
+      ],
+      "human_feedback": ""
+    }
+  ]
+}

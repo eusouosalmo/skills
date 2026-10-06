@@ -1,0 +1,8 @@
+[
+  { "query": "faz a legenda do reel da pirâmide pro Instagram, o roteiro tá em roteiro.md", "should_trigger": true },
+  { "query": "escreve a descrição desse short pro YouTube, com o link do livro. roteiro em roteiro.md", "should_trigger": true },
+  { "query": "que texto e hashtags eu boto no post desse vídeo? roteiro.md", "should_trigger": true },
+  { "query": "gera a legenda em SRT desse vídeo pra acessibilidade, a transcrição tá em transcricao.txt", "should_trigger": false },
+  { "query": "monta o roteiro do reel sobre trade-offs de arquitetura, minhas anotações tão em anotacoes.md", "should_trigger": false },
+  { "query": "esse texto do meu site tá com cara de IA, revisa na minha voz: sobre.md", "should_trigger": false }
+]
