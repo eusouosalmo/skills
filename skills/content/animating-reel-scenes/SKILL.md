@@ -13,6 +13,20 @@ The author records a vertical talking-head video and exports its narration as SR
 
 Each rule below comes with its reason. When a case falls outside the examples, decide by the reason.
 
+## Files
+
+Keep every reel in one folder with this layout, so the author always finds the finished videos in the same place:
+
+```
+<reel folder>/
+  cenas/       # one HTML per scene, named like its export: 01-problema-llm.html
+  stills/      # check frames, one subfolder per scene: stills/01-problema-llm/
+  exports/     # only the finished videos that go to CapCut
+  timeline.md  # file, start and end in HH:MM:SS:FF, one row per export
+```
+
+Number scenes and overlays by their order on the timeline (`01-`, `02-`, ...) so they import into CapCut in order. `timeline.md` holds the table of where each export goes; update it whenever a timecode or file changes.
+
 ## 1. Read the design system
 
 Look for the author's design system in the project (tokens, components, video and motion guidelines). When there is none, ask the author to bring it: exported files, or pulled from Claude Design with `/design-sync` if they have it. Without one, go on with plain styling and let the author adjust as the scenes come out.
@@ -33,7 +47,7 @@ One concept per scene: split when two parts ask for different reading paces. In 
 
 Give every scene and overlay its start and end in CapCut timecode `HH:MM:SS:FF` at 30fps, the format the CapCut timeline shows: `python3 scripts/timecode.py --srt narration.srt` converts every cue. Inside the scene, `t = absolute time - scene start`.
 
-Done when every stretch of the SRT has a destination with its reason, and every scene and overlay has a start and end timecode.
+Done when every stretch of the SRT has a destination with its reason, and every scene and overlay has a number, a name and a start and end timecode in `timeline.md`.
 
 ## 3. Get the assets
 
@@ -77,11 +91,11 @@ Done when the scene has a `render(t)` covering its whole duration and every stic
 
 ## 5. Check stills, then render
 
-1. `python3 scripts/render.py stills scene.html 1.0 4.2 ... --backdrop frame.png` writes each still alone and composited over the recording frame. Pick times at every entrance and at the densest moment.
+1. `python3 scripts/render.py stills cenas/NN-name.html 1.0 4.2 ... --backdrop frame.png --out stills/NN-name` writes each still alone and composited over the recording frame. Pick times at every entrance and at the densest moment.
 2. Look at every still: inside the safe margins, nothing over the face or the caption zone, text fits its sticker. Fix and repeat.
 3. Show the composited stills to the author and stop. Render only after the author approves them, also when the request asks for the finished file or you would call the render a draft: placement and wording are fixed on stills in seconds, while every change after a render costs a new render.
 4. Render:
-   - overlay: `python3 scripts/render.py video scene.html DURATION overlay.mov --alpha`, which writes QuickTime Animation (qtrle), the alpha format that kept its transparency in CapCut. Deliver only this file: a VP9 `.webm` with alpha came out black there, and ProRes 4444 runs to hundreds of MB. Ask the author to test the `.mov` in CapCut before the next scene.
-   - full scene: `python3 scripts/render.py video scene.html DURATION scene.mp4`.
+   - overlay: `python3 scripts/render.py video cenas/NN-name.html DURATION exports/NN-name.mov --alpha`, which writes QuickTime Animation (qtrle), the alpha format that kept its transparency in CapCut. Deliver only this file: a VP9 `.webm` with alpha came out black there, and ProRes 4444 runs to hundreds of MB. Ask the author to test the `.mov` in CapCut before the next scene.
+   - full scene: `python3 scripts/render.py video cenas/NN-name.html DURATION exports/NN-name.mp4`.
 
-Done when the author has the file and its start and end timecode for the CapCut timeline.
+Done when the file is in `exports/`, its row in `timeline.md` has the start and end timecode, and the author has both paths.

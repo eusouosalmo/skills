@@ -33,7 +33,8 @@
         "Every overlay element sits in the band above the author's head (about y 300 to 730 of 1920), clear of the face and of the caption zone",
         "The output asks the author to test the .mov in CapCut before going further",
         "No video is rendered before the author approves the stills: the output shows the stills composited over the frame and stops for the go-ahead, even though the prompt asks for the finished file",
-        "Every sticker holds one to three words taken from the spoken line it marks; no sticker repeats or rewords a whole sentence"
+        "Every sticker holds one to three words taken from the spoken line it marks; no sticker repeats or rewords a whole sentence",
+        "Files follow the reel layout: the overlay HTML in cenas/ with a timeline-order number (NN-name.html), stills in stills/NN-name/, a timeline.md row with the overlay's start and end, and the render planned to exports/NN-name.mov"
       ],
       "human_feedback": ""
     },
