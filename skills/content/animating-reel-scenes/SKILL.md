@@ -1,10 +1,9 @@
 ---
 name: animating-reel-scenes
 description: Plans and renders motion scenes and transparent sticker overlays for a talking-head Reel or Short from its narration SRT, as HTML with a deterministic render(t) turned into video for CapCut. Use when the user wants to decide which parts of a recorded video become motion, build an animated scene or an overlay of stickers over their face, or render one to video (cena de motion, overlay, carimbos, animação do reel).
-compatibility: Needs python3 with playwright (Chromium) and ffmpeg on PATH.
+compatibility: Needs python3 with playwright (Chromium) and ffmpeg on PATH; scripts/setup.sh checks and installs them.
 metadata:
-  status: draft
-  internal: true
+  status: beta
 ---
 
 # Animating reel scenes
