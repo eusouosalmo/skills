@@ -1,0 +1,288 @@
+1
+00:00:06,066 --> 00:00:08,866
+ela se chama Jev da Typesafe AI
+
+2
+00:00:08,966 --> 00:00:10,100
+o fundador
+
+3
+00:00:10,400 --> 00:00:12,533
+ex-pesquisador da OpenAI
+
+4
+00:00:12,700 --> 00:00:14,200
+se diz ser
+
+5
+00:00:14,566 --> 00:00:16,100
+co-criador do chatgpt
+
+6
+00:00:16,266 --> 00:00:17,666
+o Jev não conversa
+
+7
+00:00:17,666 --> 00:00:18,533
+ele só decide
+
+8
+00:00:18,533 --> 00:00:18,933
+imagina 
+
+9
+00:00:19,100 --> 00:00:19,266
+um
+
+10
+00:00:19,266 --> 00:00:21,533
+ jogo onde o teu código precisa decidir
+
+11
+00:00:21,800 --> 00:00:23,066
+se tu vai ter que atirar
+
+12
+00:00:23,200 --> 00:00:25,500
+se tu vai ter que desviar ou abrir uma porta
+
+13
+00:00:25,500 --> 00:00:27,500
+se tu pergunta isso pra uma llm
+
+14
+00:00:27,500 --> 00:00:29,700
+ela vai te mandar um textão
+
+15
+00:00:29,800 --> 00:00:32,366
+e o teu código vai precisar achar a decisão
+
+16
+00:00:33,066 --> 00:00:33,866
+no meio dele
+
+17
+00:00:34,133 --> 00:00:36,366
+e é uma coisa que é lenta e que é caro
+
+18
+00:00:36,666 --> 00:00:38,066
+e ainda tem outro problema
+
+19
+00:00:38,766 --> 00:00:39,700
+quando a llm
+
+20
+00:00:39,700 --> 00:00:40,800
+inventa 
+
+21
+00:00:41,100 --> 00:00:41,266
+um
+
+22
+00:00:41,266 --> 00:00:42,300
+ valor que nem existe
+
+23
+00:00:42,900 --> 00:00:44,966
+ou ainda quebra o formato de saída
+
+24
+00:00:45,566 --> 00:00:47,533
+então é pra isso que tem
+
+25
+00:00:48,100 --> 00:00:49,966
+o structured output
+
+26
+00:00:50,133 --> 00:00:50,933
+e o Jev
+
+27
+00:00:51,066 --> 00:00:52,266
+ele pula essa etapa
+
+28
+00:00:52,466 --> 00:00:54,666
+então tu passa pra ele o estado do jogo
+
+29
+00:00:54,866 --> 00:00:55,933
+as opções que ele tem
+
+30
+00:00:55,933 --> 00:00:57,066
+e ele te retorna
+
+31
+00:00:57,533 --> 00:01:00,566
+o resultado com a decisão e a probabilidade
+
+32
+00:01:00,566 --> 00:01:01,133
+por exemplo
+
+33
+00:01:01,133 --> 00:01:02,600
+ele te retorna a saída
+
+34
+00:01:02,900 --> 00:01:04,933
+atirar com 92%
+
+35
+00:01:05,133 --> 00:01:06,500
+e mais nada de texto
+
+36
+00:01:06,900 --> 00:01:07,933
+segundo a empresa
+
+37
+00:01:08,133 --> 00:01:11,300
+ele é de 40 a 200 vezes mais rápido
+
+38
+00:01:11,300 --> 00:01:13,100
+é por isso que dá pra tu decidir
+
+39
+00:01:13,100 --> 00:01:14,800
+dez vezes por segundo no DOOM
+
+40
+00:01:15,200 --> 00:01:17,400
+por sete dólares a hora apenas
+
+41
+00:01:17,400 --> 00:01:19,333
+e não é só jogo pra quem programa
+
+42
+00:01:19,666 --> 00:01:22,100
+ele é como se fosse um IF inteligente
+
+43
+00:01:22,333 --> 00:01:25,700
+então pra classificar um ticket de suporte por exemplo
+
+44
+00:01:25,700 --> 00:01:26,500
+ou tu poder
+
+45
+00:01:26,500 --> 00:01:28,066
+decidir se uma resposta
+
+46
+00:01:28,066 --> 00:01:29,366
+precisa de um modelo melhor
+
+47
+00:01:29,366 --> 00:01:30,366
+ou ainda escolher 
+
+48
+00:01:30,533 --> 00:01:31,733
+ qual botão clicar
+
+49
+00:01:32,200 --> 00:01:34,266
+então o código continua sendo o teu
+
+50
+00:01:34,600 --> 00:01:35,966
+tu define as opções
+
+51
+00:01:35,966 --> 00:01:37,533
+e tu decide o que tu vai fazer
+
+52
+00:01:37,600 --> 00:01:39,133
+com aqueles 92%
+
+53
+00:01:39,266 --> 00:01:40,866
+que foi retornado do modelo
+
+54
+00:01:41,066 --> 00:01:41,866
+mas calma
+
+55
+00:01:42,200 --> 00:01:45,466
+a empresa diz que o Jev ele não alucina
+
+56
+00:01:45,866 --> 00:01:46,666
+isso quer dizer
+
+57
+00:01:46,933 --> 00:01:48,600
+que ele nunca vai inventar uma opção
+
+58
+00:01:48,700 --> 00:01:50,700
+fora daquela lista que tu definiu
+
+59
+00:01:50,700 --> 00:01:53,200
+como também nunca vai quebrar o formato de saída
+
+60
+00:01:53,200 --> 00:01:55,600
+mas não quer dizer que ele sempre vai acertar
+
+61
+00:01:55,766 --> 00:01:58,300
+porque ele pode mandar tu atirar na hora errada
+
+62
+00:01:58,400 --> 00:01:59,066
+por exemplo
+
+63
+00:01:59,066 --> 00:01:59,866
+e até agora
+
+64
+00:02:00,266 --> 00:02:01,966
+não tem paper público
+
+65
+00:02:02,366 --> 00:02:03,166
+todos os testes
+
+66
+00:02:03,366 --> 00:02:05,800
+ele foram realizados pela própria empresa
+
+67
+00:02:05,800 --> 00:02:09,400
+e aí, qual decisão do teu software tu passaria pra uma IA
+
+68
+00:02:09,466 --> 00:02:11,066
+que responde quase que instantaneamente
+
+69
+00:02:11,366 --> 00:02:12,466
+me conta aqui nos comentários
+
+70
+00:00:03,533 --> 00:00:05,400
+e não sabe escrever uma frase
+
+71
+00:00:00,100 --> 00:00:03,133
+Essa inteligência artificial joga DOOM em tempo real
+
+72
+00:00:03,666 --> 00:00:05,866
+e não sabe escrever uma frase
+

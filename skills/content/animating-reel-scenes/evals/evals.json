@@ -1,0 +1,76 @@
+{
+  "skill_name": "animating-reel-scenes",
+  "evals": [
+    {
+      "id": 1,
+      "name": "jev-scene-plan",
+      "prompt": "gravei o reel do Jev em talking-head vertical, o SRT da narração tá em jev-ai-narracao.srt. planeja quais trechos viram cena de motion (vou fazer em HTML e renderizar, depois ponho por cima no CapCut) e quais ficam só comigo falando pra câmera",
+      "setup": "Copy evals/files/jev-scene-plan into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder).",
+      "files": [
+        "evals/files/jev-scene-plan"
+      ],
+      "expected_output": "A scene plan close to the one approved on 2026-10-07: motion only for flows, comparisons, numbers and code (LLM text wall, broken JSON, how Jev works, numbers and demo, smart IF use cases, the code reading as its own scene); the introduction and authority claims, the transition 'o código continua sendo o teu', the caveats and the CTA stay on the face, the caveats and CTA as stickers in a transparent overlay; each scene with start and end in CapCut timecode HH:MM:SS:FF at 30fps.",
+      "assertions": [
+        "No full-screen motion scene covers the caveat block from 'mas calma' to just before the CTA (cues 54 to 66, 01:41,0 to 02:05,8)",
+        "The caveats are planned as stickers in one transparent overlay over the face video, entering and leaving with each sentence",
+        "The opening hook (cues 70 to 72, 'joga DOOM em tempo real / não sabe escrever uma frase') has no motion scene",
+        "Every motion scene has start and end in CapCut timecode HH:MM:SS:FF at 30fps"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 2,
+      "name": "jev-caveat-overlay",
+      "prompt": "do 'mas calma' (1:41) até o fim do jev-ai-narracao.srt eu fico falando pra câmera. faz os carimbos das ressalvas e da CTA como overlay transparente pra eu pôr por cima do meu vídeo no CapCut. meu design system tá em ds/. me entrega o arquivo pronto e onde ele entra na timeline",
+      "setup": "Copy evals/files/jev-caveat-overlay into an empty folder, add the author's design system export as ds/ (tokens.css plus project/, kept outside the repo in .scratch/animating-reel-scenes/ds), and run the prompt from it as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit and Bash allowed.",
+      "files": [
+        "evals/files/jev-caveat-overlay"
+      ],
+      "expected_output": "Stills first, composited over the recording frame, and a stop for the author's go-ahead (approved rule of 2026-10-07: always wait for stills approval); after it, one overlay video with alpha, 1080x1920 at 30fps, no audio, delivered as QuickTime Animation (.mov qtrle) only, with stickers entering on each caveat sentence and the CTA, placed in the band above the head; plus where it goes on the CapCut timeline in HH:MM:SS:FF (01:41:00 to 02:12:24 in the approved version) and a request to test the .mov in CapCut first.",
+      "assertions": [
+        "The overlay with alpha is delivered as QuickTime Animation (.mov, qtrle) and no other video format with alpha (.webm, ProRes) is delivered or offered",
+        "Where the overlay goes on the timeline is given as start and end in HH:MM:SS:FF at 30fps",
+        "Every overlay element sits in the band above the author's head (about y 300 to 730 of 1920), clear of the face and of the caption zone",
+        "The output asks the author to test the .mov in CapCut before going further",
+        "No video is rendered before the author approves the stills: the output shows the stills composited over the frame and stops for the go-ahead, even though the prompt asks for the finished file",
+        "Every sticker holds one to three words taken from the spoken line it marks; no sticker repeats or rewords a whole sentence"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 3,
+      "name": "jev-caveat-stickers-qa",
+      "prompt": "faz só o trecho de 1:45,8 a 1:58,3 do overlay do jev-ai-narracao.srt (nunca inventa opção, nunca quebra o formato, mas pode mandar atirar na hora errada): as duas garantias riscadas com um selo NUNCA e a frase da hora errada digitada com 'hora errada' destacado. fundo transparente, vai por cima do meu rosto no CapCut. meu design system tá em ds/. me manda uns stills pra eu conferir antes de renderizar o vídeo",
+      "setup": "Copy evals/files/jev-caveat-stickers-qa into an empty folder, add the author's design system export as ds/ (tokens.css plus project/, kept outside the repo in .scratch/animating-reel-scenes/ds), and run the prompt from it as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit and Bash allowed.",
+      "files": [
+        "evals/files/jev-caveat-stickers-qa"
+      ],
+      "expected_output": "An HTML scene with a deterministic render(t) and stills composited over a frame of the author's recording (asked for when missing), every element in the band above the head and out of the caption zone, inside the safe margins, and a render path to .mov qtrle; nothing is rendered to video before the author checks the stills.",
+      "assertions": [
+        "The stills are composited over a frame of the author's recording, or the output asks for that frame (or the recording) to check the placement",
+        "No overlay element enters the caption zone or the bottom margin (below about y 1267); the typed sentence sits in the overlay band above the head",
+        "The video render it prepares encodes the overlay as QuickTime Animation (.mov, qtrle)",
+        "The prompt asks for the typed sentence, so the output builds it and says it duplicates the caption, offering to mark only the key words (one to three) instead"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 4,
+      "name": "jev-numbers-assets",
+      "prompt": "faz a cena de motion dos números do Jev, de 1:06,9 a 1:17,4 no jev-ai-narracao.srt (40 a 200 vezes mais rápido, 10 decisões por segundo no DOOM, 7 dólares a hora). meu design system tá em ds/",
+      "setup": "Copy evals/files/jev-numbers-assets into an empty folder, add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), and run the prompt from it as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit, Bash, WebSearch and WebFetch allowed.",
+      "files": [
+        "evals/files/jev-numbers-assets"
+      ],
+      "expected_output": "Before building, the agent asks for the demo footage of Jev playing DOOM (proof only the author has, and third-party game footage that stays out of public repos), checks the three numbers against the company's public page or announcement and cites it, and builds the numbers without inventing gameplay; it does not download game footage or generate it.",
+      "assertions": [
+        "The output asks the author for footage of Jev actually playing DOOM for the demo beat (or records that question), instead of drawing a stand-in for the gameplay",
+        "The three numbers are checked against a public source from the company (site, post, announcement or paper) and that source is named with its URL",
+        "When the game footage comes up, the output says it is third-party material (the game's rights belong to someone else) and asks whether the author can use it",
+        "The scene keeps the caption zone free and carries no caption strip, since the reel's captions go over everything in CapCut",
+        "No video is rendered before the author approves the stills, not even a draft"
+      ],
+      "human_feedback": ""
+    }
+  ]
+}

@@ -32,6 +32,7 @@ Em draft, escondidas do instalador:
 - [writing-as-eusouosalmo](skills/content/writing-as-eusouosalmo/SKILL.md): escreve e revisa texto na voz do eusouosalmo, no registro falado ou escrito conforme o canal.
 - [writing-short-video-scripts](skills/content/writing-short-video-scripts/SKILL.md): escreve roteiros de vídeo curto a partir das anotações do autor, com gancho, um CTA falado e texto de teleprompter cronometrado.
 - [writing-post-captions](skills/content/writing-post-captions/SKILL.md): escreve a legenda de um vídeo curto para Instagram, TikTok, YouTube Shorts ou LinkedIn a partir do roteiro, complementando o vídeo com um pedido, crédito da fonte e hashtags dentro do limite da plataforma.
+- [animating-reel-scenes](skills/content/animating-reel-scenes/SKILL.md): planeja quais trechos de um reel em talking-head viram motion e renderiza as cenas e os overlays transparentes de adesivos para o CapCut.
 
 As instruções das skills são escritas em inglês; as skills de conteúdo entregam o resultado em português.
 

@@ -1,0 +1,8 @@
+[
+  { "query": "gravei o reel novo, o srt tá aqui. me diz quais partes viram animação e quais ficam comigo falando", "should_trigger": true },
+  { "query": "faz os carimbos da ressalva como overlay transparente pra eu pôr por cima do meu rosto no capcut", "should_trigger": true },
+  { "query": "monta a cena de motion do trecho do json quebrado e renderiza em 1080x1920", "should_trigger": true },
+  { "query": "faz a legenda do post desse reel pro instagram com hashtags", "should_trigger": false },
+  { "query": "escreve o roteiro de um reel de 60 segundos sobre structured output", "should_trigger": false },
+  { "query": "gera o srt com as legendas de fala desse vídeo pra queimar no capcut", "should_trigger": false }
+]

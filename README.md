@@ -32,6 +32,7 @@ In draft, hidden from the installer:
 - [writing-as-eusouosalmo](skills/content/writing-as-eusouosalmo/SKILL.md): writes and reviews text in the voice of eusouosalmo, spoken or written register by channel.
 - [writing-short-video-scripts](skills/content/writing-short-video-scripts/SKILL.md): writes short video scripts from the author's notes, with hook, one spoken CTA and timed teleprompter text.
 - [writing-post-captions](skills/content/writing-post-captions/SKILL.md): writes the caption for a short video on Instagram, TikTok, YouTube Shorts or LinkedIn from its script, complementing the video with one ask, source credit and hashtags within the platform's limits.
+- [animating-reel-scenes](skills/content/animating-reel-scenes/SKILL.md): plans which stretches of a talking-head reel become motion and renders the scenes and transparent sticker overlays for CapCut.
 
 | Category | What it holds |
 |---|---|
