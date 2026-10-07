@@ -27,6 +27,10 @@ Keep every reel in one folder with this layout, so the author always finds the f
 
 Number scenes and overlays by their order on the timeline (`01-`, `02-`, ...) so they import into CapCut in order. `timeline.md` holds the table of where each export goes; update it whenever a timecode or file changes.
 
+## Setup
+
+Before the first still, run `bash scripts/setup.sh`. It checks python3, the playwright package, its Chromium and ffmpeg, and prints the install command for whatever is missing on this OS. Installing is the author's call: show them the commands, or have them run `bash scripts/setup.sh --install`, which asks before each one (some need sudo). If it says playwright lives in its venv, run the scripts with that venv's python.
+
 ## 1. Read the design system
 
 Look for the author's design system in the project (tokens, components, video and motion guidelines). When there is none, ask the author to bring it: exported files, or pulled from Claude Design with `/design-sync` if they have it. Without one, go on with plain styling and let the author adjust as the scenes come out.
@@ -56,18 +60,18 @@ Before building a scene, list what it shows and decide where each piece comes fr
 | Job on screen | Where it comes from | Why |
 |---|---|---|
 | **Proof**: shows that a claim is true. Whenever the speech says something happens (it runs, it plays, it beats), the proof is footage of it happening | Ask the author. | A stand-in, drawn or found elsewhere, changes what is being proved, and an illustration that looks like real output reads as proof. |
-| **Fact**: a number, date or name stated on screen | Look it up in the primary public source (the company's site or announcement, the paper, the official docs) and give the author the URL. | The screen must say what the source says; the author checks before posting. |
+| **Fact**: a number, date or name stated on screen | Open the primary public source itself (the company's site or announcement, the paper, the official docs) and give the author the URL. When you cannot reach it, say the fact is unchecked; coverage that disagrees does not make the speech wrong. | The screen must say what the source says, and coverage rounds and misquotes; the author checks before posting. |
 | **Illustration** in the design system's style (character, icon, diagram) | Build it, or write an image prompt for the author to run (solid magenta background, for chroma key into a transparent sprite). | It has to match the design system, which stock images do not. |
 | **Third-party material** (game or film footage, a book cover, a brand's logo) | Ask the author if they have it and can use it, and say whose rights it carries. | Someone else holds the rights, and the file stays out of any public repo. |
 | **A real person** (photo, likeness) | Ask the author. Never generate one. | Their image belongs to them. |
 
 Example from another subject: in a reel about a database benchmark, the author's own run is proof (ask), the vendor's published latency is a fact (look up and cite), the database's logo is third-party (ask), and a cartoon server is an illustration (build).
 
-Footage often carries both jobs: a clip of a product running inside a game is proof and third-party material at once. Ask for it once, naming whose rights the game carries.
+One sentence can carry two jobs. A number about something running ("it answers in 200 ms", "it does 10 a second") is a fact to check and an event to show: look the number up and ask for the footage of it running. And footage of a product running inside someone else's game, app or site is proof and third-party material at once: ask for it once, naming whose rights it carries.
 
 Ask before building. While a proof or third-party asset is pending, build the rest and leave its slot as a visible placeholder labelled with what goes there.
 
-For overlays, also ask for the recording (or a frame of it), because placement can only be checked against the real face: `ffmpeg -ss 105 -i recording.mp4 -frames:v 1 frame.png`.
+Also ask for a screenshot of the edit in CapCut at a moment with the face and the caption on screen, saved as `stills/backdrop.png`. It shows what a raw frame does not: the real framing, and where the caption sits, how big it is and how it already highlights words, so stickers avoid both and do not repeat its highlight. Without one, a frame of the recording still gives the framing: `ffmpeg -ss 105 -i recording.mp4 -frames:v 1 stills/backdrop.png`.
 
 Done when every piece on screen has its source: asked for (the question written to the author), looked up (with the URL), or built.
 
@@ -91,7 +95,7 @@ Done when the scene has a `render(t)` covering its whole duration and every stic
 
 ## 5. Check stills, then render
 
-1. `python3 scripts/render.py stills cenas/NN-name.html 1.0 4.2 ... --backdrop frame.png --out stills/NN-name` writes each still alone and composited over the recording frame. Pick times at every entrance and at the densest moment.
+1. `python3 scripts/render.py stills cenas/NN-name.html 1.0 4.2 ... --backdrop stills/backdrop.png --out stills/NN-name` writes each still alone and composited over the recording frame. Pick times at every entrance and at the densest moment.
 2. Look at every still: inside the safe margins, nothing over the face or the caption zone, text fits its sticker. Fix and repeat.
 3. Show the composited stills to the author and stop. Render only after the author approves them, also when the request asks for the finished file or you would call the render a draft: placement and wording are fixed on stills in seconds, while every change after a render costs a new render.
 4. Render:

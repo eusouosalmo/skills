@@ -13,9 +13,9 @@ import argparse, os, shutil, subprocess, sys
 try:
     from playwright.sync_api import sync_playwright
 except ImportError:
-    sys.exit('playwright missing: pip install playwright && playwright install chromium')
+    sys.exit('playwright missing: run bash scripts/setup.sh')
 if not shutil.which('ffmpeg'):
-    sys.exit('ffmpeg not found on PATH')
+    sys.exit('ffmpeg not found on PATH: run bash scripts/setup.sh')
 
 W, H, FPS = 1080, 1920, 30  # vertical Reels/Shorts frame and the CapCut timeline rate
 
