@@ -72,6 +72,25 @@
         "No video is rendered before the author approves the stills, not even a draft"
       ],
       "human_feedback": ""
+    },
+    {
+      "id": 5,
+      "name": "desce-plan",
+      "prompt": "o SRT do reel novo tá em arquitetura-desce.srt (a gravação ainda tô cortando). meu design system tá em ds/. planeja as cenas",
+      "setup": "Copy evals/files/desce-plan into an empty folder, add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), and run the prompt from it as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit, Bash, WebSearch and WebFetch allowed.",
+      "files": [
+        "evals/files/desce-plan"
+      ],
+      "expected_output": "Before planning, multiple-choice questions with a recommended option: the recording (needed to time each word), the format mix, references or a style file. A plan with the face as default, overlays for the closing ask, full-screen or split-screen scenes for the one-way flow and the pipeline story, sound-effect marks and suggestions for the edit in timeline.md, a note that timing is estimated until the recording arrives, and a gate with options before building anything.",
+      "assertions": [
+        "The output asks for the recording to time each word and says the timing is estimated until it arrives",
+        "Before building, the plan ends on a gate with numbered or listed options, one marked as recommended",
+        "The plan marks sound-effect moments",
+        "timeline.md lists suggestions for the edit in CapCut with time and reason",
+        "The output offers to start a style file from the author's reference reels",
+        "The format mix (face, overlay, full screen, split screen) is offered as a choice"
+      ],
+      "human_feedback": ""
     }
   ]
 }

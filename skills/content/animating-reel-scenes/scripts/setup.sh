@@ -68,7 +68,20 @@ p = sync_playwright().start(); p.chromium.launch().close(); p.stop()' 2>/dev/nul
   fi
 fi
 
+# faster-whisper times each spoken word for scripts/transcribe.py; it lives in the same venv.
+WPY=""
+for cand in python3 "$VENV/bin/python"; do
+  if [ -x "$(command -v "$cand" 2>/dev/null)" ] && "$cand" -c 'import faster_whisper' 2>/dev/null; then WPY="$cand"; break; fi
+done
+if [ -n "$WPY" ]; then ok "faster-whisper ($WPY)"
+else
+  cmd="[ -x '$VENV/bin/python' ] || python3 -m venv '$VENV'; '$VENV/bin/pip' install faster-whisper"
+  miss "faster-whisper (python package, for transcribe.py)" "$cmd"
+  run "$cmd" && WPY="$VENV/bin/python" && ok "faster-whisper ($WPY)"
+fi
+
 echo
+[ -n "$WPY" ] && echo "Transcribe with: $WPY scripts/transcribe.py ..."
 if [ "$missing" = 0 ]; then
   echo "All set. Render with: ${PY:-python3} scripts/render.py ..."
 elif [ "$INSTALL" = 1 ]; then
