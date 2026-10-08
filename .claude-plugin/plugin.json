@@ -1,0 +1,21 @@
+{
+  "name": "eusouosalmo-skills",
+  "version": "0.1.0",
+  "description": "Agent skills for engineering with AI and for content about it. Only skills in beta or stable.",
+  "author": {
+    "name": "eusouosalmo",
+    "url": "https://github.com/eusouosalmo"
+  },
+  "homepage": "https://github.com/eusouosalmo/skills",
+  "repository": "https://github.com/eusouosalmo/skills",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "ai-engineering",
+    "content"
+  ],
+  "skills": [
+    "./skills/content/animating-reel-scenes",
+    "./skills/harness/creating-skills"
+  ]
+}

@@ -1,0 +1,23 @@
+name: check-plugin
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check-plugin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # plugin.json lists exactly the beta and stable skills; names match.
+      - run: scripts/sync-plugin-skills.sh --check
+      # Pinned so a new Claude Code warning cannot break --strict on its own.
+      - run: npx -y @anthropic-ai/claude-code@2.1.293 plugin validate . --strict

@@ -1,0 +1,15 @@
+{
+  "name": "eusouosalmo",
+  "owner": {
+    "name": "eusouosalmo",
+    "url": "https://github.com/eusouosalmo"
+  },
+  "description": "Agent skills by eusouosalmo for engineering with AI and for content about it.",
+  "plugins": [
+    {
+      "name": "eusouosalmo-skills",
+      "source": "./",
+      "description": "Agent skills for engineering with AI and for content about it. Only skills in beta or stable."
+    }
+  ]
+}
