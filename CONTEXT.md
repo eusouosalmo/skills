@@ -67,3 +67,13 @@ _Avoid_: script (when only the lines are meant)
 **Hook**:
 The opening of a video that keeps the promise of its first frame or title, so the viewer stays. In a follower-question video, the question itself.
 _Avoid_: intro, gancho genérico
+
+### Distribution
+
+**Status**:
+How mature one skill is: draft, beta, stable or deprecated. Set per skill, in its frontmatter; decides whether the skill is offered to install.
+_Avoid_: version, stage
+
+**Release**:
+A numbered version of the whole repo, with its changelog entry and tag. Users of the plugin move from one release to the next; a skill's status does not change with it.
+_Avoid_: version of a skill, deploy
