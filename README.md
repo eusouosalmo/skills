@@ -12,27 +12,59 @@ I share how I build with AI on [Instagram](https://www.instagram.com/eusouosalmo
 
 ## Install
 
+Two ways in. Pick one: installing the same skill both ways loads it twice, once as `<name>` and once as `eusouosalmo-skills:<name>`.
+
+Both install only the skills in beta or stable. Drafts stay in the repo to read.
+
+### Claude Code plugin
+
+Versioned: you stay on a release until you update. Each release and its changelog are on the [Releases](https://github.com/eusouosalmo/skills/releases) page.
+
+```bash
+claude plugin marketplace add eusouosalmo/skills
+claude plugin install eusouosalmo-skills@eusouosalmo
+```
+
+Skills show up as `eusouosalmo-skills:<name>`. To update, refresh the marketplace and then the plugin (or turn on auto-update for `eusouosalmo` under `/plugin`, Marketplaces):
+
+```bash
+claude plugin marketplace update eusouosalmo
+claude plugin update eusouosalmo-skills@eusouosalmo
+```
+
+To remove the plugin, or the marketplace together with its plugin:
+
+```bash
+claude plugin uninstall eusouosalmo-skills@eusouosalmo
+claude plugin marketplace remove eusouosalmo
+```
+
+### npx skills, for any agent
+
+Not versioned: it installs and updates from the latest commit on `main`. Works with Claude Code, Codex, Cursor and other agents.
+
 ```bash
 npx skills@latest add eusouosalmo/skills
 ```
 
-The installer asks which skills to install and into which agents (Claude Code, Codex, Cursor and others). For a single skill:
+The installer asks which skills to install and into which agents. For a single skill, add `--skill <name>`. To update or remove:
 
 ```bash
-npx skills@latest add eusouosalmo/skills --skill <name>
+npx skills@latest update
+npx skills@latest remove <name>
 ```
 
 ## Skills
 
 - [creating-skills](skills/harness/creating-skills/SKILL.md) (beta): creates or changes a skill from an observed failure, checked with evals.
+- [animating-reel-scenes](skills/content/animating-reel-scenes/SKILL.md) (beta): plans which stretches of a talking-head reel become motion and renders the scenes and transparent sticker overlays for CapCut.
 
-In draft, hidden from the installer:
+In draft, not installed by either path:
 
 - [setting-up-git-guardrails](skills/harness/setting-up-git-guardrails/SKILL.md): per-project git guardrails for coding agents, with interactive and AFK profiles.
 - [writing-as-eusouosalmo](skills/content/writing-as-eusouosalmo/SKILL.md): writes and reviews text in the voice of eusouosalmo, spoken or written register by channel.
 - [writing-short-video-scripts](skills/content/writing-short-video-scripts/SKILL.md): writes short video scripts from the author's notes, with hook, one spoken CTA and timed teleprompter text.
 - [writing-post-captions](skills/content/writing-post-captions/SKILL.md): writes the caption for a short video on Instagram, TikTok, YouTube Shorts or LinkedIn from its script, complementing the video with one ask, source credit and hashtags within the platform's limits.
-- [animating-reel-scenes](skills/content/animating-reel-scenes/SKILL.md): plans which stretches of a talking-head reel become motion and renders the scenes and transparent sticker overlays for CapCut.
 
 | Category | What it holds |
 |---|---|
