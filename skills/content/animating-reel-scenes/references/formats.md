@@ -6,12 +6,18 @@ Read when the plan has a split screen, a source shot or sound effects.
 
 The scene on top, the author's face below, for the length of the stretch.
 
-1. Build the scene at 1080x1920 as usual, with everything in the top half (y 250 to 940): the top safe margin still applies, and the bottom half will be replaced. Keep the scene's own drawing out of y 940 to 960, so the seam stays clean.
-2. Render it opaque: `python3 scripts/render.py video cenas/NN-name.html DURATION exports/NN-name-top.mp4`.
-3. Pick the face crop from the recording frames of that stretch: the 960 px tall band that starts a little above the head (`--face-y`, usually 300 to 500 in a chest-up framing). The caption then falls on the author's chest, as in the full-face shots.
-4. Compose: `python3 scripts/split.py exports/NN-name-top.mp4 recording.mp4 --start <scene start in s> --face-y <y> -o exports/NN-name.mp4`, then delete the `-top` file. The export is silent and covers the recording for that stretch; the speech stays on the recording's audio.
+1. Build the scene at 1080x1920 with everything in the top half (y 250 to 940): the top safe margin still applies, and the bottom half belongs to the face. Keep the drawing out of y 940 to 960, so the seam stays clean.
+2. **Default delivery, top panel only:** make the page transparent and put the background on a 1080x960 panel behind the drawing, then render a copy of the scene as `NN-name-topo.html`:
 
-Check one still of the composed file before handing it over: the face fills the bottom half and the mouth sits above the caption.
+   ```css
+   body { background: transparent !important; background-image: none !important; }
+   .panel { position: absolute; left: 0; top: 0; width: 1080px; height: 960px; }  /* <div class="panel"> first in body, with the design system's background class */
+   ```
+
+   Render with `python3 scripts/render.py video cenas/NN-name-topo.html DURATION exports/NN-name-topo.mov --alpha`. In CapCut the author puts it over the recording and moves the video down until the face fills the bottom half, then places the caption. They frame their own face and caption better than a fixed crop, and the take keeps its own caption track.
+3. **Composed delivery, only from a recording without burned-in captions:** render the scene opaque, pick `--face-y` from the frames of that stretch so the mouth sits above where the caption goes (start at the forehead when head-to-mouth is taller than the space left), and run `python3 scripts/split.py exports/NN-name-top.mp4 recording.mp4 --start <s> --face-y <y> -o exports/NN-name.mp4`. A crop of a captioned export carries the caption down into the platform's bottom bar, and shows it twice when the caption is also a live track.
+
+Check one still before handing over: the drawing fits the top half, and in a composed file the face fills the bottom half with the mouth clear of the caption.
 
 ## Source shot
 
