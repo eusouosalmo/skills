@@ -75,7 +75,7 @@ The face is the default and every other destination the exception, because the p
 
 Then mark, from `words.json`:
 
-- **Sound effects:** the moments a sound helps land a beat (a sticker stamp, a check, a cut to a full scene). Few and soft, like the stickers: a sound on every event turns into noise.
+- **Sound effects:** a sound for every motion event, so what moves on screen also lands in the ear: each object that appears, each line traced, each state change, and each scene or overlay coming in and going out. Vary the sound by the kind of event, keep it under the speech, and let `estilo.md` set the density for this author.
 - **Suggestions for the edit:** cuts the author makes in CapCut on the recording itself (punch-in zoom, black and white for an aside), with the time and the reason. Transitions the design system forbids (wipes, glitches) only when `estilo.md` allows them.
 
 Write each scene and overlay with its number, name, destination, reason and start and end in CapCut timecode `HH:MM:SS:FF` at 30fps into `timeline.md` (`python3 scripts/timecode.py --srt narration.srt` converts cue times). Inside a scene, `t = absolute time - scene start`.

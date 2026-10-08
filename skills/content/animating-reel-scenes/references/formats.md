@@ -31,6 +31,7 @@ The primary source of a fact, on screen, with the cited sentence highlighted as 
 
 One audio file for the whole reel, so the author drops it once at 00:00:00:00.
 
-1. List the events from the plan in `cenas/sfx.json`: `[{"t": 12.31, "kind": "pop"}, ...]`, with `t` on the reel's clock from `words.json`. Kinds: `pop` (sticker stamp), `tick` (highlight or typed word), `whoosh` (cut to a full-screen scene), `ding` (a check or a right answer).
-2. `python3 scripts/sfx.py cenas/sfx.json exports/00-sfx.wav --duration <reel length in s>`. The sounds are synthesised, so there is no sample to license.
-3. Add the row to `timeline.md` (start 00:00:00:00) and tell the author to set its volume under the speech in CapCut.
+1. In each scene, list its sounds next to its timing table, in seconds from the scene start: `window.SFX = [{"t": 0.68, "kind": "pop"}, ...];`. Keeping them beside `T` means a retimed entrance carries its sound with it. One event per entrance, line, state change, and the scene's own in (`whoosh` at 0) and out (`out` just before it ends); a dry cut between two states of the same drawing gets a `tick`, not a sweep.
+2. Pick the kind by what happens: `pop` (sticker, note, node), `thud` (a change that matters, a block replaced), `tick` (small label, typed word, step), `draw` (line traced), `whoosh` and `out` (scene in and out), `ding` (a check, a loop that closes). Lower the `gain` of an event that lands on top of another.
+3. `python3 scripts/sfx.py exports/00-sfx.wav --duration <reel length in s> --scene cenas/01-name.html <start s> --scene ...`. The sounds are synthesised, so there is no sample to license, and the track peaks near -10 dB, under a voice recorded near -3 dB.
+4. Mix a preview with the recording's speech (`ffmpeg -i recording.mp4 -i exports/00-sfx.wav -filter_complex "[0:a][1:a]amix=inputs=2:duration=first:normalize=0[a]" -map 0:v -map "[a]" -c:v copy previa.mp4`) and listen before handing it over. Add the row to `timeline.md` (start 00:00:00:00).
