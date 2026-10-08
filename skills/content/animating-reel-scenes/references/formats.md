@@ -6,7 +6,7 @@ Read when the plan has a split screen, a source shot or sound effects.
 
 The scene on top, the author's face below, for the length of the stretch.
 
-1. Build the scene at 1080x1920 with everything in the top half (y 250 to 940): the top safe margin still applies, and the bottom half belongs to the face. Keep the drawing out of y 940 to 960, so the seam stays clean.
+1. Build the scene at 1080x1920 with the drawing in the top half; the bottom half belongs to the face. Centre the drawing in the 1080x960 panel, with equal space above and below and at least 170 px at the top: in a split the panel is the frame the eye reads, so a drawing pushed down by the full-frame top margin (250 px) looks misaligned. That 250 px figure is Meta's Reels ad guidance (about 14%); organic reels carry a smaller top bar. `assets/center-panel.js` does the centring; scenes that repeat one drawing share its box so nothing jumps at the cut.
 2. **Default delivery, top panel only:** make the page transparent and put the background on a 1080x960 panel behind the drawing, then render a copy of the scene as `NN-name-topo.html`:
 
    ```css
