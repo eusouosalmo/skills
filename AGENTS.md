@@ -70,6 +70,7 @@ metadata:
 
 - Only after doing the work by hand a few times. The skill covers what actually hurt, not what one imagines hurts.
 - With no case of your own yet (a preventive skill for the kit), run the existing tool or community skill against realistic inputs and record where it fails. That counts as the observed failure (see `CONTEXT.md`); the skill stays `draft` until used in a real project.
+- A reference gap (see `CONTEXT.md`) also justifies a change: a technique a high-performing reference uses that the baseline's output lacks, shown by running the baseline on the same kind of input. Learning from references does not wait for the failure to show up in a real project.
 - The official docs recommend the same path: run the task without a skill and note where it fails, write 3 evaluation scenarios, then the minimum instructions to pass them ("Build evaluations first" in the best practices).
 - First, a research pass (`research` skill) on how the community solves the problem, separating what is confirmed (primary source) from what is anecdotal.
 

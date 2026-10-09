@@ -7,8 +7,12 @@ A public collection of agent skills and the method used to create and evaluate t
 ### Creating a skill
 
 **Observed failure**:
-Something that went wrong when actually run, never only imagined: an agent doing a real task without the skill (or with its previous version), or, when there is no such case yet, the existing tool or community skill for the job run against realistic inputs. The only valid reason to create or change a skill.
+Something that went wrong when actually run, never only imagined: an agent doing a real task without the skill (or with its previous version), or, when there is no such case yet, the existing tool or community skill for the job run against realistic inputs. One of the two valid reasons to create or change a skill; the other is a reference gap.
 _Avoid_: imagined problem, nice-to-have
+
+**Reference gap**:
+A technique that a high-performing reference uses and that the baseline's output lacks, shown by running the baseline on the same kind of input. The other valid reason to create or change a skill: measured, like an observed failure, so it is never a nice-to-have by another name.
+_Avoid_: inspiration, best practice
 
 **Baseline**:
 The run of an eval scenario without the skill, or with the previous version when changing one. The skill is judged against it.
@@ -67,6 +71,32 @@ _Avoid_: script (when only the lines are meant)
 **Hook**:
 The opening of a video that keeps the promise of its first frame or title, so the viewer stays. In a follower-question video, the question itself.
 _Avoid_: intro, gancho genérico
+
+**Visual hook**:
+What the screen does in the first three seconds, with or without text. Big text is one kind of visual hook, not the only one.
+_Avoid_: thumbnail, texto do gancho
+
+**Format**:
+A kind of video, nameable before the subject is known and reusable on another one: a paradox solved in layers, a list, myth and truth.
+_Avoid_: structure (one video's blocks), template
+
+**Structure**:
+The sequence of blocks of one specific video, each with its time and job. An instance of a format.
+_Avoid_: format, skeleton
+
+**Technique**:
+One device, of script or visual, that fits any format: a re-hook, an analogy, a fixed character in the centre. Moving it to another video does not change that video's format.
+_Avoid_: trick, format
+
+**Reference sheet**:
+The analysis of one reference reel through two lenses, script and visual, in a fixed set of fields so sheets can be compared.
+_Avoid_: ficha (in English text), review
+
+### Scenes
+
+**Breakdown**:
+The speech split into stretches of meaning, each noted with its concept, its intent from a fixed list, the anchor words with their times, and what it asks to show. Comes before the scene plan and feeds it; read by the agent, not by the author. Decupagem, in pt-BR.
+_Avoid_: enriquecimento, leitura de sentido, plan
 
 ### Distribution
 
