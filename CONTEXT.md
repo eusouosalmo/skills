@@ -95,7 +95,7 @@ _Avoid_: ficha (in English text), review
 ### Scenes
 
 **Breakdown**:
-The speech split into stretches of meaning, each noted with its concept, its intent from a fixed list, the anchor words with their times, and what it asks to show. Comes before the scene plan and feeds it; read by the agent, not by the author. Decupagem, in pt-BR.
+The speech split into stretches of meaning, each noted with its concept, its intent from a fixed list, the anchor words with their times, what the recording shows in it (the take, where the head is, the free space, a gesture or object that carries meaning), and what it asks to show. Comes before the scene plan and feeds it; read by the agent, not by the author. Decupagem, in pt-BR.
 _Avoid_: enriquecimento, leitura de sentido, plan
 
 ### Distribution
