@@ -88,6 +88,14 @@ _Avoid_: format, skeleton
 One device, of script or visual, that fits any format: a re-hook, an analogy, a fixed character in the centre. Moving it to another video does not change that video's format.
 _Avoid_: trick, format
 
+**Ladder**:
+A structure in which every block is caused by the one before it: something breaks, so the next piece comes in. Its opposite is a **list**, whose blocks are parallel and could swap places. A format can be told as either; the ladder is what kept the strongest references watched.
+_Avoid_: sequence, steps (both fit a list too)
+
+**Screen mode**:
+What carries the picture of a video: with face, without face (voice over animation), split screen (animation above, face below) or overlay (graphics on top of the face). Chosen per video, and it may change at a turn.
+_Avoid_: layout, template
+
 **Reference sheet**:
 The analysis of one reference reel through two lenses, script and visual, in a fixed set of fields so sheets can be compared.
 _Avoid_: ficha (in English text), review
@@ -97,6 +105,10 @@ _Avoid_: ficha (in English text), review
 **Breakdown**:
 The speech split into stretches of meaning, each noted with its concept, its intent from a fixed list, the anchor words with their times, what the recording shows in it (the take, where the head is, the free space, a gesture or object that carries meaning), and what it asks to show. Comes before the scene plan and feeds it; read by the agent, not by the author. Decupagem, in pt-BR.
 _Avoid_: enriquecimento, leitura de sentido, plan
+
+**Choreography**:
+What moves in a scene, in what order, and how one state becomes the next: an object that transforms instead of being cut away, a fixed stage where each idea changes one part, a line traced instead of appearing. Belongs to the scene, while the curves and durations it uses come from the design system as guidance.
+_Avoid_: motion, easing, animation (each names only a part)
 
 ### Distribution
 
