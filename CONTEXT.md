@@ -96,6 +96,10 @@ _Avoid_: trick, format
 A structure in which every block is caused by the one before it: something breaks, so the next piece comes in. Its opposite is a **list**, whose blocks are parallel and could swap places. A format can be told as either; the ladder is what kept the strongest references watched.
 _Avoid_: sequence, steps (both fit a list too)
 
+**Image passage**:
+The stretch of spoken lines that explains an image or analogy, from its first sentence to the last spoken correspondence between a part of the image and the subject ("o carteiro é o servidor"). It may cross blocks. After it, the spoken lines use only the subject's words; only the picture may go back to the image's scene (the **return to the analogy**).
+_Avoid_: metaphor block, analogy section
+
 **Screen mode**:
 What carries the picture of a video: with face, without face (voice over animation), split screen (animation above, face below) or overlay (graphics on top of the face). Chosen per video, and it may change at a turn.
 _Avoid_: layout, template
