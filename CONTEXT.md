@@ -80,6 +80,10 @@ _Avoid_: thumbnail, texto do gancho
 A kind of video, nameable before the subject is known and reusable on another one: a paradox solved in layers, a list, myth and truth.
 _Avoid_: structure (one video's blocks), template
 
+**Format family**:
+A group of formats that share the same motor: a causal chain, a belief contradicted, a world the viewer already knows, a habit of the viewer's that has a price. What a script skill offers when a request names no format.
+_Avoid_: category, genre
+
 **Structure**:
 The sequence of blocks of one specific video, each with its time and job. An instance of a format.
 _Avoid_: format, skeleton
