@@ -16,7 +16,7 @@ Calling the viewer by role ("Se tu é desenvolvedor...") is not a pattern: none 
 
 ## Terms in the hook
 
-Every technical term in the hook comes full and with one meaning ("testes automatizados", not "testes"; "desenvolvedor", not "dev"), because in the first second there is no context to tell a short or ambiguous word apart. The niche stays implicit in the situation, never as a vocative. A role word enters only when it is part of the situation ("desenvolvedores experientes juraram que..."), never to call the viewer.
+Every technical term in the hook comes full and with one meaning ("testes automatizados", not "testes"; "arquitetura de software", not "arquitetura"; "desenvolvedor", not "dev"), because in the first second there is no context to tell a short or ambiguous word apart. The niche stays implicit in the situation, never as a vocative. A role word enters only when it is part of the situation ("desenvolvedores experientes juraram que..."), never to call the viewer.
 
 ## The five questions
 

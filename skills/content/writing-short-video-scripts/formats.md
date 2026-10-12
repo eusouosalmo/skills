@@ -87,7 +87,7 @@ Motor: a world the viewer already masters. Fits a concept that sounds hard to so
 3. **Solução em cena:** back in the analogy, the object that solves the failure appears and solves it there, while the viewer watches it work.
 4. **Nome:** only then the object gets the technical name and its definition. The subject may be named earlier as a label (in the hook, for instance); what waits for the scene is "a solução se chama X" or "X é...".
 5. **Peças:** the object opens into its parts, each part with its term, each said through what it does in the scene.
-6. **Volta à falha:** the failure from the start, now solved. The return happens on screen; the spoken lines stay in the subject's words.
+6. **Volta à falha:** the failure from the start, now solved. The return happens on screen (`Volta à analogia:` in the Visual cell, the failure scene's composition with the subject's labels); the spoken lines stay in the subject's words.
 
 Close: the failure solved, then a CTA born from it. Fits: tools and protocols with a few named parts (containers, key exchange, version control).
 

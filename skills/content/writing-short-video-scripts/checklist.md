@@ -32,7 +32,7 @@ Every item is a pattern eusouosalmo corrected by hand in a script, with the reas
 ## Body
 
 - **A ladder, not a list.** Blocks that could swap places (one suspect after another, parallel items) gave the viewer no reason to wait for the next. Each block enters through a problem the previous one left.
-- **An image explained once.** Reusing the parts of an image ("quem tá no fundo do funil") turns it into vocabulary the listener must translate without the drawing. After the explanation, the audience's own words.
+- **An image explained once.** Reusing the parts of an image ("quem tá no fundo do funil") turns it into vocabulary the listener must translate without the drawing. After the last correspondence said aloud, the spoken lines use the audience's own words; only the picture goes back to the image, and when the format closes on it, it must.
 - **Every claim earns its reason.** A claim the viewer would question ("precisa escrever o teste antes", "pode virar um problema") gets a concrete reason or leaves.
 - **Connectives where the ear needs them.** Two loose sentences where the second explains the first become one sentence with "porque" or "isso porque". Short loose sentences sound choppy when spoken; a connective the relation does not ask for sounds like filler.
 - **No dry or vague line.** A sentence like "Era coisa de quem viu." gets its referent.

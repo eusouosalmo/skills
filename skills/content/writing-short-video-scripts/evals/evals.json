@@ -111,7 +111,12 @@
       "assertions": [
         "Before any spoken line names or defines the solution ('se chama', 'isso é', 'é isso que X faz'), a spoken line shows the object that solves the failure acting inside the analogy scene. Naming the subject in the hook as a label does not count.",
         "The Bloco column uses the format's block names; no block is named Contexto or Conexão",
-        "The output says the facts were not researched (no web access) and every checkable technical fact the script states as fact (outside an example opened as hypothetical) is in 'A checar antes de gravar'"
+        "The output says the facts were not researched (no web access) and every checkable technical fact the script states as fact (outside an example opened as hypothetical) is in 'A checar antes de gravar'",
+        "The Visual cell of the block that closes the format starts with 'Volta à analogia:' and shows the failure scene from the analogy (the two people, the carrier and the paint pots), now resolved",
+        "That return scene labels the image's parts with the subject's terms said in the image passage ('servidor', 'chave pública')",
+        "Every image part the spoken lines use gets its correspondence to the subject said aloud",
+        "After the spoken sentence with the last correspondence, no spoken line uses the image words (tinta, pote, cor, carteiro, misturar)",
+        "The CTA question can be answered without the image"
       ],
       "human_feedback": ""
     },
@@ -127,7 +132,12 @@
       "assertions": [
         "Before any spoken line names or defines the solution ('se chama', 'isso é', 'é isso que X faz'), a spoken line shows the object that solves the failure acting inside the analogy scene. Naming the subject in the hook as a label does not count.",
         "The Bloco column uses the format's block names; no block is named Contexto or Conexão",
-        "The output says the facts were not researched (no web access) and every checkable technical fact the script states as fact (outside an example opened as hypothetical) is in 'A checar antes de gravar'"
+        "The output says the facts were not researched (no web access) and every checkable technical fact the script states as fact (outside an example opened as hypothetical) is in 'A checar antes de gravar'",
+        "The Visual cell of the block that closes the format starts with 'Volta à analogia:' and shows the failure scene from the analogy (the floor plan with the structural wall (or the image the script used)), now resolved",
+        "That return scene labels the image's parts with the subject's terms said in the image passage (the subject's terms that script's passage said for those parts, such as 'arquitetura', 'caro de desfazer' or the decision it named)",
+        "Every image part the spoken lines use gets its correspondence to the subject said aloud",
+        "After the spoken sentence with the last correspondence, no spoken line uses the image words (parede, pedreiro, armário, reforma, derrubar (or the words of the image the script used))",
+        "The CTA question can be answered without the image"
       ],
       "human_feedback": ""
     },
