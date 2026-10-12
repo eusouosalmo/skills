@@ -120,11 +120,11 @@ _Avoid_: motion, easing, animation (each names only a part)
 
 **Density regime**:
 How a scene fills its stage: one object (one large piece at the centre that transforms) or a zoned panel (each kind of information in a fixed place, with real data for whoever pauses). Chosen per video, and it may change at a turn. The middle ground of small loose pieces is what both avoid.
+_Avoid_: layout, density
 
 **Impact screen**:
 The one moment of a video where a scene takes the whole stage, cut in hard, for about a second, at the **climax**: the point where the mechanism being explained fires (or, when they coincide, where the hook's question is paid). At most once per video; a video with no climax has none.
 _Avoid_: flash, impact frame, splash
-_Avoid_: layout, density
 
 **Visual event**:
 A new state of the picture that holds and changes a visible part of the frame. An entrance that barely moves the frame does not count. The rhythm of a scene is counted in visual events per 10 seconds.
