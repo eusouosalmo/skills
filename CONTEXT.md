@@ -118,6 +118,10 @@ _Avoid_: enriquecimento, leitura de sentido, plan
 What moves in a scene, in what order, and how one state becomes the next: an object that transforms instead of being cut away, a fixed stage where each idea changes one part, a line traced instead of appearing. Belongs to the scene, while the curves and durations it uses come from the design system as guidance.
 _Avoid_: motion, easing, animation (each names only a part)
 
+**Density regime**:
+How a scene fills its stage: one object (one large piece at the centre that transforms) or a zoned panel (each kind of information in a fixed place, with real data for whoever pauses). Chosen per video, and it may change at a turn. The middle ground of small loose pieces is what both avoid.
+_Avoid_: layout, density
+
 ### Distribution
 
 **Status**:
