@@ -73,7 +73,7 @@ The opening of a video that keeps the promise of its first frame or title, so th
 _Avoid_: intro, gancho genérico
 
 **Visual hook**:
-What the screen does in the first three seconds, with or without text. Big text is one kind of visual hook, not the only one.
+What the screen does in the first three seconds, with or without text. Takes one of five forms: result shown first, image built on the word, still comparison, source or subject over the face, face and setting only. Big text (the subject's or series' name, or a typed question) is a kind of image built on the word, not a form of its own and not the default.
 _Avoid_: thumbnail, texto do gancho
 
 **Format**:
