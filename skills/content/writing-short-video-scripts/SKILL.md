@@ -16,9 +16,10 @@ A creator asking for a "roteiro" from notes means a video script. Before structu
 
 - **platform and format**: Reels, Shorts or TikTok, and the target duration (default 60 to 90 s);
 - **objective**: inform or start a conversation. The objective picks the CTA;
-- **one idea**: one video carries one idea. When the notes hold several (two concepts from the same chapter), propose one angle per video, each with its own hook, and write one script per angle.
+- **one idea**: one video carries one idea. When the notes hold several (two concepts from the same chapter), propose one angle per video, each with its own hook, and write one script per angle;
+- **format**: the kind of video, from [formats.md](formats.md) (read it now). When the request names a format, use it; when that format does not fit the notes, say why and suggest one that does. When the request names none, offer 2 or 3 formats whose motor matches the notes, from different families when the notes allow, each by its pt-BR name with one line on why it fits these notes.
 
-Ask for whatever the request leaves out and wait. Done when platform, duration, objective and the single idea of this video are known.
+Ask for whatever the request leaves out, the format included, and wait: write no script blocks until the answers come. Done when platform, duration, objective, the single idea and the format of this video are known.
 
 ## 2. Separate the knowledge from its source
 
@@ -33,21 +34,20 @@ The notes usually come from a source: a book, article, video or test. The video 
 
 Done when no spoken line mentions the source, every claim the notes do not back is in the list to check, and every statement about the author matches the notes with no date or employer in it.
 
-## 3. Build the spine
+## 3. Build the format's structure
 
-Five blocks, in this order:
+The script follows the blocks of the chosen format, in its order, and the `Bloco` column uses the format's block names. The format's blocks change only the order; every rule in this skill holds inside each of them. A block that states a principle or a rule ("Princípio", "Regra") is a claim and gets its reason in step 4. Beyond the format, every script keeps these rules:
 
-1. **Hook** (first 3 s): built from one of the patterns in [hooks.md](hooks.md) (read it now) and passing its five questions. It names the niche with full, unambiguous words the right viewer recognises as theirs ("testes automatizados", not "testes"; "desenvolvedor", not "dev"). The on-screen text repeats the hook without giving away the answer the spoken line leaves open.
-2. **Context** (1 or 2 sentences): what the hook is about.
-3. **Delivery**: the idea itself, with the author's case as proof. Use the case from the notes; when it sums up specific things in a generic word ("usei várias ferramentas") and the notes do not say which, write `[falta: ...]` asking for them, worded so the sentence stands if the answer never comes. The `[falta: ...]` goes in even when the sentence already holds, because the author decides whether a case exists. Only once the author says there is none, keep the general sentence when it holds on its own or cut the passage. Never invent the case. Ask only for specifics the notes sum up; a new anecdote or an outcome the story works without is not a gap.
-4. **Connection**: what the idea changes for the viewer.
-5. **CTA**: one spoken ask, a question born from the conclusion that the viewer answers in a word or a short sentence about themselves.
+- **Hook** (first 3 s): the opening lines of the format's first block are the hook, whatever that block is called ("Sintoma", "Afirmação absurda"); when the format's first block is a scene that does not hook (a long setup), add a `Gancho` block before it. When the format asks for a hook, the main hook takes that form; otherwise it comes from a pattern in [hooks.md](hooks.md) (read it now). Either way it passes the five questions there. It names the video's subject and niche with full, unambiguous words the right viewer recognises as theirs ("testes automatizados", not "testes"; "desenvolvedor", not "dev"), also when the format opens on a symptom or a scene: a video about indexes that opens on a slow query still says "índice" in the hook. The on-screen text repeats the hook without giving away the answer the spoken line leaves open.
+- **The author's case as proof.** Use the case from the notes; when it sums up specific things in a generic word ("usei várias ferramentas") and the notes do not say which, write `[falta: ...]` asking for them, worded so the sentence stands if the answer never comes. The `[falta: ...]` goes in even when the sentence already holds, because the author decides whether a case exists. Only once the author says there is none, keep the general sentence when it holds on its own or cut the passage. Never invent the case. Ask only for specifics the notes sum up; a new anecdote or an outcome the story works without is not a gap.
+- **What the hook opens is paid off** before the last line.
+- **One closing question.** The last spoken line is the CTA: one question born from the close, which the viewer answers in a word or a short sentence about themselves. When the format's close delivers a tool (a question to ask, a rule, a symptom map), the tool becomes the CTA: one question that has the viewer apply it to their own case ("Qual peça do teu sistema não passa nessas duas perguntas?"), never the tool's question followed by a second one. When the close is a caveat or a dilemma, the CTA comes out of it. Questions the video answers itself may sit in the body when the format asks for them; only the closing question waits for the viewer's answer.
 
 An image or metaphor (a funnel, an iceberg, a traffic light) gets one passage that says what each part means; a sentence that only restates the image ("e o cliente vai descendo" right after "pensa num funil") adds no meaning and counts as a later line. Every line after it, the CTA included, names the thing itself, never the part of the image: "quem já comprou uma vez", not "quem chegou no fundo do funil". Mapping people, roles or actions onto the image ("o cliente novo fica no topo do funil", "comprar de novo te puxa pra cima") is already using the image as vocabulary. Before writing, list the words that name the image's parts and movements (for a funnel: topo, meio, fundo, descer, cair); after the passage, no line uses them. Test each later line heard alone, without the drawing: if it needs the picture, rewrite it in the words the audience uses about their own work.
 
 The spoken lines hold a single ask. A follow request ("me segue") belongs in the caption, where it does not cut the loop at the end of the video.
 
-Done when every block exists, no line after the image's passage names a part of it, and the CTA is one question that needs no image to answer.
+Done when every block of the format is in the script under its name, no line after the image's passage names a part of it, and the spoken lines end on one question that needs no image to answer, with no other question to the viewer after the format's close.
 
 ## 4. Earn every sentence
 

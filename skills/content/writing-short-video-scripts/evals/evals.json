@@ -17,8 +17,8 @@
     {
       "id": 2,
       "name": "pyramid-reel",
-      "prompt": "monta o roteiro do reel sobre o conhecimento do arquiteto (a pirâmide), pro Instagram, de 60 a 90 segundos. minhas anotações tão em anotacoes.md",
-      "setup": "Copy evals/files/pyramid-reel/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3.",
+      "prompt": "monta o roteiro do reel sobre o conhecimento do arquiteto (a pirâmide), pro Instagram, de 60 a 90 segundos, no formato paradoxo resolvido em camadas. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/pyramid-reel/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3. The user is away: where the skill asks and waits (objective), the run notes the question, assumes the likeliest answer and continues, so the script assertions can be checked.",
       "files": [
         "evals/files/pyramid-reel"
       ],
@@ -42,8 +42,8 @@
     {
       "id": 3,
       "name": "two-way-reel",
-      "prompt": "monta o roteiro do reel sobre a arquitetura que só desce pro time e nunca volta, pro Instagram, de 60 a 90 segundos. minhas anotações tão em anotacoes.md",
-      "setup": "Copy evals/files/two-way-reel/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3.",
+      "prompt": "monta o roteiro do reel sobre a arquitetura que só desce pro time e nunca volta, pro Instagram, de 60 a 90 segundos, no formato dúvida comum respondida de passagem. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/two-way-reel/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3. The user is away: where the skill asks and waits (objective), the run notes the question, assumes the likeliest answer and continues, so the script assertions can be checked.",
       "files": [
         "evals/files/two-way-reel"
       ],
@@ -61,6 +61,84 @@
         "No spoken line ties the author's story to a current job or a date ('hoje', 'atual', 'na empresa onde eu tô', 'no meu trabalho atual')",
         "Every 'então' or 'por isso' in the spoken lines introduces a consequence of the previous sentence",
         "After the sentence that explains an image or metaphor, the next sentence does not restate the same image"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 4,
+      "name": "format-menu-no-format",
+      "prompt": "monta o roteiro de um reel sobre JSONB no Postgres, pro Instagram, de 60 a 90 segundos, objetivo informar. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/format-menu-no-format/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3.",
+      "files": [
+        "evals/files/format-menu-no-format"
+      ],
+      "expected_output": "Before writing, the agent offers 2 or 3 formats from the menu (for instance symptom, cure and dose; common doubt answered in passing; experiment that reproduces everyday life), each with one line on why it fits the notes, and waits for the choice.",
+      "assertions": [
+        "Before any script, the output offers 2 or 3 named formats, each with one line on why it fits the notes",
+        "The offered formats come from at least 2 format families",
+        "The output stops and waits for the choice; no script blocks (Gancho, Contexto, Entrega, Conexão, CTA) are written"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 5,
+      "name": "format-ladder-single-close",
+      "prompt": "monta o roteiro de um reel sobre os comentários de um post com milhares de respostas, pro Instagram, de 60 a 90 segundos, objetivo informar, no formato sistema que cresce por problemas. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/format-ladder-single-close/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3.",
+      "files": [
+        "evals/files/format-ladder-single-close"
+      ],
+      "expected_output": "The script follows the format's blocks (minimal version, steps, turn against the video itself, rule and tool), the bug is only the hook and the author's guesses stay hypotheses, and the tool becomes the single closing question.",
+      "assertions": [
+        "The Bloco column uses the format's block names; no block is named Contexto or Conexão",
+        "The spoken lines end on exactly one question to the viewer, and no other question asking for the viewer's answer comes after the rule",
+        "The format's tool (the question the viewer can apply to their own system) is in that last question or stated before it, never as a second closing question"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 6,
+      "name": "whatsapp-colors-return",
+      "prompt": "monta o roteiro de um reel sobre a criptografia do WhatsApp explicada com mistura de cores, pro Instagram, de 60 a 90 segundos, objetivo informar, no formato problema na analogia, solução em peças. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/whatsapp-colors-return/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3.",
+      "files": [
+        "evals/files/whatsapp-colors-return"
+      ],
+      "expected_output": "The paint analogy shows the failure (a carrier sees everything sent), then the mixing that solves it happens in the scene before the key exchange gets its name; the pieces follow, and the screen returns to the failure scene, solved.",
+      "assertions": [
+        "Before any spoken line names or defines the solution ('se chama', 'isso é', 'é isso que X faz'), a spoken line shows the object that solves the failure acting inside the analogy scene. Naming the subject in the hook as a label does not count.",
+        "The Bloco column uses the format's block names; no block is named Contexto or Conexão"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 7,
+      "name": "wall-cost-return",
+      "prompt": "monta o roteiro de um reel sobre a diferença entre arquitetura e design de software, pro Instagram, de 60 a 90 segundos, objetivo informar, no formato problema na analogia, solução em peças. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/wall-cost-return/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3.",
+      "files": [
+        "evals/files/wall-cost-return"
+      ],
+      "expected_output": "An analogy (such as a floor plan with a structural wall) shows a costly change, the idea that solves it acts in the scene before it gets its name, and the difference comes out as a matter of degree: the costlier to undo and the more spread the decision, the more it is architecture.",
+      "assertions": [
+        "Before any spoken line names or defines the solution ('se chama', 'isso é', 'é isso que X faz'), a spoken line shows the object that solves the failure acting inside the analogy scene. Naming the subject in the hook as a label does not count.",
+        "The Bloco column uses the format's block names; no block is named Contexto or Conexão"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 8,
+      "name": "queue-half-truth-hook",
+      "prompt": "monta o roteiro de um reel sobre a fila de requisições que trava sem erro, pro Instagram, de 60 a 90 segundos, objetivo informar, no formato comparação absurda que separa duas métricas. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/queue-half-truth-hook/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3.",
+      "files": [
+        "evals/files/queue-half-truth-hook"
+      ],
+      "expected_output": "The main hook is a half-truth (a claim true in one metric, such as throughput), the body flips to the other metric (latency), and no case is invented for an author who has not lived it.",
+      "assertions": [
+        "The main hook is a half-truth: true in one metric, and the script later shows the metric where it is false",
+        "The Bloco column uses the format's block names; no block is named Contexto or Conexão",
+        "A spoken turn measures the same comparison in the second metric and the side that won in the first metric loses"
       ],
       "human_feedback": ""
     }

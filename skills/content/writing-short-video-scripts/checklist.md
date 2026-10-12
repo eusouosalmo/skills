@@ -38,4 +38,5 @@ Every item is a pattern eusouosalmo corrected by hand in a script, with the reas
 ## CTA
 
 - **One spoken ask, a question the viewer answers about themselves.** No "me segue" in the speech; it goes in the caption.
+- **One closing question.** A format that closes with a tool (a question to ask about any system) followed by a CTA question left two questions in a row at the end; the tool becomes the CTA, applied to the viewer's own case.
 - **Answerable without the image.** A CTA that asks the viewer to place themselves on the hook's image ("tu tá no topo ou no fundo do funil?") was corrected twice. The CTA uses the words people use about their own work.
