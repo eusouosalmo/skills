@@ -1,0 +1,23 @@
+1
+00:00:00,000 --> 00:00:02,400
+todo pedaço que sai do teu computador pela internet
+
+2
+00:00:02,500 --> 00:00:04,600
+leva na frente um cabeçalho TCP
+
+3
+00:00:04,800 --> 00:00:06,900
+primeiro vem a porta de origem
+
+4
+00:00:07,000 --> 00:00:09,400
+depois a porta de destino
+
+5
+00:00:09,700 --> 00:00:12,000
+e embaixo o número de sequência
+
+6
+00:00:12,100 --> 00:00:15,000
+a posição do primeiro byte desse pedaço na conversa

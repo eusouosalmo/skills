@@ -1,0 +1,27 @@
+1
+00:00:00,000 --> 00:00:04,783
+sábado de promoção, o site caiu sem nenhum erro no código
+
+2
+00:00:05,033 --> 00:00:09,815
+cada pedido que chega pega emprestada uma conexão com o banco
+
+3
+00:00:10,065 --> 00:00:14,413
+e o pool tem dez conexões, o padrão do HikariCP
+
+4
+00:00:14,663 --> 00:00:20,750
+no pico, dez pedidos ocupam as dez e o décimo primeiro entra na fila
+
+5
+00:00:21,000 --> 00:00:27,087
+aí a fila para de andar: todo mundo esperando uma conexão que não volta
+
+6
+00:00:27,337 --> 00:00:31,685
+depois de trinta segundos esperando, cada pedido desiste com erro
+
+7
+00:00:31,935 --> 00:00:38,457
+a correção foi devolver a conexão logo depois da consulta, não no fim da página

@@ -1,0 +1,55 @@
+1
+00:00:00,000 --> 00:00:06,522
+Eu abri no computador os comentários de um post com milhares de respostas: abriram normal.
+
+2
+00:00:06,772 --> 00:00:09,380
+No celular, ficava carregando pra sempre.
+
+3
+00:00:09,630 --> 00:00:19,196
+Não sei o que quebrou, mas dá pra seguir o toque até o servidor e de volta, em menos de um segundo.
+
+4
+00:00:19,446 --> 00:00:23,793
+Cinco: tocar em ver respostas vira um pedido pela internet.
+
+5
+00:00:24,043 --> 00:00:28,826
+Quatro: ele chega numa API, o programa que atende o app.
+
+6
+00:00:29,076 --> 00:00:35,598
+App e site podem usar APIs diferentes, por isso um quebra e o outro não.
+
+7
+00:00:35,848 --> 00:00:40,196
+Três: a API vira uma consulta ao banco de dados.
+
+8
+00:00:40,446 --> 00:00:47,402
+O normal é paginar, buscar um pedaço por vez, porque milhares juntos viram uma resposta enorme.
+
+9
+00:00:47,652 --> 00:00:53,739
+Dois: na volta, o banco devolve um JSON, texto com nome, foto e comentário.
+
+10
+00:00:53,989 --> 00:00:56,598
+Um: esse texto vira a tela.
+
+11
+00:00:56,848 --> 00:01:02,935
+Carregar pra sempre é resposta que não chegou, ou chegou grande demais pra montar.
+
+12
+00:01:03,185 --> 00:01:13,620
+Se só o celular trava, suspeita do que é só do app: a API, o cache, que é uma cópia guardada, ou o aparelho.
+
+13
+00:01:13,870 --> 00:01:20,826
+Mas isso é um mapa, não um diagnóstico, porque eu não vi o código do Instagram.
+
+14
+00:01:21,076 --> 00:01:27,598
+Pelo sintoma, tu chutaria o quê: API do app, falta de paginação ou o celular?

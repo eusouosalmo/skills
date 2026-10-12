@@ -1,0 +1,43 @@
+1
+00:00:00,000 --> 00:00:02,400
+tua VPN não te deixa invisível
+
+2
+00:00:02,600 --> 00:00:05,800
+ela cria um túnel cifrado entre o teu aparelho e o servidor dela
+
+3
+00:00:06,000 --> 00:00:09,200
+então o wi-fi do café não vê o que tu acessa
+
+4
+00:00:09,400 --> 00:00:10,200
+mas calma
+
+5
+00:00:10,400 --> 00:00:14,100
+isso não significa que tu fica anônimo na internet
+
+6
+00:00:14,300 --> 00:00:17,600
+porque o site continua vendo a tua conta logada
+
+7
+00:00:17,800 --> 00:00:21,900
+e também não quer dizer que a empresa da VPN deixa de ver o teu tráfego
+
+8
+00:00:22,100 --> 00:00:24,300
+ela só passa a ver no lugar do provedor
+
+9
+00:00:24,500 --> 00:00:28,600
+e nenhuma VPN impede que tu clique num link de phishing
+
+10
+00:00:28,800 --> 00:00:31,000
+ela protege o caminho, não a decisão
+
+11
+00:00:31,200 --> 00:00:34,800
+e aí, tu usa VPN pra quê? me conta aqui nos comentários

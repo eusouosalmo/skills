@@ -1,0 +1,152 @@
+1
+00:00:00,700 --> 00:00:01,933
+se tu é desenvolvedor
+
+2
+00:00:02,066 --> 00:00:04,966
+e a arquitetura de software chega pra tu pronta
+
+3
+00:00:05,100 --> 00:00:06,200
+só pra tu implementar
+
+4
+00:00:06,800 --> 00:00:07,600
+ela tem um problema
+
+5
+00:00:08,066 --> 00:00:09,733
+que não tá escrito em nenhum lugar
+
+6
+00:00:10,066 --> 00:00:12,666
+isso porque o arquiteto entende o negócio
+
+7
+00:00:13,066 --> 00:00:14,600
+ele decide as tecnologias
+
+8
+00:00:14,866 --> 00:00:16,866
+e passa pro desenvolvedor implementar
+
+9
+00:00:17,200 --> 00:00:18,666
+problema é que nada volta
+
+10
+00:00:18,933 --> 00:00:20,366
+então quando o desenvolvedor muda
+
+11
+00:00:20,566 --> 00:00:21,766
+alguma coisa no meio do caminho
+
+12
+00:00:22,266 --> 00:00:24,000
+o arquiteto nunca fica sabendo
+
+13
+00:00:24,366 --> 00:00:24,700
+por isso
+
+14
+00:00:24,700 --> 00:00:27,333
+o melhor é o time devolver pra quem desenhou
+
+15
+00:00:27,566 --> 00:00:29,466
+o que mudou e o que ele descobriu
+
+16
+00:00:29,733 --> 00:00:32,800
+eu aprendi isso quando eu precisei tomar decisões como
+
+17
+00:00:33,100 --> 00:00:33,900
+arquiteto
+
+18
+00:00:34,266 --> 00:00:36,333
+acostumada a ser um desenvolvedor
+
+19
+00:00:36,533 --> 00:00:37,800
+e daí uma vez eu passei
+
+20
+00:00:38,166 --> 00:00:41,133
+alguns meses desenhando uma pipeline de processamento
+
+21
+00:00:41,266 --> 00:00:42,066
+que basicamente
+
+22
+00:00:42,200 --> 00:00:43,333
+por questões de domínio
+
+23
+00:00:43,500 --> 00:00:46,266
+utilizava ali o banco relacionado como uma fila
+
+24
+00:00:46,500 --> 00:00:48,600
+e só foi andar de fato
+
+25
+00:00:48,733 --> 00:00:51,066
+quando eu fui conversar com quem tava no time
+
+26
+00:00:51,200 --> 00:00:54,166
+há mais tempo que a galera conhecia os problemas
+
+27
+00:00:54,266 --> 00:00:56,866
+que não tava no código e nem documentado
+
+28
+00:00:57,100 --> 00:00:59,900
+e eles tinham vivido o problema quando ele aconteceu
+
+29
+00:01:00,133 --> 00:01:00,933
+depois disso
+
+30
+00:01:01,066 --> 00:01:02,466
+o desenho fechou mais rápido
+
+31
+00:01:02,966 --> 00:01:04,400
+a mudança da implementação
+
+32
+00:01:04,566 --> 00:01:06,766
+era rápida de atualizar na arquitetura toda
+
+33
+00:01:07,066 --> 00:01:09,566
+então quando o time devolve o que descobriu
+
+34
+00:01:10,000 --> 00:01:10,900
+a solução fica melhor
+
+35
+00:01:11,533 --> 00:01:14,733
+porque leva em conta problemas que só o time conhecia
+
+36
+00:01:15,000 --> 00:01:16,300
+conta aqui no teu time
+
+37
+00:01:16,400 --> 00:01:18,966
+quando o desenvolvedor muda alguma coisa na arquitetura
+
+38
+00:01:19,133 --> 00:01:20,700
+quem desenhou também fica sabendo
+

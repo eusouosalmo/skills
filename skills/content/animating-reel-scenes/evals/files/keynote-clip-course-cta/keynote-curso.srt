@@ -1,0 +1,19 @@
+1
+00:00:00,000 --> 00:00:06,522
+em 2007, o Steve Jobs subiu no palco e disse que ia lançar três aparelhos
+
+2
+00:00:06,772 --> 00:00:10,685
+um iPod, um telefone e um comunicador de internet
+
+3
+00:00:10,935 --> 00:00:16,152
+e aí revelou que os três eram um aparelho só, o iPhone
+
+4
+00:00:16,402 --> 00:00:22,489
+anunciar três e entregar um é o truque que eu ensino pra apresentação técnica
+
+5
+00:00:22,739 --> 00:00:28,826
+tá tudo no meu curso de apresentações para devs, o link tá na bio

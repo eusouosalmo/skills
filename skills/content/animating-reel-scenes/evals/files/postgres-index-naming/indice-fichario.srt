@@ -1,0 +1,27 @@
+1
+00:00:00,000 --> 00:00:03,478
+pensa numa biblioteca com um fichário na entrada
+
+2
+00:00:03,728 --> 00:00:10,685
+cada ficha tem o título em ordem alfabética e diz em qual estante o livro está
+
+3
+00:00:10,935 --> 00:00:17,022
+tu não percorre as estantes: abre o fichário, acha a ficha e vai direto
+
+4
+00:00:17,272 --> 00:00:22,489
+sem o fichário, tu ia olhar livro por livro, estante por estante
+
+5
+00:00:22,739 --> 00:00:29,696
+no Postgres, o fichário é o índice B-tree, e cada ficha é uma entrada do índice
+
+6
+00:00:29,946 --> 00:00:34,728
+a estante é a página da tabela onde a linha mora
+
+7
+00:00:34,978 --> 00:00:39,761
+por isso a busca vai direto, sem ler a tabela inteira

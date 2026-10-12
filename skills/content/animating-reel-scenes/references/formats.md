@@ -1,10 +1,12 @@
 # Formats with their own layout
 
-Read when the plan has a split screen, a source shot or sound effects.
+Read when the plan has a split screen, a whole-video mode, an image over the face, an impact screen with the face, a source shot or sound effects.
 
 ## Split screen
 
-The scene on top, the author's face below, for the length of the stretch.
+The scene on top, the author's face below, for the length of the stretch or of the whole reel.
+
+**Entrance and exit:** deliver the panel still at its first and last frame, both fully drawn, and let the author keyframe the panel and the face in CapCut, so both moves live in one tool. The first new event waits for the panel to settle, and `timeline.md` notes how long the keyframe takes.
 
 1. Build the scene at 1080x1920 with the drawing in the top half; the bottom half belongs to the face. Centre the drawing in the 1080x960 panel, with equal space above and below and at least 170 px at the top: in a split the panel is the frame the eye reads, so a drawing pushed down by the full-frame top margin (250 px) looks misaligned. That 250 px figure is Meta's Reels ad guidance (about 14%); organic reels carry a smaller top bar. `assets/center-panel.js` does the centring; scenes that repeat one drawing share its box so nothing jumps at the cut.
 2. **Default delivery, top panel only:** make the page transparent and put the background on a 1080x960 panel behind the drawing, then render a copy of the scene as `NN-name-topo.html`:
@@ -19,6 +21,24 @@ The scene on top, the author's face below, for the length of the stretch.
 
 Check one still before handing over: the drawing fits the top half, and in a composed file the face fills the bottom half with the mouth clear of the caption.
 
+## Whole-video modes
+
+Split screen for the whole reel, without face, and full screen with the face at the turns are each one HTML with a single `render(t)` from 00:00:00:00 and a single export, with one row in `timeline.md`: `NN-name-topo.mov` with alpha for the split screen, `NN-name.mp4` full screen for the other two. A fixed stage that transforms in place is what these modes are for, and one file keeps it with nothing to align in CapCut. A change after the render costs a full render; the stills gate holds that.
+
+- **Face stretches** (split screen and face at the turns): for each, the plan says whether the stage stays at **rest** (last state held, the default when the idea goes on) or **empties** (when the next idea starts from scratch), with the reason. In the face-at-the-turns mode, `timeline.md` marks each span where the author cuts to the recording in CapCut.
+- **Opening of the split screen:** a hook form that is an overlay (or only the face) plays over the full face, and the panel comes down with a keyframe right after; a panel form (result shown first, still comparison, a drawing that grows) opens already split at frame 0, with no entrance keyframe. `timeline.md` notes which opening was used.
+- **Visual thread** (a chapter counter, a terminal that grows, a rail): optional, at the plan's call.
+
+An explanation in steps over the face is not one of these modes: when the author asks for it, say why (the face and the diagram fight for the same frame) and offer the three modes above, with the reason for each.
+
+## Image over the face
+
+The second overlay size (step 5, "Overlays"). Build it in the overlay's HTML: the image in the top half of the frame, with a CSS gradient mask fading it into transparency toward the forehead, and render it as a `.mov` with alpha like the stickers. Check its still over the backdrop: the eyes, the mouth and the caption zone stay clear.
+
+## Impact screen with the face
+
+In mixed mode with the face or in an overlay, the impact screen is its own full-screen file, `NN-impacto.mp4`, 0.5 to 1.5 s, that the author drops over the recording at the anchor word with a dry cut in and out. Its row in `timeline.md` gives the timecode of the anchor word.
+
 ## Source shot
 
 The primary source of a fact, on screen, with the cited sentence highlighted as it is said.
@@ -32,6 +52,7 @@ The primary source of a fact, on screen, with the cited sentence highlighted as 
 One audio file for the whole reel, so the author drops it once at 00:00:00:00.
 
 1. In each scene, list its sounds next to its timing table, in seconds from the scene start: `window.SFX = [{"t": 0.68, "kind": "pop"}, ...];`. Keeping them beside `T` means a retimed entrance carries its sound with it. One event per entrance, line, state change, and the scene's own in (`whoosh` at 0) and out (`out` just before it ends); a dry cut between two states of the same drawing gets a `tick`, not a sweep.
+   The impact screen stays out of `window.SFX`: its row in `timeline.md` says "impacto" with the time, and the author picks that sound by ear.
 2. Pick the kind by what happens: `pop` (sticker, note, node), `thud` (a change that matters, a block replaced), `tick` (small label, typed word, step), `draw` (line traced), `whoosh` and `out` (scene in and out), `ding` (a check, a loop that closes). Lower the `gain` of an event that lands on top of another.
 3. `python3 scripts/sfx.py exports/00-sfx.wav --duration <reel length in s> --scene cenas/01-name.html <start s> --scene ...`. The sounds are synthesised, so there is no sample to license, and the track peaks near -10 dB, under a voice recorded near -3 dB.
 4. Mix a preview with the recording's speech (`ffmpeg -i recording.mp4 -i exports/00-sfx.wav -filter_complex "[0:a][1:a]amix=inputs=2:duration=first:normalize=0[a]" -map 0:v -map "[a]" -c:v copy previa.mp4`) and listen before handing it over. Add the row to `timeline.md` (start 00:00:00:00).

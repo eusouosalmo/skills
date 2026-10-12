@@ -1,0 +1,19 @@
+1
+00:00:00,000 --> 00:00:03,913
+três comandos de git que eu uso todo dia
+
+2
+00:00:04,163 --> 00:00:08,076
+primeiro: git switch traço, que volta pra branch anterior
+
+3
+00:00:08,326 --> 00:00:13,109
+segundo: git stash, que guarda o que tu mexeu sem commitar
+
+4
+00:00:13,359 --> 00:00:18,141
+terceiro: git log oneline, o histórico com uma linha por commit
+
+5
+00:00:18,391 --> 00:00:21,870
+salva esse vídeo pra lembrar na próxima vez

@@ -1,0 +1,168 @@
+1
+00:00:00,000 --> 00:00:02,066
+tu sabia que nem o Mark Zuckerberg
+
+2
+00:00:02,166 --> 00:00:03,133
+consegue ler o teu WhatsApp
+
+3
+00:00:03,600 --> 00:00:04,866
+pra proteger uma mensagem
+
+4
+00:00:05,066 --> 00:00:06,766
+você precisa de uma senha secreta
+
+5
+00:00:06,933 --> 00:00:09,066
+só que se tu mandar essa mensagem pela internet
+
+6
+00:00:09,800 --> 00:00:12,200
+qualquer um no caminho vai poder ver
+
+7
+00:00:12,200 --> 00:00:12,666
+então
+
+8
+00:00:12,666 --> 00:00:16,400
+como dois celulares combinam um segredo em público?
+
+9
+00:00:17,166 --> 00:00:20,333
+e a forma mais fácil de entender é usando tinta
+
+10
+00:00:20,800 --> 00:00:21,400
+primeiro
+
+11
+00:00:21,400 --> 00:00:23,166
+imagina uma cor pública
+
+12
+00:00:23,500 --> 00:00:25,600
+onde todo mundo conhece o amarelo
+
+13
+00:00:25,766 --> 00:00:28,066
+eu escolho em segredo a cor vermelha
+
+14
+00:00:28,366 --> 00:00:29,933
+e você escolhe a cor azul
+
+15
+00:00:30,200 --> 00:00:32,566
+nenhum de nós revela a cor secreta
+
+16
+00:00:32,866 --> 00:00:35,200
+eu misturo a cor amarela com a minha
+
+17
+00:00:35,400 --> 00:00:36,900
+e te mando a cor laranja
+
+18
+00:00:37,166 --> 00:00:39,000
+você mistura a cor amarela com a sua
+
+19
+00:00:39,266 --> 00:00:40,866
+e me manda a verde água
+
+20
+00:00:41,200 --> 00:00:42,966
+agora quem estiver olhando a rede de internet
+
+21
+00:00:43,900 --> 00:00:45,766
+observa as misturas passando
+
+22
+00:00:46,466 --> 00:00:47,366
+mas é impossível
+
+23
+00:00:47,766 --> 00:00:50,766
+desfazer a mistura para descobrir o segredo original
+
+24
+00:00:51,133 --> 00:00:52,166
+agora olha o que acontece
+
+25
+00:00:52,400 --> 00:00:54,133
+eu pego o seu verde água
+
+26
+00:00:54,500 --> 00:00:56,033
+pingo o meu vermelho
+
+27
+00:00:56,033 --> 00:00:59,100
+agora você pega o seu laranja e pinga o seu azul
+
+28
+00:00:59,300 --> 00:01:00,000
+no final
+
+29
+00:01:00,100 --> 00:01:03,366
+nós dois temos exatamente o mesmo marrom
+
+30
+00:01:03,666 --> 00:01:06,800
+uma chave secreta idêntica que nunca viajou na internet
+
+31
+00:01:06,966 --> 00:01:09,966
+com essa chave pronta dos dois lados aí sim
+
+32
+00:01:10,200 --> 00:01:13,466
+eu tranco a mensagem com ela com o texto cifrado
+
+33
+00:01:13,666 --> 00:01:16,066
+e só o teu celular vai conseguir abrir
+
+34
+00:01:16,566 --> 00:01:17,566
+essa troca de cores
+
+35
+00:01:17,666 --> 00:01:19,500
+é o algoritmo Diffie Hellman
+
+36
+00:01:19,500 --> 00:01:23,100
+que no WhatsApp roda via protocolo Signal com
+
+37
+00:01:23,133 --> 00:01:23,933
+X3DH
+
+38
+00:01:24,166 --> 00:01:25,166
+e a mensagem em si
+
+39
+00:01:25,366 --> 00:01:28,566
+ela vai blindada com o algoritmo AES
+
+40
+00:01:28,833 --> 00:01:30,900
+já me segue aqui se tu quer aprender mais sobre
+
+41
+00:01:31,000 --> 00:01:31,700
+tecnologia
+
+42
+00:01:31,700 --> 00:01:34,066
+e entender o que rola por debaixo dos panos
+

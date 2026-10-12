@@ -1,0 +1,63 @@
+1
+00:00:00,000 --> 00:00:07,826
+Tu criou um índice GIN na coluna JSONB do Postgres, e a consulta continua varrendo a tabela inteira.
+
+2
+00:00:08,076 --> 00:00:10,685
+O remédio tem nome: operador indexável.
+
+3
+00:00:10,935 --> 00:00:17,891
+Numa tabela de pagamentos, cada gateway devolve a resposta num formato diferente, então JSONB faz sentido.
+
+4
+00:00:18,141 --> 00:00:21,620
+Aí o suporte pede a lista dos recusados.
+
+5
+00:00:21,870 --> 00:00:28,391
+Tu escreve metadados, setinha dupla, status, igual a recusado, e o EXPLAIN mostra Seq Scan.
+
+6
+00:00:28,641 --> 00:00:36,033
+Isso porque a setinha só extrai um texto, e o GIN não sabe comparar texto com igual.
+
+7
+00:00:36,283 --> 00:00:44,109
+Ele guarda as chaves e valores de dentro do JSON e só responde a operadores como o contém.
+
+8
+00:00:44,359 --> 00:00:49,576
+Troca o filtro pra metadados contém status recusado, e o índice entra.
+
+9
+00:00:49,826 --> 00:00:52,870
+Ou cria um B-tree daquela expressão exata.
+
+10
+00:00:53,120 --> 00:00:56,163
+Caso novo: pagamentos acima de cem reais.
+
+11
+00:00:56,413 --> 00:00:58,013
+O GIN ajuda?
+
+12
+00:00:58,263 --> 00:01:02,176
+Não, porque maior que não é operador do GIN.
+
+13
+00:01:02,426 --> 00:01:08,078
+Aqui vai um B-tree no valor convertido pra número, escrito igualzinho no WHERE.
+
+14
+00:01:08,328 --> 00:01:13,111
+Então o índice não serve a coluna, ele serve o operador.
+
+15
+00:01:13,361 --> 00:01:24,665
+Só que, quando o campo aparece em quase toda consulta, ele vira coluna normal, porque o Postgres não guarda estatística dos campos de dentro do JSON.
+
+16
+00:01:24,915 --> 00:01:28,393
+Qual operador tu mais usa no teu JSONB?

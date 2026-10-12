@@ -1,0 +1,1822 @@
+[
+{
+"w": "tu",
+"s": 0.0,
+"e": 0.34,
+"cue": 1,
+"src": "whisper"
+},
+{
+"w": "sabia",
+"s": 0.34,
+"e": 0.54,
+"cue": 1,
+"src": "whisper"
+},
+{
+"w": "que",
+"s": 0.54,
+"e": 0.7,
+"cue": 1,
+"src": "whisper"
+},
+{
+"w": "nem",
+"s": 0.7,
+"e": 0.92,
+"cue": 1,
+"src": "whisper"
+},
+{
+"w": "o",
+"s": 0.92,
+"e": 1.04,
+"cue": 1,
+"src": "whisper"
+},
+{
+"w": "Mark",
+"s": 1.04,
+"e": 1.26,
+"cue": 1,
+"src": "whisper"
+},
+{
+"w": "Zuckerberg",
+"s": 1.26,
+"e": 1.84,
+"cue": 1,
+"src": "whisper"
+},
+{
+"w": "consegue",
+"s": 1.84,
+"e": 2.18,
+"cue": 2,
+"src": "whisper"
+},
+{
+"w": "ler",
+"s": 2.18,
+"e": 2.42,
+"cue": 2,
+"src": "whisper"
+},
+{
+"w": "o",
+"s": 2.42,
+"e": 2.56,
+"cue": 2,
+"src": "whisper"
+},
+{
+"w": "teu",
+"s": 2.56,
+"e": 2.64,
+"cue": 2,
+"src": "whisper"
+},
+{
+"w": "WhatsApp",
+"s": 2.64,
+"e": 3.02,
+"cue": 2,
+"src": "whisper"
+},
+{
+"w": "pra",
+"s": 3.7,
+"e": 3.72,
+"cue": 3,
+"src": "whisper"
+},
+{
+"w": "proteger",
+"s": 3.72,
+"e": 4.18,
+"cue": 3,
+"src": "whisper"
+},
+{
+"w": "uma",
+"s": 4.18,
+"e": 4.36,
+"cue": 3,
+"src": "whisper"
+},
+{
+"w": "mensagem",
+"s": 4.36,
+"e": 4.96,
+"cue": 3,
+"src": "whisper"
+},
+{
+"w": "você",
+"s": 5.04,
+"e": 5.24,
+"cue": 4,
+"src": "whisper"
+},
+{
+"w": "precisa",
+"s": 5.24,
+"e": 5.58,
+"cue": 4,
+"src": "whisper"
+},
+{
+"w": "de",
+"s": 5.58,
+"e": 5.78,
+"cue": 4,
+"src": "whisper"
+},
+{
+"w": "uma",
+"s": 5.78,
+"e": 5.9,
+"cue": 4,
+"src": "whisper"
+},
+{
+"w": "senha",
+"s": 5.9,
+"e": 6.16,
+"cue": 4,
+"src": "whisper"
+},
+{
+"w": "secreta",
+"s": 6.16,
+"e": 6.8,
+"cue": 4,
+"src": "whisper"
+},
+{
+"w": "só",
+"s": 6.92,
+"e": 7.12,
+"cue": 5,
+"src": "whisper"
+},
+{
+"w": "que",
+"s": 7.12,
+"e": 7.3,
+"cue": 5,
+"src": "whisper"
+},
+{
+"w": "se",
+"s": 7.3,
+"e": 7.48,
+"cue": 5,
+"src": "whisper"
+},
+{
+"w": "tu",
+"s": 7.48,
+"e": 7.68,
+"cue": 5,
+"src": "whisper"
+},
+{
+"w": "mandar",
+"s": 7.68,
+"e": 7.84,
+"cue": 5,
+"src": "whisper"
+},
+{
+"w": "essa",
+"s": 7.84,
+"e": 8.16,
+"cue": 5,
+"src": "whisper"
+},
+{
+"w": "mensagem",
+"s": 8.16,
+"e": 8.56,
+"cue": 5,
+"src": "whisper"
+},
+{
+"w": "pela",
+"s": 8.56,
+"e": 8.8,
+"cue": 5,
+"src": "whisper"
+},
+{
+"w": "internet",
+"s": 8.8,
+"e": 9.18,
+"cue": 5,
+"src": "whisper"
+},
+{
+"w": "qualquer",
+"s": 9.62,
+"e": 9.94,
+"cue": 6,
+"src": "whisper"
+},
+{
+"w": "um",
+"s": 9.94,
+"e": 10.26,
+"cue": 6,
+"src": "whisper"
+},
+{
+"w": "no",
+"s": 10.26,
+"e": 10.4,
+"cue": 6,
+"src": "whisper"
+},
+{
+"w": "caminho",
+"s": 10.4,
+"e": 10.74,
+"cue": 6,
+"src": "whisper"
+},
+{
+"w": "vai",
+"s": 10.74,
+"e": 11.26,
+"cue": 6,
+"src": "whisper"
+},
+{
+"w": "poder",
+"s": 11.26,
+"e": 11.56,
+"cue": 6,
+"src": "whisper"
+},
+{
+"w": "ver",
+"s": 11.56,
+"e": 11.86,
+"cue": 6,
+"src": "whisper"
+},
+{
+"w": "então",
+"s": 12.28,
+"e": 12.54,
+"cue": 7,
+"src": "whisper"
+},
+{
+"w": "como",
+"s": 12.62,
+"e": 12.88,
+"cue": 8,
+"src": "whisper"
+},
+{
+"w": "dois",
+"s": 12.88,
+"e": 13.22,
+"cue": 8,
+"src": "whisper"
+},
+{
+"w": "celulares",
+"s": 13.22,
+"e": 13.84,
+"cue": 8,
+"src": "whisper"
+},
+{
+"w": "combinam",
+"s": 13.84,
+"e": 14.66,
+"cue": 8,
+"src": "whisper"
+},
+{
+"w": "um",
+"s": 14.66,
+"e": 14.84,
+"cue": 8,
+"src": "whisper"
+},
+{
+"w": "segredo",
+"s": 14.84,
+"e": 15.52,
+"cue": 8,
+"src": "whisper"
+},
+{
+"w": "em",
+"s": 15.52,
+"e": 15.8,
+"cue": 8,
+"src": "whisper"
+},
+{
+"w": "público?",
+"s": 15.8,
+"e": 16.24,
+"cue": 8,
+"src": "whisper"
+},
+{
+"w": "e",
+"s": 17.0,
+"e": 17.3,
+"cue": 9,
+"src": "whisper"
+},
+{
+"w": "a",
+"s": 17.3,
+"e": 17.38,
+"cue": 9,
+"src": "whisper"
+},
+{
+"w": "forma",
+"s": 17.38,
+"e": 17.58,
+"cue": 9,
+"src": "whisper"
+},
+{
+"w": "mais",
+"s": 17.58,
+"e": 17.92,
+"cue": 9,
+"src": "whisper"
+},
+{
+"w": "fácil",
+"s": 17.92,
+"e": 18.18,
+"cue": 9,
+"src": "whisper"
+},
+{
+"w": "de",
+"s": 18.18,
+"e": 18.38,
+"cue": 9,
+"src": "whisper"
+},
+{
+"w": "entender",
+"s": 18.38,
+"e": 18.84,
+"cue": 9,
+"src": "whisper"
+},
+{
+"w": "é",
+"s": 18.84,
+"e": 19.3,
+"cue": 9,
+"src": "whisper"
+},
+{
+"w": "usando",
+"s": 19.3,
+"e": 19.56,
+"cue": 9,
+"src": "whisper"
+},
+{
+"w": "tinta",
+"s": 19.56,
+"e": 20.3,
+"cue": 9,
+"src": "whisper"
+},
+{
+"w": "primeiro",
+"s": 20.74,
+"e": 21.3,
+"cue": 10,
+"src": "whisper"
+},
+{
+"w": "imagina",
+"s": 21.5,
+"e": 21.9,
+"cue": 11,
+"src": "whisper"
+},
+{
+"w": "uma",
+"s": 21.9,
+"e": 22.08,
+"cue": 11,
+"src": "whisper"
+},
+{
+"w": "cor",
+"s": 22.08,
+"e": 22.42,
+"cue": 11,
+"src": "whisper"
+},
+{
+"w": "pública",
+"s": 22.42,
+"e": 23.06,
+"cue": 11,
+"src": "whisper"
+},
+{
+"w": "onde",
+"s": 23.06,
+"e": 23.58,
+"cue": 12,
+"src": "whisper"
+},
+{
+"w": "todo",
+"s": 23.58,
+"e": 23.82,
+"cue": 12,
+"src": "whisper"
+},
+{
+"w": "mundo",
+"s": 23.82,
+"e": 24.04,
+"cue": 12,
+"src": "whisper"
+},
+{
+"w": "conhece",
+"s": 24.04,
+"e": 24.64,
+"cue": 12,
+"src": "whisper"
+},
+{
+"w": "o",
+"s": 24.88,
+"e": 25.08,
+"cue": 12,
+"src": "whisper"
+},
+{
+"w": "amarelo",
+"s": 25.08,
+"e": 25.6,
+"cue": 12,
+"src": "whisper"
+},
+{
+"w": "eu",
+"s": 25.6,
+"e": 25.92,
+"cue": 13,
+"src": "whisper"
+},
+{
+"w": "escolho",
+"s": 25.92,
+"e": 26.32,
+"cue": 13,
+"src": "whisper"
+},
+{
+"w": "em",
+"s": 26.32,
+"e": 26.44,
+"cue": 13,
+"src": "whisper"
+},
+{
+"w": "segredo",
+"s": 26.44,
+"e": 27.08,
+"cue": 13,
+"src": "whisper"
+},
+{
+"w": "a",
+"s": 27.08,
+"e": 27.32,
+"cue": 13,
+"src": "whisper"
+},
+{
+"w": "cor",
+"s": 27.32,
+"e": 27.44,
+"cue": 13,
+"src": "whisper"
+},
+{
+"w": "vermelha",
+"s": 27.44,
+"e": 28.16,
+"cue": 13,
+"src": "whisper"
+},
+{
+"w": "e",
+"s": 28.16,
+"e": 28.5,
+"cue": 14,
+"src": "whisper"
+},
+{
+"w": "você",
+"s": 28.5,
+"e": 28.74,
+"cue": 14,
+"src": "whisper"
+},
+{
+"w": "escolhe",
+"s": 28.74,
+"e": 29.3,
+"cue": 14,
+"src": "whisper"
+},
+{
+"w": "a",
+"s": 29.3,
+"e": 29.4,
+"cue": 14,
+"src": "whisper"
+},
+{
+"w": "cor",
+"s": 29.4,
+"e": 29.66,
+"cue": 14,
+"src": "whisper"
+},
+{
+"w": "azul",
+"s": 29.66,
+"e": 29.98,
+"cue": 14,
+"src": "whisper"
+},
+{
+"w": "nenhum",
+"s": 30.28,
+"e": 30.46,
+"cue": 15,
+"src": "whisper"
+},
+{
+"w": "de",
+"s": 30.46,
+"e": 30.62,
+"cue": 15,
+"src": "whisper"
+},
+{
+"w": "nós",
+"s": 30.62,
+"e": 30.86,
+"cue": 15,
+"src": "whisper"
+},
+{
+"w": "revela",
+"s": 30.86,
+"e": 31.58,
+"cue": 15,
+"src": "whisper"
+},
+{
+"w": "a",
+"s": 31.58,
+"e": 31.74,
+"cue": 15,
+"src": "whisper"
+},
+{
+"w": "cor",
+"s": 31.74,
+"e": 32.0,
+"cue": 15,
+"src": "whisper"
+},
+{
+"w": "secreta",
+"s": 32.0,
+"e": 32.66,
+"cue": 15,
+"src": "whisper"
+},
+{
+"w": "eu",
+"s": 32.96,
+"e": 33.06,
+"cue": 16,
+"src": "whisper"
+},
+{
+"w": "misturo",
+"s": 33.06,
+"e": 33.54,
+"cue": 16,
+"src": "whisper"
+},
+{
+"w": "a",
+"s": 33.54,
+"e": 33.92,
+"cue": 16,
+"src": "whisper"
+},
+{
+"w": "cor",
+"s": 33.92,
+"e": 34.14,
+"cue": 16,
+"src": "whisper"
+},
+{
+"w": "amarela",
+"s": 34.14,
+"e": 34.62,
+"cue": 16,
+"src": "whisper"
+},
+{
+"w": "com",
+"s": 34.62,
+"e": 34.82,
+"cue": 16,
+"src": "whisper"
+},
+{
+"w": "a",
+"s": 34.82,
+"e": 34.92,
+"cue": 16,
+"src": "whisper"
+},
+{
+"w": "minha",
+"s": 34.92,
+"e": 35.22,
+"cue": 16,
+"src": "whisper"
+},
+{
+"w": "e",
+"s": 35.22,
+"e": 35.6,
+"cue": 17,
+"src": "whisper"
+},
+{
+"w": "te",
+"s": 35.6,
+"e": 35.74,
+"cue": 17,
+"src": "whisper"
+},
+{
+"w": "mando",
+"s": 35.74,
+"e": 36.04,
+"cue": 17,
+"src": "whisper"
+},
+{
+"w": "a",
+"s": 36.04,
+"e": 36.16,
+"cue": 17,
+"src": "whisper"
+},
+{
+"w": "cor",
+"s": 36.16,
+"e": 36.38,
+"cue": 17,
+"src": "whisper"
+},
+{
+"w": "laranja",
+"s": 36.38,
+"e": 36.86,
+"cue": 17,
+"src": "whisper"
+},
+{
+"w": "você",
+"s": 37.14,
+"e": 37.2,
+"cue": 18,
+"src": "whisper"
+},
+{
+"w": "mistura",
+"s": 37.2,
+"e": 37.64,
+"cue": 18,
+"src": "whisper"
+},
+{
+"w": "a",
+"s": 37.64,
+"e": 37.8,
+"cue": 18,
+"src": "whisper"
+},
+{
+"w": "cor",
+"s": 37.8,
+"e": 37.96,
+"cue": 18,
+"src": "whisper"
+},
+{
+"w": "amarela",
+"s": 37.96,
+"e": 38.44,
+"cue": 18,
+"src": "whisper"
+},
+{
+"w": "com",
+"s": 38.44,
+"e": 38.6,
+"cue": 18,
+"src": "whisper"
+},
+{
+"w": "a",
+"s": 38.6,
+"e": 38.72,
+"cue": 18,
+"src": "whisper"
+},
+{
+"w": "sua",
+"s": 38.72,
+"e": 39.02,
+"cue": 18,
+"src": "whisper"
+},
+{
+"w": "e",
+"s": 39.02,
+"e": 39.44,
+"cue": 19,
+"src": "whisper"
+},
+{
+"w": "me",
+"s": 39.44,
+"e": 39.54,
+"cue": 19,
+"src": "whisper"
+},
+{
+"w": "manda",
+"s": 39.54,
+"e": 39.98,
+"cue": 19,
+"src": "whisper"
+},
+{
+"w": "a",
+"s": 39.98,
+"e": 40.16,
+"cue": 19,
+"src": "whisper"
+},
+{
+"w": "verde",
+"s": 40.16,
+"e": 40.44,
+"cue": 19,
+"src": "whisper"
+},
+{
+"w": "água",
+"s": 40.44,
+"e": 40.84,
+"cue": 19,
+"src": "whisper"
+},
+{
+"w": "agora",
+"s": 41.2,
+"e": 41.2,
+"cue": 20,
+"src": "interp"
+},
+{
+"w": "quem",
+"s": 41.2,
+"e": 41.32,
+"cue": 20,
+"src": "whisper"
+},
+{
+"w": "estiver",
+"s": 41.32,
+"e": 41.62,
+"cue": 20,
+"src": "whisper"
+},
+{
+"w": "olhando",
+"s": 41.62,
+"e": 41.98,
+"cue": 20,
+"src": "whisper"
+},
+{
+"w": "a",
+"s": 41.98,
+"e": 42.22,
+"cue": 20,
+"src": "whisper"
+},
+{
+"w": "rede",
+"s": 42.22,
+"e": 42.44,
+"cue": 20,
+"src": "whisper"
+},
+{
+"w": "de",
+"s": 42.44,
+"e": 42.64,
+"cue": 20,
+"src": "whisper"
+},
+{
+"w": "internet",
+"s": 42.64,
+"e": 43.1,
+"cue": 20,
+"src": "whisper"
+},
+{
+"w": "observa",
+"s": 43.7,
+"e": 44.46,
+"cue": 21,
+"src": "whisper"
+},
+{
+"w": "as",
+"s": 44.46,
+"e": 44.58,
+"cue": 21,
+"src": "whisper"
+},
+{
+"w": "misturas",
+"s": 44.58,
+"e": 45.12,
+"cue": 21,
+"src": "whisper"
+},
+{
+"w": "passando",
+"s": 45.12,
+"e": 45.82,
+"cue": 21,
+"src": "whisper"
+},
+{
+"w": "mas",
+"s": 46.2,
+"e": 46.54,
+"cue": 22,
+"src": "whisper"
+},
+{
+"w": "é",
+"s": 46.54,
+"e": 46.7,
+"cue": 22,
+"src": "whisper"
+},
+{
+"w": "impossível",
+"s": 46.7,
+"e": 47.52,
+"cue": 22,
+"src": "whisper"
+},
+{
+"w": "desfazer",
+"s": 47.52,
+"e": 48.38,
+"cue": 23,
+"src": "whisper"
+},
+{
+"w": "a",
+"s": 48.38,
+"e": 48.48,
+"cue": 23,
+"src": "whisper"
+},
+{
+"w": "mistura",
+"s": 48.48,
+"e": 48.98,
+"cue": 23,
+"src": "whisper"
+},
+{
+"w": "para",
+"s": 48.98,
+"e": 49.32,
+"cue": 23,
+"src": "whisper"
+},
+{
+"w": "descobrir",
+"s": 49.32,
+"e": 49.66,
+"cue": 23,
+"src": "whisper"
+},
+{
+"w": "o",
+"s": 49.66,
+"e": 49.8,
+"cue": 23,
+"src": "whisper"
+},
+{
+"w": "segredo",
+"s": 49.8,
+"e": 50.24,
+"cue": 23,
+"src": "whisper"
+},
+{
+"w": "original",
+"s": 50.24,
+"e": 50.72,
+"cue": 23,
+"src": "whisper"
+},
+{
+"w": "agora",
+"s": 50.72,
+"e": 51.24,
+"cue": 24,
+"src": "whisper"
+},
+{
+"w": "olha",
+"s": 50.72,
+"e": 51.24,
+"cue": 24,
+"src": "whisper"
+},
+{
+"w": "o",
+"s": 51.24,
+"e": 51.34,
+"cue": 24,
+"src": "whisper"
+},
+{
+"w": "que",
+"s": 51.46,
+"e": 51.6,
+"cue": 24,
+"src": "whisper"
+},
+{
+"w": "acontece",
+"s": 51.6,
+"e": 52.06,
+"cue": 24,
+"src": "whisper"
+},
+{
+"w": "eu",
+"s": 52.42,
+"e": 52.5,
+"cue": 25,
+"src": "whisper"
+},
+{
+"w": "pego",
+"s": 52.5,
+"e": 52.98,
+"cue": 25,
+"src": "whisper"
+},
+{
+"w": "o",
+"s": 52.98,
+"e": 53.26,
+"cue": 25,
+"src": "whisper"
+},
+{
+"w": "seu",
+"s": 53.26,
+"e": 53.4,
+"cue": 25,
+"src": "whisper"
+},
+{
+"w": "verde",
+"s": 53.4,
+"e": 53.86,
+"cue": 25,
+"src": "whisper"
+},
+{
+"w": "água",
+"s": 53.86,
+"e": 54.16,
+"cue": 25,
+"src": "whisper"
+},
+{
+"w": "pingo",
+"s": 54.5,
+"e": 54.8,
+"cue": 26,
+"src": "whisper"
+},
+{
+"w": "o",
+"s": 54.8,
+"e": 55.16,
+"cue": 26,
+"src": "whisper"
+},
+{
+"w": "meu",
+"s": 55.16,
+"e": 55.26,
+"cue": 26,
+"src": "whisper"
+},
+{
+"w": "vermelho",
+"s": 55.26,
+"e": 55.92,
+"cue": 26,
+"src": "whisper"
+},
+{
+"w": "agora",
+"s": 56.09,
+"e": 56.09,
+"cue": 27,
+"src": "interp"
+},
+{
+"w": "você",
+"s": 56.14,
+"e": 56.24,
+"cue": 27,
+"src": "whisper"
+},
+{
+"w": "pega",
+"s": 56.24,
+"e": 56.7,
+"cue": 27,
+"src": "whisper"
+},
+{
+"w": "o",
+"s": 56.7,
+"e": 57.0,
+"cue": 27,
+"src": "whisper"
+},
+{
+"w": "seu",
+"s": 57.0,
+"e": 57.1,
+"cue": 27,
+"src": "whisper"
+},
+{
+"w": "laranja",
+"s": 57.1,
+"e": 57.6,
+"cue": 27,
+"src": "whisper"
+},
+{
+"w": "e",
+"s": 57.6,
+"e": 57.9,
+"cue": 27,
+"src": "whisper"
+},
+{
+"w": "pinga",
+"s": 57.9,
+"e": 58.38,
+"cue": 27,
+"src": "whisper"
+},
+{
+"w": "o",
+"s": 58.38,
+"e": 58.6,
+"cue": 27,
+"src": "whisper"
+},
+{
+"w": "seu",
+"s": 58.6,
+"e": 58.68,
+"cue": 27,
+"src": "whisper"
+},
+{
+"w": "azul",
+"s": 58.68,
+"e": 59.06,
+"cue": 27,
+"src": "whisper"
+},
+{
+"w": "no",
+"s": 59.3,
+"e": 59.4,
+"cue": 28,
+"src": "whisper"
+},
+{
+"w": "final",
+"s": 59.4,
+"e": 59.78,
+"cue": 28,
+"src": "whisper"
+},
+{
+"w": "nós",
+"s": 60.06,
+"e": 60.28,
+"cue": 29,
+"src": "whisper"
+},
+{
+"w": "dois",
+"s": 60.28,
+"e": 60.62,
+"cue": 29,
+"src": "whisper"
+},
+{
+"w": "temos",
+"s": 60.62,
+"e": 61.02,
+"cue": 29,
+"src": "whisper"
+},
+{
+"w": "exatamente",
+"s": 61.02,
+"e": 61.98,
+"cue": 29,
+"src": "whisper"
+},
+{
+"w": "o",
+"s": 61.98,
+"e": 62.44,
+"cue": 29,
+"src": "whisper"
+},
+{
+"w": "mesmo",
+"s": 62.44,
+"e": 62.86,
+"cue": 29,
+"src": "whisper"
+},
+{
+"w": "marrom",
+"s": 62.86,
+"e": 63.56,
+"cue": 29,
+"src": "whisper"
+},
+{
+"w": "uma",
+"s": 63.7,
+"e": 63.88,
+"cue": 30,
+"src": "whisper"
+},
+{
+"w": "chave",
+"s": 63.88,
+"e": 64.16,
+"cue": 30,
+"src": "whisper"
+},
+{
+"w": "secreta",
+"s": 64.16,
+"e": 64.68,
+"cue": 30,
+"src": "whisper"
+},
+{
+"w": "idêntica",
+"s": 64.68,
+"e": 65.32,
+"cue": 30,
+"src": "whisper"
+},
+{
+"w": "que",
+"s": 65.32,
+"e": 65.56,
+"cue": 30,
+"src": "whisper"
+},
+{
+"w": "nunca",
+"s": 65.56,
+"e": 65.9,
+"cue": 30,
+"src": "whisper"
+},
+{
+"w": "viajou",
+"s": 65.9,
+"e": 66.34,
+"cue": 30,
+"src": "whisper"
+},
+{
+"w": "na",
+"s": 66.34,
+"e": 66.46,
+"cue": 30,
+"src": "whisper"
+},
+{
+"w": "internet",
+"s": 66.46,
+"e": 66.84,
+"cue": 30,
+"src": "whisper"
+},
+{
+"w": "com",
+"s": 67.08,
+"e": 67.22,
+"cue": 31,
+"src": "whisper"
+},
+{
+"w": "essa",
+"s": 67.22,
+"e": 67.38,
+"cue": 31,
+"src": "whisper"
+},
+{
+"w": "chave",
+"s": 67.38,
+"e": 67.7,
+"cue": 31,
+"src": "whisper"
+},
+{
+"w": "pronta",
+"s": 67.7,
+"e": 68.08,
+"cue": 31,
+"src": "whisper"
+},
+{
+"w": "dos",
+"s": 68.08,
+"e": 68.32,
+"cue": 31,
+"src": "whisper"
+},
+{
+"w": "dois",
+"s": 68.32,
+"e": 68.54,
+"cue": 31,
+"src": "whisper"
+},
+{
+"w": "lados",
+"s": 68.54,
+"e": 69.02,
+"cue": 31,
+"src": "whisper"
+},
+{
+"w": "aí",
+"s": 69.32,
+"e": 69.62,
+"cue": 31,
+"src": "whisper"
+},
+{
+"w": "sim",
+"s": 69.62,
+"e": 69.98,
+"cue": 31,
+"src": "whisper"
+},
+{
+"w": "eu",
+"s": 70.36,
+"e": 70.48,
+"cue": 32,
+"src": "whisper"
+},
+{
+"w": "tranco",
+"s": 70.48,
+"e": 70.78,
+"cue": 32,
+"src": "whisper"
+},
+{
+"w": "a",
+"s": 70.78,
+"e": 70.88,
+"cue": 32,
+"src": "whisper"
+},
+{
+"w": "mensagem",
+"s": 70.88,
+"e": 71.28,
+"cue": 32,
+"src": "whisper"
+},
+{
+"w": "com",
+"s": 71.28,
+"e": 71.84,
+"cue": 32,
+"src": "whisper"
+},
+{
+"w": "ela",
+"s": 71.28,
+"e": 71.84,
+"cue": 32,
+"src": "whisper"
+},
+{
+"w": "com",
+"s": 71.84,
+"e": 72.28,
+"cue": 32,
+"src": "whisper"
+},
+{
+"w": "o",
+"s": 72.28,
+"e": 72.42,
+"cue": 32,
+"src": "whisper"
+},
+{
+"w": "texto",
+"s": 72.42,
+"e": 72.58,
+"cue": 32,
+"src": "whisper"
+},
+{
+"w": "cifrado",
+"s": 72.58,
+"e": 73.28,
+"cue": 32,
+"src": "whisper"
+},
+{
+"w": "e",
+"s": 73.28,
+"e": 73.76,
+"cue": 33,
+"src": "whisper"
+},
+{
+"w": "só",
+"s": 73.76,
+"e": 73.96,
+"cue": 33,
+"src": "whisper"
+},
+{
+"w": "o",
+"s": 73.96,
+"e": 74.12,
+"cue": 33,
+"src": "whisper"
+},
+{
+"w": "teu",
+"s": 74.12,
+"e": 74.2,
+"cue": 33,
+"src": "whisper"
+},
+{
+"w": "celular",
+"s": 74.2,
+"e": 74.76,
+"cue": 33,
+"src": "whisper"
+},
+{
+"w": "vai",
+"s": 74.76,
+"e": 75.1,
+"cue": 33,
+"src": "whisper"
+},
+{
+"w": "conseguir",
+"s": 75.1,
+"e": 75.58,
+"cue": 33,
+"src": "whisper"
+},
+{
+"w": "abrir",
+"s": 75.58,
+"e": 76.14,
+"cue": 33,
+"src": "whisper"
+},
+{
+"w": "essa",
+"s": 76.14,
+"e": 76.74,
+"cue": 34,
+"src": "whisper"
+},
+{
+"w": "troca",
+"s": 76.74,
+"e": 77.1,
+"cue": 34,
+"src": "whisper"
+},
+{
+"w": "de",
+"s": 77.1,
+"e": 77.22,
+"cue": 34,
+"src": "whisper"
+},
+{
+"w": "cores",
+"s": 77.22,
+"e": 77.56,
+"cue": 34,
+"src": "whisper"
+},
+{
+"w": "é",
+"s": 77.56,
+"e": 77.78,
+"cue": 35,
+"src": "whisper"
+},
+{
+"w": "o",
+"s": 77.78,
+"e": 77.86,
+"cue": 35,
+"src": "whisper"
+},
+{
+"w": "algoritmo",
+"s": 77.86,
+"e": 78.5,
+"cue": 35,
+"src": "whisper"
+},
+{
+"w": "Diffie",
+"s": 78.5,
+"e": 78.96,
+"cue": 35,
+"src": "whisper"
+},
+{
+"w": "Hellman",
+"s": 78.96,
+"e": 79.38,
+"cue": 35,
+"src": "whisper"
+},
+{
+"w": "que",
+"s": 79.54,
+"e": 79.66,
+"cue": 36,
+"src": "whisper"
+},
+{
+"w": "no",
+"s": 79.66,
+"e": 79.8,
+"cue": 36,
+"src": "whisper"
+},
+{
+"w": "WhatsApp",
+"s": 79.8,
+"e": 80.16,
+"cue": 36,
+"src": "whisper"
+},
+{
+"w": "roda",
+"s": 80.16,
+"e": 80.68,
+"cue": 36,
+"src": "whisper"
+},
+{
+"w": "via",
+"s": 80.68,
+"e": 80.84,
+"cue": 36,
+"src": "whisper"
+},
+{
+"w": "protocolo",
+"s": 80.84,
+"e": 81.56,
+"cue": 36,
+"src": "whisper"
+},
+{
+"w": "Signal",
+"s": 81.56,
+"e": 82.3,
+"cue": 36,
+"src": "whisper"
+},
+{
+"w": "com",
+"s": 82.3,
+"e": 82.7,
+"cue": 36,
+"src": "whisper"
+},
+{
+"w": "X3DH",
+"s": 82.7,
+"e": 83.8,
+"cue": 37,
+"src": "whisper"
+},
+{
+"w": "e",
+"s": 84.22,
+"e": 84.3,
+"cue": 38,
+"src": "whisper"
+},
+{
+"w": "a",
+"s": 84.3,
+"e": 84.34,
+"cue": 38,
+"src": "whisper"
+},
+{
+"w": "mensagem",
+"s": 84.34,
+"e": 84.82,
+"cue": 38,
+"src": "whisper"
+},
+{
+"w": "em",
+"s": 84.82,
+"e": 85.02,
+"cue": 38,
+"src": "whisper"
+},
+{
+"w": "si",
+"s": 85.02,
+"e": 85.26,
+"cue": 38,
+"src": "whisper"
+},
+{
+"w": "ela",
+"s": 85.26,
+"e": 85.48,
+"cue": 39,
+"src": "whisper"
+},
+{
+"w": "vai",
+"s": 85.48,
+"e": 85.64,
+"cue": 39,
+"src": "whisper"
+},
+{
+"w": "blindada",
+"s": 85.64,
+"e": 86.34,
+"cue": 39,
+"src": "whisper"
+},
+{
+"w": "com",
+"s": 86.34,
+"e": 86.72,
+"cue": 39,
+"src": "whisper"
+},
+{
+"w": "o",
+"s": 86.72,
+"e": 86.82,
+"cue": 39,
+"src": "whisper"
+},
+{
+"w": "algoritmo",
+"s": 86.82,
+"e": 87.46,
+"cue": 39,
+"src": "whisper"
+},
+{
+"w": "AES",
+"s": 87.46,
+"e": 88.44,
+"cue": 39,
+"src": "whisper"
+},
+{
+"w": "já",
+"s": 88.84,
+"e": 89.04,
+"cue": 40,
+"src": "whisper"
+},
+{
+"w": "me",
+"s": 89.04,
+"e": 89.18,
+"cue": 40,
+"src": "whisper"
+},
+{
+"w": "segue",
+"s": 89.18,
+"e": 89.4,
+"cue": 40,
+"src": "whisper"
+},
+{
+"w": "aqui",
+"s": 89.4,
+"e": 89.62,
+"cue": 40,
+"src": "whisper"
+},
+{
+"w": "se",
+"s": 89.62,
+"e": 89.8,
+"cue": 40,
+"src": "whisper"
+},
+{
+"w": "tu",
+"s": 89.8,
+"e": 89.94,
+"cue": 40,
+"src": "whisper"
+},
+{
+"w": "quer",
+"s": 89.94,
+"e": 90.06,
+"cue": 40,
+"src": "whisper"
+},
+{
+"w": "aprender",
+"s": 90.06,
+"e": 90.34,
+"cue": 40,
+"src": "whisper"
+},
+{
+"w": "mais",
+"s": 90.34,
+"e": 90.58,
+"cue": 40,
+"src": "whisper"
+},
+{
+"w": "sobre",
+"s": 90.58,
+"e": 90.82,
+"cue": 40,
+"src": "whisper"
+},
+{
+"w": "tecnologia",
+"s": 90.82,
+"e": 91.5,
+"cue": 41,
+"src": "whisper"
+},
+{
+"w": "e",
+"s": 91.5,
+"e": 91.82,
+"cue": 42,
+"src": "whisper"
+},
+{
+"w": "entender",
+"s": 91.82,
+"e": 92.14,
+"cue": 42,
+"src": "whisper"
+},
+{
+"w": "o",
+"s": 92.14,
+"e": 92.28,
+"cue": 42,
+"src": "whisper"
+},
+{
+"w": "que",
+"s": 92.28,
+"e": 92.4,
+"cue": 42,
+"src": "whisper"
+},
+{
+"w": "rola",
+"s": 92.4,
+"e": 92.84,
+"cue": 42,
+"src": "whisper"
+},
+{
+"w": "por",
+"s": 92.84,
+"e": 93.02,
+"cue": 42,
+"src": "whisper"
+},
+{
+"w": "debaixo",
+"s": 93.02,
+"e": 93.4,
+"cue": 42,
+"src": "whisper"
+},
+{
+"w": "dos",
+"s": 93.4,
+"e": 93.56,
+"cue": 42,
+"src": "whisper"
+},
+{
+"w": "panos",
+"s": 93.56,
+"e": 93.98,
+"cue": 42,
+"src": "whisper"
+}
+]
