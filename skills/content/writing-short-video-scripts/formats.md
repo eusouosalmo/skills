@@ -1,6 +1,6 @@
 # Formats
 
-Twelve formats in four families. A **format** is a kind of video reusable on any subject; a **format family** groups formats that share the same motor, the thing that pulls the viewer from one block to the next. Each format lists its blocks in order with the job of each, the hook it asks for (when it asks one), how it closes and the subject it fits. Use the block names in the script's `Bloco` column.
+Twelve formats in four families. A **format** is a kind of video reusable on any subject; a **format family** groups formats that share the same motor, the thing that pulls the viewer from one block to the next. Each format lists its blocks in order with the job of each, the hook pattern from [hooks.md](hooks.md) it asks for (when it asks one), how it closes and the subject it fits. Use the block names in the script's `Bloco` column.
 
 - [A. Process as a ladder](#a-process-as-a-ladder-processo-em-escada)
 - [B. Everyday mystery](#b-everyday-mystery-mistério-do-cotidiano)
@@ -54,7 +54,7 @@ Motor: a belief the viewer holds, contradicted. Fits a phenomenon the viewer liv
 4. **Última camada:** one more layer that turns the answer again, often bringing back the explanation that fell.
 5. **Frase do cotidiano:** a closing line that makes the viewer's everyday experience recall the video.
 
-Hook: the unsaid question. The scene or prediction makes the viewer form the question alone; no line asks it. Close: changes an everyday experience. Fits: behaviours of systems everyone sees (why the loading bar lies, why the queue next to you moves faster).
+Hook: unsaid question (pergunta não dita). The scene or prediction makes the viewer form the question alone; no line asks it. Close: changes an everyday experience. Fits: behaviours of systems everyone sees (why the loading bar lies, why the queue next to you moves faster).
 
 ### Experiment that reproduces everyday life (experimento que reproduz o cotidiano)
 
@@ -64,7 +64,7 @@ Hook: the unsaid question. The scene or prediction makes the viewer form the que
 4. **Mecanismo:** step by step, inside the experiment.
 5. **Segundo experimento:** a change that makes the problem go away, and the opening scene read again with it.
 
-Hook: exclusion. The proof comes before the question: the obvious causes are denied in the opening lines. Close: the opening scene explained, with something the viewer can do. Fits: performance and concurrency problems that appear with no error.
+Hook: exclusion (exclusão). The proof comes before the question: the obvious causes are denied in the opening lines. Close: the opening scene explained, with something the viewer can do. Fits: performance and concurrency problems that appear with no error.
 
 ### Absurd comparison that splits two metrics (comparação absurda que separa duas métricas)
 
@@ -74,7 +74,7 @@ Hook: exclusion. The proof comes before the question: the obvious causes are den
 4. **Regra:** the two metrics named as two things, and when each side wins.
 5. **Mundo real:** a real case where the absurd side was used.
 
-Hook: half-truth. The opening claim is true in one metric only, and the video later shows the metric where it is false. Close: the rule of when each side wins. Fits: throughput against latency, read against write, average against worst case.
+Hook: half-truth (meia-verdade). The opening claim is true in one metric only, and the video later shows the metric where it is false; it sounds exaggerated, so the next sentence anticipates the objection. Close: the rule of when each side wins. Fits: throughput against latency, read against write, average against worst case.
 
 ## C. Analogy for beginners (analogia para quem começa)
 
@@ -97,7 +97,7 @@ Close: the failure solved, then a CTA born from it. Fits: tools and protocols wi
 2. **Etapas:** the task walked in order; each step shows a gesture, and the concept's name comes after the gesture. A fixed refrain when naming ("e isso é X") may mark the count; it is optional.
 3. **Contagem:** one task, N concepts, summed up in one sentence.
 
-Hook: the viewer's situation with an unexpected consequence (knowing the routine means knowing the area). Close: the count. Fits: first concepts of an area (variables and conditions, addresses and packets).
+Hook: the viewer's situation (situação do espectador), with an unexpected consequence: knowing the routine means knowing the area. Close: the count. Fits: first concepts of an area (variables and conditions, addresses and packets).
 
 ## D. The developer's pain (dor do dev)
 
@@ -112,7 +112,7 @@ Motor: a habit of the viewer's that has a price. Fits a practice the viewer does
 5. **Princípio:** the principle behind the remedy.
 6. **Dose:** when the remedy is not worth it.
 
-Hook: the viewer's situation, shown as code or output on screen in the first second. Close: a caveat (the dose). Fits: patterns, indexes, refactorings.
+Hook: the viewer's situation (situação do espectador), shown as code or output on screen in the first second. Close: a caveat (the dose). Fits: patterns, indexes, refactorings.
 
 ### Common doubt answered in passing (dúvida comum respondida de passagem)
 
@@ -122,7 +122,7 @@ Hook: the viewer's situation, shown as code or output on screen in the first sec
 4. **Solução:** the fix.
 5. **Ressalva:** what the fix does not cover.
 
-Hook: the viewer's situation, as the question itself. Close: a caveat. The answer can run while the author does an everyday task on camera. Fits: security and production habits (a token in localStorage, `SELECT *`).
+Hook: the viewer's situation (situação do espectador), as the question itself. Close: a caveat. The answer can run while the author does an everyday task on camera. Fits: security and production habits (a token in localStorage, `SELECT *`).
 
 ### Study with fine print (estudo com letra miúda)
 
@@ -133,7 +133,7 @@ Hook: the viewer's situation, as the question itself. Close: a caveat. The answe
 5. **Correção e ressalvas:** the practical fix and where it does not work.
 6. **Dilema:** a trade-off question with no right answer.
 
-Hook: the viewer's situation with an unexpected consequence (the habit costs). Close: a dilemma, then the source. Needs a real study the author points to or that is found and checked; never an invented one. Fits: AI, tooling and productivity claims.
+Hook: the viewer's situation (situação do espectador), with an unexpected consequence: the habit costs. Close: a dilemma, then the source. Needs a real study the author points to or that is found and checked; never an invented one. Fits: AI, tooling and productivity claims.
 
 ### Tool swap with one number (troca de ferramenta com um número)
 

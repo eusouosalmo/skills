@@ -138,7 +138,25 @@
       "assertions": [
         "The main hook is a half-truth: true in one metric, and the script later shows the metric where it is false",
         "The Bloco column uses the format's block names; no block is named Contexto or Conexão",
-        "A spoken turn measures the same comparison in the second metric and the side that won in the first metric loses"
+        "A spoken turn measures the same comparison in the second metric and the side that won in the first metric loses",
+        "No hook, main or alternative, addresses the viewer by role ('Se tu é desenvolvedor', 'Desenvolvedor,', 'Se tu é dev')",
+        "The two or three hooks (main and alternatives) each name a different pattern from hooks.md",
+        "The sentence right after the hook states the viewer's likely doubt and promises the proof"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 9,
+      "name": "architecture-ladder-hook",
+      "prompt": "monta o roteiro de um reel sobre a diferença entre arquitetura e design de software, pro Instagram, de 60 a 90 segundos, objetivo informar, no formato sistema que cresce por problemas. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/architecture-ladder-hook/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3.",
+      "files": [
+        "evals/files/architecture-ladder-hook"
+      ],
+      "expected_output": "The hooks open on a situation, a scene or a contradiction, never by calling the viewer by role; each hook names its pattern from hooks.md and no two share one.",
+      "assertions": [
+        "No hook, main or alternative, addresses the viewer by role ('Se tu é desenvolvedor', 'Desenvolvedor,', 'Se tu é dev')",
+        "The two or three hooks (main and alternatives) each name a different pattern from hooks.md"
       ],
       "human_feedback": ""
     }

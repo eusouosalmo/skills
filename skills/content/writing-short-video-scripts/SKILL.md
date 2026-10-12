@@ -38,7 +38,7 @@ Done when no spoken line mentions the source, every claim the notes do not back 
 
 The script follows the blocks of the chosen format, in its order, and the `Bloco` column uses the format's block names. The format's blocks change only the order; every rule in this skill holds inside each of them. A block that states a principle or a rule ("Princípio", "Regra") is a claim and gets its reason in step 4. Beyond the format, every script keeps these rules:
 
-- **Hook** (first 3 s): the opening lines of the format's first block are the hook, whatever that block is called ("Sintoma", "Afirmação absurda"); when the format's first block is a scene that does not hook (a long setup), add a `Gancho` block before it. When the format asks for a hook, the main hook takes that form; otherwise it comes from a pattern in [hooks.md](hooks.md) (read it now). Either way it passes the five questions there. It names the video's subject and niche with full, unambiguous words the right viewer recognises as theirs ("testes automatizados", not "testes"; "desenvolvedor", not "dev"), also when the format opens on a symptom or a scene: a video about indexes that opens on a slow query still says "índice" in the hook. The on-screen text repeats the hook without giving away the answer the spoken line leaves open.
+- **Hook** (first 3 s): the opening lines of the format's first block are the hook, whatever that block is called ("Sintoma", "Afirmação absurda"); when the format's first block is a scene that does not hook (a long setup), add a `Gancho` block before it. Read [hooks.md](hooks.md) now: the hook comes from one of its patterns (the format's, when the format asks for one), follows its rule for terms, passes its five questions, and the two alternatives come from other patterns, each named. The hook never calls the viewer by role. It names the video's subject, also when the format opens on a symptom or a scene: a video about indexes that opens on a slow query still says "índice" in the hook. The sentence after the hook follows "After the hook" in hooks.md. The on-screen text repeats the hook without giving away the answer the spoken line leaves open.
 - **The author's case as proof.** Use the case from the notes; when it sums up specific things in a generic word ("usei várias ferramentas") and the notes do not say which, write `[falta: ...]` asking for them, worded so the sentence stands if the answer never comes. The `[falta: ...]` goes in even when the sentence already holds, because the author decides whether a case exists. Only once the author says there is none, keep the general sentence when it holds on its own or cut the passage. Never invent the case. Ask only for specifics the notes sum up; a new anecdote or an outcome the story works without is not a gap.
 - **What the hook opens is paid off** before the last line.
 - **One closing question.** The last spoken line is the CTA: one question born from the close, which the viewer answers in a word or a short sentence about themselves. When the format's close delivers a tool (a question to ask, a rule, a symptom map), the tool becomes the CTA: one question that has the viewer apply it to their own case ("Qual peça do teu sistema não passa nessas duas perguntas?"), never the tool's question followed by a second one. When the close is a caveat or a dilemma, the CTA comes out of it. Questions the video answers itself may sit in the body when the format asks for them; only the closing question waits for the viewer's answer.
@@ -88,8 +88,10 @@ Plataforma: <...> | Duração alvo: <...> | Objetivo: <...>
 |---|---|---|
 | Gancho | ... | ... |
 
+Padrão do gancho: <pattern of the main hook>
+
 Ganchos alternativos:
-- ...
+- ... (<pattern>)
 
 A checar antes de gravar:
 - ...
