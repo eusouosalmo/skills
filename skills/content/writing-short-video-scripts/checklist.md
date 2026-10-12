@@ -5,6 +5,7 @@ Every item is a pattern eusouosalmo corrected by hand in a script, with the reas
 ## Context and idea
 
 - **One video, one idea.** Notes with two concepts become two videos: two ideas in one reel dilute the hook and give the viewer a place to leave.
+- **The case opens, the mechanism is the subject.** A strange bug in the notes became the subject, and each stage of the video turned into a suspect. The case is the hook; the video explains the mechanism it lets the viewer see, and an unknown cause stays a hypothesis.
 - **Context known before structure.** Platform, duration and objective change the CTA and the rules: "no próximo vídeo eu falo de..." fits a long video; a spoken "me segue" at the end of a reel cuts the loop.
 
 ## Source and facts
@@ -30,6 +31,7 @@ Every item is a pattern eusouosalmo corrected by hand in a script, with the reas
 
 ## Body
 
+- **A ladder, not a list.** Blocks that could swap places (one suspect after another, parallel items) gave the viewer no reason to wait for the next. Each block enters through a problem the previous one left.
 - **An image explained once.** Reusing the parts of an image ("quem tá no fundo do funil") turns it into vocabulary the listener must translate without the drawing. After the explanation, the audience's own words.
 - **Every claim earns its reason.** A claim the viewer would question ("precisa escrever o teste antes", "pode virar um problema") gets a concrete reason or leaves.
 - **Connectives where the ear needs them.** Two loose sentences where the second explains the first become one sentence with "porque" or "isso porque". Short loose sentences sound choppy when spoken; a connective the relation does not ask for sounds like filler.

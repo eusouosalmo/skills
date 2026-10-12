@@ -1,0 +1,1 @@
+No aplicativo mobile ficava com loading infinito ao tentar expandir os comentários. O desktop abria normal. Não faço ideia do que seja. Posso desconfiar que não tem paginação e puxa tudo de uma vez, ou é algo de cache. Podem ser APIs diferentes ou algo relacionado ao tamanho (máquinas ou CDN) do Instagram.

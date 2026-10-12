@@ -200,6 +200,42 @@
         "No claim appears in both 'Conferido' and 'A checar antes de gravar'"
       ],
       "human_feedback": ""
+    },
+    {
+      "id": 12,
+      "name": "comments-bug-ladder",
+      "prompt": "monta o roteiro de um reel sobre os comentários de um post com milhares de respostas, pro Instagram, de 60 a 90 segundos, objetivo informar, no formato processo percorrido por um caso só. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/comments-bug-ladder/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3. No web access.",
+      "files": [
+        "evals/files/comments-bug-ladder"
+      ],
+      "expected_output": "The bug only opens the video; the subject is how a comments system holds thousands of replies, each stage brought in by a problem the previous one left, and the ending returns to the bug through pieces already built, as hypothesis.",
+      "assertions": [
+        "The video's idea, stated without the bug, is how the comments system works; no body block is devoted to one possible cause of the bug",
+        "Every body block after the first names, in its spoken lines, a problem left by the previous block that brings this block's piece or stage in",
+        "No body block presents a suspect ('pode ser X', 'pode ter um X', 'o X tá velho?')",
+        "The ending returns to the bug only through pieces the body already built, marked as hypothesis, with no new suspect",
+        "The ending is not a list of questions, one per stage or piece"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 13,
+      "name": "comments-bug-journey-ladder",
+      "prompt": "monta o roteiro de um reel sobre os comentários de um post com milhares de respostas, pro Instagram, de 60 a 90 segundos, objetivo informar, no formato jornada de um objeto de ponta a ponta. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/comments-bug-journey-ladder/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3. No web access.",
+      "files": [
+        "evals/files/comments-bug-journey-ladder"
+      ],
+      "expected_output": "The bug only opens the video; the subject is how a comments system holds thousands of replies, each stage brought in by a problem the previous one left, and the ending returns to the bug through pieces already built, as hypothesis.",
+      "assertions": [
+        "The video's idea, stated without the bug, is how the comments system works; no body block is devoted to one possible cause of the bug",
+        "Every body block after the first names, in its spoken lines, a problem left by the previous block that brings this block's piece or stage in",
+        "No body block presents a suspect ('pode ser X', 'pode ter um X', 'o X tá velho?')",
+        "The ending returns to the bug only through pieces the body already built, marked as hypothesis, with no new suspect",
+        "The ending is not a list of questions, one per stage or piece"
+      ],
+      "human_feedback": ""
     }
   ]
 }

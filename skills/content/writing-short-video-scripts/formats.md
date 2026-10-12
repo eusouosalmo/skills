@@ -28,16 +28,16 @@ Close: delivers a tool. Fits: architecture, infrastructure, any system that grew
 1. **O caso:** one concrete item (a commit, a request, an order) with enough detail to be that one, not a generic one.
 2. **Etapas:** the item crosses the process one stage at a time; each stage is explained as the item passes through it, and one stage stops it, with the reason.
 3. **Camada extra:** after the process looks complete, one more layer the viewer did not know (what happens when it still fails).
-4. **Síntese:** each part of the process summed up as the one question it answers.
+4. **Volta ao caso:** the item from the start, now read through the stages it crossed; when its fate is unknown, the stages that could explain it, as hypothesis.
 
-Close: delivers a tool (the questions). The process already exists and is walked; in the system that grows, it is built piece by piece. Fits: CI/CD, a request's path, a checkout flow.
+Close: the case read again, then a CTA born from it. The process already exists and is walked; in the system that grows, it is built piece by piece. Fits: CI/CD, a request's path, a checkout flow.
 
 ### Journey of an object end to end (jornada de um objeto de ponta a ponta)
 
 1. **Cena:** a person does an everyday action with a destination and a short real time (sends a photo, pays at a card machine).
 2. **Etapas:** the object of that action goes through the system; at each stage it changes form (compressed, split, labelled), and the change is the concept.
 3. **Volta:** the way back, in a few sentences, in reverse.
-4. **Mapa de sintomas:** what goes wrong at each stage and where to look.
+4. **Mapa de sintomas:** what goes wrong at each stage the video walked and where to look; no stage or piece the video did not build.
 5. **Ressalva:** the limit of the model the video used.
 
 Close: delivers a tool (the symptom map) and a caveat; the last line goes back to the opening scene and its time. Fits: networks, payments, anything with layers or hops. A variant of the single case, with an object that transforms.
