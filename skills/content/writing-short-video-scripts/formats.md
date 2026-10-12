@@ -116,7 +116,7 @@ Hook: the viewer's situation (situação do espectador), shown as code or output
 
 ### Common doubt answered in passing (dúvida comum respondida de passagem)
 
-1. **Pergunta:** a "por que não..." question that presumes a habit of the viewer's.
+1. **Pergunta:** a "por que tu não..." question that presumes a habit of the viewer's, with the viewer in it.
 2. **Ameaça:** what goes wrong, in first person ("eu consigo...").
 3. **Mecanismo e prova:** how it happens, with one line of proof.
 4. **Solução:** the fix.

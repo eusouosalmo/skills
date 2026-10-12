@@ -12,6 +12,7 @@ Every item is a pattern eusouosalmo corrected by hand in a script, with the reas
 - **The knowledge is the subject, not the reading.** A draft that opens with "eu tô lendo..." makes the source the topic. There is always a source; it is not what adds value. It goes to the caption credit.
 - **What the source says is checked.** Definitions taken from memory were wrong several times in one script. Every claim about the source that the notes do not back is in `A checar antes de gravar`.
 - **Checkable technical facts are checked in the official source**, including the ones the author remembers with confidence (an operator, a flag, a version, a default). The author's memory of the source can be imprecise too.
+- **Researched before writing, not after.** Scripts written from memory used illustrative numbers ("vinte por vez") and drew a fixed border where the primary sources describe a degree. The facts are looked up before the first line; `Conferido` holds what a primary source confirmed, with the link, and `A checar` only what was not found.
 
 ## The author's story
 

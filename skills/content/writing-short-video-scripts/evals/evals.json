@@ -35,7 +35,8 @@
         "Any spoken claim that specialising too much is a problem carries a concrete reason or is absent",
         "Outside the hook and one turning-point line, no two consecutive spoken sentences stand in a cause or contrast relation without a connective (porque, então, por isso, mas, só que)",
         "No spoken line ties the author's story to a current job or a date ('hoje', 'atual', 'na empresa onde eu tô', 'no meu trabalho atual')",
-        "Every spoken sentence where the narrator says they learned technologies names one from the notes or carries a [falta: ...] asking which"
+        "Every spoken sentence where the narrator says they learned technologies names one from the notes or carries a [falta: ...] asking which",
+        "The output says the facts were not researched (no web access) and every checkable technical fact the script states as fact (outside an example opened as hypothetical) is in 'A checar antes de gravar'"
       ],
       "human_feedback": ""
     },
@@ -60,7 +61,8 @@
         "Outside the hook and one turning-point line, no two consecutive spoken sentences stand in a cause or contrast relation without a connective (porque, então, por isso, mas, só que)",
         "No spoken line ties the author's story to a current job or a date ('hoje', 'atual', 'na empresa onde eu tô', 'no meu trabalho atual')",
         "Every 'então' or 'por isso' in the spoken lines introduces a consequence of the previous sentence",
-        "After the sentence that explains an image or metaphor, the next sentence does not restate the same image"
+        "After the sentence that explains an image or metaphor, the next sentence does not restate the same image",
+        "The output says the facts were not researched (no web access) and every checkable technical fact the script states as fact (outside an example opened as hypothetical) is in 'A checar antes de gravar'"
       ],
       "human_feedback": ""
     },
@@ -92,7 +94,8 @@
       "assertions": [
         "The Bloco column uses the format's block names; no block is named Contexto or Conexão",
         "The spoken lines end on exactly one question to the viewer, and no other question asking for the viewer's answer comes after the rule",
-        "The format's tool (the question the viewer can apply to their own system) is in that last question or stated before it, never as a second closing question"
+        "The format's tool (the question the viewer can apply to their own system) is in that last question or stated before it, never as a second closing question",
+        "The output says the facts were not researched (no web access) and every checkable technical fact the script states as fact (outside an example opened as hypothetical) is in 'A checar antes de gravar'"
       ],
       "human_feedback": ""
     },
@@ -107,7 +110,8 @@
       "expected_output": "The paint analogy shows the failure (a carrier sees everything sent), then the mixing that solves it happens in the scene before the key exchange gets its name; the pieces follow, and the screen returns to the failure scene, solved.",
       "assertions": [
         "Before any spoken line names or defines the solution ('se chama', 'isso é', 'é isso que X faz'), a spoken line shows the object that solves the failure acting inside the analogy scene. Naming the subject in the hook as a label does not count.",
-        "The Bloco column uses the format's block names; no block is named Contexto or Conexão"
+        "The Bloco column uses the format's block names; no block is named Contexto or Conexão",
+        "The output says the facts were not researched (no web access) and every checkable technical fact the script states as fact (outside an example opened as hypothetical) is in 'A checar antes de gravar'"
       ],
       "human_feedback": ""
     },
@@ -122,7 +126,8 @@
       "expected_output": "An analogy (such as a floor plan with a structural wall) shows a costly change, the idea that solves it acts in the scene before it gets its name, and the difference comes out as a matter of degree: the costlier to undo and the more spread the decision, the more it is architecture.",
       "assertions": [
         "Before any spoken line names or defines the solution ('se chama', 'isso é', 'é isso que X faz'), a spoken line shows the object that solves the failure acting inside the analogy scene. Naming the subject in the hook as a label does not count.",
-        "The Bloco column uses the format's block names; no block is named Contexto or Conexão"
+        "The Bloco column uses the format's block names; no block is named Contexto or Conexão",
+        "The output says the facts were not researched (no web access) and every checkable technical fact the script states as fact (outside an example opened as hypothetical) is in 'A checar antes de gravar'"
       ],
       "human_feedback": ""
     },
@@ -141,7 +146,8 @@
         "A spoken turn measures the same comparison in the second metric and the side that won in the first metric loses",
         "No hook, main or alternative, addresses the viewer by role ('Se tu é desenvolvedor', 'Desenvolvedor,', 'Se tu é dev')",
         "The two or three hooks (main and alternatives) each name a different pattern from hooks.md",
-        "The sentence right after the hook states the viewer's likely doubt and promises the proof"
+        "The sentence right after the hook states the viewer's likely doubt and promises the proof",
+        "The output says the facts were not researched (no web access) and every checkable technical fact the script states as fact (outside an example opened as hypothetical) is in 'A checar antes de gravar'"
       ],
       "human_feedback": ""
     },
@@ -156,7 +162,42 @@
       "expected_output": "The hooks open on a situation, a scene or a contradiction, never by calling the viewer by role; each hook names its pattern from hooks.md and no two share one.",
       "assertions": [
         "No hook, main or alternative, addresses the viewer by role ('Se tu é desenvolvedor', 'Desenvolvedor,', 'Se tu é dev')",
-        "The two or three hooks (main and alternatives) each name a different pattern from hooks.md"
+        "The two or three hooks (main and alternatives) each name a different pattern from hooks.md",
+        "The output says the facts were not researched (no web access) and every checkable technical fact the script states as fact (outside an example opened as hypothetical) is in 'A checar antes de gravar'"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 10,
+      "name": "architecture-degree-checked",
+      "prompt": "monta o roteiro de um reel sobre a diferença entre arquitetura e design de software, pro Instagram, de 60 a 90 segundos, objetivo informar, no formato sistema que cresce por problemas. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/architecture-degree-checked/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir), running wc and python3, and WebSearch and WebFetch.",
+      "files": [
+        "evals/files/architecture-degree-checked"
+      ],
+      "expected_output": "Before writing, the agent looks up primary sources on architecture versus design; the script treats the difference as a matter of degree (cost to undo, reach of the decision), and the delivery lists 'Conferido' with links apart from 'A checar antes de gravar'.",
+      "assertions": [
+        "The spoken lines treat the difference as one of degree (cost to undo, reach of the decision); no spoken line draws a fixed border ('design é o resto', 'isso é arquitetura, aquilo é design')",
+        "A 'Conferido' list holds the definition used, with a link to at least one primary source (Fowler, SEI, ISO/IEC/IEEE 42010, Martin or Richards); open the link and say whether it supports the claim",
+        "Every number said as fact in the spoken lines is in 'Conferido'; any other number is marked as a hypothesis in the spoken line or sits inside an example the spoken lines open as hypothetical ('imagina', 'digamos')",
+        "No claim appears in both 'Conferido' and 'A checar antes de gravar'"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 11,
+      "name": "jsonb-operators-checked",
+      "prompt": "monta o roteiro de um reel sobre JSONB no Postgres, pro Instagram, de 60 a 90 segundos, objetivo informar, no formato sintoma, cura e dose. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/jsonb-operators-checked/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir), running wc and python3, and WebSearch and WebFetch.",
+      "files": [
+        "evals/files/jsonb-operators-checked"
+      ],
+      "expected_output": "Before writing, the agent checks in the PostgreSQL docs which operators a GIN index on jsonb supports; the script says '->' does not use the GIN index and '@>' does, and 'Conferido' carries the postgresql.org link.",
+      "assertions": [
+        "The spoken lines say the '->' operator does not use the GIN index and '@>' does",
+        "A 'Conferido' list holds that claim with a link to postgresql.org; open the link and say whether it supports the claim",
+        "Every number said as fact in the spoken lines is in 'Conferido'; any other number is marked as a hypothesis in the spoken line or sits inside an example the spoken lines open as hypothetical ('imagina', 'digamos')",
+        "No claim appears in both 'Conferido' and 'A checar antes de gravar'"
       ],
       "human_feedback": ""
     }

@@ -27,18 +27,21 @@ The notes usually come from a source: a book, article, video or test. The video 
 
 - The spoken lines teach the idea directly. They never narrate the reading ("tô lendo", "o livro diz", "no capítulo 2").
 - The source goes in a `Crédito para a legenda` line at the end of the script.
-- When the script depends on a concept the notes only name ("o artigo mostra um diagrama"), ask the author for their notes on that part of the source. Until they come, explain it from what you know and put it in the list to check.
-- Every claim about the source that is not written in the notes (what the book says, its definitions, its examples) and every checkable technical fact (operator, version, number, tool behaviour) goes to `A checar antes de gravar`, with where to check it. Prefer the official source.
+- When the script depends on a concept the notes only name ("o artigo mostra um diagrama"), ask the author for their notes on that part of the source. Until they come, explain it from what you find in the research below.
+- **Research the facts before writing.** Look up in a primary source (official documentation, specification, paper, the source's own text) every fact the video will state: the numbers and names of the concrete case, technical behaviour (operator, flag, version, default) and the definitions a contrast rests on. Per claim, stop at the first primary source that confirms it; after about three searches without one, the claim goes to `A checar antes de gravar` with what was tried. A claim about the source that the notes do not back (what the book says, its definitions, its examples) is checked the same way. The author's own story is never researched; it comes from the notes.
+- When a source contradicts the notes, the script follows the source and the gap goes to the questions after the file ("tua nota diz X, a fonte diz Y, escrevi Y"). Never correct the notes silently, never record their error.
+- A number the research did not confirm is spoken only as a hypothesis ("imagina", "digamos"); a number spoken as fact is in `Conferido`. An example case the author did not live (a made-up app, a sample table) opens as one ("imagina um app de entrega"), so its sizes and durations read as part of the hypothesis; outside that frame, a number is a fact.
+- Without web access, every checkable fact goes to `A checar antes de gravar` with where to check it, and the delivery says the facts were not researched.
 - The author's own story keeps the verb and degree of the notes. The notes' hedges stay ("por exemplo", "alguns meses"). A role, number or result never goes up a level: "liderei o projeto uma vez" stays that, never "sou tech lead". When the exact version sounds weak, say the honest contrast ("eu não era tech lead, mas tive que liderar como um").
 - The author's story is told as past experience, free of date and employer, so the video still holds after a job change and exposes no one. Keep the problem, the public tool, what the author did and the result. Turn markers of time and place into a past event ("hoje", "atual", "na empresa onde eu tô" become "quando eu precisei", "uma vez"); an employer or client name becomes a category ("num e-commerce"); internal data, identifiable people and judgements about the company or colleagues leave. Generalising never changes the fact: one company stays one, not "várias empresas".
 
-Done when no spoken line mentions the source, every claim the notes do not back is in the list to check, and every statement about the author matches the notes with no date or employer in it.
+Done when no spoken line mentions the source, every fact the script states is either in `Conferido` with its link or in `A checar antes de gravar`, never in both, and every statement about the author matches the notes with no date or employer in it.
 
 ## 3. Build the format's structure
 
 The script follows the blocks of the chosen format, in its order, and the `Bloco` column uses the format's block names. The format's blocks change only the order; every rule in this skill holds inside each of them. A block that states a principle or a rule ("Princípio", "Regra") is a claim and gets its reason in step 4. Beyond the format, every script keeps these rules:
 
-- **Hook** (first 3 s): the opening lines of the format's first block are the hook, whatever that block is called ("Sintoma", "Afirmação absurda"); when the format's first block is a scene that does not hook (a long setup), add a `Gancho` block before it. Read [hooks.md](hooks.md) now: the hook comes from one of its patterns (the format's, when the format asks for one), follows its rule for terms, passes its five questions, and the two alternatives come from other patterns, each named. The hook never calls the viewer by role. It names the video's subject, also when the format opens on a symptom or a scene: a video about indexes that opens on a slow query still says "índice" in the hook. The sentence after the hook follows "After the hook" in hooks.md. The on-screen text repeats the hook without giving away the answer the spoken line leaves open.
+- **Hook** (first 3 s): the opening lines of the format's first block are the hook, whatever that block is called ("Sintoma", "Afirmação absurda"); when the format's first block is a scene that does not hook (a long setup), add a `Gancho` block before it. Read [hooks.md](hooks.md) now: the hook comes from one of its patterns (the format's, when the format asks for one), follows its rule for terms, passes its five questions, and the two alternatives come from other patterns, each named. The hook never calls the viewer by role, and its terms win over the author's short word: "dev" in the notes becomes "desenvolvedor" in the hook. It names the video's subject, also when the format opens on a symptom or a scene: a video about indexes that opens on a slow query still says "índice" in the hook. The sentence after the hook follows "After the hook" in hooks.md. The on-screen text repeats the hook without giving away the answer the spoken line leaves open.
 - **The author's case as proof.** Use the case from the notes; when it sums up specific things in a generic word ("usei várias ferramentas") and the notes do not say which, write `[falta: ...]` asking for them, worded so the sentence stands if the answer never comes. The `[falta: ...]` goes in even when the sentence already holds, because the author decides whether a case exists. Only once the author says there is none, keep the general sentence when it holds on its own or cut the passage. Never invent the case. Ask only for specifics the notes sum up; a new anecdote or an outcome the story works without is not a gap.
 - **What the hook opens is paid off** before the last line.
 - **One closing question.** The last spoken line is the CTA: one question born from the close, which the viewer answers in a word or a short sentence about themselves. When the format's close delivers a tool (a question to ask, a rule, a symptom map), the tool becomes the CTA: one question that has the viewer apply it to their own case ("Qual peça do teu sistema não passa nessas duas perguntas?"), never the tool's question followed by a second one. When the close is a caveat or a dilemma, the CTA comes out of it. Questions the video answers itself may sit in the body when the format asks for them; only the closing question waits for the viewer's answer.
@@ -93,8 +96,11 @@ Padrão do gancho: <pattern of the main hook>
 Ganchos alternativos:
 - ... (<pattern>)
 
+Conferido:
+- <claim>: <link to the primary source>
+
 A checar antes de gravar:
-- ...
+- <claim>: <where to check it, or what was tried>
 
 Crédito para a legenda: <source>
 
