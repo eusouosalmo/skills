@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.0](https://github.com/eusouosalmo/skills/compare/v0.1.0...v0.2.0) (2026-10-12)
+
+
+### Features
+
+* **content:** breakdown, choreography and impact screen in animating-reel-scenes ([8d7b28c](https://github.com/eusouosalmo/skills/commit/8d7b28c8b14802c75b90ee1d26cd6763194f2ef1))
+* **content:** replace the fixed spine with a format menu in writing-short-video-scripts ([05cb921](https://github.com/eusouosalmo/skills/commit/05cb921455f73d69299ab580424c8a7389df4393))
+
 ## 0.1.0 (2026-10-08)
 
 
