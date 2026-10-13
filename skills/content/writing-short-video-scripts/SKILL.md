@@ -2,8 +2,7 @@
 name: writing-short-video-scripts
 description: Writes short video scripts (Reels, Shorts, TikTok) from the author's notes, with hook, structure, one spoken CTA and teleprompter text timed to the target duration. Use when the user asks for a reel or short video script, or to restructure one (roteiro, reels, vídeo curto, teleprompter).
 metadata:
-  status: draft
-  internal: true
+  status: beta
 ---
 
 # Writing short video scripts
