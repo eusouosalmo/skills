@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.3.0](https://github.com/eusouosalmo/skills/compare/v0.2.0...v0.3.0) (2026-10-13)
+
+
+### Features
+
+* **content:** image passage and return to the analogy in writing-short-video-scripts ([4f48999](https://github.com/eusouosalmo/skills/commit/4f48999820c5b785e4a019e5561de440ffdbcac3))
+* **content:** ladder test and case as opener in writing-short-video-scripts ([1b3052c](https://github.com/eusouosalmo/skills/commit/1b3052c89876ab60b11d358007c0dc662a9a59af))
+* **content:** new hook patterns and terms rule in writing-short-video-scripts ([906a916](https://github.com/eusouosalmo/skills/commit/906a9167611820ae8c1f7e7f1dd03a57dbe59396))
+* **content:** promote writing-short-video-scripts to beta ([dd6b4b6](https://github.com/eusouosalmo/skills/commit/dd6b4b6a488150a5a67e231e6d1a4af8a1617f95))
+* **content:** research facts before writing in writing-short-video-scripts ([311737e](https://github.com/eusouosalmo/skills/commit/311737e2afb44b85280cffef91846fdd9c0ee3c6))
+* **content:** visual hook form instead of repeated hook text in writing-short-video-scripts ([7d8c4bb](https://github.com/eusouosalmo/skills/commit/7d8c4bb4900f26b47225a15368ab3743f7867665))
+
+
+### Bug Fixes
+
+* **content:** ask for a stage-scale change where only small ones happen in animating-reel-scenes ([c207b61](https://github.com/eusouosalmo/skills/commit/c207b6173c496958240480b85b3f5d5ba29d6af4))
+* **content:** count rhythm in beats and trace pointed places in animating-reel-scenes ([f74cd39](https://github.com/eusouosalmo/skills/commit/f74cd39e9350f61cd26c604e76816de6fd1bfe50))
+
 ## [0.2.0](https://github.com/eusouosalmo/skills/compare/v0.1.0...v0.2.0) (2026-10-12)
 
 
