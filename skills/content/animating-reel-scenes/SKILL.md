@@ -206,6 +206,8 @@ Done when the scene has a `render(t)` covering its whole duration and every stic
    - full scene: `python3 scripts/render.py video cenas/NN-name.html DURATION exports/NN-name.mp4`.
    - split screen, whole-video modes and sound track: as in [references/formats.md](references/formats.md).
 
+   Run at most two `render.py` at a time, stills included, and a longer batch in the background with a log per file. Each run opens its own Chromium at 1080x1920 and pipes frames into ffmpeg; eight at once exhausted the memory of a 16 GB WSL machine, which restarted with nothing written.
+
 Done when every file is in `exports/`, its row in `timeline.md` has the start and end timecode, and the author has the paths.
 
 ## 7. Verdict
