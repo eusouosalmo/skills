@@ -27,6 +27,7 @@ Every item is a pattern eusouosalmo corrected by hand in a script, with the reas
 - **Full terms, no vocative.** Every technical term of the hook in full ("desenvolvedor", not "dev"; "testes automatizados", not "testes"): the viewer decides in the first seconds whether the video is for them. The niche comes from the situation; "Se tu é desenvolvedor..." returned in almost every hook once it was allowed, and none of the strongest references opens that way.
 - **Alternatives from other patterns.** The alternative hooks each come from a different pattern, named, so the author picks between techniques and not between rewordings of one.
 - **A hook with technique.** A statement about a process ("o deploy só vai num sentido") holds no one: no person, nothing concrete, nothing left open. The hook comes from a pattern in [hooks.md](hooks.md).
+- **The screen does not repeat the hook.** A rule that put the spoken hook as on-screen text gave every script the same opening and covered the right form (the typed symptom) with a caption. The hook's Visual cell names its form; big text only as the subject's name.
 - **A true contradiction.** A contradicting hook keeps the qualifier that makes it true, and the video pays it off.
 
 ## Body

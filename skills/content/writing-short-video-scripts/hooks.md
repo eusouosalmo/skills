@@ -34,6 +34,18 @@ The lukewarm claim "testar o código é importante" fails the first four: no one
 
 When the format asks for a hook pattern ([formats.md](formats.md)), the main hook uses it. Otherwise pick the strongest for these notes. Write two alternatives besides the main one, each from a pattern different from the main hook's and from each other's, and name each hook's pattern in parentheses.
 
+## Visual hook
+
+What the screen does in the first 3 seconds takes one of five forms. Pick the one the format points to; text that repeats the spoken hook is not a form, because the screen would close the question the voice leaves open, and most of the strongest reference reels have no big text in the hook.
+
+| Form | What the screen does | Fits |
+|---|---|---|
+| Result shown first (resultado mostrado antes) | the finished thing (a diagram, a green pipeline, the trip in miniature) appears and then comes apart | process as a ladder |
+| Image built on the word (imagem que se monta na palavra) | what is heard appears at that instant, drawn or typed: the symptom typed as code or `EXPLAIN` output, the scene drawn as it is said | paradox in layers, symptom, cure and dose, common doubt (the typed question) |
+| Still comparison (comparação parada) | one ready image with a difference for the eye to find; nothing moves | experiment that reproduces everyday life, absurd comparison |
+| Source or subject over the face (fonte ou assunto sobre o rosto) | the source's cover or an image of the subject over the recording | study with fine print, tool swap |
+| Face and setting only (só rosto e cenário) | the setting says who the video is for (a kitchen, a call, a notebook) | routine that becomes a list, analogy formats that open on a scene the author plays |
+
 ## After the hook
 
 Two moves for the sentence right after the hook, each only when its trigger holds; without the trigger they become a tic.

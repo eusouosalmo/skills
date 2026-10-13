@@ -246,6 +246,38 @@
         "The ending is not a list of questions, one per stage or piece"
       ],
       "human_feedback": ""
+    },
+    {
+      "id": 14,
+      "name": "jsonb-symptom-hook",
+      "prompt": "monta o roteiro de um reel sobre JSONB no Postgres, pro Instagram, de 60 a 90 segundos, objetivo informar, no formato sintoma, cura e dose. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/jsonb-symptom-hook/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3. No web access.",
+      "files": [
+        "evals/files/jsonb-symptom-hook"
+      ],
+      "expected_output": "The hook's Visual cell opens with the visual hook form the format points to, and no on-screen text repeats the spoken hook.",
+      "assertions": [
+        "The hook's Visual cell starts with 'Forma:' and names one of the five visual hook forms",
+        "No on-screen text in the hook repeats or summarises the spoken hook; any big text is the subject's or series' name, at most 4 words",
+        "The hook's form is the typed symptom: code or EXPLAIN output on screen from the first frame"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 15,
+      "name": "paradox-image-hook",
+      "prompt": "monta o roteiro de um reel sobre a diferença entre arquitetura e design de software, pro Instagram, de 60 a 90 segundos, objetivo informar, no formato paradoxo resolvido em camadas. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/paradox-image-hook/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3. No web access.",
+      "files": [
+        "evals/files/paradox-image-hook"
+      ],
+      "expected_output": "The hook's Visual cell opens with the visual hook form the format points to, and no on-screen text repeats the spoken hook.",
+      "assertions": [
+        "The hook's Visual cell starts with 'Forma:' and names one of the five visual hook forms",
+        "No on-screen text in the hook repeats or summarises the spoken hook; any big text is the subject's or series' name, at most 4 words",
+        "The hook's form is the image built on the word, with no big text in the hook"
+      ],
+      "human_feedback": ""
     }
   ]
 }
