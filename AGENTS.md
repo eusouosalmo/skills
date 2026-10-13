@@ -63,6 +63,12 @@ metadata:
 - `metadata.status`: `draft | beta | stable | deprecated`. Maturity lives here, not in a folder, so a skill's path never changes (see `docs/adr/0001`).
 - `draft` and `deprecated` skills also carry `metadata.internal: true`, which hides them from `npx skills add` (shown only with `INSTALL_INTERNAL_SKILLS=1`, per the vercel-labs/skills README). `beta` and `stable` go without it.
 - The Claude Code plugin ships only `beta` and `stable` skills, listed in `.claude-plugin/plugin.json`. After changing a status, or creating, renaming or removing a `beta` or `stable` skill, run `scripts/sync-plugin-skills.sh` and commit `plugin.json` with the change; CI fails otherwise (see `docs/adr/0005`).
+- Every status change, new, renamed or removed skill, or change in what a skill does goes out in the same commit as all the places that list it:
+  - `metadata.status`, plus `metadata.internal: true` added or dropped to match.
+  - The category `README.md`: the `(status)` label and the one-line description.
+  - `README.md` and `README.pt-BR.md`: `beta` and `stable` skills go in the main list with their `(status)`, `draft` ones in the draft list, with the same one-line description in both languages.
+  - `.claude-plugin/plugin.json`, via `scripts/sync-plugin-skills.sh`.
+  - `scripts/link-skills.sh`, re-run locally when a skill is created, renamed or removed.
 - `disable-model-invocation: true` only when the skill must not fire on its own.
 - `context: fork`, `hooks` and other Claude Code only fields do not work in other agents (vercel-labs/skills compatibility table). If used, declare it in `compatibility`.
 
