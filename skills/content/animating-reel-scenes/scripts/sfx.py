@@ -14,6 +14,12 @@ clock. The file goes on an audio track at 00:00:00:00 in CapCut. Kinds:
   whoosh   a rising sweep: a scene or panel comes in
   out      a falling sweep: a scene, panel or overlay goes away
   ding     a light bell: a check, a loop that closes, a right answer
+  drip     a water drop: a drop falls, a liquid drips
+  splash   liquid landing: a drop or a pour hits liquid
+  swirl    stirring: a liquid mixes, something churns
+  coin     a metal clink: a coin, a token, a key put down
+  slide    a soft brush: an object travels or slides across the stage
+  lock     a mechanical click: a lock, a latch, a switch
 Optional "gain" per event (default 1.0). Levels sit well under speech; the author sets the final volume in CapCut.
 """
 import argparse, json, math, random, re, struct, sys, wave
@@ -54,8 +60,45 @@ def draw(dur=.26):
 def ding(n=int(.5 * SR)):
     return [.25 * math.exp(-5 * i / n) * (math.sin(2 * math.pi * 1320 * i / SR) + .4 * math.sin(2 * math.pi * 2640 * i / SR)) for i in range(n)]
 
+# Material sounds: when the object on screen is made of something, the ear expects that thing.
+def drip(dur=.09):
+    n, out, ph = int(dur * SR), [], 0.0
+    for i in range(n):
+        ph += 2 * math.pi * (380 + 1100 * (i / n) ** .5) / SR  # rising pitch: the "bloop" of a drop
+        out.append(.5 * math.exp(-5 * i / n) * math.sin(ph))
+    return out
+
+def splash(dur=.3):
+    r, y, n = random.Random(5), 0.0, int(dur * SR)
+    noise = []
+    for i in range(n):
+        y += .35 * ((r.random() * 2 - 1) - y)  # bright noise burst that settles: liquid landing
+        noise.append(.5 * math.exp(-9 * i / n) * y)
+    return [a + b for a, b in zip(noise, sweep_down(160, 60, dur, .35) + [0] * n)]
+
+def swirl(dur=.75):
+    r, y, n, out = random.Random(6), 0.0, int(dur * SR), []
+    for i in range(n):
+        y += .06 * ((r.random() * 2 - 1) - y)
+        wob = .55 + .45 * math.sin(2 * math.pi * 7 * i / SR)  # turns of the stir
+        out.append(.9 * math.sin(math.pi * i / n) * wob * y)
+    return out
+
+def coin(dur=.45):
+    n = int(dur * SR)
+    parts = [(2210, 1), (3470, .6), (5130, .35)]  # inharmonic partials: metal
+    return [.22 * math.exp(-7 * i / n) * sum(a * math.sin(2 * math.pi * f * i / SR) for f, a in parts) for i in range(n)]
+
+def slide(dur=.42):
+    return noise_sweep(dur, True, 7, .5)  # a soft, low brush: something moving across the stage
+
+def lock():
+    t = tick(); gap = [0.0] * int(.06 * SR)
+    return [a + b for a, b in zip(t + gap + t + [0.0] * int(.2 * SR), [0.0] * (len(t) + len(gap)) + sweep_down(140, 60, .2, .4) + [0.0] * len(t))]
+
 KINDS = {'pop': sweep_down(170, 70, .12, .55), 'thud': sweep_down(110, 42, .22, .75), 'tick': tick(), 'draw': draw(),
-         'whoosh': noise_sweep(.32, True, 2), 'out': noise_sweep(.28, False, 4, .42), 'ding': ding()}
+         'whoosh': noise_sweep(.32, True, 2), 'out': noise_sweep(.28, False, 4, .42), 'ding': ding(),
+         'drip': drip(), 'splash': splash(), 'swirl': swirl(), 'coin': coin(), 'slide': slide(), 'lock': lock()}
 
 ap = argparse.ArgumentParser()
 ap.add_argument('out'); ap.add_argument('--duration', type=float, required=True)
