@@ -35,6 +35,8 @@ An explanation in steps over the face is not one of these modes: when the author
 
 The second overlay size (step 5, "Overlays"). Build it in the overlay's HTML: the image in the top half of the frame, with a CSS gradient mask fading it into transparency toward the forehead, and render it as a `.mov` with alpha like the stickers. Check its still over the backdrop: the eyes, the mouth and the caption zone stay clear.
 
+When the image has a solid background that the fade cannot hide (a portrait on black, a logo on a coloured box), frame it instead as a sticker in the design system's shape, with its border, inside the free band. A dark background faded over a light wall reads as a smudge around the image, not as a cutout.
+
 ## Impact screen with the face
 
 In mixed mode with the face or in an overlay, the impact screen is its own full-screen file, `NN-impacto.mp4`, 0.5 to 1.5 s, that the author drops over the recording at the anchor word with a dry cut in and out. Its row in `timeline.md` gives the timecode of the anchor word.
