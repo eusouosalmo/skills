@@ -58,12 +58,12 @@ npx skills@latest remove <nome>
 
 - [creating-skills](skills/harness/creating-skills/SKILL.md) (beta): cria ou altera uma skill a partir de uma falha observada, conferida com evals.
 - [animating-reel-scenes](skills/content/animating-reel-scenes/SKILL.md) (beta): planeja quais trechos de um reel em talking-head viram motion e renderiza as cenas e os overlays transparentes de adesivos para o CapCut.
+- [writing-short-video-scripts](skills/content/writing-short-video-scripts/SKILL.md) (beta): escreve roteiros de vídeo curto a partir das anotações do autor, com gancho, um CTA falado e texto de teleprompter cronometrado.
 
 Em draft, fora dos dois caminhos de instalação:
 
 - [setting-up-git-guardrails](skills/harness/setting-up-git-guardrails/SKILL.md): guardrails de git por projeto para agentes de código, com perfis interativo e AFK.
 - [writing-as-eusouosalmo](skills/content/writing-as-eusouosalmo/SKILL.md): escreve e revisa texto na voz do eusouosalmo, no registro falado ou escrito conforme o canal.
-- [writing-short-video-scripts](skills/content/writing-short-video-scripts/SKILL.md): escreve roteiros de vídeo curto a partir das anotações do autor, com gancho, um CTA falado e texto de teleprompter cronometrado.
 - [writing-post-captions](skills/content/writing-post-captions/SKILL.md): escreve a legenda de um vídeo curto para Instagram, TikTok, YouTube Shorts ou LinkedIn a partir do roteiro, complementando o vídeo com um pedido, crédito da fonte e hashtags dentro do limite da plataforma.
 
 As instruções das skills são escritas em inglês; as skills de conteúdo entregam o resultado em português.
