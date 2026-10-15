@@ -1,0 +1,8 @@
+[
+  { "query": "junta esses brutos que gravei e tira as tomadas ruins e os silêncios", "should_trigger": true },
+  { "query": "faz o corte seco do reel: tira os erros, as repetições e as pausas do bruto", "should_trigger": true },
+  { "query": "tenho 8 arquivos gravados do celular, quero o corte pronto pra legendar no capcut", "should_trigger": true },
+  { "query": "planeja quais trechos do reel viram cena de motion a partir do SRT", "should_trigger": false },
+  { "query": "escreve a legenda do post desse reel pro instagram", "should_trigger": false },
+  { "query": "corta esse roteiro pra caber em 60 segundos", "should_trigger": false }
+]

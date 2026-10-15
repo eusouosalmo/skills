@@ -1,0 +1,58 @@
+{
+  "skill_name": "cutting-raw-takes",
+  "evals": [
+    {
+      "id": 1,
+      "name": "many-raws-takes-and-backstage",
+      "prompt": "gravei o reel do whatsapp em 10 arquivos, tão na pasta brutos. junta tudo, tira as tomadas ruins, as conversas e os silêncios e me deixa o corte pronto pra eu legendar no capcut",
+      "setup": "Private input, kept out of the repo: copy .scratch/edicao-completa/brutos/whatsapp-tintas (10 iPhone .mov, 666 s) into an empty folder as brutos/ and run the prompt from it. Run heavy processes under a memory cap (systemd-run --user --scope -p MemoryMax=6G). Grade against the author's cut in .scratch/edicao-completa/capcut-drafts/whatsapp-tintas with .scratch/edicao-completa/scripts/comparar_corte.py.",
+      "files": [],
+      "expected_output": "Before writing any output, a table of takes shown in the chat for approval and a question on the output form (CapCut project or loose files), each with how to use it. The cut joins the clips in recording order and never reorders. It drops the conversation with the person filming, the spoken 'Corta', abandoned and partial takes (the line 'Quem estiver olhando a rede de internet' said six times keeps one version), and reworded retakes; where the take to keep is not obviously the last (the line 'Então, como dois celulares combinam um segredo em público', where the author kept the first take), the table flags the choice instead of deciding silently. Result close to the author's 94 s, no word of the kept takes cut, about 0.1 to 0.25 s before speech and 0.1 to 0.35 s after, no pause above about 0.5 s. No render of the whole cut in one ffmpeg filter.",
+      "assertions": [
+        "Before any render or file output, the output-form question (CapCut project or loose files, with how to use each) is asked or, with the user away, recorded",
+        "A table of takes, kept and dropped with their text and reason, is shown for approval before any render",
+        "Where two takes differ in register, the kept take is the one in the author's spoken register (tu/teu): 'se tu mandar essa mensagem' and 'só o teu celular vai conseguir abrir'",
+        "No conversation with the person filming, no spoken 'Corta' and only one version of each repeated line remain",
+        "For 'Então, como dois celulares combinam um segredo em público' the first take is kept (F33AAC0B about 5.0 to 10.0 s)",
+        "Kept duration within 10% of the author's 94.4 s and at least 80% of the author's kept time in common",
+        "No ffmpeg filter_complex with many trims; heavy processes under a memory cap"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 2,
+      "name": "single-raw-retakes-and-warm-up",
+      "prompt": "esse aqui é o bruto do reel da pirâmide, gravei tudo de uma vez só. faz o corte: tira os erros, as repetições e as pausas",
+      "setup": "Private input, kept out of the repo: copy .scratch/edicao-completa/brutos/arquiteto-dev-piramide (one .mp4, 204 s) into an empty folder and run the prompt from it, under the same memory cap. Grade against .scratch/edicao-completa/capcut-drafts/arquiteto-dev-piramide.",
+      "files": [],
+      "expected_output": "The output-form question and a takes table for approval before any output. The warm-up opener 'Bora trocar um papo sobre experiência' is out and the cut opens on the hook 'Quando eu precisei tomar decisões de arquitetura de software'. False starts ('eu não fazia ideia que eu não fazia ideia que', 'e tu hoje e tu e tu hoje'), reworded retakes ('o que tu sabe que nem existe' before 'o que tu nem sabe que existe') and the two unfinished tries of 'só que não dá para se aprofundar em tudo' (about 78 to 103 s) are cut, keeping the complete one after them; connectors the author kept stay ('então pensa na pirâmide', 'acostumado a ser', 'o tempo todo porque'). Quiet words such as 'versão nova, uma vulnerabilidade' are kept. Result close to the author's 81 s.",
+      "assertions": [
+        "Before any render or file output, the output-form question (with how to use each option) is asked or, with the user away, recorded",
+        "A table of takes, kept and dropped with their text and reason, is shown for approval before any render",
+        "The cut opens on 'Quando eu precisei tomar decisões', with the warm-up 'Bora trocar um papo sobre experiência' out",
+        "Connectors inside the kept lines stay: 'então pensa na pirâmide', 'acostumado a ser só desenvolvedor' and 'o tempo todo porque sempre sai' are in the cut",
+        "False starts and the reworded retake 'o que tu sabe que nem existe' are cut, and the complete 'só que não dá para se aprofundar em tudo' after the unfinished tries is kept",
+        "The quiet words 'versão nova, uma vulnerabilidade' and 'banco, por exemplo' are kept",
+        "Kept duration within 10% of the author's 80.7 s and at least 80% of the author's kept time in common",
+        "No ffmpeg filter_complex with many trims; heavy processes under a memory cap"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 3,
+      "name": "clean-take-only-pauses",
+      "prompt": "gravei o do Jev numa tomada só e saiu limpo, só tira as pausas pra ficar mais dinâmico",
+      "setup": "Private input, kept out of the repo: copy .scratch/edicao-completa/brutos/jev-ai (one .mp4, 143 s) into an empty folder and run the prompt from it, under the same memory cap. Grade against .scratch/edicao-completa/capcut-drafts/Jev-AI.",
+      "files": [],
+      "expected_output": "Only pauses come out: the author's cut keeps 93% (133 of 143 s), removes gaps of about 0.5 to 0.8 s between phrases and drops no take or content. No sentence is flagged as a retake without a repetition in the audio, and the output-form question still comes before any output.",
+      "assertions": [
+        "Before any render or file output, the output-form question (with how to use each option) is asked or, with the user away, recorded",
+        "Before any render, the stretches to cut are shown for approval (for a clean take, the list of pauses and anything else marked for cutting)",
+        "No spoken word is cut: every line of the take is in the cut, and no stretch is marked as a take, warm-up or hesitation without a repetition or restart in the audio",
+        "Kept duration between 125 and 137 s and at least 95% of the author's kept time in common",
+        "No ffmpeg filter_complex with many trims; heavy processes under a memory cap"
+      ],
+      "human_feedback": ""
+    }
+  ]
+}
