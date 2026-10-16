@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.4.0](https://github.com/eusouosalmo/skills/compare/v0.3.0...v0.4.0) (2026-10-16)
+
+
+### Features
+
+* **content:** add cutting-raw-takes draft skill for rough cuts of raw takes ([a19f89d](https://github.com/eusouosalmo/skills/commit/a19f89d28aab4b4a77995184d7440af17282e492))
+* **content:** detect reading takes, breaths and restarts in cutting-raw-takes ([3c79224](https://github.com/eusouosalmo/skills/commit/3c79224f6f5a458abe06818b8dc89bd0844ec699))
+* **content:** material sound effects and a motion audit in animating-reel-scenes ([bde286b](https://github.com/eusouosalmo/skills/commit/bde286b13c317e2c0f1eb150d9d52ff100c0fe50))
+* **content:** promote cutting-raw-takes to beta ([f30e653](https://github.com/eusouosalmo/skills/commit/f30e6532cb553e99ef3987f97164a9f40be0797d))
+* **content:** twelve more synthesised sound effects in animating-reel-scenes ([7e4ffa7](https://github.com/eusouosalmo/skills/commit/7e4ffa74563b1a39e695d47953eb2f9b60179a93))
+
+
+### Bug Fixes
+
+* **content:** cap parallel renders at two in animating-reel-scenes ([f7f9b32](https://github.com/eusouosalmo/skills/commit/f7f9b322542d4f793ddd977ef8583c5abedd15a8))
+* **content:** frame solid-background images as stickers in animating-reel-scenes ([1cb8e4b](https://github.com/eusouosalmo/skills/commit/1cb8e4beb775cd948f7cd58cadc1378302f548b4))
+
 ## [0.3.0](https://github.com/eusouosalmo/skills/compare/v0.2.0...v0.3.0) (2026-10-13)
 
 
