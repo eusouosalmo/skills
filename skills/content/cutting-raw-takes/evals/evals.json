@@ -53,6 +53,24 @@
         "No ffmpeg filter_complex with many trims; heavy processes under a memory cap"
       ],
       "human_feedback": ""
+    },
+    {
+      "id": 4,
+      "name": "reading-takes-breaths-restarts",
+      "prompt": "gravei o fim do reel 'o celular não precisa ouvir' em 6 arquivos, tão na pasta brutos. tira as tomadas ruins, as conversas e os silêncios. por enquanto só me mostra a tabela de tomadas, com início e fim de cada trecho, que eu aprovo antes do render.",
+      "setup": "Private input, kept out of the repo: the author's raw clips IMG_1432 to IMG_1437 of the reel 'o celular não precisa ouvir' (6 iPhone .MOV, 655 s), linked in .scratch/edicao-completa/brutos/celular-nao-precisa-ouvir. Give the run the reel's teleprompter lines from 'Depois da reportagem' to the closing question. With the user away, the run records the output-form question, takes option 1, writes the takes table and a keep.json with the exact cut times, and stops before rendering. Grade against the cut the author approved on 2026-10-16.",
+      "files": [],
+      "expected_output": "Between takes the author turns to the computer and reads the line aloud, mic away from the mouth: those readings sit at -31 to -45 dB against -18 to -27 for takes to camera, and the frame shows the author's back. None of them is kept, however complete. The kept takes face the camera: 'E a Meta diz que não usa microfone' at 1432 about 86.6 s (a stretch the clip-wide transcript leaves empty), the Pixel line joined from halves the author said to camera (1434 about 33.2 or 77.8 s, then 93.8 s), the hypothesis at 1434 about 190.2 s, 'Desde dezembro' from 1435 about 52.0 s plus 'ajuda a escolher' at about 67.1 s, and 'Então, da próxima vez' whole and to camera (1436 about 22.8 s or 1437 about 21.2 s). Stretches that hold their own false start are cut at the restart: 'Só que tem uma conversa' starts at 1435 about 14.0 s, 'Isso tem nome' at 1434 about 268.5 s. Kept starts sit on the word onset, not on the breath before it.",
+      "assertions": [
+        "No kept stretch overlaps a reading turned away from the camera: 1432 83.2 to 85.5, 1434 59.3 to 65.4, 1434 161.2 to 169.1, 1435 29.2 to 35.2, 1436 17.2 to 21.8",
+        "'E a Meta diz que não usa microfone' is kept from 1432 about 86.6 to 89.2 s",
+        "The Pixel line is kept from to-camera halves: 'muita loja online tem no site o pixel' (1434 about 33.2 to 35.6 s or 77.8 to 80.7 s) with 'um código da Meta que conta pra ela o que tu olhou' (1434 about 93.8 to 96.5 s)",
+        "'Desde dezembro de 2025' is kept from 1435 about 52.0 to 57.8 s with 'ajuda a escolher' from about 67.1 to 70.1 s (or 71.7 to 74.5 s)",
+        "'Então, da próxima vez que o feed acertar' is kept whole and to camera (1436 about 22.8 to 26.7 s or 1437 about 21.2 to 25.0 s), never the 1436 stretch from about 13.0 s that has the reading at 17.2 to 21.8 s in its middle",
+        "False starts inside a stretch are cut: the kept 'Só que tem uma conversa' starts at 1435 14.0 s or later and the kept 'Isso tem nome' at 1434 268.5 s or later",
+        "Every kept start is at most 0.15 s before the -35 dB speech onset, so no piece opens on a breath"
+      ],
+      "human_feedback": ""
     }
   ]
 }
