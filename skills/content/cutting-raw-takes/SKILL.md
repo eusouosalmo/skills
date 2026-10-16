@@ -3,8 +3,7 @@ name: cutting-raw-takes
 description: Cuts the raw recordings of a talking-head Reel or Short into a rough cut, joining the clips in recording order, picking the take to keep for each line and dropping backstage talk and silences, with a takes table approved before anything is rendered. Use when the user hands over the raw clips of a video and wants them joined and cleaned of bad takes and pauses, ready to caption (corte bruto, juntar os brutos, tirar tomadas ruins, tirar silêncio).
 compatibility: Needs ffmpeg and a Whisper with word timestamps (faster-whisper or whisper.cpp). Memory caps (scripts/run_capped.sh) use systemd-run or prlimit on Linux and WSL. Multiple-choice questions use the agent's question tool when it has one (AskUserQuestion in Claude Code).
 metadata:
-  status: draft
-  internal: true
+  status: beta
 ---
 
 # Cutting raw takes
