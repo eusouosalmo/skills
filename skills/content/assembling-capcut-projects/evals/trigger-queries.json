@@ -1,8 +1,0 @@
-[
-  { "query": "monta esse reel no capcut pra mim, já criei o projeto vazio e fechei o app", "should_trigger": true },
-  { "query": "coloca o corte, as cenas, o sfx e a legenda no projeto do capcut, nos tempos da timeline", "should_trigger": true },
-  { "query": "quero abrir o capcut e o reel já estar montado com a abertura e a legenda no meu estilo", "should_trigger": true },
-  { "query": "faz o corte bruto desses arquivos que gravei, tira os silêncios", "should_trigger": false },
-  { "query": "planeja e renderiza as cenas de tela dividida desse reel a partir do SRT", "should_trigger": false },
-  { "query": "escreve a legenda do post do reel pro instagram", "should_trigger": false }
-]

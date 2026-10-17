@@ -303,8 +303,8 @@ def main():
             res["extra_material_refs"] = clone_refs(ref, {"extra_material_refs": res.get("extra_material_refs", [])}, True)
             add("text_templates", tt)
             s = seg_from(ref, cap_seg, tt["id"], a, b - a, 0.0, keep_anim=True)
-            mid = (a + b) / 2
-            s["clip"]["transform"]["y"] = y_split if any(x <= mid < y for x, y in split_ranges) else y_full
+            # a reel with a split screen keeps one caption height, under the panel, as the author's approved reels do
+            s["clip"]["transform"]["y"] = y_split if split_ranges else y_full
             for r in s["extra_material_refs"]:  # the caption animation spans the whole cue
                 k, m = next(((k, x) for k, v in D["materials"].items() if isinstance(v, list)
                              for x in v if isinstance(x, dict) and x.get("id") == r), (None, None))

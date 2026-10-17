@@ -63,7 +63,7 @@ npx skills@latest remove <name>
 
 In draft, not installed by either path:
 
-- [assembling-capcut-projects](skills/content/assembling-capcut-projects/SKILL.md): assembles a reel into an empty CapCut desktop project, with the cut, scene overlays, split-screen keyframes and divider, sfx, opening and captions styled from one of the author's own projects.
+- [finishing-reels](skills/content/finishing-reels/SKILL.md): finishes a reel as a CapCut desktop project or as the final mp4 without CapCut, with the cut, scene overlays, split-screen keyframes and divider, sfx, opening and captions styled from one of the author's own projects.
 - [setting-up-git-guardrails](skills/harness/setting-up-git-guardrails/SKILL.md): per-project git guardrails for coding agents, with interactive and AFK profiles.
 - [writing-as-eusouosalmo](skills/content/writing-as-eusouosalmo/SKILL.md): writes and reviews text in the voice of eusouosalmo, spoken or written register by channel.
 - [writing-post-captions](skills/content/writing-post-captions/SKILL.md): writes the caption for a short video on Instagram, TikTok, YouTube Shorts or LinkedIn from its script, complementing the video with one ask, source credit and hashtags within the platform's limits.
