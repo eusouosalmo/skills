@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.5.0](https://github.com/eusouosalmo/skills/compare/v0.4.0...v0.5.0) (2026-10-17)
+
+
+### Features
+
+* **content:** add assembling-capcut-projects skill in draft ([aa814cb](https://github.com/eusouosalmo/skills/commit/aa814cb6ff619097456b34ca03e319f7c49d6c19))
+* **content:** add punch-ins with their sound to finishing-reels ([f267bb8](https://github.com/eusouosalmo/skills/commit/f267bb8cce1e20f12a6bdd32b183fbd8ee223532))
+* **content:** add words on screen behind the head to finishing-reels ([c83c41c](https://github.com/eusouosalmo/skills/commit/c83c41ccedeb02e49a473b4187cd8111f58dfd5d))
+* **content:** finish reels as a final mp4 and rename to finishing-reels ([2222e71](https://github.com/eusouosalmo/skills/commit/2222e71ce89b16bbdc36df0bd249d71285640615))
+
+
+### Bug Fixes
+
+* **content:** keep split-screen panels inside the side and top safe margins in animating-reel-scenes ([89cc3b1](https://github.com/eusouosalmo/skills/commit/89cc3b15e11c1d7e3445090940d1f08f9b03396b))
+* **content:** widen the top-right safe band to 250 px in animating-reel-scenes ([cc183a0](https://github.com/eusouosalmo/skills/commit/cc183a03f1bfa9a3409e022c2843679e36f8b60c))
+
 ## [0.4.0](https://github.com/eusouosalmo/skills/compare/v0.3.0...v0.4.0) (2026-10-16)
 
 
