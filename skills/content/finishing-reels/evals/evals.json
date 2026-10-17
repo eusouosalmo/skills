@@ -57,7 +57,7 @@
       "expected_output": "An mp4 of the whole reel (100.6 s, 1080x1920, 30 fps) in the reel's exports, with no CapCut project written. Frames 0 to 15 show the reference project's entrance as CapCut renders it: the frame swinging in with a directional motion blur and mirrored edges, never black corners. Captions in the reference template at the posted reel's size, breaking lines where CapCut breaks them ('APARECER POR / CAUSA', 'UMA CONVERSA / QUE', 'CONVERSA COM ELA' on one line), at y about 1645 px for the whole reel, the close included. Split-screen keyframe at 5.90 s, divider, dossier overlay, sfx and the two opening sounds.",
       "assertions": [
         "An mp4 of the whole reel (about 100.6 s, 1080x1920, 30 fps) is written in the reel's exports and no CapCut project is written",
-        "The entrance frames (0 to 15) have no black corners or bars and show a directional motion blur in frames 1 to 5, like the posted reel",
+        "The entrance frames (0 to 15) have no black bars (the one dark wedge in the top-right corner of frame 0 is in the posted CapCut export too) and show a directional motion blur in frames 1 to 5, like the posted reel",
         "Caption lines break where CapCut breaks them: 'APARECER POR' over 'CAUSA' and 'UMA CONVERSA' over 'QUE', with 'CONVERSA COM ELA' on one line",
         "Captions stay at the posted reel's height (centre about 1645 px) for the whole reel, the close after 92.9 s included",
         "The two opening sounds (camera click at 0.0 s, reversed whoosh at 0.3 s) and 00-sfx.wav are in the mix with the speech"
@@ -86,9 +86,55 @@
       "expected_output": "An mp4 of the whole reel (94.45 s) with the reference project's entrance (directional blur, mirrored edges), the eight scenes at their timeline timecodes, the recording down at 3.70 s and back by 88.40 s, the divider only during the split, captions in the reference template at one height under the panel for the whole reel, the sfx and the opening sounds.",
       "assertions": [
         "An mp4 of the whole reel (about 94.45 s, 1080x1920, 30 fps) is written and no CapCut project is written",
-        "The entrance frames (0 to 15) have no black corners or bars and show a directional motion blur in frames 1 to 5",
+        "The entrance frames (0 to 15) have no black bars (the one dark wedge in the top-right corner of frame 0 is in the posted CapCut export too) and show a directional motion blur in frames 1 to 5",
         "Captions use the reference template ('逐词显色大写 黄' font and yellow highlight) at one height, centre about 1645 px, for the whole reel",
         "Caption lines break where CapCut breaks them: a page wider than about 837 px at the template size goes to two lines with the first line fuller"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 7,
+      "name": "jev-dynamic-capcut-split-reel",
+      "prompt": "monta no capcut o reel \"o celular não precisa ouvir\" com a dinâmica do começo do reel do Jev no vídeo todo: os punch-ins e os sons de micro-interação. criei o projeto vazio \"04-celular não precisa ouvir\" e fechei o capcut. tá tudo na pasta do reel.",
+      "setup": "Private input, kept out of the repo: setup_run.sh <run> celular-dyn (the celular reel folder, an empty project made in the app and the author's drafts). Run with run_eval.sh from outside the repo; the baseline is the previous version of the skill. Gauge against the author's reference project Jev-AI, whose punch-ins are hard cuts to 1.59x and 1.68x for 0.7 to 1.0 s on a key word ('Jev' 6.73 s, 'OpenAI' 12.2 s), with the face filling the frame, each with a library sound on its first frame.",
+      "files": [],
+      "expected_output": "The project of scenario 1 plus punch-ins only where the face fills the frame: in the hook, after the entrance and before the split-screen entry at 5.90 s (key words such as 'microfone' 2.54 s or 'vinte e quatro horas' 4.34 s), none from 5.90 s on, where the face sits in the lower half under the panel. Each one is a hard cut to the reference's scale (about 1.6x), lowered only as far as the hook's overlays require (about 1.2 to 1.3x, author's verdict 2026-10-17: 'vale livre'), for 0.6 to 1.0 s, written as scale keyframes one frame apart, with the reference's punch-in sound (its mouse click) on the same frame. The panel's 00-sfx.wav stays as it is. Written by the skill's own assemble_draft.py from plan.json; the handover lists each punch-in.",
+      "assertions": [
+        "No punch-in (recording scale above 1.0) from the split-screen entry at 5.90 s to the end; at least one punch-in in the hook, between the end of the entrance (0.5 s) and 5.90 s",
+        "Each punch-in is a hard cut held 0.6 to 1.1 s, starting within two frames of a spoken word's start in words.json, at the reference project's scale (about 1.63x) or lower only as far as it takes for the zoomed head, hair included, to stay clear of the overlays (the hook's comment print and microphone sticker sit just above the head)",
+        "Each punch-in has the reference project's punch-in sound (its mouse click) starting on the same frame, at the reference volume",
+        "The punch-ins are listed in plan.json and the project is written by the skill's own assemble_draft.py, not by an edited copy",
+        "The handover lists each punch-in with its time and word"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 8,
+      "name": "jev-dynamic-mp4-split-and-close",
+      "prompt": "gera o mp4 final do reel do whatsapp, sem capcut, com a dinâmica do começo do reel do Jev do início ao fim (punch-in e os sons de micro-interação). tá tudo na pasta do reel.",
+      "setup": "Private input, kept out of the repo: setup_run.sh <run> whatsapp-dyn-mp4 (the whatsapp reel folder with the clean cut and the author's drafts; no empty project). Run with run_eval.sh from outside the repo; the baseline is the previous version of the skill. Gauge against the author's reference project Jev-AI, whose punch-ins are hard cuts to 1.59x and 1.68x for 0.7 to 1.0 s on a key word ('Jev' 6.73 s, 'OpenAI' 12.2 s), with the face filling the frame, each with a library sound on its first frame.",
+      "files": [],
+      "expected_output": "The mp4 of scenario 6 plus punch-ins only in the full-frame hook (0.5 to 3.70 s): the punch-in timeline.md suggests, 110% from 1.03 to 1.80 s on 'Mark Zuckerberg', so the finger keeps pointing at the photo. None in the split screen (3.70 to 88.40 s) and none in the closing shot (88.83 s on), which is already a close-up. Each punch-in with the reference project's punch-in sound on its first frame. Rendered by the skill's own render_mp4.py from plan.json.",
+      "assertions": [
+        "No zoom of the recording in the split screen (3.70 to 88.40 s) nor in the closing close-up (88.83 s to the end)",
+        "The hook punch-in follows the timeline's suggestion: 110% from about 1.03 to 1.80 s, with the finger still pointing at the photo",
+        "Each punch-in has a short library sound of the reference project starting on its first frame",
+        "The punch-ins are listed in plan.json and the mp4 is rendered by the skill's own render_mp4.py, not by an edited copy",
+        "An mp4 of the whole reel (about 94.45 s, 1080x1920, 30 fps) is written and no CapCut project is written"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 9,
+      "name": "jev-dynamic-both-outputs-same-plan",
+      "prompt": "quero o reel do celular não precisa ouvir nas duas formas: o projeto do capcut (já criei o vazio \"04-celular não precisa ouvir\" e fechei o capcut) e o mp4 pronto pra postar. a mesma dinâmica do Jev nas duas, o vídeo todo.",
+      "setup": "Private input, kept out of the repo: setup_run.sh <run> celular-both (the celular reel folder, an empty project made in the app and the author's drafts). Run with run_eval.sh from outside the repo; the baseline is the previous version of the skill. Gauge against the author's reference project Jev-AI, whose punch-ins are hard cuts to 1.59x and 1.68x for 0.7 to 1.0 s on a key word ('Jev' 6.73 s, 'OpenAI' 12.2 s), with the face filling the frame, each with a library sound on its first frame.",
+      "files": [],
+      "expected_output": "One plan.json with punch-ins in the hook only, read by both scripts: the CapCut project has scale keyframes and the mp4 has the zoom at the same times, scale and length, each with the reference's punch-in sound.",
+      "assertions": [
+        "Both the CapCut project and the mp4 carry punch-ins, without the author asking for them separately",
+        "The punch-ins match between the two outputs (same start, end and scale within one frame), read from one plan.json",
+        "No punch-in from the split-screen entry at 5.90 s to the end, in either output"
       ],
       "human_feedback": ""
     }

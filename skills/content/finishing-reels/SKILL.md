@@ -1,6 +1,6 @@
 ---
 name: finishing-reels
-description: Finishes a talking-head Reel or Short from its cut, scenes, sfx and captions, either as a CapCut desktop project ready to open or as the final mp4 rendered without CapCut, in the editing style of one of the author's own CapCut projects (entrance, opening sounds, caption template, split-screen keyframes and divider). Use when the user wants a recorded reel put together or finished (montar no capcut, finalizar o reel, vídeo final sem capcut, mp4 pronto pra postar).
+description: Finishes a talking-head Reel or Short from its cut, scenes, sfx and captions, either as a CapCut desktop project ready to open or as the final mp4 rendered without CapCut, in the editing style of one of the author's own CapCut projects (entrance, opening sounds, punch-ins with their sound, caption template, split-screen keyframes and divider). Use when the user wants a recorded reel put together or finished (montar no capcut, finalizar o reel, vídeo final sem capcut, mp4 pronto pra postar).
 compatibility: The CapCut output is confirmed on CapCut desktop 9.6 for Windows, written from WSL. Needs Python 3.8+, ffmpeg (with libass) and ffprobe; the mp4 also needs numpy and fontTools (python3 -m venv .venv && .venv/bin/pip install numpy fonttools). Multiple-choice questions use the agent's question tool when it has one (AskUserQuestion in Claude Code).
 metadata:
   status: draft
@@ -30,7 +30,8 @@ The style comes from one of the author's own CapCut projects, the **reference pr
 
 - the entrance animation of its first clip (a zoom with a sway, for example);
 - the opening sounds: library sounds starting in its first second (camera click at 0.0 s, reversed whoosh at 0.3 s);
-- its most used caption template, with font, colour and word-by-word highlight.
+- its most used caption template, with font, colour and word-by-word highlight;
+- its punch-ins: short clips of the main track zoomed in with a hard cut, and the library sound on their first frame.
 
 From the reference project copy style only, never the properties of its media: its video once carried `has_sound_separated` (the author had extracted the audio there), and the speech went silent in the new project. `scripts/assemble_draft.py` resets those fields; a hand-written project has to do the same.
 
@@ -45,11 +46,17 @@ Read `timeline.md` whole and write `plan.json` next to the reel (fields in the d
 - **overlays:** each export at its own timecode from the exports table, never all at 00:00 unless the table says so.
 - **divider:** every split-screen range gets the divider the author chose, a black line with a hard shadow drawn from the centre in 0.4 s with the entry keyframe, so the panel and the footage do not meet in a raw seam. Render it with `scripts/render_divider.sh <reel>/exports/NN-divisao.mov <seconds of the split range>` and add it as an overlay starting at the entry, `own_track: true`.
 - **audio:** `00-sfx.wav` at 0.
+- **punch_ins:** always, as the reference project's dynamic, each with its `t`, `end` and the `word` it lands on. The scripts take the scale and the sound from the reference project and refuse a punch-in that breaks the rules they can check.
+  - Only where the face fills the frame in a medium shot: after the entrance, never in a split-screen range or its keyframe, never on a shot that is already a close-up. In a split screen the panel carries the rhythm, and a sudden zoom on the face pulls the eye away from the diagram the speech is explaining; on a close-up, the zoom crops the face to the eyes. A reel in split screen almost all the way through gets punch-ins only in its full-frame stretches, usually the hook; that is the right result, not a gap to fill.
+  - On a word that carries the sentence (a name, a number, the claim), from its start in `words.json` to the end of the word or its short phrase, 0.6 to 1.0 s, a few seconds apart. A zoom on a filler word marks nothing, and back-to-back zooms stop reading as emphasis.
+  - When `timeline.md` suggests a punch-in, take its time and scale: the overlay of that stretch was placed for that framing (a photo where a finger points stays under the finger only at the scale the timeline gives).
+  - Otherwise look at one frame of the stretch at the punch-in scale: the zoomed head, hair included, must stay clear of every overlay. When it would touch one, lower the scale only as far as it takes (the author prefers a smaller punch-in with the head free to the reference's scale with hair under a print).
+  - The micro-interaction sound is the punch-in's own sound, added by the scripts. Add no library sound over the panel: `00-sfx.wav` already gives each panel event the sound of its material.
 - **captions:** the SRT, the word timing from `words.json`, and every caption error `timeline.md` points out in `fixes`. In a reel with a split screen every caption sits at `y_split` (-0.71, on the chest under the panel), the hook and the close included, as in the author's approved reels; a reel without one keeps the reference project's height. The scripts apply this.
 
-Files you generate go in the reel's `exports/`, on the Windows drive, where CapCut can read them.
+Files you generate go in the reel's `exports/`, on the Windows drive, where CapCut can read them. Both outputs come from this plan through the skill's own scripts, so the CapCut project and the mp4 carry the same edit; never edit a copy of a script to add something the plan lacks.
 
-Done when every row of the exports table, every split range and every caption fix in `timeline.md` is in the plan.
+Done when every row of the exports table, every split range, every caption fix and every punch-in suggestion in `timeline.md` is in the plan, and every full-frame medium-shot stretch has been considered for a punch-in.
 
 ## 4a. CapCut project: write and check
 
@@ -63,14 +70,15 @@ Done when the script prints `written:` with the tracks you planned.
 
 ## 4b. Final mp4: render and check
 
-Run `scripts/render_mp4.py plan.json <reel>/exports/<reel name> - final.mp4 --preview 8` under the memory cap, with a Python that has numpy and fontTools. Look at frames 0 to 15 (the entrance: the frame moves in with a directional blur and mirrored edges, never black corners) and at a caption that breaks into two lines, then render the whole reel without `--preview`. The script reproduces CapCut's own pieces from the reference project and the local CapCut cache:
+Run `scripts/render_mp4.py plan.json <reel>/exports/<reel name> - final.mp4 --preview 8` under the memory cap, with a Python that has numpy and fontTools. Look at frames 0 to 15 (the entrance: the frame moves in with a directional blur and mirrored edges, with no black bars; the one dark wedge in the top-right corner of frame 0 is in CapCut's own export too, so leave it), at the frames on each side of a punch-in's cut, and at a caption that breaks into two lines, then render the whole reel without `--preview`. The script reproduces CapCut's own pieces from the reference project and the local CapCut cache:
 
 - the entrance "Balançar para cima e para a direita", frame by frame from its shader (another entrance is reported and left out);
 - the caption template: its font with the pt-BR accented capitals added when the font lacks them, the size, colour, stroke and shadow, pages of up to three words, lines broken where CapCut breaks them;
-- the opening sounds, from the cache files the reference project uses.
+- the opening sounds, from the cache files the reference project uses;
+- the punch-ins, as hard cuts around the frame centre, with the reference project's punch-in sound.
 
 Done when the mp4 has the reel's length at 1080x1920 and 30 fps, and the frames you looked at match the plan.
 
 ## 5. Hand over
 
-Tell the author where the output is, what is in it (each track, or each layer of the mp4), what to check (the entrance and opening sounds, the speech audible, the split-screen keyframe, captions in the template), and what stayed for them (the impact sound the timeline leaves to them, an optional punch-in). For a CapCut project, say where the backup is and ask them to keep CapCut closed if a fix is needed.
+Tell the author where the output is, what is in it (each track, or each layer of the mp4), what to check (the entrance and opening sounds, the speech audible, the split-screen keyframe, captions in the template), and each punch-in with its time and word, so they can drop one, and what stayed for them (the impact sound the timeline leaves to them). For a CapCut project, say where the backup is and ask them to keep CapCut closed if a fix is needed.

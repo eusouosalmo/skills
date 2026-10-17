@@ -14,6 +14,7 @@ The plan (JSON, paths in the local filesystem; see SKILL.md for each field):
   "main": [{"t": 0, "y": 0}, {"t": 5.9, "y": -0.396, "ramp": 0.4}, {"t": 92.94, "y": -0.396}],
   "entrance": true,
   "opening_sounds": true,
+  "punch_ins": [{"t": 2.54, "end": 3.3, "word": "microfone"}, {"t": 1.03, "end": 1.8, "scale": 1.1}],
   "overlays": [{"file": "<reel>/exports/01-x.mov", "start": 0, "end": 100.6, "volume": 0}],
   "audio": [{"file": "<reel>/exports/00-sfx.wav", "start": 0}],
   "captions": {"srt": "<reel>/legenda.srt", "words": "<reel>/words.json",
@@ -27,12 +28,14 @@ import datetime
 import json
 import re
 import shutil
+import statistics
 import subprocess
 import sys
 import uuid
 from pathlib import Path
 
 US = 1_000_000  # CapCut times are integer microseconds
+FRAME = 1 / 30  # the reels are 30 fps; punch-ins snap to this grid
 OPENING_WINDOW = 1.0  # library sounds starting this early in the reference project belong to its opening (observed: camera click at 0.0 s, whoosh at 0.3 s)
 # Properties that describe one specific media file. Copied from a reference project they break the new project:
 # has_sound_separated muted the speech once (the reference project's audio had been extracted to another track).
@@ -96,6 +99,74 @@ class Draft:
 
     def mat(self, seg):
         return self.idx.get(seg["material_id"], (None, None))
+
+    def main_track(self):
+        return next(t for t in self.d["tracks"] if t["type"] == "video")["segments"]
+
+    def entrance(self):
+        """The 'in' animation of the first clip, or None."""
+        first = self.main_track()[0]
+        return next((a for r in first.get("extra_material_refs", []) if self.idx.get(r, ("",))[0] == "material_animations"
+                     for a in self.idx[r][1].get("animations", []) if a.get("type") == "in"), None)
+
+    def punch(self):
+        """The reference project's punch-in: its scale (median of the short zoomed clips of the main track) and the
+        library sound that starts on the frame of its first punch-in, as (scale, sound segment, sound material)."""
+        zoomed = [s for s in self.main_track() if (s.get("clip") or {}).get("scale", {}).get("x", 1.0) > 1.2
+                  and s["target_timerange"]["duration"] < 2 * US]
+        if not zoomed:
+            return None, None, None
+        t0 = zoomed[0]["target_timerange"]["start"]
+        snd = next(((s, m) for _, s in self.segments("audio") for k, m in [self.mat(s)]
+                    if k == "audios" and m.get("type") in ("sound", "music")
+                    and abs(s["target_timerange"]["start"] - t0) <= FRAME * US), (None, None))
+        return statistics.median(s["clip"]["scale"]["x"] for s in zoomed), *snd
+
+
+def moving_ranges(main, rec_dur):
+    """Where the recording is off its full-frame place: split-screen ranges and the ramps into and out of them."""
+    bps = sorted(main, key=lambda b: b["t"])
+    out, prev = [], 0.0
+    for i, b in enumerate(bps):
+        y = b.get("y", 0.0)
+        e = bps[i + 1]["t"] if i + 1 < len(bps) else rec_dur
+        if y != 0:
+            out.append((b["t"], e))
+        elif prev != 0 and b.get("ramp"):
+            out.append((b["t"], b["t"] + b["ramp"]))
+        prev = y
+    return out
+
+
+def punch_ins(plan, ref, rec_dur):
+    """The plan's punch-ins, checked against the frame: each one a hard cut to the reference project's scale, held on a
+    spoken word, only where the face fills the frame (after the entrance, outside split screens and their ramps)."""
+    scale, _, _ = ref.punch()
+    ent = ref.entrance() if plan.get("entrance", True) else None
+    ent_end = (ent or {}).get("duration", 0) / US
+    blocked = moving_ranges(plan["main"], rec_dur)
+    out, last = [], -1.0
+    for p in sorted(plan.get("punch_ins", []), key=lambda p: p["t"]):
+        # on the frame grid: a keyframe between two frames gives one frame of half zoom in CapCut
+        t, e = round(p["t"] / FRAME) * FRAME, round(p["end"] / FRAME) * FRAME
+        s = p.get("scale", scale)
+        if s is None:
+            die(f"punch-in at {t}: the reference project has no punch-in to take the scale from; give 'scale'")
+        if not 0 < e - t <= 2.0:
+            die(f"punch-in at {t}: it must last more than 0 and at most 2 s (the reference's last 0.7 to 1.0 s)")
+        if t < ent_end:
+            die(f"punch-in at {t} overlaps the entrance animation (0 to {ent_end:.2f} s)")
+        if e > rec_dur:
+            die(f"punch-in at {t} ends after the recording ({rec_dur:.2f} s)")
+        hit = next(((a, b) for a, b in blocked if t < b and e > a), None)
+        if hit:
+            die(f"punch-in at {t}-{e} falls in a split screen or its keyframe ({hit[0]:.2f}-{hit[1]:.2f} s): "
+                "zoom only where the face fills the frame")
+        if t < last:
+            die(f"punch-in at {t} overlaps the previous one")
+        out.append({**p, "t": t, "end": e, "scale": s})
+        last = e
+    return out
 
 
 def main():
@@ -182,6 +253,7 @@ def main():
     bps = sorted(plan["main"], key=lambda b: b["t"])
     if not bps or bps[0]["t"] != 0:
         bps.insert(0, {"t": 0, "y": 0})
+    punches = punch_ins(plan, ref, rec_dur)
     segs, prev_y, split_ranges = [], 0.0, []
     for i, b in enumerate(bps):
         a = b["t"]
@@ -190,12 +262,22 @@ def main():
         s = seg_from(ref, first if keep else plain, rec_id, a, e - a, a, keep_anim=keep)
         y = b.get("y", 0.0)
         s["clip"]["transform"]["y"] = y
-        if b.get("ramp") and y != prev_y:
-            r = b["ramp"]
-            s["common_keyframes"] = [kf("KFTypePositionX", [(a, 0.0), (a + r, 0.0)]),
-                                     kf("KFTypePositionY", [(a, prev_y), (a + r, y)]),
-                                     kf("KFTypeScaleX", [(a, 1.0), (a + r, 1.0)]),
-                                     kf("KFTypeRotation", [(a, 0.0), (a + r, 0.0)])]
+        # keyframe times are in the source's time, which here equals the timeline's
+        r = b.get("ramp") if b.get("ramp") and y != prev_y else 0.0
+        ys = [(a, prev_y), (a + r, y)] if r else []
+        # a punch-in is a hard cut: the scale jumps between two keyframes one frame apart, in and out
+        sc = []
+        for p in (p for p in punches if a <= p["t"] < e):
+            sc += [(p["t"] - FRAME, 1.0)] if p["t"] - FRAME >= a else []
+            sc += [(p["t"], p["scale"]), (p["end"] - FRAME, p["scale"]), (p["end"], 1.0)]
+        if ys or sc:
+            pts = sorted({t for t, _ in ys + sc})
+            yv = lambda t: y if not r else prev_y + (y - prev_y) * min(max((t - a) / r, 0.0), 1.0)
+            sv = lambda t: next((v for tt, v in sc if abs(tt - t) < 1e-9), 1.0)
+            s["common_keyframes"] = [kf("KFTypePositionX", [(t, 0.0) for t in pts]),
+                                     kf("KFTypePositionY", [(t, yv(t)) for t in pts]),
+                                     kf("KFTypeScaleX", [(t, sv(t)) for t in pts]),
+                                     kf("KFTypeRotation", [(t, 0.0) for t in pts])]
         if y != 0:
             split_ranges.append((a, e))
         prev_y = y
@@ -245,7 +327,23 @@ def main():
         if segs:
             tracks.append(track("audio", segs))
 
-    # 5. captions: SRT cues in the reference project's caption template, word timing from words.json
+    # 5. each punch-in gets the reference project's punch-in sound on its first frame, same cut and volume
+    _, ps, pm = ref.punch()
+    sounded = [p for p in punches if p.get("sound", True)]
+    if sounded and ps is None:
+        print("assemble_draft: warning: the reference project has no sound on its punch-in; punch-ins go silent", file=sys.stderr)
+    elif sounded:
+        segs = []
+        for p in sounded:
+            c = copy.deepcopy(pm)
+            c["id"] = nid()
+            ns = seg_from(ref, ps, add("audios", c), p["t"], ps["target_timerange"]["duration"] / US,
+                          ps["source_timerange"]["start"] / US)
+            ns["volume"] = ps.get("volume", 1.0)
+            segs.append(ns)
+        tracks.append(track("audio", segs))
+
+    # 6. captions: SRT cues in the reference project's caption template, word timing from words.json
     cap = plan.get("captions")
     if cap:
         counts = {}
@@ -320,8 +418,9 @@ def main():
     D["canvas_config"] = {**ref.d.get("canvas_config", {}), "width": 1080, "height": 1920}
 
     summary = [(t["type"], len(t["segments"])) for t in tracks]
+    pin = [(round(p["t"], 2), round(p["end"], 2), round(p["scale"], 2)) for p in punches]
     if dry:
-        print(f"dry run: {rec_dur:.2f} s, tracks {summary}, split ranges {split_ranges}")
+        print(f"dry run: {rec_dur:.2f} s, tracks {summary}, split ranges {split_ranges}, punch-ins {pin}")
         return
 
     running = capcut_running()
@@ -374,7 +473,7 @@ def main():
             if s["target_timerange"]["start"] < end:
                 die(f"overlapping clips in a {t['type']} track")
             end = s["target_timerange"]["start"] + s["target_timerange"]["duration"]
-    print(f"written: {rec_dur:.2f} s, tracks {summary}, split ranges {split_ranges}")
+    print(f"written: {rec_dur:.2f} s, tracks {summary}, split ranges {split_ranges}, punch-ins {pin}")
     print(f"files: {[str(p.relative_to(proj)) for p in targets] + ['draft_meta_info.json']}; backup: {bdir}")
 
 

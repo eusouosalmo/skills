@@ -6,6 +6,8 @@ Usage:
 What it reproduces from the reference project (read from the CapCut drafts and the local CapCut cache):
 - the entrance of the first clip, when it is "Balançar para cima e para a direita" (the CapCut shader, frame by frame);
 - the opening sounds, from the cache files the reference project uses;
+- the punch-ins of the plan, as hard cuts to the reference project's scale around the frame centre, each with the
+  reference project's punch-in sound;
 - the caption template: font, size, max line width, white text with the spoken word in the template colour,
   black stroke and hard shadow, pages of up to three words.
 Everything else comes from the plan: the recording with its split-screen keyframes, the overlays, the reel's audio.
@@ -23,7 +25,7 @@ import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from assemble_draft import Draft, die, load_json, probe  # noqa: E402
+from assemble_draft import US, Draft, die, load_json, probe, punch_ins  # noqa: E402
 
 W, H, FPS = 1080, 1920, 30
 HALF = H / 2  # CapCut's y unit is half the frame height; negative is down
@@ -319,17 +321,21 @@ def main():
     # split-screen ranges, as assemble_draft computes them
     bps = sorted(plan["main"], key=lambda b: b["t"])
     split = [(b["t"], bps[i + 1]["t"] if i + 1 < len(bps) else 1e9) for i, b in enumerate(bps) if b.get("y", 0)]
+    punches = [p for p in punch_ins(plan, ref, probe(rec)) if p["t"] < dur]
 
-    inputs, filt, n = ["-i", str(rec)], [f"color=black:s={W}x{H}:r={FPS}:d={dur:.3f}[bg]",
-                                         f"[0:v]scale={W}:{H},setsar=1[rec]",
-                                         f"[bg][rec]overlay=x=0:y='{y_expr(bps, dur)}':eval=frame[v0]"], 1
-    last = "v0"
+    filt = [f"color=black:s={W}x{H}:r={FPS}:d={dur:.3f}[bg]",
+            f"[0:v]scale={W}:{H},setsar=1" + (f",split={len(punches) + 1}[r0]" + "".join(f"[pz{i}]" for i in range(len(punches)))
+                                               if punches else "[r0]")]
+    # punch-ins: a zoomed copy of the recording, cut to each punch-in's frames, laid over the full-frame recording
+    for i, p in enumerate(punches):
+        zw, zh = round(W * p["scale"] / 2) * 2, round(H * p["scale"] / 2) * 2
+        filt += [f"[pz{i}]trim=start={p['t'] - 0.5 / FPS:.4f}:end={p['end'] - 0.5 / FPS:.4f},scale={zw}:{zh},crop={W}:{H}[z{i}]",
+                 f"[r{i}][z{i}]overlay=0:0:eof_action=pass[r{i + 1}]"]
+    filt.append(f"[bg][r{len(punches)}]overlay=x=0:y='{y_expr(bps, dur)}':eval=frame[v0]")
+    inputs, n, last = ["-i", str(rec)], 1, "v0"
     # entrance of the reference project's first clip
-    first = next(t for t in ref.d["tracks"] if t["type"] == "video")["segments"][0]
-    anims = [a for r in first.get("extra_material_refs", []) if ref.idx.get(r, ("",))[0] == "material_animations"
-             for a in ref.idx[r][1].get("animations", []) if a.get("type") == "in"]
-    if plan.get("entrance", True) and anims:
-        a = anims[0]
+    a = ref.entrance()
+    if plan.get("entrance", True) and a:
         if a.get("name") != ENTRANCE:
             print(f"render_mp4: warning: entrance '{a.get('name')}' is not reproduced yet; the reel starts without it",
                   file=sys.stderr)
@@ -405,13 +411,26 @@ def main():
                            f"volume={s.get('volume', 1.0):.4f},adelay={round(s['target_timerange']['start'] / 1000)}:all=1[a{n}]")
                 labels.append(f"[a{n}]")
                 n += 1
+    _, ps, pm = ref.punch()
+    if ps is not None and any(p.get("sound", True) for p in punches):
+        f = local_path(pm["path"])
+        if not f.exists():
+            print(f"render_mp4: warning: punch-in sound {f} not in the CapCut cache; punch-ins go silent", file=sys.stderr)
+        else:
+            ss, sd = ps["source_timerange"]["start"] / US, ps["target_timerange"]["duration"] / US
+            for p in (p for p in punches if p.get("sound", True)):
+                inputs += ["-i", str(f)]
+                mix.append(f"[{n}:a]aresample=48000,atrim={ss:.3f}:{ss + sd:.3f},asetpts=PTS-STARTPTS,"
+                           f"volume={ps.get('volume', 1.0):.4f},adelay={round(p['t'] * 1000)}:all=1[a{n}]")
+                labels.append(f"[a{n}]")
+                n += 1
     mix.append(f"{''.join(labels)}amix=inputs={len(labels)}:normalize=0:duration=first,alimiter=limit=0.89:level=false[a]")
     graph = ";".join(filt + mix)
     ff([*inputs, "-filter_complex", graph, "-map", "[v]", "-map", "[a]", "-t", f"{dur:.3f}", "-r", str(FPS),
         "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p",
         "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-movflags", "+faststart", str(out)])
     shutil.rmtree(work, ignore_errors=True)
-    print(f"render_mp4: wrote {out} ({dur:.2f} s)")
+    print(f"render_mp4: wrote {out} ({dur:.2f} s), punch-ins {[(round(p['t'], 2), round(p['end'], 2), round(p['scale'], 2)) for p in punches]}")
 
 
 if __name__ == "__main__":
