@@ -8,7 +8,7 @@ Elas são pequenas, combináveis e nascem do trabalho real: uma skill só entra 
 
 Eu mostro como construo com IA no [Instagram](https://www.instagram.com/eusouosalmo/) e no [YouTube](https://www.youtube.com/@eusouosalmo) (@eusouosalmo) e em [eusouosalmo.dev](https://eusouosalmo.dev).
 
-[Read in English](README.md)
+[Read in English](README.en.md)
 
 ## Instalação
 

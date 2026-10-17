@@ -1,6 +1,6 @@
 # English structure, pt-BR content
 
-Skill names, frontmatter, instructions, repo docs and commits are in English; voice material, examples and the output of content skills are in pt-BR, and `README.pt-BR.md` mirrors the README. English matches the skills ecosystem installed alongside (flat in `~/.agents/skills`), reaches pt, en and es readers, and lets names follow the gerund form the Anthropic best practices prefer (`writing-scripts`), which sounds odd in Portuguese. The voice itself only exists in Portuguese, so its examples stay pt-BR, and the instruction language does not set the output language.
+Skill names, frontmatter, instructions, repo docs and commits are in English; voice material, examples and the output of content skills are in pt-BR, and the README has a mirror in the other language (see the amendment below for which one leads). English matches the skills ecosystem installed alongside (flat in `~/.agents/skills`), reaches pt, en and es readers, and lets names follow the gerund form the Anthropic best practices prefer (`writing-scripts`), which sounds odd in Portuguese. The voice itself only exists in Portuguese, so its examples stay pt-BR, and the instruction language does not set the output language.
 
 ## Considered Options
 
@@ -10,3 +10,7 @@ Skill names, frontmatter, instructions, repo docs and commits are in English; vo
 ## Amendment: issues and research in pt-BR
 
 Issues (wayfinder maps and tickets) and research notes in `docs/research/` are written in pt-BR. They are planning conversation and study material whose main reader is Salmo, and the discussion happens in Portuguese. Skills, ADRs, `AGENTS.md` and commits stay in English.
+
+## Amendment: README in pt-BR, English mirror
+
+The root `README.md` and the category `README.md` files are in pt-BR, and `README.en.md` mirrors the root one in English. Most of the people who reach the repo come from eusouosalmo's pt-BR audience, and `README.md` is the page GitHub shows them first. The category files carry no English mirror: `README.en.md` already lists every skill with its description. Skills, frontmatter, ADRs, `AGENTS.md`, commits and the plugin manifests stay in English for the ecosystem reasons above.

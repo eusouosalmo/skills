@@ -38,8 +38,8 @@
     {
       "id": 3,
       "name": "repo-linkedin-post",
-      "prompt": "escreve um post pro LinkedIn anunciando meu repositório de skills. a base é o README.pt-BR.md",
-      "setup": "Copy evals/files/repo-readme/README.pt-BR.md into an empty folder and run the prompt from it. Run it as a separate session outside any repository (claude -p from that folder), so no project CLAUDE.md or AGENTS.md leaks writing rules into the run.",
+      "prompt": "escreve um post pro LinkedIn anunciando meu repositório de skills. a base é o README.md",
+      "setup": "Copy evals/files/repo-readme/README.md into an empty folder and run the prompt from it. Run it as a separate session outside any repository (claude -p from that folder), so no project CLAUDE.md or AGENTS.md leaks writing rules into the run.",
       "files": [
         "evals/files/repo-readme"
       ],
@@ -49,7 +49,7 @@
         "The post has no em dash, en dash, unicode arrow or ellipsis character",
         "The post addresses the reader as 'você' and never as 'tu'",
         "The post has no catchphrase from the spoken register ('macho', 'bora lá', 'pô', 'ó')",
-        "Every claim in the post comes from README.pt-BR.md",
+        "Every claim in the post comes from README.md",
         "The output has no [falta: ...] asking for an anecdote or outcome the input does not mention"
       ],
       "human_feedback": ""

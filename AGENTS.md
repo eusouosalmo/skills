@@ -25,8 +25,8 @@ Read these before deciding on a format or following a recommendation, and cite t
 
 Structure in English, content that is pt-BR stays pt-BR (see `docs/adr/0003`).
 
-- **English:** skill, folder and category names; frontmatter; `SKILL.md` instructions; this file; ADRs; commits (Conventional Commits); `README.md`.
-- **pt-BR:** issues (wayfinder maps and tickets); research notes in `docs/research/`; voice material and examples (`examples.md` of content skills), the output of content skills (state it in the skill: "Write the output in pt-BR"), and `README.pt-BR.md`, which mirrors `README.md`.
+- **English:** skill, folder and category names; frontmatter; `SKILL.md` instructions; this file; ADRs; commits (Conventional Commits); `README.en.md`, which mirrors `README.md`.
+- **pt-BR:** issues (wayfinder maps and tickets); research notes in `docs/research/`; voice material and examples (`examples.md` of content skills), the output of content skills (state it in the skill: "Write the output in pt-BR"); the root `README.md`, which is the repo's front page, and the category `README.md` files.
 - A `description` may add pt-BR trigger words when the user is likely to ask in Portuguese.
 
 ## Layout
@@ -36,7 +36,7 @@ skills/<category>/<skill-name>/SKILL.md
 ```
 
 - Current categories: `content/` (writing, scripts, voice, brand) and `harness/` (setting up a repo to work with AI safely). A new category is born together with its first skill.
-- Each category has a `README.md` listing its skills, the name linked to the `SKILL.md`, plus a one-line description. The root `README.md` and `README.pt-BR.md` list them all.
+- Each category has a `README.md` listing its skills, the name linked to the `SKILL.md`, plus the same one-line description as the root `README.md`. The root `README.md` and `README.en.md` list them all.
 - The category is repo organisation only: on install every skill lands flat in `~/.agents/skills/<name>`.
 
 ## Names
@@ -66,7 +66,7 @@ metadata:
 - Every status change, new, renamed or removed skill, or change in what a skill does goes out in the same commit as all the places that list it:
   - `metadata.status`, plus `metadata.internal: true` added or dropped to match.
   - The category `README.md`: the `(status)` label and the one-line description.
-  - `README.md` and `README.pt-BR.md`: `beta` and `stable` skills go in the main list with their `(status)`, `draft` ones in the draft list, with the same one-line description in both languages.
+  - `README.md` and `README.en.md`: `beta` and `stable` skills go in the main list with their `(status)`, `draft` ones in the draft list, with the same one-line description in both languages.
   - `.claude-plugin/plugin.json`, via `scripts/sync-plugin-skills.sh`.
   - `scripts/link-skills.sh`, re-run locally when a skill is created, renamed or removed.
 - `disable-model-invocation: true` only when the skill must not fire on its own.

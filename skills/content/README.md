@@ -1,10 +1,10 @@
 # content
 
-Writing, video scripts, voice and brand skills for eusouosalmo. Instructions in English, output in pt-BR.
+Skills de escrita, roteiro, voz e marca do eusouosalmo. Instruções em inglês, resultado em pt-BR.
 
-- [writing-as-eusouosalmo](writing-as-eusouosalmo/SKILL.md) (draft): writes and reviews text in the voice of eusouosalmo, picking the spoken or written register by channel.
-- [writing-short-video-scripts](writing-short-video-scripts/SKILL.md) (beta): writes short video scripts from the author's notes, with hook, one spoken CTA and timed teleprompter text.
-- [writing-post-captions](writing-post-captions/SKILL.md) (draft): writes the caption for a short video on Instagram, TikTok, YouTube Shorts or LinkedIn from its script, complementing the video with one ask, source credit and hashtags within the platform's limits.
-- [animating-reel-scenes](animating-reel-scenes/SKILL.md) (beta): plans which stretches of a talking-head reel become motion and renders the scenes and transparent sticker overlays for CapCut.
-- [cutting-raw-takes](cutting-raw-takes/SKILL.md) (beta): cuts the raw clips of a talking-head reel into a rough cut, picking the take to keep for each line and dropping backstage talk and long pauses, with a takes table approved before rendering.
-- [assembling-capcut-projects](assembling-capcut-projects/SKILL.md) (draft): assembles a reel into an empty CapCut desktop project, with the cut, scene overlays, split-screen keyframes and divider, sfx, opening and captions styled from one of the author's own projects.
+- [writing-as-eusouosalmo](writing-as-eusouosalmo/SKILL.md) (draft): escreve e revisa texto na voz do eusouosalmo, no registro falado ou escrito conforme o canal.
+- [writing-short-video-scripts](writing-short-video-scripts/SKILL.md) (beta): escreve roteiros de vídeo curto a partir das anotações do autor, com gancho, um CTA falado e texto de teleprompter cronometrado.
+- [writing-post-captions](writing-post-captions/SKILL.md) (draft): escreve a legenda de um vídeo curto para Instagram, TikTok, YouTube Shorts ou LinkedIn a partir do roteiro, complementando o vídeo com um pedido, crédito da fonte e hashtags dentro do limite da plataforma.
+- [animating-reel-scenes](animating-reel-scenes/SKILL.md) (beta): planeja quais trechos de um reel em talking-head viram motion e renderiza as cenas e os overlays transparentes de adesivos para o CapCut.
+- [cutting-raw-takes](cutting-raw-takes/SKILL.md) (beta): corta os brutos de um reel em talking-head num corte seco, escolhendo a tomada de cada fala e tirando bastidor e pausas longas, com uma tabela de tomadas aprovada antes do render.
+- [assembling-capcut-projects](assembling-capcut-projects/SKILL.md) (draft): monta um reel num projeto vazio do CapCut desktop, com o corte, os overlays das cenas, os keyframes e a divisão da tela dividida, os sfx, a abertura e a legenda no estilo de um projeto do próprio autor.

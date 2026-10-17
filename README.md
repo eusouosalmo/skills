@@ -1,82 +1,84 @@
-# Skills for engineering with AI
+# Skills para engenharia com IA
 
-My agent skills for software architecture, programming, AI and SaaS. Some also help me create the content I make on these topics.
+Minhas skills de agente para arquitetura de software, programação, IA e SaaS. Algumas também me ajudam a criar o conteúdo que eu faço sobre esses temas.
 
-Generating code got cheap. What still sets software apart is the engineering around it: architecture, tests, and the harness that keeps an agent on track. These skills are how I put that into practice, in my projects and in the videos I make.
+Gerar código ficou barato. O que ainda diferencia um software é a engenharia em volta: arquitetura, testes e o harness que mantém o agente nos trilhos. Estas skills são como eu coloco isso em prática, nos meus projetos e nos vídeos que eu faço.
 
-They are small, composable and born from real work: a skill only lands here after I've done the job by hand a few times. Read them, fork them, adapt them to your stack and your voice.
+Elas são pequenas, combináveis e nascem do trabalho real: uma skill só entra aqui depois que fiz o trabalho na mão algumas vezes. Leia, faça fork, adapte para a sua stack e a sua voz.
 
-I share how I build with AI on [Instagram](https://www.instagram.com/eusouosalmo/) and [YouTube](https://www.youtube.com/@eusouosalmo) (@eusouosalmo) and at [eusouosalmo.dev](https://eusouosalmo.dev).
+Eu mostro como construo com IA no [Instagram](https://www.instagram.com/eusouosalmo/) e no [YouTube](https://www.youtube.com/@eusouosalmo) (@eusouosalmo) e em [eusouosalmo.dev](https://eusouosalmo.dev).
 
-[Leia em português](README.pt-BR.md)
+[Read in English](README.en.md)
 
-## Install
+## Instalação
 
-Two ways in. Pick one: installing the same skill both ways loads it twice, once as `<name>` and once as `eusouosalmo-skills:<name>`.
+Há dois caminhos. Escolha um: a mesma skill instalada pelos dois carrega duas vezes, uma como `<nome>` e outra como `eusouosalmo-skills:<nome>`.
 
-Both install only the skills in beta or stable. Drafts stay in the repo to read.
+Os dois instalam só as skills em beta ou stable. Os rascunhos ficam no repositório para leitura.
 
-### Claude Code plugin
+### Plugin do Claude Code
 
-Versioned: you stay on a release until you update. Each release and its changelog are on the [Releases](https://github.com/eusouosalmo/skills/releases) page.
+Versionado: você fica numa release até atualizar. Cada release e o changelog dela estão na página de [Releases](https://github.com/eusouosalmo/skills/releases).
 
 ```bash
 claude plugin marketplace add eusouosalmo/skills
 claude plugin install eusouosalmo-skills@eusouosalmo
 ```
 
-Skills show up as `eusouosalmo-skills:<name>`. To update, refresh the marketplace and then the plugin (or turn on auto-update for `eusouosalmo` under `/plugin`, Marketplaces):
+As skills aparecem como `eusouosalmo-skills:<nome>`. Para atualizar, atualize o marketplace e depois o plugin (ou ligue a atualização automática do `eusouosalmo` em `/plugin`, Marketplaces):
 
 ```bash
 claude plugin marketplace update eusouosalmo
 claude plugin update eusouosalmo-skills@eusouosalmo
 ```
 
-To remove the plugin, or the marketplace together with its plugin:
+Para remover o plugin, ou o marketplace junto com o plugin:
 
 ```bash
 claude plugin uninstall eusouosalmo-skills@eusouosalmo
 claude plugin marketplace remove eusouosalmo
 ```
 
-### npx skills, for any agent
+### npx skills, para qualquer agente
 
-Not versioned: it installs and updates from the latest commit on `main`. Works with Claude Code, Codex, Cursor and other agents.
+Sem versão: instala e atualiza a partir do último commit do `main`. Funciona com Claude Code, Codex, Cursor e outros agentes.
 
 ```bash
 npx skills@latest add eusouosalmo/skills
 ```
 
-The installer asks which skills to install and into which agents. For a single skill, add `--skill <name>`. To update or remove:
+O instalador pergunta quais skills e em quais agentes instalar. Para uma skill só, acrescente `--skill <nome>`. Para atualizar ou remover:
 
 ```bash
 npx skills@latest update
-npx skills@latest remove <name>
+npx skills@latest remove <nome>
 ```
 
 ## Skills
 
-- [creating-skills](skills/harness/creating-skills/SKILL.md) (beta): creates or changes a skill from an observed failure, checked with evals.
-- [animating-reel-scenes](skills/content/animating-reel-scenes/SKILL.md) (beta): plans which stretches of a talking-head reel become motion and renders the scenes and transparent sticker overlays for CapCut.
-- [writing-short-video-scripts](skills/content/writing-short-video-scripts/SKILL.md) (beta): writes short video scripts from the author's notes, with hook, one spoken CTA and timed teleprompter text.
-- [cutting-raw-takes](skills/content/cutting-raw-takes/SKILL.md) (beta): cuts the raw clips of a talking-head reel into a rough cut, picking the take to keep for each line and dropping backstage talk and long pauses, with a takes table approved before rendering.
+- [creating-skills](skills/harness/creating-skills/SKILL.md) (beta): cria ou altera uma skill a partir de uma falha observada, conferida com evals.
+- [animating-reel-scenes](skills/content/animating-reel-scenes/SKILL.md) (beta): planeja quais trechos de um reel em talking-head viram motion e renderiza as cenas e os overlays transparentes de adesivos para o CapCut.
+- [writing-short-video-scripts](skills/content/writing-short-video-scripts/SKILL.md) (beta): escreve roteiros de vídeo curto a partir das anotações do autor, com gancho, um CTA falado e texto de teleprompter cronometrado.
+- [cutting-raw-takes](skills/content/cutting-raw-takes/SKILL.md) (beta): corta os brutos de um reel em talking-head num corte seco, escolhendo a tomada de cada fala e tirando bastidor e pausas longas, com uma tabela de tomadas aprovada antes do render.
 
-In draft, not installed by either path:
+Em draft, fora dos dois caminhos de instalação:
 
-- [assembling-capcut-projects](skills/content/assembling-capcut-projects/SKILL.md): assembles a reel into an empty CapCut desktop project, with the cut, scene overlays, split-screen keyframes and divider, sfx, opening and captions styled from one of the author's own projects.
-- [setting-up-git-guardrails](skills/harness/setting-up-git-guardrails/SKILL.md): per-project git guardrails for coding agents, with interactive and AFK profiles.
-- [writing-as-eusouosalmo](skills/content/writing-as-eusouosalmo/SKILL.md): writes and reviews text in the voice of eusouosalmo, spoken or written register by channel.
-- [writing-post-captions](skills/content/writing-post-captions/SKILL.md): writes the caption for a short video on Instagram, TikTok, YouTube Shorts or LinkedIn from its script, complementing the video with one ask, source credit and hashtags within the platform's limits.
+- [assembling-capcut-projects](skills/content/assembling-capcut-projects/SKILL.md): monta um reel num projeto vazio do CapCut desktop, com o corte, os overlays das cenas, os keyframes e a divisão da tela dividida, os sfx, a abertura e a legenda no estilo de um projeto do próprio autor.
+- [setting-up-git-guardrails](skills/harness/setting-up-git-guardrails/SKILL.md): guardrails de git por projeto para agentes de código, com perfis interativo e AFK.
+- [writing-as-eusouosalmo](skills/content/writing-as-eusouosalmo/SKILL.md): escreve e revisa texto na voz do eusouosalmo, no registro falado ou escrito conforme o canal.
+- [writing-post-captions](skills/content/writing-post-captions/SKILL.md): escreve a legenda de um vídeo curto para Instagram, TikTok, YouTube Shorts ou LinkedIn a partir do roteiro, complementando o vídeo com um pedido, crédito da fonte e hashtags dentro do limite da plataforma.
 
-| Category | What it holds |
+As instruções das skills são escritas em inglês; as skills de conteúdo entregam o resultado em português.
+
+| Categoria | O que reúne |
 |---|---|
-| [content](skills/content/README.md) | Writing, video scripts, voice and brand. Output in pt-BR |
-| [harness](skills/harness/README.md) | Setting up a repo to work with AI safely, including unattended (AFK) runs, and creating the skills it uses |
+| [content](skills/content/README.md) | Escrita, roteiro, voz e marca. Resultado em pt-BR |
+| [harness](skills/harness/README.md) | Setup de repositório para trabalhar com IA com segurança, inclusive em modo AFK, e criação das skills que o agente usa |
 
-## How this repo works
+## Como o repositório funciona
 
-Every skill follows the [Agent Skills specification](https://agentskills.io/specification). Conventions (naming, maturity, language) are in [AGENTS.md](AGENTS.md) and the reasons behind them in [docs/adr](docs/adr). The structure owes a lot to [Matt Pocock's skills](https://github.com/mattpocock/skills).
+Toda skill segue a [especificação Agent Skills](https://agentskills.io/specification). As convenções (nomes, maturidade, língua) estão no [AGENTS.md](AGENTS.md), e o porquê de cada uma em [docs/adr](docs/adr). A estrutura deve muito às [skills do Matt Pocock](https://github.com/mattpocock/skills).
 
-## License
+## Licença
 
 [MIT](LICENSE)

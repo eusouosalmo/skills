@@ -1,6 +1,6 @@
 # harness
 
-Skills that set up a repo to work with AI safely and with quality, mainly for unattended (AFK) runs, including the skills the agent uses there.
+Skills que preparam um repositório para trabalhar com IA com segurança e qualidade, principalmente em modo AFK, incluindo as skills que o agente usa nele.
 
-- [creating-skills](creating-skills/SKILL.md) (beta): creates or changes a skill from an observed failure, checked with evals against a baseline.
-- [setting-up-git-guardrails](setting-up-git-guardrails/SKILL.md) (draft): installs per-project git guardrails for coding agents, with interactive and AFK profiles, tests and a server protection check.
+- [creating-skills](creating-skills/SKILL.md) (beta): cria ou altera uma skill a partir de uma falha observada, conferida com evals.
+- [setting-up-git-guardrails](setting-up-git-guardrails/SKILL.md) (draft): guardrails de git por projeto para agentes de código, com perfis interativo e AFK.
