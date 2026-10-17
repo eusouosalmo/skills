@@ -137,6 +137,49 @@
         "No punch-in from the split-screen entry at 5.90 s to the end, in either output"
       ],
       "human_feedback": ""
+    },
+    {
+      "id": 10,
+      "name": "words-capcut-band-taken",
+      "prompt": "monta no capcut o reel \"o celular não precisa ouvir\" com as palavras soltas em destaque do começo do reel do Jev (aquelas amarelas com sombra) junto com os punch-ins. criei o projeto vazio \"04-celular não precisa ouvir\" e fechei o capcut. tá tudo na pasta do reel.",
+      "setup": "Private input, kept out of the repo: setup_run.sh <run> celular-words (the celular reel folder, an empty project made in the app and the author's drafts). Run with run_eval.sh from outside the repo; the baseline is the previous version of the skill. Gauge against the author's reference project Jev-AI, whose words on screen ('UMA' 4.73 s, 'FRASE' 5.30 s) sit in the free band above the head, behind the hair (a cut-out copy of the recording over them), in the template 'Title EN Basic Take Your Time' with the effect '黄字加投影', each with a mouse click.",
+      "files": [],
+      "expected_output": "The project with the punch-ins in the hook and no word on screen: the band above the head holds the comment print for the whole hook (0 to 5.90 s) and the rest is split screen, so the overlay already marks the idea (author's verdict 2026-10-17: a word enters only where the band above the head is free). The handover says why no word went in. Written by the skill's own assemble_draft.py from plan.json.",
+      "assertions": [
+        "No word on screen anywhere in the reel: none over the comment print or the hook's stickers, none below the chin or on the hands, none in the split screen from 5.90 s",
+        "The handover says why no word went in (the band above the head is taken by the hook's overlay)",
+        "The punch-ins and their click are written by the skill's own assemble_draft.py from plan.json, with no edited or extra script"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 11,
+      "name": "words-mp4-behind-head",
+      "prompt": "gera o mp4 final do reel do whatsapp sem capcut, com as palavras em destaque na tela como no começo do reel do Jev, as amarelas com sombra. tá tudo na pasta do reel.",
+      "setup": "Private input, kept out of the repo: setup_run.sh <run> whatsapp-words-mp4 (the whatsapp reel folder with the clean cut and the author's drafts; no empty project). Run with run_eval.sh from outside the repo. Gauge against the author's reference project Jev-AI, whose words on screen ('UMA' 4.73 s, 'FRASE' 5.30 s) sit in the free band above the head, behind the hair (a cut-out copy of the recording over them), in the template 'Title EN Basic Take Your Time' with the effect '黄字加投影', each with a mouse click.",
+      "files": [],
+      "expected_output": "The mp4 with the hook punch-in from the timeline and the name as words behind the head, one at a time: 'MARK' from 1.04 s and 'ZUCKERBERG' from 1.26 s to about 1.84 s, the Zuckerberg photo (a small sticker at the right) on top of them, each with its click (author's verdict 2026-10-17: 'A: uma palavra por vez'). No word in the split screen or in the closing close-up. Rendered by the skill's own render_mp4.py from plan.json.",
+      "assertions": [
+        "Words only in the hook's full-frame stretch: 'MARK' from about 1.04 s and 'ZUCKERBERG' from about 1.26 s, one at a time; none in the split screen (3.70 to 88.40 s) nor in the closing close-up",
+        "Each word sits behind the head and behind the Zuckerberg photo: the person, cut out of the recording, covers its letters where they meet, the photo stays on top, and the captions above all",
+        "The word has the reference's look: ZY Modern capitals, fill about #FBFD99, a hard black shadow down and right, starting within two frames of the spoken word, with the click on its first frame",
+        "The mp4 is rendered by the skill's own render_mp4.py from a plan.json that lists the words"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 12,
+      "name": "words-both-outputs-same-plan",
+      "prompt": "monta o reel do whatsapp no capcut (o projeto vazio 05-whatsapp já tá criado e o capcut fechado) e gera também o mp4 pronto pra postar. as duas com a dinâmica completa do começo do reel do Jev: punch-in, palavras em destaque e os sons.",
+      "setup": "Private input, kept out of the repo: setup_run.sh <run> whatsapp-both-words (the whatsapp reel folder, an empty project 05-whatsapp as the app makes it, the author's drafts). Run with run_eval.sh from outside the repo; the baseline is the previous version of the skill.",
+      "files": [],
+      "expected_output": "One plan.json read by both scripts: the timeline's punch-in at 1.03 s and 'MARK' (1.04 s) then 'ZUCKERBERG' (1.26 s), native text in the reference's word template in the CapCut project and the same words in the mp4, behind the head in both through the same cut-out .mov, under the photo, each with the click.",
+      "assertions": [
+        "Words only in the hook: 'MARK' from about 1.04 s and 'ZUCKERBERG' from about 1.26 s, one at a time; none on the chest or below the chin, none in the split screen or the close-up",
+        "In the CapCut project each word is a native text in the reference's word template (editable), and the mp4 shows the same word at the same time, position and size, both read from one plan.json",
+        "In both outputs the word sits behind the head, under the same cut-out .mov of the person"
+      ],
+      "human_feedback": ""
     }
   ]
 }

@@ -1,7 +1,7 @@
 ---
 name: finishing-reels
-description: Finishes a talking-head Reel or Short from its cut, scenes, sfx and captions, either as a CapCut desktop project ready to open or as the final mp4 rendered without CapCut, in the editing style of one of the author's own CapCut projects (entrance, opening sounds, punch-ins with their sound, caption template, split-screen keyframes and divider). Use when the user wants a recorded reel put together or finished (montar no capcut, finalizar o reel, vídeo final sem capcut, mp4 pronto pra postar).
-compatibility: The CapCut output is confirmed on CapCut desktop 9.6 for Windows, written from WSL. Needs Python 3.8+, ffmpeg (with libass) and ffprobe; the mp4 also needs numpy and fontTools (python3 -m venv .venv && .venv/bin/pip install numpy fonttools). Multiple-choice questions use the agent's question tool when it has one (AskUserQuestion in Claude Code).
+description: Finishes a talking-head Reel or Short from its cut, scenes, sfx and captions, either as a CapCut desktop project ready to open or as the final mp4 rendered without CapCut, in the editing style of one of the author's own CapCut projects (entrance, opening sounds, punch-ins and words on screen with their sound, caption template, split-screen keyframes and divider). Use when the user wants a recorded reel put together or finished (montar no capcut, finalizar o reel, vídeo final sem capcut, mp4 pronto pra postar).
+compatibility: The CapCut output is confirmed on CapCut desktop 9.6 for Windows, written from WSL. Needs Python 3.8+, ffmpeg (with libass) and ffprobe; the mp4 also needs numpy and fontTools, and words behind the head need numpy, Pillow and mediapipe in both outputs (python3 -m venv .venv && .venv/bin/pip install numpy fonttools pillow mediapipe; the segmentation model downloads once into ~/.cache/finishing-reels). Multiple-choice questions use the agent's question tool when it has one (AskUserQuestion in Claude Code).
 metadata:
   status: draft
   internal: true
@@ -31,7 +31,8 @@ The style comes from one of the author's own CapCut projects, the **reference pr
 - the entrance animation of its first clip (a zoom with a sway, for example);
 - the opening sounds: library sounds starting in its first second (camera click at 0.0 s, reversed whoosh at 0.3 s);
 - its most used caption template, with font, colour and word-by-word highlight;
-- its punch-ins: short clips of the main track zoomed in with a hard cut, and the library sound on their first frame.
+- its punch-ins: short clips of the main track zoomed in with a hard cut, and the library sound on their first frame;
+- its words on screen: a text template carrying a text effect, other than the caption template, behind the head.
 
 From the reference project copy style only, never the properties of its media: its video once carried `has_sound_separated` (the author had extracted the audio there), and the speech went silent in the new project. `scripts/assemble_draft.py` resets those fields; a hand-written project has to do the same.
 
@@ -52,11 +53,16 @@ Read `timeline.md` whole and write `plan.json` next to the reel (fields in the d
   - When `timeline.md` suggests a punch-in, take its time and scale: the overlay of that stretch was placed for that framing (a photo where a finger points stays under the finger only at the scale the timeline gives).
   - Otherwise look at one frame of the stretch at the punch-in scale: the zoomed head, hair included, must stay clear of every overlay. When it would touch one, lower the scale only as far as it takes (the author prefers a smaller punch-in with the head free to the reference's scale with hair under a print).
   - The micro-interaction sound is the punch-in's own sound, added by the scripts. Add no library sound over the panel: `00-sfx.wav` already gives each panel event the sound of its material.
+- **words:** always, with the punch-ins, each with its `t`, `end` and `text`. The scripts take the template, the position above the head, the size, the click and the cut-out from the reference project, and refuse a word outside a full-frame stretch.
+  - In the same stretches as the punch-ins, in the band above the head. While a scene overlay fills that band across (a print, a card), the overlay already marks the idea and the word stays out: over it the word hides the proof the hook shows, and below the chin it lands on the hands. A small sticker at one side does not fill the band: the word goes in, and the sticker stays on top of it. A reel whose full-frame stretches all have the band filled gets no word; say so in the handover.
+  - The words of what the sentence is about: a name, a number, the claim. Never a function word ("nem", "o", "que"): alone on screen it marks nothing, and the author picked the name over "NEM" in the same stretch. A photo of the same person on screen does not replace the word: the author kept "MARK" and "ZUCKERBERG" with his photo up. One word on screen at a time, each from its start in `words.json` to the start of the next word shown or the end of its phrase. A name of two words shows as two flashes ("MARK", then "ZUCKERBERG"), as the reference shows "UMA" and then "FRASE"; a word shorter than the spoken word is fine. It may repeat the caption, as in the author's reference reel; inside a scene the stamp rule of the scenes still holds.
+  - Behind the head by default: the scripts cut the person out of the recording into `exports/recorte-*.mov` and lay it over the word, so the hair covers the letters as in the reference. A word on a punch-in may go centred and larger (`"y": 0`, `"scale": 1.98` in the reference), over the face, with `"behind": false`.
+  - The scripts shrink a word that would run past x 110 or 970, where Instagram crops the sides; a long word comes out small, so prefer a short one.
 - **captions:** the SRT, the word timing from `words.json`, and every caption error `timeline.md` points out in `fixes`. In a reel with a split screen every caption sits at `y_split` (-0.71, on the chest under the panel), the hook and the close included, as in the author's approved reels; a reel without one keeps the reference project's height. The scripts apply this.
 
 Files you generate go in the reel's `exports/`, on the Windows drive, where CapCut can read them. Both outputs come from this plan through the skill's own scripts, so the CapCut project and the mp4 carry the same edit; never edit a copy of a script to add something the plan lacks.
 
-Done when every row of the exports table, every split range, every caption fix and every punch-in suggestion in `timeline.md` is in the plan, and every full-frame medium-shot stretch has been considered for a punch-in.
+Done when every row of the exports table, every split range, every caption fix and every punch-in suggestion in `timeline.md` is in the plan, and every full-frame medium-shot stretch has been considered for a punch-in and a word.
 
 ## 4a. CapCut project: write and check
 
@@ -70,15 +76,16 @@ Done when the script prints `written:` with the tracks you planned.
 
 ## 4b. Final mp4: render and check
 
-Run `scripts/render_mp4.py plan.json <reel>/exports/<reel name> - final.mp4 --preview 8` under the memory cap, with a Python that has numpy and fontTools. Look at frames 0 to 15 (the entrance: the frame moves in with a directional blur and mirrored edges, with no black bars; the one dark wedge in the top-right corner of frame 0 is in CapCut's own export too, so leave it), at the frames on each side of a punch-in's cut, and at a caption that breaks into two lines, then render the whole reel without `--preview`. The script reproduces CapCut's own pieces from the reference project and the local CapCut cache:
+Run `scripts/render_mp4.py plan.json <reel>/exports/<reel name> - final.mp4 --preview 8` under the memory cap, with a Python that has numpy and fontTools. Look at frames 0 to 15 (the entrance: the frame moves in with a directional blur and mirrored edges, with no black bars; the one dark wedge in the top-right corner of frame 0 is in CapCut's own export too, so leave it), at the frames on each side of a punch-in's cut, at one frame of each word (letters behind the hair, nothing cut off at the sides), and at a caption that breaks into two lines, then render the whole reel without `--preview`. The script reproduces CapCut's own pieces from the reference project and the local CapCut cache:
 
 - the entrance "Balançar para cima e para a direita", frame by frame from its shader (another entrance is reported and left out);
 - the caption template: its font with the pt-BR accented capitals added when the font lacks them, the size, colour, stroke and shadow, pages of up to three words, lines broken where CapCut breaks them;
 - the opening sounds, from the cache files the reference project uses;
-- the punch-ins, as hard cuts around the frame centre, with the reference project's punch-in sound.
+- the punch-ins, as hard cuts around the frame centre, with the reference project's punch-in sound;
+- the words in the reference's word template: its font, the effect's yellow and hard shadow, the template's size and position, with the person cut out over them.
 
 Done when the mp4 has the reel's length at 1080x1920 and 30 fps, and the frames you looked at match the plan.
 
 ## 5. Hand over
 
-Tell the author where the output is, what is in it (each track, or each layer of the mp4), what to check (the entrance and opening sounds, the speech audible, the split-screen keyframe, captions in the template), and each punch-in with its time and word, so they can drop one, and what stayed for them (the impact sound the timeline leaves to them). For a CapCut project, say where the backup is and ask them to keep CapCut closed if a fix is needed.
+Tell the author where the output is, what is in it (each track, or each layer of the mp4), what to check (the entrance and opening sounds, the speech audible, the split-screen keyframe, captions in the template), and each punch-in and each word on screen with its time, so they can drop one (or why no word went in), and what stayed for them (the impact sound the timeline leaves to them). For a CapCut project, say where the backup is and ask them to keep CapCut closed if a fix is needed.

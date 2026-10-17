@@ -15,6 +15,9 @@ The plan (JSON, paths in the local filesystem; see SKILL.md for each field):
   "entrance": true,
   "opening_sounds": true,
   "punch_ins": [{"t": 2.54, "end": 3.3, "word": "microfone"}, {"t": 1.03, "end": 1.8, "scale": 1.1}],
+  "words": [{"t": 4.34, "end": 5.1, "text": "24 HORAS"}, {"t": 6.73, "end": 7.43, "text": "JEV", "y": 0, "scale": 1.98,
+             "behind": false}],
+  "exports": "<reel>/exports",
   "overlays": [{"file": "<reel>/exports/01-x.mov", "start": 0, "end": 100.6, "volume": 0}],
   "audio": [{"file": "<reel>/exports/00-sfx.wav", "start": 0}],
   "captions": {"srt": "<reel>/legenda.srt", "words": "<reel>/words.json",
@@ -36,6 +39,15 @@ from pathlib import Path
 
 US = 1_000_000  # CapCut times are integer microseconds
 FRAME = 1 / 30  # the reels are 30 fps; punch-ins snap to this grid
+# The word template ("Title EN Basic Take Your Time" with the "黄字加投影" effect), measured on the author's reel at size 15:
+# "UMA" at scale 1.28 has capitals 248 px tall (190.7 px per unit of scale gives that height with the font's overshoot,
+# checked against "JEV" at 1.98, 385 px); the template squeezes the text across by its own x/y scale; it lifts the text 234.5 px per
+# unit of scale above the clip's y (capitals from 258 px at y 0.29 and scale 1.28, from 303 px at y 0 and scale 1.98); fill #FBFD99 (the effect's
+# colour, not the text's), a hard black shadow down and right of about 3.2% of the capital height, no stroke.
+WORD_CAP_PX, WORD_LIFT_PX, WORD_FILL, WORD_SHADOW = 190.7, 236.8, (0xFB, 0xFD, 0x99), 0.032
+# Instagram crops about 98 px off each side of a tall phone screen (the author's posted reel, 2026-10-16): a word
+# stays between x 110 and 970.
+SAFE_X = 110
 OPENING_WINDOW = 1.0  # library sounds starting this early in the reference project belong to its opening (observed: camera click at 0.0 s, whoosh at 0.3 s)
 # Properties that describe one specific media file. Copied from a reference project they break the new project:
 # has_sound_separated muted the speech once (the reference project's audio had been extracted to another track).
@@ -63,6 +75,26 @@ def win_path(p):
     if not m:
         print(f"assemble_draft: warning: {s} is not on a Windows drive; CapCut on Windows cannot open it", file=sys.stderr)
     return f"{m.group(1).upper()}:/{m.group(2)}" if m else s
+
+
+def local_path(p):
+    """C:/Users/x -> /mnt/c/Users/x, so a path stored by CapCut on Windows opens from WSL."""
+    m = re.match(r"^([A-Za-z]):[/\\](.*)$", p)
+    return Path(f"/mnt/{m.group(1).lower()}/{m.group(2)}".replace("\\", "/")) if m else Path(p)
+
+
+def word_width(font, text, scale, size, squeeze):
+    """Width in px of a word in the word template, from the font's advances; None without fontTools or the font."""
+    try:
+        from fontTools.ttLib import TTFont
+        f = TTFont(font)
+    except (ImportError, OSError):
+        return None
+    cmap, hmtx = f.getBestCmap(), f["hmtx"]
+    cap = getattr(f["OS/2"], "sCapHeight", 0) or f["head"].unitsPerEm * 0.7
+    adv = sum(hmtx[cmap[ord(c)]][0] if ord(c) in cmap else hmtx[cmap[ord("A")]][0] for c in text)
+    cap_px = WORD_CAP_PX * scale * size / 15
+    return adv * cap_px / cap * squeeze * (1 + WORD_SHADOW)
 
 
 def probe(p):
@@ -109,6 +141,21 @@ class Draft:
         return next((a for r in first.get("extra_material_refs", []) if self.idx.get(r, ("",))[0] == "material_animations"
                      for a in self.idx[r][1].get("animations", []) if a.get("type") == "in"), None)
 
+    def word_template(self):
+        """The reference project's word on screen: a text template carrying a text effect, other than the caption
+        template (the one with the most cues). Returns (segment, template material) or (None, None)."""
+        found, counts = [], {}
+        for _, s in self.segments("text"):
+            k, m = self.mat(s)
+            if k == "text_templates":
+                counts[m.get("name")] = counts.get(m.get("name"), 0) + 1
+                refs = s.get("extra_material_refs", []) + m["text_info_resources"][0].get("extra_material_refs", [])
+                if any(self.idx.get(r, ("",))[0] == "effects" for r in refs):
+                    found.append((s, m))
+        caption = max(counts, key=counts.get) if counts else None
+        found = [(s, m) for s, m in found if m.get("name") != caption]
+        return found[0] if found else (None, None)
+
     def punch(self):
         """The reference project's punch-in: its scale (median of the short zoomed clips of the main track) and the
         library sound that starts on the frame of its first punch-in, as (scale, sound segment, sound material)."""
@@ -138,34 +185,96 @@ def moving_ranges(main, rec_dur):
     return out
 
 
-def punch_ins(plan, ref, rec_dur):
-    """The plan's punch-ins, checked against the frame: each one a hard cut to the reference project's scale, held on a
-    spoken word, only where the face fills the frame (after the entrance, outside split screens and their ramps)."""
-    scale, _, _ = ref.punch()
+def full_frame_spans(kind, items, plan, ref, rec_dur):
+    """Items of the plan with t and end, snapped to the frame grid and checked to lie where the face fills the frame:
+    after the entrance, outside split screens and their ramps, one at a time."""
     ent = ref.entrance() if plan.get("entrance", True) else None
     ent_end = (ent or {}).get("duration", 0) / US
     blocked = moving_ranges(plan["main"], rec_dur)
     out, last = [], -1.0
-    for p in sorted(plan.get("punch_ins", []), key=lambda p: p["t"]):
+    for p in sorted(items, key=lambda p: p["t"]):
         # on the frame grid: a keyframe between two frames gives one frame of half zoom in CapCut
         t, e = round(p["t"] / FRAME) * FRAME, round(p["end"] / FRAME) * FRAME
-        s = p.get("scale", scale)
-        if s is None:
-            die(f"punch-in at {t}: the reference project has no punch-in to take the scale from; give 'scale'")
         if not 0 < e - t <= 2.0:
-            die(f"punch-in at {t}: it must last more than 0 and at most 2 s (the reference's last 0.7 to 1.0 s)")
+            die(f"{kind} at {t:.2f}: it must last more than 0 and at most 2 s (the reference's last 0.6 to 1.0 s)")
         if t < ent_end:
-            die(f"punch-in at {t} overlaps the entrance animation (0 to {ent_end:.2f} s)")
+            die(f"{kind} at {t:.2f} overlaps the entrance animation (0 to {ent_end:.2f} s)")
         if e > rec_dur:
-            die(f"punch-in at {t} ends after the recording ({rec_dur:.2f} s)")
+            die(f"{kind} at {t:.2f} ends after the recording ({rec_dur:.2f} s)")
         hit = next(((a, b) for a, b in blocked if t < b and e > a), None)
         if hit:
-            die(f"punch-in at {t}-{e} falls in a split screen or its keyframe ({hit[0]:.2f}-{hit[1]:.2f} s): "
-                "zoom only where the face fills the frame")
-        if t < last:
-            die(f"punch-in at {t} overlaps the previous one")
-        out.append({**p, "t": t, "end": e, "scale": s})
+            die(f"{kind} at {t:.2f}-{e:.2f} falls in a split screen or its keyframe ({hit[0]:.2f}-{hit[1]:.2f} s): "
+                "only where the face fills the frame")
+        if t < last - 1e-6:
+            die(f"{kind} at {t:.2f} overlaps the previous one")
+        out.append({**p, "t": t, "end": e})
         last = e
+    return out
+
+
+def punch_ins(plan, ref, rec_dur):
+    """The plan's punch-ins: each one a hard cut to the reference project's scale, held on a spoken word."""
+    scale, _, _ = ref.punch()
+    out = full_frame_spans("punch-in", plan.get("punch_ins", []), plan, ref, rec_dur)
+    for p in out:
+        p.setdefault("scale", scale)
+        if p["scale"] is None:
+            die(f"punch-in at {p['t']:.2f}: the reference project has no punch-in to take the scale from; give 'scale'")
+    return out
+
+
+def screen_words(plan, ref, rec_dur):
+    """The plan's words on screen, in the reference project's word template, with its position and size by default;
+    behind the head (a cut-out of the person laid over them) unless 'behind' is false."""
+    seg, _ = ref.word_template()
+    out = full_frame_spans("word", plan.get("words", []), plan, ref, rec_dur)
+    if out and seg is None:
+        die("the reference project has no word template (a text template with a text effect besides the captions)")
+    for w in out:
+        w.setdefault("y", seg["clip"]["transform"]["y"])
+        w.setdefault("scale", seg["clip"]["scale"]["x"])
+        w.setdefault("behind", True)
+        w["text"] = w["text"].strip().upper()
+    if out:  # a word wider than the safe band shrinks until it fits, as the author asked after one ran off the sides
+        _, tmpl = ref.word_template()
+        st = json.loads(ref.idx[tmpl["text_info_resources"][0]["text_material_id"]][1]["content"])["styles"][0]
+        sc = tmpl["text_info_resources"][0]["attach_info"]["clip"]["scale"]
+        for w in out:
+            width = word_width(local_path(st["font"]["path"]), w["text"], w["scale"], st.get("size", 15), sc["x"] / sc["y"])
+            if width is None:
+                print(f"assemble_draft: warning: cannot measure '{w['text']}' (fontTools or the font missing); "
+                      f"check on a frame that it stays between x {SAFE_X} and {1080 - SAFE_X}", file=sys.stderr)
+            elif width > 1080 - 2 * SAFE_X:
+                w["scale"] *= (1080 - 2 * SAFE_X) / width
+                print(f"assemble_draft: '{w['text']}' scaled to {w['scale']:.2f} to stay between x {SAFE_X} and {1080 - SAFE_X}",
+                      file=sys.stderr)
+    return out
+
+
+def sound_times(punches, ws):
+    """Where the reference project's punch-in sound goes: the first frame of each punch-in and each word (its words
+    carry the same click), once when a word and a punch-in start together."""
+    out = []
+    for t in sorted(p["t"] for p in punches + ws if p.get("sound", True)):
+        if not out or t - out[-1] > FRAME / 2:
+            out.append(t)
+    return out
+
+
+def cutouts(plan, ws, punches, render=True):
+    """The cut-out .mov laid over each word behind the head, rendered once into the reel's exports folder
+    (skipped, not rendered, when render is false)."""
+    exports = Path(plan.get("exports") or Path(plan["recording"]).parent / "exports")
+    scale_at = lambda t: next((p["scale"] for p in punches if p["t"] - 1e-6 <= t < p["end"] - 1e-6), 1.0)
+    out = []
+    for w in (w for w in ws if w["behind"]):
+        f = exports / f"recorte-{w['t']:.2f}-{w['end']:.2f}.mov"
+        if not f.exists():
+            if not render:
+                continue
+            import cutout
+            cutout.render(Path(plan["recording"]), f, w["t"], w["end"], scale_at, die)
+        out.append((w, f))
     return out
 
 
@@ -185,6 +294,9 @@ def main():
     others = [Draft(p) for p in plan.get("media_references", [])]
     D = out.d
     D.setdefault("materials", {})
+    for v in D["materials"].values():  # with --force, the replaced edit's materials go too (an empty project has none)
+        if isinstance(v, list):
+            v.clear()
 
     def add(kind, m):
         D["materials"].setdefault(kind, []).append(m)
@@ -284,7 +396,46 @@ def main():
         segs.append(s)
     tracks.append(track("video", segs))
 
-    # 2. overlays (.mov with alpha): packed onto as few tracks as possible without overlap
+    # 2. words on screen in the reference project's word template, and over each word behind the head, the cut-out of
+    # the person (render_index orders the layers: recording, words, cut-out, overlays, captions)
+    shown = screen_words(plan, ref, rec_dur)
+    cuts = cutouts(plan, shown, punches, render=not dry) if shown else []
+    if shown:
+        wseg, wtmpl = ref.word_template()
+        wtext = ref.idx[wtmpl["text_info_resources"][0]["text_material_id"]][1]
+        segs = []
+        for w in shown:
+            tm = copy.deepcopy(wtext)
+            content = json.loads(tm["content"])
+            content["text"] = w["text"]
+            for st in content.get("styles", []):
+                st["range"] = [0, len(w["text"])]
+            tm.update(id=nid(), content=json.dumps(content, ensure_ascii=False))
+            add("texts", tm)
+            tt = copy.deepcopy(wtmpl)
+            tt["id"] = nid()
+            res = tt["text_info_resources"][0]
+            res["id"], res["text_material_id"] = nid(), tm["id"]
+            res["attach_info"]["duration"] = round((w["end"] - w["t"]) * US)
+            res["extra_material_refs"] = clone_refs(ref, {"extra_material_refs": res.get("extra_material_refs", [])}, True)
+            add("text_templates", tt)
+            s = seg_from(ref, wseg, tt["id"], w["t"], w["end"] - w["t"], 0.0, keep_anim=True)
+            s["clip"]["transform"]["y"] = w["y"]
+            s["clip"]["scale"] = {"x": w["scale"], "y": w["scale"]}
+            s["render_index"] = 1
+            segs.append(s)
+        tracks.append(track("text", segs))
+    if cuts:
+        src, mt, st = find_local("videos", ".mov")
+        segs = []
+        for w, f in cuts:
+            m = media("videos", mt, f, probe(f), has_audio=False, width=1080, height=1920)
+            s = seg_from(src, st, m, w["t"], w["end"] - w["t"])
+            s["volume"], s["render_index"] = 0.0, 2
+            segs.append(s)
+        tracks.append(track("video", segs))
+
+    # 3. overlays (.mov with alpha): packed onto as few tracks as possible without overlap
     if plan.get("overlays"):
         src, mt, st = find_local("videos", ".mov")
         lanes = []
@@ -300,9 +451,12 @@ def main():
                 lane = []
                 lanes.append(lane)
             lane.append((o["start"], o["start"] + dur, s))
+        for i, l in enumerate(lanes):
+            for x in l:
+                x[2]["render_index"] = 3 + i
         tracks += [track("video", [x[2] for x in l]) for l in lanes]
 
-    # 3. audio files of the reel (00-sfx.wav), each on its own track
+    # 4. audio files of the reel (00-sfx.wav), each on its own track
     for au in plan.get("audio", []):
         src, mt, st = find_local("audios", ".wav")
         f = Path(au["file"])
@@ -312,7 +466,7 @@ def main():
         s["volume"] = au.get("volume", 1.0)
         tracks.append(track("audio", [s]))
 
-    # 4. opening sounds of the reference project: library sounds in its first OPENING_WINDOW seconds, same times and volumes
+    # 5. opening sounds of the reference project: library sounds in its first OPENING_WINDOW seconds, same times and volumes
     if plan.get("opening_sounds", True):
         segs = []
         for t, s in ref.segments("audio"):
@@ -327,23 +481,24 @@ def main():
         if segs:
             tracks.append(track("audio", segs))
 
-    # 5. each punch-in gets the reference project's punch-in sound on its first frame, same cut and volume
+    # 6. each punch-in and each word gets the reference project's punch-in sound on its first frame, same cut and
+    # volume (its words carry the same click); one sound when a word and a punch-in start together
     _, ps, pm = ref.punch()
-    sounded = [p for p in punches if p.get("sound", True)]
+    sounded = sound_times(punches, shown)
     if sounded and ps is None:
         print("assemble_draft: warning: the reference project has no sound on its punch-in; punch-ins go silent", file=sys.stderr)
     elif sounded:
         segs = []
-        for p in sounded:
+        for t in sounded:
             c = copy.deepcopy(pm)
             c["id"] = nid()
-            ns = seg_from(ref, ps, add("audios", c), p["t"], ps["target_timerange"]["duration"] / US,
+            ns = seg_from(ref, ps, add("audios", c), t, ps["target_timerange"]["duration"] / US,
                           ps["source_timerange"]["start"] / US)
             ns["volume"] = ps.get("volume", 1.0)
             segs.append(ns)
         tracks.append(track("audio", segs))
 
-    # 6. captions: SRT cues in the reference project's caption template, word timing from words.json
+    # 7. captions: SRT cues in the reference project's caption template, word timing from words.json
     cap = plan.get("captions")
     if cap:
         counts = {}
@@ -417,8 +572,25 @@ def main():
     D["duration"] = round(rec_dur * US)
     D["canvas_config"] = {**ref.d.get("canvas_config", {}), "width": 1080, "height": 1920}
 
+    # validate before anything is written: every reference resolves, no duplicate ids, no overlap inside a track
+    idx = {}
+    for k, v in D["materials"].items():
+        for x in v if isinstance(v, list) else []:
+            if isinstance(x, dict) and "id" in x:
+                if x["id"] in idx:
+                    die(f"duplicate material id {x['id']}")
+                idx[x["id"]] = k
+    for t in tracks:
+        end = -1
+        for s in sorted(t["segments"], key=lambda s: s["target_timerange"]["start"]):
+            if s["material_id"] not in idx or any(r not in idx for r in s.get("extra_material_refs", [])):
+                die(f"dangling reference in a {t['type']} track")
+            if s["target_timerange"]["start"] < end:
+                die(f"overlapping clips in a {t['type']} track")
+            end = s["target_timerange"]["start"] + s["target_timerange"]["duration"]
     summary = [(t["type"], len(t["segments"])) for t in tracks]
     pin = [(round(p["t"], 2), round(p["end"], 2), round(p["scale"], 2)) for p in punches]
+    pin = f"{pin}, words {[(round(w['t'], 2), w['text'], 'behind' if w['behind'] else 'front') for w in shown]}"
     if dry:
         print(f"dry run: {rec_dur:.2f} s, tracks {summary}, split ranges {split_ranges}, punch-ins {pin}")
         return
@@ -443,6 +615,7 @@ def main():
     meta = load_json(meta_p)
     meta["tm_duration"] = D["duration"]
     files = [(rec, rec_dur, "video")] + [(Path(o["file"]), probe(o["file"]), "video") for o in plan.get("overlays", [])] \
+        + [(f, probe(f), "video") for _, f in cuts] \
         + [(Path(a["file"]), probe(a["file"]), "music") for a in plan.get("audio", [])]
     value = [{"ai_group_type": "", "create_time": 0, "duration": round(d * US), "enter_from": 0, "extra_info": "",
               "file_Path": win_path(p), "height": 1920 if k == "video" else 0, "id": nid(), "import_time": 0,
@@ -457,22 +630,6 @@ def main():
         slot["value"] = value
     meta_p.write_text(json.dumps(meta, ensure_ascii=False), encoding="utf-8")
 
-    # validate: every reference resolves, no duplicate ids, no overlap inside a track
-    idx = {}
-    for k, v in D["materials"].items():
-        for x in v if isinstance(v, list) else []:
-            if isinstance(x, dict) and "id" in x:
-                if x["id"] in idx:
-                    die(f"duplicate material id {x['id']}")
-                idx[x["id"]] = k
-    for t in tracks:
-        end = -1
-        for s in sorted(t["segments"], key=lambda s: s["target_timerange"]["start"]):
-            if s["material_id"] not in idx or any(r not in idx for r in s.get("extra_material_refs", [])):
-                die(f"dangling reference in a {t['type']} track")
-            if s["target_timerange"]["start"] < end:
-                die(f"overlapping clips in a {t['type']} track")
-            end = s["target_timerange"]["start"] + s["target_timerange"]["duration"]
     print(f"written: {rec_dur:.2f} s, tracks {summary}, split ranges {split_ranges}, punch-ins {pin}")
     print(f"files: {[str(p.relative_to(proj)) for p in targets] + ['draft_meta_info.json']}; backup: {bdir}")
 

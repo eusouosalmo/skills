@@ -25,7 +25,8 @@ import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from assemble_draft import US, Draft, die, load_json, probe, punch_ins  # noqa: E402
+from assemble_draft import (US, WORD_CAP_PX, WORD_FILL, WORD_LIFT_PX, WORD_SHADOW, Draft, cutouts, die,  # noqa: E402
+                            load_json, local_path, probe, punch_ins, screen_words, sound_times)
 
 W, H, FPS = 1080, 1920, 30
 HALF = H / 2  # CapCut's y unit is half the frame height; negative is down
@@ -37,12 +38,6 @@ PAGE_WORDS = 3  # the word-by-word templates show up to three words at a time
 # CapCut breaks a caption line a little before line_max_width: on the author's reel "CONVERSA COM ELA" (835 px)
 # stays on one line and "UMA CONVERSA QUE" (839 px) breaks, with line_max_width 0.82 (886 px).
 LINE_LIMIT = 837 / 886
-
-
-def local_path(p):
-    """C:/Users/x -> /mnt/c/Users/x, so a path stored by CapCut on Windows opens from WSL."""
-    m = re.match(r"^([A-Za-z]):[/\\](.*)$", p)
-    return Path(f"/mnt/{m.group(1).lower()}/{m.group(2)}".replace("\\", "/")) if m else Path(p)
 
 
 def ff(args, **kw):
@@ -286,6 +281,32 @@ def srt_cues(p, words, fixes):
     return out
 
 
+def write_words_ass(path, ws, font, family, size, squeeze):
+    """One event per word, centred on x, its capitals placed where CapCut draws the word template."""
+    from fontTools.ttLib import TTFont
+    f = TTFont(font)
+    em = f["hhea"].ascent - f["hhea"].descent
+    cap = getattr(f["OS/2"], "sCapHeight", 0) or f["head"].unitsPerEm * 0.7
+    out = []
+    for w in ws:
+        cap_px = WORD_CAP_PX * w["scale"] * size / 15
+        fs = cap_px * em / cap
+        centre = HALF - w["y"] * HALF - WORD_LIFT_PX * w["scale"] * size / 15
+        base = centre + cap_px / 2
+        box = base - (f["hhea"].ascent + f["hhea"].descent) * fs / em / 2  # libass centres the ascent-descent box
+        sh = WORD_SHADOW * cap_px
+        out.append(f"Dialogue: 0,{ass_time(w['t'])},{ass_time(w['end'])},Word,,0,0,0,,"
+                   f"{{\\an5\\pos(540,{box:.0f})\\fs{fs:.1f}\\fscx{squeeze * 100:.1f}\\xshad{sh:.1f}\\yshad{sh:.1f}}}{w['text']}")
+    r, g, b = WORD_FILL
+    head = (f"[Script Info]\nScriptType: v4.00+\nPlayResX: {W}\nPlayResY: {H}\nWrapStyle: 2\nScaledBorderAndShadow: yes\n\n"
+            "[V4+ Styles]\nFormat: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, "
+            "Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, "
+            "Alignment, MarginL, MarginR, MarginV, Encoding\n"
+            f"Style: Word,{family},100,&H00{b:02X}{g:02X}{r:02X}&,&H00FFFFFF&,&H00000000&,&H00000000&,0,0,0,0,100,100,0,0,1,"
+            "0,0,5,0,0,0,1\n\n[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n")
+    Path(path).write_text(head + "\n".join(out) + "\n", encoding="utf-8")
+
+
 # ---------- composition ----------
 
 def y_expr(bps, dur):
@@ -322,6 +343,7 @@ def main():
     bps = sorted(plan["main"], key=lambda b: b["t"])
     split = [(b["t"], bps[i + 1]["t"] if i + 1 < len(bps) else 1e9) for i, b in enumerate(bps) if b.get("y", 0)]
     punches = [p for p in punch_ins(plan, ref, probe(rec)) if p["t"] < dur]
+    ws = [w for w in screen_words(plan, ref, probe(rec)) if w["t"] < dur]
 
     filt = [f"color=black:s={W}x{H}:r={FPS}:d={dur:.3f}[bg]",
             f"[0:v]scale={W}:{H},setsar=1" + (f",split={len(punches) + 1}[r0]" + "".join(f"[pz{i}]" for i in range(len(punches)))
@@ -345,6 +367,23 @@ def main():
             inputs += ["-i", str(ent)]
             filt.append(f"[{last}][{n}:v]overlay=0:0:eof_action=pass[v{n}]")
             last, n = f"v{n}", n + 1
+    # words on screen, then the cut-out of the person over the ones behind the head
+    if ws:
+        wseg, wtmpl = ref.word_template()
+        wst = json.loads(ref.idx[wtmpl["text_info_resources"][0]["text_material_id"]][1]["content"])["styles"][0]
+        wfont = local_path(wst["font"]["path"])
+        if not wfont.exists():
+            die(f"word font {wfont} not found; open the reference project once in CapCut so it downloads")
+        (work / "fonts").mkdir(exist_ok=True)
+        wfam = accent_font(wfont, work / "fonts" / "word.ttf", wfont.stem)
+        sc = wtmpl["text_info_resources"][0]["attach_info"]["clip"]["scale"]
+        write_words_ass(work / "words.ass", ws, work / "fonts" / "word.ttf", wfam, wst.get("size", 15), sc["x"] / sc["y"])
+        filt.append(f"[{last}]ass={work / 'words.ass'}:fontsdir={work / 'fonts'}[vw]")
+        last = "vw"
+        for w, f in cutouts(plan, ws, punches):
+            inputs += ["-itsoffset", f"{w['t']:.4f}", "-i", str(f)]
+            filt.append(f"[{last}][{n}:v]overlay=0:0:eof_action=pass:enable='between(t,{w['t']:.4f},{w['end']:.4f})'[v{n}]")
+            last, n = f"v{n}", n + 1
     # overlays, in plan order (later ones on top), each from its start
     for o in plan.get("overlays", []):
         inputs += ["-itsoffset", f"{o['start']:.4f}", "-i", o["file"]]
@@ -367,7 +406,7 @@ def main():
         if not src_font.exists():
             die(f"caption font {src_font} not found; open the reference project once in CapCut so it downloads")
         fonts = work / "fonts"
-        fonts.mkdir()
+        fonts.mkdir(exist_ok=True)
         family = accent_font(src_font, fonts / "caption.ttf", src_font.stem)
         size = st.get("size", 12) * ASS_PER_CAPCUT_SIZE
         sh = (st.get("shadows") or [{}])[0]
@@ -412,16 +451,17 @@ def main():
                 labels.append(f"[a{n}]")
                 n += 1
     _, ps, pm = ref.punch()
-    if ps is not None and any(p.get("sound", True) for p in punches):
+    times = sound_times(punches, ws)
+    if ps is not None and times:
         f = local_path(pm["path"])
         if not f.exists():
             print(f"render_mp4: warning: punch-in sound {f} not in the CapCut cache; punch-ins go silent", file=sys.stderr)
         else:
             ss, sd = ps["source_timerange"]["start"] / US, ps["target_timerange"]["duration"] / US
-            for p in (p for p in punches if p.get("sound", True)):
+            for t in times:
                 inputs += ["-i", str(f)]
                 mix.append(f"[{n}:a]aresample=48000,atrim={ss:.3f}:{ss + sd:.3f},asetpts=PTS-STARTPTS,"
-                           f"volume={ps.get('volume', 1.0):.4f},adelay={round(p['t'] * 1000)}:all=1[a{n}]")
+                           f"volume={ps.get('volume', 1.0):.4f},adelay={round(t * 1000)}:all=1[a{n}]")
                 labels.append(f"[a{n}]")
                 n += 1
     mix.append(f"{''.join(labels)}amix=inputs={len(labels)}:normalize=0:duration=first,alimiter=limit=0.89:level=false[a]")
