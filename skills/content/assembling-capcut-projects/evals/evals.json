@@ -1,0 +1,52 @@
+{
+  "skill_name": "assembling-capcut-projects",
+  "evals": [
+    {
+      "id": 1,
+      "name": "split-whole-reel-from-reference",
+      "prompt": "monta no capcut o reel \"o celular não precisa ouvir\". criei o projeto vazio \"04-celular não precisa ouvir\" e fechei o capcut. o corte, as cenas, o sfx e a legenda tão na pasta do reel. quero abrir e já estar pronto, como eu faria à mão.",
+      "setup": "Private input, kept out of the repo: build the sandbox with .scratch/assembling-capcut-projects-workspace/setup_run.sh <run> celular (drafts/ with a copy of the empty project made in the app plus the author's Jev-AI, whatsapp-tintas, arquitetura-desce and arquiteto-dev-piramide drafts; reel/ with the cut, legenda.srt, words.json, timeline.md, exports/01-dossie-topo.mov and 00-sfx.wav, without the divider). Run with run_eval.sh from a folder outside the repo, so no project memory loads. Grade the written draft with inspect_draft.py against the project the author approved and posted (CapCut drafts/04-celular não precisa ouvir).",
+      "files": [],
+      "expected_output": "Before writing, a check that CapCut is closed and a backup of the empty project. The draft copies style from the author's reference project (Jev-AI, named as reference in timeline.md): the 'Balançar para cima e para a direita' entrance on the first clip, the camera click at 0.0 s and the reversed 'Keen' at 0.3 s, and the caption template '逐词显色大写 黄'. Recording in clips at 0, 5.90 (keyframe y 0 to about -0.396 in 0.4 s) and the close, with its speech audible. 01-dossie-topo.mov over the whole reel, a divider overlay with alpha from 5.90 s to the end, 00-sfx.wav at 0, 51 caption cues with word timing and the two fixes from timeline.md. Root and Timelines copies identical.",
+      "assertions": [
+        "Before writing the project, CapCut being closed is checked (tasklist or equivalent) and the empty project is backed up outside the drafts folder",
+        "The first recording clip carries the reference project's entrance animation ('Balançar para cima e para a direita')",
+        "The opening sounds of the reference project are on an audio track: camera click at 0.0 s and reversed 'Keen' at 0.3 s, with their volumes",
+        "The captions use the reference project's template '逐词显色大写 黄' (51 cues with word timing), with both caption errors timeline.md points out changed (cue 26 'o lança', cue 48 'teu filho')",
+        "A divider (a line with shadow between the panel and the footage) starts at the split-screen entry 5.90 s on its own track",
+        "The recording's speech stays audible: its video material has has_sound_separated false, has_audio true and no local_id from another file",
+        "The split-screen keyframe moves the recording from y 0 to about -0.396 between 5.90 and 6.30 s, and 01-dossie-topo.mov and 00-sfx.wav start at 0"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 2,
+      "name": "split-per-scene-entry-and-exit",
+      "prompt": "monta o reel do whatsapp no capcut, já criei o projeto vazio 05-whatsapp e o capcut tá fechado. tá tudo na pasta do reel.",
+      "setup": "Private input, kept out of the repo: setup_run.sh <run> whatsapp (drafts/ with an empty project made in the app named 05-whatsapp plus the author's drafts, whatsapp-tintas among them; reel/ with a clean cut rendered from the author's whatsapp-tintas main track without captions, whatsapp-tintas.srt, words.json, timeline.md and the 8 scene exports plus 00-sfx.wav). Run with run_eval.sh from outside the repo. Grade the draft with inspect_draft.py.",
+      "files": [],
+      "expected_output": "Each export at its timecode from the timeline (01 at 1.03, 02 at 3.70, 03 at 20.70, 04 at 32.80, 05 at 50.60, 06 at 66.93, 07 at 76.00, 08 at 89.17); the recording keyframed down to the lower half at the panel entry (3.70 s) and back up when the panel leaves (ending 88.40 s); a divider overlay only while the split lasts; the reference project's entrance, opening sounds and caption template; 42 caption cues; 00-sfx.wav at 0.",
+      "assertions": [
+        "Before writing the project, CapCut being closed is checked and the empty project is backed up outside the drafts folder",
+        "The first recording clip carries the reference project's entrance animation and the opening sounds (click 0.0 s, 'Keen' 0.3 s) are on an audio track",
+        "The captions use the author's main caption template '逐词显色大写 黄' (42 cues with word timing)",
+        "A divider overlay covers the split screen only: it starts at the entry (3.70 s) and ends by the exit (88.40 s)",
+        "The recording moves down at 3.70 s and back to y 0 by 88.40 s with keyframes, and the eight exports start at their timeline timecodes within one frame"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 3,
+      "name": "no-empty-project-asks-and-stops",
+      "prompt": "monta no capcut o reel do celular não precisa ouvir pra mim, tá tudo na pasta do reel.",
+      "setup": "Private input, kept out of the repo: setup_run.sh <run> noproject (the celular reel folder, and drafts/ with only the author's older projects: no project for this reel). Run with run_eval.sh from outside the repo.",
+      "files": [],
+      "expected_output": "The agent asks the author to create an empty project in the CapCut app (with the reel's name) and close CapCut, and stops: no project folder is created by hand and no existing project is changed.",
+      "assertions": [
+        "The questions or report ask the author to create an empty project in the CapCut app and keep CapCut closed",
+        "No new folder is created in drafts/ and no file of an existing project in drafts/ changes"
+      ],
+      "human_feedback": ""
+    }
+  ]
+}

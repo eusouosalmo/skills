@@ -63,6 +63,7 @@ npx skills@latest remove <nome>
 
 Em draft, fora dos dois caminhos de instalação:
 
+- [assembling-capcut-projects](skills/content/assembling-capcut-projects/SKILL.md): monta um reel num projeto vazio do CapCut desktop, com o corte, os overlays das cenas, os keyframes e a divisão da tela dividida, os sfx, a abertura e a legenda no estilo de um projeto do próprio autor.
 - [setting-up-git-guardrails](skills/harness/setting-up-git-guardrails/SKILL.md): guardrails de git por projeto para agentes de código, com perfis interativo e AFK.
 - [writing-as-eusouosalmo](skills/content/writing-as-eusouosalmo/SKILL.md): escreve e revisa texto na voz do eusouosalmo, no registro falado ou escrito conforme o canal.
 - [writing-post-captions](skills/content/writing-post-captions/SKILL.md): escreve a legenda de um vídeo curto para Instagram, TikTok, YouTube Shorts ou LinkedIn a partir do roteiro, complementando o vídeo com um pedido, crédito da fonte e hashtags dentro do limite da plataforma.
