@@ -1,0 +1,8 @@
+[
+  { "query": "os brutos do reel novo tão na pasta, com o roteiro. edita tudo e me entrega o reel pronto", "should_trigger": true },
+  { "query": "gravei o reel, faz a edição completa do bruto até o mp4 pra postar", "should_trigger": true },
+  { "query": "pega esses brutos e o roteiro e monta o reel inteiro no capcut pra mim, corte, cenas e legenda", "should_trigger": true },
+  { "query": "corta os brutos do reel tirando as tomadas ruins e o silêncio", "should_trigger": false },
+  { "query": "o corte e as cenas tão prontos, monta no capcut", "should_trigger": false },
+  { "query": "faz a cena de motion do trecho das tintas do reel", "should_trigger": false }
+]

@@ -63,6 +63,7 @@ npx skills@latest remove <nome>
 
 Em draft, fora dos dois caminhos de instalação:
 
+- [editing-reels](skills/content/editing-reels/SKILL.md): edita um reel em talking-head dos brutos e do roteiro até o reel pronto, como projeto do CapCut ou mp4, chamando em ordem a cutting-raw-takes, a animating-reel-scenes e a finishing-reels, com a aprovação do autor entre elas.
 - [finishing-reels](skills/content/finishing-reels/SKILL.md): monta o reel pronto, como projeto do CapCut ou como mp4 final sem CapCut, com o corte, os overlays das cenas, os keyframes e a divisão da tela dividida, os sfx, a abertura, os punch-ins e as palavras em destaque com som e a legenda no estilo de um projeto do próprio autor.
 - [setting-up-git-guardrails](skills/harness/setting-up-git-guardrails/SKILL.md): guardrails de git por projeto para agentes de código, com perfis interativo e AFK.
 - [writing-as-eusouosalmo](skills/content/writing-as-eusouosalmo/SKILL.md): escreve e revisa texto na voz do eusouosalmo, no registro falado ou escrito conforme o canal.
