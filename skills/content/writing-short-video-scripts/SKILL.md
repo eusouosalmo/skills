@@ -1,6 +1,7 @@
 ---
 name: writing-short-video-scripts
-description: Writes short video scripts (Reels, Shorts, TikTok) from the author's notes, with hook, structure, one spoken CTA and teleprompter text timed to the target duration. Use when the user asks for a reel or short video script, or to restructure one (roteiro, reels, vídeo curto, teleprompter).
+description: Writes short video scripts (Reels, Shorts, TikTok) from the author's notes, with hook, structure, one spoken CTA, teleprompter text timed to the target duration and prints of its sources for the edit. Use when the user asks for a reel or short video script, to restructure one, or for the source prints of one (roteiro, reels, vídeo curto, teleprompter, prints das fontes).
+compatibility: Capturing source prints needs python3 with playwright and its Chromium (pip install playwright && python3 -m playwright install chromium).
 metadata:
   status: beta
 ---
@@ -29,13 +30,14 @@ The notes usually come from a source: a book, article, video or test. The video 
 - The source goes in a `Crédito para a legenda` line at the end of the script.
 - When the script depends on a concept the notes only name ("o artigo mostra um diagrama"), ask the author for their notes on that part of the source. Until they come, explain it from what you find in the research below.
 - **Research the facts before writing.** Look up in a primary source (official documentation, specification, paper, the source's own text) every fact the video will state: the numbers and names of the concrete case, technical behaviour (operator, flag, version, default) and the definitions a contrast rests on. Per claim, stop at the first primary source that confirms it; after about three searches without one, the claim goes to `A checar antes de gravar` with what was tried. A claim about the source that the notes do not back (what the book says, its definitions, its examples) is checked the same way. The author's own story is never researched; it comes from the notes.
+- **Capture the source while it is open.** For every source in `Conferido` whose page the edit can show (an article, a paper, an official page, a document), run `python3 scripts/capture_source.py <url> assets/<script file name>/NN-<source> --highlight "<the words of the claim as the page writes them>"`, numbered in the order the script uses them, next to the script file. It writes the top of the page and the passage marked in yellow, without ads and banners, so the edit shows the proof the speech cites instead of a drawing of it, and a print taken later may show a page that changed. When the script exits 2, the page writes the claim in other words or another language: read its text and run again with its words; a passage print without its mark proves nothing. When the claim sits in a part that opens on click (a question in an FAQ), pass `--click "<its title>"`. Look at every print: a leftover ad, banner or empty box gets cropped or noted.
 - When a source contradicts the notes, the script follows the source and the gap goes to the questions after the file ("tua nota diz X, a fonte diz Y, escrevi Y"). Never correct the notes silently, never record their error.
 - A number the research did not confirm is spoken only as a hypothesis ("imagina", "digamos"); a number spoken as fact is in `Conferido`. An example case the author did not live (a made-up app, a sample table) opens as one ("imagina um app de entrega"), so its sizes and durations read as part of the hypothesis; outside that frame, a number is a fact.
 - Without web access, every checkable fact the script states as fact, the definitions a contrast rests on included, goes to `A checar antes de gravar` with where to check it, and the delivery says the facts were not researched.
 - The author's own story keeps the verb and degree of the notes. The notes' hedges stay ("por exemplo", "alguns meses"). A role, number or result never goes up a level: "liderei o projeto uma vez" stays that, never "sou tech lead". When the exact version sounds weak, say the honest contrast ("eu não era tech lead, mas tive que liderar como um").
 - The author's story is told as past experience, free of date and employer, so the video still holds after a job change and exposes no one. Keep the problem, the public tool, what the author did and the result. Turn markers of time and place into a past event ("hoje", "atual", "na empresa onde eu tô" become "quando eu precisei", "uma vez"); an employer or client name becomes a category ("num e-commerce"); internal data, identifiable people and judgements about the company or colleagues leave. Generalising never changes the fact: one company stays one, not "várias empresas".
 
-Done when no spoken line mentions the source, every fact the script states is either in `Conferido` with its link or in `A checar antes de gravar`, never in both, and every statement about the author matches the notes with no date or employer in it.
+Done when no spoken line mentions the source, every fact the script states is either in `Conferido` with its link or in `A checar antes de gravar`, never in both, every source in `Conferido` whose page the edit can show has its `-trecho` print with the mark (or a note on why not), and every statement about the author matches the notes with no date or employer in it.
 
 ## 3. Build the format's structure
 
@@ -110,12 +112,22 @@ A checar antes de gravar:
 
 Crédito para a legenda: <source>
 
+## Referências visuais para edição
+
+Prints em `assets/<script file name>/` (capturados em <date>, tela de 1280 px; `-topo` é o início da página, `-trecho` é o trecho marcado em amarelo).
+
+| Bloco | Arquivo / o que capturar | Fonte | O que destacar na edição |
+|---|---|---|---|
+| ... | `NN-<source>-trecho.png` | <url> | <the spoken words the mark shows> |
+
 ## Teleprompter
 
 <one spoken sentence per line, split at every period, no labels>
 
 Duração estimada: <words> palavras, <seconds> s a 130 palavras por minuto.
 ```
+
+The visual references table has one row per thing the Visual column shows from outside the script: each print, and what only the author can give, as a **falta:** row saying what to capture and where (a stretch of the author's own earlier video, a screen recording on their phone, a page behind a login), so the edit asks for it instead of drawing a stand-in. A print with a third party's personal data (the name, handle and photo of whoever wrote a comment) says **Embaçar** with what to blur, since the person did not agree to be in the video. When the author asks for the prints of a script already written, capture its sources the same way and add this section to that file.
 
 After the file, list every `[falta: ...]` and question to the user, and each claim from step 4 with the concrete thing in its reason, so the author sees the check.
 

@@ -3,7 +3,7 @@
 Skills de escrita, roteiro, voz e marca do eusouosalmo. Instruções em inglês, resultado em pt-BR.
 
 - [writing-as-eusouosalmo](writing-as-eusouosalmo/SKILL.md) (draft): escreve e revisa texto na voz do eusouosalmo, no registro falado ou escrito conforme o canal.
-- [writing-short-video-scripts](writing-short-video-scripts/SKILL.md) (beta): escreve roteiros de vídeo curto a partir das anotações do autor, com gancho, um CTA falado e texto de teleprompter cronometrado.
+- [writing-short-video-scripts](writing-short-video-scripts/SKILL.md) (beta): escreve roteiros de vídeo curto a partir das anotações do autor, com gancho, um CTA falado, texto de teleprompter cronometrado e os prints das fontes para a edição.
 - [writing-post-captions](writing-post-captions/SKILL.md) (draft): escreve a legenda de um vídeo curto para Instagram, TikTok, YouTube Shorts ou LinkedIn a partir do roteiro, complementando o vídeo com um pedido, crédito da fonte e hashtags dentro do limite da plataforma.
 - [animating-reel-scenes](animating-reel-scenes/SKILL.md) (beta): planeja quais trechos de um reel em talking-head viram motion e renderiza as cenas e os overlays transparentes de adesivos para o CapCut.
 - [cutting-raw-takes](cutting-raw-takes/SKILL.md) (beta): corta os brutos de um reel em talking-head num corte seco, escolhendo a tomada de cada fala e tirando bastidor e pausas longas, com uma tabela de tomadas aprovada antes do render.

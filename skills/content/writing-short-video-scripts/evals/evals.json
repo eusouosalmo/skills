@@ -278,6 +278,35 @@
         "The hook's form is the image built on the word, with no big text in the hook"
       ],
       "human_feedback": ""
+    },
+    {
+      "id": 16,
+      "name": "celular-source-prints",
+      "prompt": "faz o roteiro do próximo reel respondendo esse comentário (comentario.png). a pesquisa tá em pesquisa.md. instagram, 90 a 180 s, objetivo puxar conversa, formato paradoxo resolvido em camadas.",
+      "setup": "Private input, kept out of the repo: .scratch/writing-short-video-scripts-workspace/private-inputs/celular-source-prints (from the author's vault). Run with bin/run_private.py: claude -p from that folder, outside the repo, with web access and python3 with playwright; the user is away. Input: the author's research note on whether the phone listens to conversations and the print of the follower's comment. Compare with the script the author recorded, whose prints and visual references table were made by hand in two sessions.",
+      "files": [],
+      "expected_output": "The script, plus prints of the sources it shows in assets/<script name>/ (top of the page and the passage marked in yellow, without ads or banners) and a 'Referências visuais para edição' table in the script: one row per print, falta rows for what only the author has (a stretch of the earlier paint video, a screen recording of the Meta AI button), and the comment print marked to blur the commenter's name and photo.",
+      "assertions": [
+        "The script file has a 'Referências visuais para edição' section with a table of block, file or what to capture, source and what to highlight",
+        "Every source in Conferido whose page the edit can show has a -trecho print in assets/<script name>/ next to the script, with the spoken claim marked in yellow",
+        "The row of the comment print says to blur the commenter's name and photo",
+        "What only the author can provide and the Visual column cites (a stretch of the earlier video, a screen recording on the phone) is a falta row saying what to capture"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 17,
+      "name": "existing-script-prints",
+      "prompt": "o roteiro da conta do lula tá pronto (roteiro a meta e a conta do lula.md). prepara os prints das fontes pra edição do vídeo.",
+      "setup": "Private input, kept out of the repo: .scratch/writing-short-video-scripts-workspace/private-inputs/existing-script-prints (from the author's vault). Run with bin/run_private.py: claude -p from that folder, outside the repo, with web access and python3 with playwright; the user is away. Input: the author's script about the Meta and Lula's ad account with its 'Referências visuais para edição' section removed. The hand-made prints of that script left ads in the page and a passage print identical to the page top (the Meta page opened in Portuguese and the mark was in English).",
+      "files": [],
+      "expected_output": "Prints of each source in assets/roteiro a meta e a conta do lula/, each passage print with the words of the claim marked as the page writes them (Portuguese on the Meta page), no ads, banners or empty ad boxes, and the script file gains the visual references table listing them.",
+      "assertions": [
+        "The prints are in assets/roteiro a meta e a conta do lula/ next to the script, and the script file gains a 'Referências visuais para edição' section listing them",
+        "Every -trecho print shows the yellow mark on the words its row says to highlight, in the page's own language",
+        "No print shows an ad, a cookie banner or the empty box an ad leaves ('Publicidade' over a blank area)"
+      ],
+      "human_feedback": ""
     }
   ]
 }
