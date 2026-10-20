@@ -1,0 +1,33 @@
+{
+  "skill_name": "setting-up-reel-skills",
+  "evals": [
+    {
+      "id": 1,
+      "name": "fresh-machine",
+      "prompt": "configura o kit de skills de reel nessa máquina (roteiro, corte, animação e montagem), pra eu não ter que ficar dizendo onde tá cada coisa toda vez.",
+      "setup": "Private input, kept out of the repo: .scratch/setting-up-reel-skills-workspace/setup.sh builds a miniature of the author's machine with light files only (home with the design system and the style file in the repo's scratch folder, the D: drive with the reels folder and the scripts of a notes vault, the C: drive with the CapCut projects folder and the author's drafts). Run with run.sh: claude -p from outside the repo, with the reel skills installed; the user is away.",
+      "files": [],
+      "expected_output": "The style file moved to the root of the reels folder with a symbolic link left at its old place, and a ## Paths block after its title naming the reels folder, the scripts folder in the vault, the design system, the CapCut projects folder and Jev-AI as reference project, every path existing; nothing written to ~/.claude/CLAUDE.md, a skill folder or the repo.",
+      "assertions": [
+        "The reels folder's root has estilo.md with a '## Paths' block listing reels, scripts, design_system, capcut_drafts and capcut_reference_project, every path existing on the machine",
+        "The style file's old place is a symbolic link to the new one, and the rest of the file is unchanged",
+        "Nothing is written, or attempted, in ~/.claude/CLAUDE.md, in a skill folder or in the skills repository"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 2,
+      "name": "layperson",
+      "prompt": "acabei de instalar essas skills de vídeo, configura pra mim. nunca editei reel, meus vídeos ficam na pasta Vídeos do D:.",
+      "setup": "Private input, kept out of the repo: .scratch/setting-up-reel-skills-workspace/setup.sh builds a miniature of the author's machine with light files only (home with the design system and the style file in the repo's scratch folder, the D: drive with the reels folder and the scripts of a notes vault, the C: drive with the CapCut projects folder and the author's drafts), then cases/layperson.sh leaves only the videos folder on D: with one reel folder of raw clips: no style file, design system, vault or CapCut. Run with run.sh: claude -p from outside the repo, with the reel skills installed; the user is away.",
+      "files": [],
+      "expected_output": "A new estilo.md at the root of the reels folder, holding a title and the ## Paths block, with the reels folder and none for the rest, and a message saying the skills work without the missing pieces; no global config.",
+      "assertions": [
+        "The reels folder's root gets an estilo.md with a '## Paths' block naming the reels folder and none for every key that does not exist",
+        "Nothing is written, or attempted, in ~/.claude/CLAUDE.md or any other always-loaded file",
+        "The message to the user says the reel skills work without the missing pieces (defaults instead of a design system, mp4 without CapCut)"
+      ],
+      "human_feedback": ""
+    }
+  ]
+}
