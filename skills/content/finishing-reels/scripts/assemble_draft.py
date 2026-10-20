@@ -239,8 +239,13 @@ def screen_words(plan, ref, rec_dur):
         _, tmpl = ref.word_template()
         st = json.loads(ref.idx[tmpl["text_info_resources"][0]["text_material_id"]][1]["content"])["styles"][0]
         sc = tmpl["text_info_resources"][0]["attach_info"]["clip"]["scale"]
+        wfont, squeeze = local_path(st["font"]["path"]), sc["x"] / sc["y"]
+        if plan.get("own_assets") or not wfont.exists():  # the mp4 draws the word in our stand-in font
+            import own_assets
+            wfont, _, _, sx = own_assets.font(wfont.stem)
+            squeeze *= sx
         for w in out:
-            width = word_width(local_path(st["font"]["path"]), w["text"], w["scale"], st.get("size", 15), sc["x"] / sc["y"])
+            width = word_width(wfont, w["text"], w["scale"], st.get("size", 15), squeeze)
             if width is None:
                 print(f"assemble_draft: warning: cannot measure '{w['text']}' (fontTools or the font missing); "
                       f"check on a frame that it stays between x {SAFE_X} and {1080 - SAFE_X}", file=sys.stderr)

@@ -1,7 +1,7 @@
 ---
 name: finishing-reels
 description: Finishes a talking-head Reel or Short from its cut, scenes, sfx and captions, either as a CapCut desktop project ready to open or as the final mp4 rendered without CapCut, in the editing style of one of the author's own CapCut projects (entrance, opening sounds, punch-ins and words on screen with their sound, caption template, split-screen keyframes and divider). Use when the user wants a recorded reel put together or finished (montar no capcut, finalizar o reel, vídeo final sem capcut, mp4 pronto pra postar).
-compatibility: The CapCut output is confirmed on CapCut desktop 9.6 for Windows, written from WSL. Needs Python 3.8+, ffmpeg (with libass) and ffprobe; the mp4 also needs numpy and fontTools, and words behind the head need numpy, Pillow and mediapipe in both outputs (python3 -m venv .venv && .venv/bin/pip install numpy fonttools pillow mediapipe; the segmentation model downloads once into ~/.cache/finishing-reels). Multiple-choice questions use the agent's question tool when it has one (AskUserQuestion in Claude Code).
+compatibility: The CapCut output is confirmed on CapCut desktop 9.6 for Windows, written from WSL. Needs Python 3.8+, ffmpeg (with libass) and ffprobe; the mp4 also needs numpy and fontTools, and words behind the head need numpy, Pillow and mediapipe in both outputs (python3 -m venv .venv && .venv/bin/pip install numpy fonttools pillow mediapipe; the segmentation model downloads once into ~/.cache/finishing-reels). Without the CapCut cache, the mp4 downloads its stand-in fonts once from Google Fonts into the same folder. Multiple-choice questions use the agent's question tool when it has one (AskUserQuestion in Claude Code).
 metadata:
   status: draft
   internal: true
@@ -83,6 +83,8 @@ Run `scripts/render_mp4.py plan.json <reel>/exports/<reel name> - final.mp4 --pr
 - the opening sounds, from the cache files the reference project uses;
 - the punch-ins, as hard cuts around the frame centre, with the reference project's punch-in sound;
 - the words in the reference's word template: its font, the effect's yellow and hard shadow, the template's size and position, with the person cut out over them.
+
+When the cache lacks one of these files (another machine, a cleared cache), the script takes our own version from `scripts/own_assets.py` and prints which: a free font sized to the CapCut font's capitals and line width (Lexend for the caption, Kanit for the words) and a synthesized sound (camera click, reversed whoosh, mouse click). Render on, and name each stand-in in the handover, so the author knows what to compare. `"own_assets": true` in the plan uses ours even with the cache, for a side-by-side with CapCut's.
 
 Done when the mp4 has the reel's length at 1080x1920 and 30 fps, and the frames you looked at match the plan.
 

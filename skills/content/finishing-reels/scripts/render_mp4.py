@@ -27,6 +27,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from assemble_draft import (US, WORD_CAP_PX, WORD_FILL, WORD_LIFT_PX, WORD_SHADOW, Draft, cutouts, die,  # noqa: E402
                             load_json, local_path, probe, punch_ins, screen_words, sound_times)
+import own_assets  # noqa: E402
 
 W, H, FPS = 1080, 1920, 30
 HALF = H / 2  # CapCut's y unit is half the frame height; negative is down
@@ -109,6 +110,31 @@ def render_entrance(rec, out, dur=0.5):
     enc.wait()
 
 
+# ---------- CapCut's files or ours ----------
+
+def pick_font(path, own, what):
+    """(font file, family, size factor, horizontal scale): the reference project's font, or ours when the cache
+    lacks it or the plan asks for ours."""
+    if not own and path.exists():
+        return path, path.stem, 1.0, 1.0
+    if not own:
+        print(f"render_mp4: {what} font {path.name} not in the CapCut cache; using our free stand-in", file=sys.stderr)
+    f, family, k, sx = own_assets.font(path.stem)
+    return f, family, k, sx
+
+
+def pick_sound(path, name, own, what):
+    """(file, its start in s): the reference project's library sound, or our synthesized one (cut already, start 0)."""
+    if not own and path.exists():
+        return path, None
+    f = own_assets.sound(name)
+    if f is None:
+        print(f"render_mp4: warning: {what} '{name}' not in the CapCut cache and no stand-in; skipped", file=sys.stderr)
+    elif not own:
+        print(f"render_mp4: {what} '{name}' not in the CapCut cache; using our synthesized stand-in", file=sys.stderr)
+    return f, 0.0
+
+
 # ---------- captions ----------
 
 def accent_font(src, dst, family):
@@ -189,6 +215,15 @@ def ass_colour(rgb):
     return f"&H00{b:02X}{g:02X}{r:02X}&"
 
 
+def vmetrics(f):
+    """(ascent, descent) as libass reads them: the OS/2 win metrics when the font sets them, else hhea. A font whose
+    win and hhea metrics differ (Lexend) came out 22% small when sized by hhea."""
+    o = f["OS/2"]
+    if o.usWinAscent + o.usWinDescent:
+        return o.usWinAscent, -o.usWinDescent
+    return f["hhea"].ascent, f["hhea"].descent
+
+
 def text_width(font, size):
     """Width in px of a string at an ASS font size, from the font's advances; None without fontTools."""
     try:
@@ -197,7 +232,8 @@ def text_width(font, size):
         return None
     f = TTFont(font)
     cmap, hmtx = f.getBestCmap(), f["hmtx"]
-    em = f["hhea"].ascent - f["hhea"].descent  # libass sizes a font by ascent + descent, not by units per em
+    asc, desc = vmetrics(f)
+    em = asc - desc  # libass sizes a font by ascent + descent, not by units per em
     space = hmtx[cmap[32]][0] if 32 in cmap else em / 4
     return lambda t: sum(hmtx[cmap[ord(c)]][0] if ord(c) in cmap else space for c in t) * size / em
 
@@ -223,7 +259,8 @@ def write_ass(path, cues, style, split_ranges):
             "[V4+ Styles]\nFormat: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, "
             "Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, "
             "Alignment, MarginL, MarginR, MarginV, Encoding\n"
-            f"Style: Cap,{style['family']},{fs:.0f},&H00FFFFFF&,&H00FFFFFF&,&H00000000&,&H00000000&,0,0,0,0,100,100,0,0,1,"
+            f"Style: Cap,{style['family']},{fs:.0f},&H00FFFFFF&,&H00FFFFFF&,&H00000000&,&H00000000&,0,0,0,0,"
+            f"{style.get('scale_x', 1.0) * 100:.1f},100,0,0,1,"
             f"{style['outline']:.1f},0,5,{style['margin']},{style['margin']},0,1\n\n"
             "[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n")
     hi, white = style["highlight"], "&H00FFFFFF&"
@@ -285,7 +322,8 @@ def write_words_ass(path, ws, font, family, size, squeeze):
     """One event per word, centred on x, its capitals placed where CapCut draws the word template."""
     from fontTools.ttLib import TTFont
     f = TTFont(font)
-    em = f["hhea"].ascent - f["hhea"].descent
+    asc, desc = vmetrics(f)
+    em = asc - desc
     cap = getattr(f["OS/2"], "sCapHeight", 0) or f["head"].unitsPerEm * 0.7
     out = []
     for w in ws:
@@ -293,7 +331,7 @@ def write_words_ass(path, ws, font, family, size, squeeze):
         fs = cap_px * em / cap
         centre = HALF - w["y"] * HALF - WORD_LIFT_PX * w["scale"] * size / 15
         base = centre + cap_px / 2
-        box = base - (f["hhea"].ascent + f["hhea"].descent) * fs / em / 2  # libass centres the ascent-descent box
+        box = base - (asc + desc) * fs / em / 2  # libass centres the ascent-descent box
         sh = WORD_SHADOW * cap_px
         out.append(f"Dialogue: 0,{ass_time(w['t'])},{ass_time(w['end'])},Word,,0,0,0,,"
                    f"{{\\an5\\pos(540,{box:.0f})\\fs{fs:.1f}\\fscx{squeeze * 100:.1f}\\xshad{sh:.1f}\\yshad{sh:.1f}}}{w['text']}")
@@ -338,6 +376,7 @@ def main():
     rec = Path(plan["recording"])
     dur = probe(rec) if preview is None else min(preview, probe(rec))
     work = Path(tempfile.mkdtemp(prefix="render_mp4_"))
+    own = plan.get("own_assets", False)  # our free font and synthesized sounds instead of the CapCut cache
 
     # split-screen ranges, as assemble_draft computes them
     bps = sorted(plan["main"], key=lambda b: b["t"])
@@ -371,13 +410,11 @@ def main():
     if ws:
         wseg, wtmpl = ref.word_template()
         wst = json.loads(ref.idx[wtmpl["text_info_resources"][0]["text_material_id"]][1]["content"])["styles"][0]
-        wfont = local_path(wst["font"]["path"])
-        if not wfont.exists():
-            die(f"word font {wfont} not found; open the reference project once in CapCut so it downloads")
+        wfont, wfam, _, wsx = pick_font(local_path(wst["font"]["path"]), own, "word")
         (work / "fonts").mkdir(exist_ok=True)
-        wfam = accent_font(wfont, work / "fonts" / "word.ttf", wfont.stem)
+        wfam = accent_font(wfont, work / "fonts" / "word.ttf", wfam)
         sc = wtmpl["text_info_resources"][0]["attach_info"]["clip"]["scale"]
-        write_words_ass(work / "words.ass", ws, work / "fonts" / "word.ttf", wfam, wst.get("size", 15), sc["x"] / sc["y"])
+        write_words_ass(work / "words.ass", ws, work / "fonts" / "word.ttf", wfam, wst.get("size", 15), sc["x"] / sc["y"] * wsx)
         filt.append(f"[{last}]ass={work / 'words.ass'}:fontsdir={work / 'fonts'}[vw]")
         last = "vw"
         for w, f in cutouts(plan, ws, punches):
@@ -402,13 +439,11 @@ def main():
         seg, tmpl = counts[name][0]
         tm = ref.idx[tmpl["text_info_resources"][0]["text_material_id"]][1]
         st = json.loads(tm["content"])["styles"][0]
-        src_font = local_path(st["font"]["path"])
-        if not src_font.exists():
-            die(f"caption font {src_font} not found; open the reference project once in CapCut so it downloads")
+        src_font, family, k, sx = pick_font(local_path(st["font"]["path"]), own, "caption")
         fonts = work / "fonts"
         fonts.mkdir(exist_ok=True)
-        family = accent_font(src_font, fonts / "caption.ttf", src_font.stem)
-        size = st.get("size", 12) * ASS_PER_CAPCUT_SIZE
+        family = accent_font(src_font, fonts / "caption.ttf", family)
+        size = st.get("size", 12) * ASS_PER_CAPCUT_SIZE * k
         sh = (st.get("shadows") or [{}])[0]
         dist, ang = sh.get("distance", 0), math.radians(sh.get("angle", 0))
         y_full = cap.get("y_full")
@@ -419,7 +454,8 @@ def main():
                  "highlight": ass_colour(st["fill"]["content"]["solid"]["color"]),
                  "shadow_xy": (dist * math.cos(ang), -dist * math.sin(ang)),
                  "margin": round(W * (1 - tm.get("line_max_width", 0.82)) / 2),
-                 "width": text_width(fonts / "caption.ttf", size),
+                 "width": (lambda w: w and (lambda t: w(t) * sx))(text_width(fonts / "caption.ttf", size)),
+                 "scale_x": sx,
                  "y_full": y_full, "y_split": cap.get("y_split", -0.71)}
         words = load_json(cap["words"]) if cap.get("words") else []
         nev = write_ass(work / "captions.ass", srt_cues(cap["srt"], words, cap.get("fixes", {})), style, split)
@@ -440,11 +476,10 @@ def main():
         for _, s in ref.segments("audio"):
             k, m = ref.mat(s)
             if k == "audios" and m.get("type") in ("sound", "music") and s["target_timerange"]["start"] < 1_000_000:
-                f = local_path(m["path"])
-                if not f.exists():
-                    print(f"render_mp4: warning: opening sound {f} not in the CapCut cache; skipped", file=sys.stderr)
+                f, start = pick_sound(local_path(m["path"]), m.get("name", ""), own, "opening sound")
+                if f is None:
                     continue
-                ss, sd = s["source_timerange"]["start"] / 1e6, s["target_timerange"]["duration"] / 1e6
+                ss, sd = s["source_timerange"]["start"] / 1e6 if start is None else start, s["target_timerange"]["duration"] / 1e6
                 inputs += ["-i", str(f)]
                 mix.append(f"[{n}:a]aresample=48000,atrim={ss:.3f}:{ss + sd:.3f},asetpts=PTS-STARTPTS,"
                            f"volume={s.get('volume', 1.0):.4f},adelay={round(s['target_timerange']['start'] / 1000)}:all=1[a{n}]")
@@ -453,11 +488,9 @@ def main():
     _, ps, pm = ref.punch()
     times = sound_times(punches, ws)
     if ps is not None and times:
-        f = local_path(pm["path"])
-        if not f.exists():
-            print(f"render_mp4: warning: punch-in sound {f} not in the CapCut cache; punch-ins go silent", file=sys.stderr)
-        else:
-            ss, sd = ps["source_timerange"]["start"] / US, ps["target_timerange"]["duration"] / US
+        f, start = pick_sound(local_path(pm["path"]), pm.get("name", ""), own, "punch-in sound")
+        if f is not None:
+            ss, sd = ps["source_timerange"]["start"] / US if start is None else start, ps["target_timerange"]["duration"] / US
             for t in times:
                 inputs += ["-i", str(f)]
                 mix.append(f"[{n}:a]aresample=48000,atrim={ss:.3f}:{ss + sd:.3f},asetpts=PTS-STARTPTS,"

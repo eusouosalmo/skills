@@ -180,6 +180,20 @@
         "In both outputs the word sits behind the head, under the same cut-out .mov of the person"
       ],
       "human_feedback": ""
+    },
+    {
+      "id": 13,
+      "name": "mp4-without-capcut-cache",
+      "prompt": "gera o mp4 final do reel do whatsapp sem capcut, com as palavras em destaque na tela como no começo do reel do Jev, as amarelas com sombra. tá tudo na pasta do reel.",
+      "setup": "Private input, kept out of the repo: setup_run.sh <run> whatsapp-nocache-mp4 (the whatsapp reel folder and the author's drafts, Jev-AI as reference, with every CapCut cache path pointing to another user's cache that does not exist, as on another machine or after the cache is cleared). Run with run_eval.sh from outside the repo; the preamble names the same missing cache. Before the change, render_mp4.py stopped with 'word font ... not found; open the reference project once in CapCut so it downloads'.",
+      "files": [],
+      "expected_output": "The final mp4 of the whole reel, with the entrance, captions in the template's place and size, the words on screen and the opening and punch-in sounds, all drawn with our free fonts and synthesized sounds; the handover names each stand-in.",
+      "assertions": [
+        "An mp4 of the whole reel (1080x1920, 30 fps) is written in the reel's exports although the CapCut cache has none of the reference project's fonts and sounds",
+        "The mp4 has captions and the words on screen (seen on frames), and the opening sounds and the punch-in sound are in the mix",
+        "The report or the message to the author names which fonts and sounds are our stand-ins instead of CapCut's"
+      ],
+      "human_feedback": ""
     }
   ]
 }
