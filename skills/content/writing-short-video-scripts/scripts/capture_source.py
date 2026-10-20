@@ -8,6 +8,8 @@ from the top). Cookie banners, pop-ups, fixed bars and ads are removed before ea
 empty "Publicidade" box is left in the print. --click opens a collapsed part first (a question in an FAQ).
 Prints a JSON report. Exits 2 when a highlight is not on the page: the shot is then not proof of the claim, so look
 at the page's text (its language may differ from the claim's) and run again with the words the page uses.
+Exits 3, writing nothing, when the site answers with an error page (some block automated browsers): list that source
+as a capture for the author.
 Needs python3 with playwright and its Chromium (pip install playwright && python3 -m playwright install chromium).
 """
 import argparse, json, sys
@@ -90,8 +92,14 @@ def main():
     with sync_playwright() as p:
         browser = p.chromium.launch()
         page = browser.new_page(viewport={"width": WIDTH, "height": HEIGHT}, locale="pt-BR")
-        page.goto(a.url, wait_until="domcontentloaded", timeout=60000)
+        resp = page.goto(a.url, wait_until="domcontentloaded", timeout=60000)
         page.wait_for_timeout(4000)  # late banners and lazy ads arrive in the first seconds
+        # A site that blocks automated browsers answers with an error page; a print of it is not the source.
+        if (resp and resp.status >= 400) or "access denied" in page.title().lower():
+            report["error"] = f"HTTP {resp.status if resp else '?'}: {page.title()}"
+            browser.close()
+            print(json.dumps(report, ensure_ascii=False, indent=1))
+            sys.exit(3)
         for name in ("Aceitar", "Aceito", "Concordo", "Accept", "Allow all", "Permitir todos"):
             try:
                 b = page.get_by_role("button", name=name).first
