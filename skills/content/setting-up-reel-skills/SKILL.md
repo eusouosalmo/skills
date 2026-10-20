@@ -4,8 +4,7 @@ description: Sets up the reel skills on a machine once, finding the author's ree
 disable-model-invocation: true
 compatibility: disable-model-invocation is a Claude Code field; in other agents, run the skill by name. Multiple-choice questions use the agent's question tool when it has one (AskUserQuestion in Claude Code).
 metadata:
-  status: draft
-  internal: true
+  status: beta
 ---
 
 # Setting up the reel skills

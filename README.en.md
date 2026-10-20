@@ -60,13 +60,13 @@ npx skills@latest remove <name>
 - [animating-reel-scenes](skills/content/animating-reel-scenes/SKILL.md) (beta): plans which stretches of a talking-head reel become motion and renders the scenes and transparent sticker overlays for CapCut.
 - [writing-short-video-scripts](skills/content/writing-short-video-scripts/SKILL.md) (beta): writes short video scripts from the author's notes, with hook, one spoken CTA, timed teleprompter text and prints of its sources for the edit.
 - [cutting-raw-takes](skills/content/cutting-raw-takes/SKILL.md) (beta): cuts the raw clips of a talking-head reel into a rough cut, picking the take to keep for each line and dropping backstage talk and long pauses, with a takes table approved before rendering.
+- [setting-up-reel-skills](skills/content/setting-up-reel-skills/SKILL.md) (beta): sets up the reel skills on a machine once, finding the reels folder, the scripts folder, the style file, the design system and the CapCut projects and writing their paths into a Paths section of the style file.
 
 In draft, not installed by either path:
 
 - [editing-reels](skills/content/editing-reels/SKILL.md): edits a talking-head reel from its raw clips and script to the finished reel, as a CapCut project or an mp4, running cutting-raw-takes, animating-reel-scenes and finishing-reels in order with the author's approval between them.
 - [finishing-reels](skills/content/finishing-reels/SKILL.md): finishes a reel as a CapCut desktop project or as the final mp4 without CapCut, with the cut, scene overlays, split-screen keyframes and divider, sfx, opening, punch-ins and words on screen with their sound, and captions styled from one of the author's own projects.
 - [setting-up-git-guardrails](skills/harness/setting-up-git-guardrails/SKILL.md): per-project git guardrails for coding agents, with interactive and AFK profiles.
-- [setting-up-reel-skills](skills/content/setting-up-reel-skills/SKILL.md): sets up the reel skills on a machine once, finding the reels folder, the scripts folder, the style file, the design system and the CapCut projects and writing their paths into a Paths section of the style file.
 - [writing-as-eusouosalmo](skills/content/writing-as-eusouosalmo/SKILL.md): writes and reviews text in the voice of eusouosalmo, spoken or written register by channel.
 - [writing-post-captions](skills/content/writing-post-captions/SKILL.md): writes the caption for a short video on Instagram, TikTok, YouTube Shorts or LinkedIn from its script, complementing the video with one ask, source credit and hashtags within the platform's limits.
 Skill instructions are written in English; content skills deliver their output in Portuguese.
