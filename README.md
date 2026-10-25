@@ -60,7 +60,7 @@ npx skills@latest remove <nome>
 - [animating-reel-scenes](skills/content/animating-reel-scenes/SKILL.md) (beta): planeja quais trechos de um reel em talking-head viram motion e renderiza as cenas e os overlays transparentes de adesivos para o CapCut.
 - [writing-short-video-scripts](skills/content/writing-short-video-scripts/SKILL.md) (beta): escreve roteiros de vídeo curto a partir das anotações do autor, com gancho, um CTA falado, texto de teleprompter cronometrado e os prints das fontes para a edição.
 - [cutting-raw-takes](skills/content/cutting-raw-takes/SKILL.md) (beta): corta os brutos de um reel em talking-head num corte seco, escolhendo a tomada de cada fala e tirando bastidor e pausas longas, com uma tabela de tomadas aprovada antes do render.
-- [setting-up-reel-skills](skills/content/setting-up-reel-skills/SKILL.md) (beta): configura as skills de reel numa máquina uma vez, achando a pasta dos reels, a dos roteiros, o arquivo de estilo, o design system e os projetos do CapCut e gravando os caminhos numa seção Paths do arquivo de estilo.
+- [setup-eusouosalmo-skills](skills/content/setup-eusouosalmo-skills/SKILL.md) (beta): configura as skills deste kit numa máquina uma vez, achando as pastas e os arquivos que elas leem (nas de reel: a pasta dos reels, os roteiros, o arquivo de estilo, o design system e os projetos do CapCut) e gravando os caminhos onde elas procuram.
 
 Em draft, fora dos dois caminhos de instalação:
 

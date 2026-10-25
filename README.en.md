@@ -60,7 +60,7 @@ npx skills@latest remove <name>
 - [animating-reel-scenes](skills/content/animating-reel-scenes/SKILL.md) (beta): plans which stretches of a talking-head reel become motion and renders the scenes and transparent sticker overlays for CapCut.
 - [writing-short-video-scripts](skills/content/writing-short-video-scripts/SKILL.md) (beta): writes short video scripts from the author's notes, with hook, one spoken CTA, timed teleprompter text and prints of its sources for the edit.
 - [cutting-raw-takes](skills/content/cutting-raw-takes/SKILL.md) (beta): cuts the raw clips of a talking-head reel into a rough cut, picking the take to keep for each line and dropping backstage talk and long pauses, with a takes table approved before rendering.
-- [setting-up-reel-skills](skills/content/setting-up-reel-skills/SKILL.md) (beta): sets up the reel skills on a machine once, finding the reels folder, the scripts folder, the style file, the design system and the CapCut projects and writing their paths into a Paths section of the style file.
+- [setup-eusouosalmo-skills](skills/content/setup-eusouosalmo-skills/SKILL.md) (beta): sets up this kit's skills on a machine once, finding the folders and files they read (for the reel skills: the reels folder, scripts, style file, design system and CapCut projects) and writing their paths where they look.
 
 In draft, not installed by either path:
 
