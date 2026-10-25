@@ -274,6 +274,10 @@ def write_ass(path, cues, style, split_ranges):
             mid = (p0 + p1) / 2
             # a reel with a split screen keeps one caption height, under the panel, as the author's approved reels do
             y = HALF - (style["y_split"] if split_ranges else style["y_full"]) * HALF
+            # a stretch where the panel fills the frame takes its own height, so the caption leaves the drawing
+            for r0, r1, ry in style["y_ranges"]:
+                if r0 <= mid < r1:
+                    y = HALF - ry * HALF
             cuts = sorted({p0, p1, *[min(max(s, p0), p1) for _, s, _ in pg]})
             for s0, s1 in zip(cuts, cuts[1:]):
                 if s1 - s0 < 0.01:
@@ -456,7 +460,8 @@ def main():
                  "margin": round(W * (1 - tm.get("line_max_width", 0.82)) / 2),
                  "width": (lambda w: w and (lambda t: w(t) * sx))(text_width(fonts / "caption.ttf", size)),
                  "scale_x": sx,
-                 "y_full": y_full, "y_split": cap.get("y_split", -0.71)}
+                 "y_full": y_full, "y_split": cap.get("y_split", -0.71),
+                 "y_ranges": cap.get("y_ranges", [])}
         words = load_json(cap["words"]) if cap.get("words") else []
         nev = write_ass(work / "captions.ass", srt_cues(cap["srt"], words, cap.get("fixes", {})), style, split)
         filt.append(f"[{last}]ass={work / 'captions.ass'}:fontsdir={fonts}[vc]")

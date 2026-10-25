@@ -21,7 +21,8 @@ The plan (JSON, paths in the local filesystem; see SKILL.md for each field):
   "overlays": [{"file": "<reel>/exports/01-x.mov", "start": 0, "end": 100.6, "volume": 0}],
   "audio": [{"file": "<reel>/exports/00-sfx.wav", "start": 0}],
   "captions": {"srt": "<reel>/legenda.srt", "words": "<reel>/words.json",
-               "fixes": {"wrong text": "right text"}, "y_split": -0.71, "y_full": null}
+               "fixes": {"wrong text": "right text"}, "y_split": -0.71, "y_full": null,
+               "y_ranges": [[76.15, 96.38, -0.71]]}
 }
 
 Requires Python 3.8+ and ffprobe. Exits non-zero with a message when a precondition fails.
@@ -563,6 +564,10 @@ def main():
             s = seg_from(ref, cap_seg, tt["id"], a, b - a, 0.0, keep_anim=True)
             # a reel with a split screen keeps one caption height, under the panel, as the author's approved reels do
             s["clip"]["transform"]["y"] = y_split if split_ranges else y_full
+            # a stretch where the panel fills the frame takes its own height, so the caption leaves the drawing
+            for r0, r1, ry in cap.get("y_ranges", []):
+                if r0 <= (a + b) / 2 < r1:
+                    s["clip"]["transform"]["y"] = ry
             for r in s["extra_material_refs"]:  # the caption animation spans the whole cue
                 k, m = next(((k, x) for k, v in D["materials"].items() if isinstance(v, list)
                              for x in v if isinstance(x, dict) and x.get("id") == r), (None, None))
