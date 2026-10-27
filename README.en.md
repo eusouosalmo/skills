@@ -4,6 +4,12 @@ Skills that teach your AI agent (Claude Code, Codex, Cursor and others) to do tw
 
 Each skill was born from work I did by hand a few times, and is tested against the same agent without it: only what changes the result stays.
 
+<p align="center">
+  <img src="docs/media/reel-urna.gif" width="270" alt="Excerpt of a reel edited with these skills: split screen with an electronic voting machine animation timed to speech, and captions">
+  <br>
+  <sub>Excerpt of a reel made with these skills: script, cut, animation and captions.</sub>
+</p>
+
 [Leia em português](README.md)
 
 ## Get started in three steps

@@ -4,6 +4,12 @@ Skills que ensinam o seu agente de IA (Claude Code, Codex, Cursor e outros) a fa
 
 Cada skill nasceu de um trabalho que eu fiz na mão algumas vezes, e é testada contra o mesmo agente sem ela: só fica o que muda o resultado.
 
+<p align="center">
+  <img src="docs/media/reel-urna.gif" width="270" alt="Trecho de um reel editado com estas skills: tela dividida com a animação de uma urna eletrônica sincronizada com a fala e a legenda">
+  <br>
+  <sub>Trecho de um reel feito com estas skills: roteiro, corte, animação e legenda.</sub>
+</p>
+
 [Read in English](README.en.md)
 
 ## Começar em três passos
