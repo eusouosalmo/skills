@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.5.0](https://github.com/eusouosalmo/skills/compare/v0.4.0...v0.5.0) (2026-10-27)
+
+
+### Features
+
+* **content:** add assembling-capcut-projects skill in draft ([aa814cb](https://github.com/eusouosalmo/skills/commit/aa814cb6ff619097456b34ca03e319f7c49d6c19))
+* **content:** add editing-reels skill in draft ([d0dd7eb](https://github.com/eusouosalmo/skills/commit/d0dd7eb2b2853cfbe97b26227440816aacfe72a0))
+* **content:** add punch-ins with their sound to finishing-reels ([f267bb8](https://github.com/eusouosalmo/skills/commit/f267bb8cce1e20f12a6bdd32b183fbd8ee223532))
+* **content:** add setting-up-reel-skills in draft ([9fc228b](https://github.com/eusouosalmo/skills/commit/9fc228bc29f3be2172244bf0c759583265a98307))
+* **content:** add words on screen behind the head to finishing-reels ([c83c41c](https://github.com/eusouosalmo/skills/commit/c83c41ccedeb02e49a473b4187cd8111f58dfd5d))
+* **content:** caption height per range in finishing-reels ([f9e4262](https://github.com/eusouosalmo/skills/commit/f9e4262727909beae560990976a57537f884359a))
+* **content:** capture source prints in writing-short-video-scripts ([5d81b9f](https://github.com/eusouosalmo/skills/commit/5d81b9f4549e3716637f21eed4fdf09b55865f6c))
+* **content:** finish reels as a final mp4 and rename to finishing-reels ([2222e71](https://github.com/eusouosalmo/skills/commit/2222e71ce89b16bbdc36df0bd249d71285640615))
+* **content:** promote setting-up-reel-skills to beta ([b997304](https://github.com/eusouosalmo/skills/commit/b99730421e4c78be0677f2b3d5e5464adc19beae))
+* **content:** render the final mp4 without the CapCut cache ([c873c2f](https://github.com/eusouosalmo/skills/commit/c873c2f0deeacbb0693f2f3ec23bfaa3a517e577))
+* **content:** turn the reel setup into setup-eusouosalmo-skills ([340fd73](https://github.com/eusouosalmo/skills/commit/340fd730b788e8163ce7a367c8249b303bdd22af))
+
+
+### Bug Fixes
+
+* **content:** keep split-screen panels inside the side and top safe margins in animating-reel-scenes ([89cc3b1](https://github.com/eusouosalmo/skills/commit/89cc3b15e11c1d7e3445090940d1f08f9b03396b))
+* **content:** refuse to save a print of an error page in capture_source ([7e5fcf8](https://github.com/eusouosalmo/skills/commit/7e5fcf809bd65861a73f9fbbd61d516f809daca6))
+* **content:** widen the top-right safe band to 250 px in animating-reel-scenes ([cc183a0](https://github.com/eusouosalmo/skills/commit/cc183a03f1bfa9a3409e022c2843679e36f8b60c))
+
 ## [0.4.0](https://github.com/eusouosalmo/skills/compare/v0.3.0...v0.4.0) (2026-10-16)
 
 
