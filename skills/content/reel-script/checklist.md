@@ -38,7 +38,7 @@ Every item is a pattern eusouosalmo corrected by hand in a script, with the reas
 - **Connectives where the ear needs them.** Two loose sentences where the second explains the first become one sentence with "porque" or "isso porque". Short loose sentences sound choppy when spoken; a connective the relation does not ask for sounds like filler.
 - **No dry or vague line.** A sentence like "Era coisa de quem viu." gets its referent.
 - **The author's words, once each.** The author's word for an idea stays, never a synonym. A word that piles up (one noun seven times) or sits twice in a row ("o time virou um time só") gets rewritten.
-- **Fits the duration.** At 130 words per minute, 90 s is 195 words; a script over it is cut, not sped up.
+- **Fits the duration, at the author's rate.** The estimate uses the words per minute measured on the author's recorded reels (130 only without them); a script over the target is cut, not sped up. At a generic rate the script misses the target: 390 words for 3 minutes ran 2:15 for an author at about 170.
 
 ## CTA
 

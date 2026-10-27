@@ -1,0 +1,167 @@
+1
+00:00:00,000 --> 00:00:02,020
+Segundo mensagens internas da Meta,
+
+2
+00:00:02,220 --> 00:00:04,320
+ela bloqueou anúncios do Flávio Bolsonaro
+
+3
+00:00:04,320 --> 00:00:06,220
+três dias antes do primeiro turno,
+
+4
+00:00:06,300 --> 00:00:07,500
+porque o robô achou que elas
+
+5
+00:00:07,500 --> 00:00:09,300
+eram feitas com inteligência artificial.
+
+6
+00:00:09,760 --> 00:00:11,160
+A campanha afirma que não usou
+
+7
+00:00:11,160 --> 00:00:12,200
+inteligência artificial.
+
+8
+00:00:12,560 --> 00:00:13,940
+O robô estava atrás disso porque
+
+9
+00:00:13,940 --> 00:00:16,140
+o TSE proíbe de utilizar qualquer
+
+10
+00:00:16,140 --> 00:00:19,220
+conteúdo criado com inteligência artificial 72
+
+11
+00:00:19,220 --> 00:00:20,780
+horas antes de cada turno.
+
+12
+00:00:20,940 --> 00:00:23,140
+Como ninguém confere anúncio por anúncio,
+
+13
+00:00:23,340 --> 00:00:24,620
+um detector de IA lê,
+
+14
+00:00:24,620 --> 00:00:25,240
+por exemplo,
+
+15
+00:00:25,480 --> 00:00:26,040
+os metadados.
+
+16
+00:00:26,200 --> 00:00:29,380
+informações escondidas dentro de cada arquivo.
+
+17
+00:00:29,500 --> 00:00:31,640
+Ali o ChatGPT ou Photoshop
+
+18
+00:00:31,640 --> 00:00:33,840
+gravam uma etiqueta de IA.
+
+19
+00:00:34,200 --> 00:00:36,380
+Só que até um pequeno ajuste
+
+20
+00:00:36,380 --> 00:00:38,620
+ou uma ediçãozinha já pode criar
+
+21
+00:00:38,620 --> 00:00:39,660
+essa etiqueta.
+
+22
+00:00:39,840 --> 00:00:40,560
+Por isso,
+
+23
+00:00:40,740 --> 00:00:43,100
+em 2024 a Meta mudou o
+
+24
+00:00:43,100 --> 00:00:44,900
+selo de IA e um print
+
+25
+00:00:44,900 --> 00:00:47,080
+pode apagar a etiqueta e deixar
+
+26
+00:00:47,080 --> 00:00:48,600
+a imagem de IA passar.
+
+27
+00:00:48,900 --> 00:00:49,420
+Ou seja,
+
+28
+00:00:49,640 --> 00:00:50,800
+a IA pode errar para os
+
+29
+00:00:50,800 --> 00:00:51,180
+dois lados.
+
+30
+00:00:51,220 --> 00:00:52,860
+Então eu não sei se o
+
+31
+00:00:52,860 --> 00:00:54,540
+anúncio do Flávio tinha IA e
+
+32
+00:00:54,540 --> 00:00:56,000
+a Meta não disse o que
+
+33
+00:00:56,000 --> 00:00:56,500
+o robô viu.
+
+34
+00:00:56,860 --> 00:00:57,620
+Mas na quarta,
+
+35
+00:00:57,760 --> 00:00:59,160
+a janela volta para o segundo
+
+36
+00:00:59,160 --> 00:00:59,620
+turno.
+
+37
+00:00:59,740 --> 00:01:00,960
+Por isso eu defendo que robô
+
+38
+00:01:00,960 --> 00:01:03,440
+nenhum barre a propaganda sem mostrar
+
+39
+00:01:03,440 --> 00:01:04,740
+o que ele achou nela.
+
+40
+00:01:04,900 --> 00:01:06,780
+Se tu pudesse ajustar esse robô,
+
+41
+00:01:06,920 --> 00:01:08,420
+tu iria barrar mais anúncio de
+
+42
+00:01:08,420 --> 00:01:10,680
+IA ou barrar anúncio menos honesto.

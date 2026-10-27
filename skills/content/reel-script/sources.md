@@ -21,4 +21,5 @@ No text in this skill is copied from a third party. The method is described in t
   - Study with fine print: https://www.instagram.com/reel/DdcN3aKvW2C/ and https://www.instagram.com/p/Db4GJGZDgRz/
   - Tool swap with one number: https://www.instagram.com/reel/DbMKeHvBnSi/
   - Why a ladder: in two profiles, the reel where each block causes the next earned several times the one with parallel items (the same map, catalogue comparison 1).
+- **Speaking rate**: measured on the captions of four reels eusouosalmo recorded (166, 169, 174 and 206 words per minute, median about 171) and on a 3-minute script read aloud (515 words in 2:46, 186 per minute); the 130 of `roteiro-de-video.md` section 6.4 stays as the fallback without recorded reels. Guo, Kim and Rubin (2014, `docs/research/roteiro-de-video.md` section 4.8) saw rates from 48 to 254 words per minute in educational videos, so one fixed rate fits few authors.
 - **Observed failures**: the corrections eusouosalmo made by hand to two Instagram reels about software architecture, which became the eval scenarios in `evals/evals.json` and the items of `checklist.md`.

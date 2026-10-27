@@ -1,0 +1,204 @@
+1
+00:00:00,066 --> 00:00:02,200
+pra esse vídeo aparecer por causa da tua conversa
+
+2
+00:00:02,400 --> 00:00:04,333
+o microfone do teu celular teria que gravar
+
+3
+00:00:04,533 --> 00:00:05,666
+vinte e quatro horas por dia
+
+4
+00:00:06,266 --> 00:00:08,066
+todo mundo acha que o aplicativo tá escutando
+
+5
+00:00:08,166 --> 00:00:10,600
+ou que o WhatsApp tá lendo as tuas mensagens
+
+6
+00:00:11,100 --> 00:00:14,100
+só que pesquisadores analisaram 17.000 aplicativos
+
+7
+00:00:14,533 --> 00:00:17,566
+procurando por áudios escondidos e não acharam nenhum
+
+8
+00:00:18,133 --> 00:00:18,766
+e no WhatsApp
+
+9
+00:00:18,766 --> 00:00:20,733
+graças a criptografia de ponta a ponta
+
+10
+00:00:20,866 --> 00:00:23,100
+nem mesmo a meta consegue ler tuas mensagens
+
+11
+00:00:23,333 --> 00:00:24,966
+assim como eu mostrei no vídeo anterior
+
+12
+00:00:25,533 --> 00:00:26,000
+mesmo assim
+
+13
+00:00:26,000 --> 00:00:27,333
+a desconfiança tem motivo
+
+14
+00:00:27,566 --> 00:00:29,866
+uma agência de marketing dos Estados Unidos
+
+15
+00:00:30,000 --> 00:00:31,933
+chegou a vender pros seus anunciantes
+
+16
+00:00:32,133 --> 00:00:33,666
+uma escuta ativa
+
+17
+00:00:33,900 --> 00:00:34,700
+pelo microfone
+
+18
+00:00:35,000 --> 00:00:36,066
+depois da reportagem
+
+19
+00:00:36,400 --> 00:00:38,966
+o Google tirou a agência do seu programa de parceiros
+
+20
+00:00:39,100 --> 00:00:41,766
+e a meta diz que não usa microfone pra anúncios
+
+21
+00:00:42,133 --> 00:00:44,700
+mas o que aparece no teu feed continua acertando
+
+22
+00:00:44,766 --> 00:00:47,066
+porque eles não precisam nem ouvir e nem ler
+
+23
+00:00:47,500 --> 00:00:49,466
+muita loja online tem no seu site
+
+24
+00:00:49,666 --> 00:00:50,466
+o pixel
+
+25
+00:00:50,666 --> 00:00:52,566
+um código da meta que conta pra ela
+
+26
+00:00:52,600 --> 00:00:53,966
+o que tu olhou o lança
+
+27
+00:00:54,066 --> 00:00:55,933
+é que às vezes nem foi tu que pesquisou
+
+28
+00:00:56,400 --> 00:00:58,800
+pode ser um amigo que estava contigo que pesquisou
+
+29
+00:00:58,900 --> 00:01:00,800
+e a meta usou a localização do celular
+
+30
+00:01:01,066 --> 00:01:02,100
+pra escolher o anúncio
+
+31
+00:01:02,300 --> 00:01:03,100
+essa ligação do teu
+
+32
+00:01:03,266 --> 00:01:05,366
+feed e a pesquisa dele ainda é hipótese
+
+33
+00:01:05,500 --> 00:01:06,900
+porque ninguém de fora conseguiu provar
+
+34
+00:01:07,000 --> 00:01:08,200
+e ainda tem o teu cérebro
+
+35
+00:01:08,266 --> 00:01:09,800
+que tu vê um monte de anúncio no dia
+
+36
+00:01:10,266 --> 00:01:12,700
+e tu só lembra do que bateu com a tua conversa
+
+37
+00:01:12,900 --> 00:01:13,700
+e isso tem nome
+
+38
+00:01:13,800 --> 00:01:15,200
+se chama ilusão da frequência
+
+39
+00:01:15,566 --> 00:01:17,533
+só que tem uma conversa que eles leem
+
+40
+00:01:17,666 --> 00:01:19,866
+que é a conversa que tu tem com o meta ai
+
+41
+00:01:19,966 --> 00:01:21,700
+que é aquela inteligência artificial que aparece
+
+42
+00:01:21,866 --> 00:01:22,666
+dentro do WhatsApp
+
+43
+00:01:22,766 --> 00:01:23,566
+e do Instagram
+
+44
+00:01:24,000 --> 00:01:25,766
+desde dezembro de dois mil e vinte e cinco
+
+45
+00:01:25,933 --> 00:01:27,300
+o que tu conversa com ela
+
+46
+00:01:27,466 --> 00:01:29,366
+seja por texto ou por voz
+
+47
+00:01:29,733 --> 00:01:32,200
+ajuda a escolher os teus vídeos e os anúncios
+
+48
+00:01:32,733 --> 00:01:34,766
+então da próxima vez que teu filho acertar
+
+49
+00:01:34,900 --> 00:01:36,300
+não vai culpar só o microfone
+
+50
+00:01:36,700 --> 00:01:38,766
+me conta aqui qual foi o último vídeo que te fez
+
+51
+00:01:38,933 --> 00:01:40,366
+achar que o celular tava te ouvindo
+

@@ -80,7 +80,7 @@ Done when the voice skill's own check passes.
 
 ## 6. Fit the duration
 
-Count the words of the spoken lines (`wc -w`) and estimate the duration at 130 words per minute: 60 to 90 s is 130 to 195 words. Over the target, cut what the idea survives without: first what failed the chain test, then sentences that repeat another, then details the case does not need. Keep the hook, the CTA and every reason added in step 4; when they do not fit, cut a claim together with its reason.
+Count the words of the spoken lines (`wc -w`) and estimate the duration at the author's own speaking rate, measured on reels they already recorded: when their style file (`estilo.md`, whose `## Paths` names the `reels` folder; look in the working folder and the reels folder) leads to the caption files (`.srt`) of recorded reels, measure each as its words over the minutes from the first caption's start to the last caption's end, and use the median of at least three. Rates vary a lot between people, and a fixed rate made a 3-minute script come out at 2:15 for an author who speaks about 170 words per minute. Without recorded captions, use 130 words per minute and say the estimate is generic: 60 to 90 s is then 130 to 195 words. Over the target, cut what the idea survives without: first what failed the chain test, then sentences that repeat another, then details the case does not need. Keep the hook, the CTA and every reason added in step 4; when they do not fit, cut a claim together with its reason.
 
 Done when the count is inside the target.
 
@@ -124,7 +124,7 @@ Prints em `assets/<script file name>/` (capturados em <date>, tela de 1280 px; `
 
 <one spoken sentence per line, split at every period, no labels>
 
-Duração estimada: <words> palavras, <seconds> s a 130 palavras por minuto.
+Duração estimada: <words> palavras, <seconds> s a <rate> palavras por minuto (<where the rate came from: median of N recorded reels, or generic>).
 ```
 
 The visual references table has one row per thing the Visual column shows from outside the script: each print, and what only the author can give, as a **falta:** row saying what to capture and where (a stretch of the author's own earlier video, a screen recording on their phone, a page behind a login), so the edit asks for it instead of drawing a stand-in. A print with a third party's personal data (the name, handle and photo of whoever wrote a comment) says **Embaçar** with what to blur, since the person did not agree to be in the video. When the author asks for the prints of a script already written, capture its sources the same way and add this section to that file.

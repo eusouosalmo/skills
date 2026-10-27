@@ -307,6 +307,22 @@
         "No print shows an ad, a cookie banner or the empty box an ad leaves ('Publicidade' over a blank area)"
       ],
       "human_feedback": ""
+    },
+    {
+      "id": 18,
+      "name": "speech-rate-from-reels",
+      "prompt": "monta o roteiro do reel sobre o caminho do voto na urna eletrônica, pro Instagram, 3 minutos (o máximo), formato jornada de um objeto de ponta a ponta, objetivo informar. minhas anotações tão em anotacoes.md.",
+      "setup": "Copy evals/files/speech-rate-from-reels into an empty folder (anotacoes.md, estilo.md whose Paths name ./reels, and reels/ with the captions of four reels the author recorded) and run the prompt from it, as a separate session or fresh subagent. The source prints step may be skipped. The user is away: the run notes questions, assumes the likeliest answer and writes the script.",
+      "files": [
+        "evals/files/speech-rate-from-reels"
+      ],
+      "expected_output": "A script for 3 minutes sized at the author's measured rate: the median of the four recorded reels (about 170 words per minute), so about 500 to 520 spoken words, with the delivery line naming that rate and where it came from.",
+      "assertions": [
+        "The duration is estimated at a rate measured on the captions in reels/ (between 160 and 185 words per minute), not at 130",
+        "The delivery line names the rate and says it comes from the author's recorded reels",
+        "The spoken lines total between 460 and 560 words for the 3-minute target"
+      ],
+      "human_feedback": ""
     }
   ]
 }
