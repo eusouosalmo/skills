@@ -1,12 +1,17 @@
 # content
 
-Skills de escrita, roteiro, voz e marca do eusouosalmo. Instruções em inglês, resultado em pt-BR.
+Skills de vídeo curto, escrita e voz do eusouosalmo. Instruções em inglês, resultado em pt-BR.
 
-- [eusouosalmo-voice](eusouosalmo-voice/SKILL.md) (draft): escreve e revisa texto na voz do eusouosalmo, no registro falado ou escrito conforme o canal.
-- [reel-script](reel-script/SKILL.md) (beta): escreve roteiros de vídeo curto a partir das anotações do autor, com gancho, um CTA falado, texto de teleprompter cronometrado e os prints das fontes para a edição.
-- [post-caption](post-caption/SKILL.md) (draft): escreve a legenda de um vídeo curto para Instagram, TikTok, YouTube Shorts ou LinkedIn a partir do roteiro, complementando o vídeo com um pedido, crédito da fonte e hashtags dentro do limite da plataforma.
-- [reel-motion](reel-motion/SKILL.md) (beta): planeja quais trechos de um reel em talking-head viram motion e renderiza as cenas e os overlays transparentes de adesivos para o CapCut.
-- [reel-cut](reel-cut/SKILL.md) (beta): corta os brutos de um reel em talking-head num corte seco, escolhendo a tomada de cada fala e tirando bastidor e pausas longas, com uma tabela de tomadas aprovada antes do render.
-- [reel-finish](reel-finish/SKILL.md) (draft): monta o reel pronto, como projeto do CapCut ou como mp4 final sem CapCut, com o corte, os overlays das cenas, os keyframes e a divisão da tela dividida, os sfx, a abertura, os punch-ins e as palavras em destaque com som e a legenda no estilo de um projeto do próprio autor.
-- [reel-edit](reel-edit/SKILL.md) (draft): edita um reel em talking-head dos brutos e do roteiro até o reel pronto, como projeto do CapCut ou mp4, chamando em ordem a reel-cut, a reel-motion e a reel-finish, com a aprovação do autor entre elas.
-- [setup-eusouosalmo-skills](setup-eusouosalmo-skills/SKILL.md) (beta): configura as skills deste kit numa máquina uma vez, achando as pastas e os arquivos que elas leem (nas de reel: a pasta dos reels, os roteiros, o arquivo de estilo, o design system e os projetos do CapCut) e gravando os caminhos onde elas procuram.
+Na ordem em que entram num reel:
+
+1. [reel-script](reel-script/SKILL.md) (beta): escreve o roteiro a partir das suas anotações, com gancho, um CTA falado, texto de teleprompter cronometrado e os prints das fontes para a edição.
+2. [reel-cut](reel-cut/SKILL.md) (beta): junta os brutos num corte seco, escolhendo a tomada de cada fala e tirando bastidor e pausas longas, com uma tabela de tomadas aprovada antes do render.
+3. [reel-motion](reel-motion/SKILL.md) (beta): decide quais trechos viram animação e renderiza as cenas e os overlays de adesivos, sincronizados com cada palavra falada.
+4. [reel-finish](reel-finish/SKILL.md) (draft): monta o reel pronto, como projeto do CapCut ou como mp4 final sem CapCut, com legenda, sons, punch-ins e tela dividida no estilo de um projeto seu.
+5. [post-caption](post-caption/SKILL.md) (draft): escreve a legenda do post para Instagram, TikTok, YouTube Shorts ou LinkedIn, com um pedido, crédito da fonte e hashtags dentro do limite da plataforma.
+
+Em volta dessa sequência:
+
+- [reel-edit](reel-edit/SKILL.md) (draft): faz a edição inteira, dos brutos ao reel pronto, chamando reel-cut, reel-motion e reel-finish em ordem, com a sua aprovação entre elas.
+- [eusouosalmo-voice](eusouosalmo-voice/SKILL.md) (draft): escreve e revisa texto na minha voz, falada ou escrita conforme o canal. Serve de modelo para criar a skill da sua voz.
+- [setup-eusouosalmo-skills](setup-eusouosalmo-skills/SKILL.md) (beta): configura o kit numa máquina uma vez, achando as pastas e os arquivos que as skills leem.

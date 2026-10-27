@@ -1,24 +1,82 @@
-# Skills para engenharia com IA
+# Skills do eusouosalmo
 
-Minhas skills de agente para arquitetura de software, programação, IA e SaaS. Algumas também me ajudam a criar o conteúdo que eu faço sobre esses temas.
+Skills que ensinam o seu agente de IA (Claude Code, Codex, Cursor e outros) a fazer bem dois trabalhos: criar e proteger o código de um projeto com IA, e produzir vídeo curto do roteiro ao reel pronto.
 
-Gerar código ficou barato. O que ainda diferencia um software é a engenharia em volta: arquitetura, testes e o harness que mantém o agente nos trilhos. Estas skills são como eu coloco isso em prática, nos meus projetos e nos vídeos que eu faço.
-
-Elas são pequenas, combináveis e nascem do trabalho real: uma skill só entra aqui depois que fiz o trabalho na mão algumas vezes. Leia, faça fork, adapte para a sua stack e a sua voz.
-
-Eu mostro como construo com IA no [Instagram](https://www.instagram.com/eusouosalmo/) e no [YouTube](https://www.youtube.com/@eusouosalmo) (@eusouosalmo) e em [eusouosalmo.dev](https://eusouosalmo.dev).
+Cada skill nasceu de um trabalho que eu fiz na mão algumas vezes, e é testada contra o mesmo agente sem ela: só fica o que muda o resultado.
 
 [Read in English](README.en.md)
 
-## Instalação
+## Começar em três passos
+
+1. Instale:
+
+   ```bash
+   npx skills@latest add eusouosalmo/skills
+   ```
+
+   O instalador pergunta quais skills e em quais agentes. Prefere o plugin do Claude Code, que é versionado? Veja [outras formas de instalar](#outras-formas-de-instalar).
+
+2. Vai usar as skills de reel? Rode `/setup-eusouosalmo-skills` uma vez. Ela acha as suas pastas (reels, roteiros, estilo, CapCut) e guarda os caminhos, para nenhuma skill perguntar de novo.
+
+3. Peça em linguagem normal. O agente escolhe a skill pelo pedido:
+
+   - "escreve um roteiro de reel sobre índice no Postgres a partir dessas notas"
+   - "corta os brutos da pasta desse reel e tira as tomadas ruins"
+   - "o agente esqueceu de novo de rodar os testes, transforma isso numa skill"
+
+## Skills
+
+### Vídeo curto, do roteiro ao post
+
+Na ordem em que entram num reel. Todas entregam o resultado em português.
+
+1. [reel-script](skills/content/reel-script/SKILL.md) (beta): escreve o roteiro a partir das suas anotações, com gancho, um CTA falado, texto de teleprompter cronometrado e os prints das fontes para a edição.
+2. [reel-cut](skills/content/reel-cut/SKILL.md) (beta): junta os brutos num corte seco, escolhendo a tomada de cada fala e tirando bastidor e pausas longas, com uma tabela de tomadas aprovada antes do render.
+3. [reel-motion](skills/content/reel-motion/SKILL.md) (beta): decide quais trechos viram animação e renderiza as cenas e os overlays de adesivos, sincronizados com cada palavra falada.
+4. [reel-finish](skills/content/reel-finish/SKILL.md) (draft): monta o reel pronto, como projeto do CapCut ou como mp4 final sem CapCut, com legenda, sons, punch-ins e tela dividida no estilo de um projeto seu.
+5. [post-caption](skills/content/post-caption/SKILL.md) (draft): escreve a legenda do post para Instagram, TikTok, YouTube Shorts ou LinkedIn, com um pedido, crédito da fonte e hashtags dentro do limite da plataforma.
+
+E as que trabalham em volta dessa sequência:
+
+- [reel-edit](skills/content/reel-edit/SKILL.md) (draft): faz a edição inteira, dos brutos ao reel pronto, chamando reel-cut, reel-motion e reel-finish em ordem, com a sua aprovação entre elas.
+- [eusouosalmo-voice](skills/content/eusouosalmo-voice/SKILL.md) (draft): escreve e revisa texto na minha voz, falada ou escrita conforme o canal. Serve de modelo para criar a skill da sua voz.
+- [setup-eusouosalmo-skills](skills/content/setup-eusouosalmo-skills/SKILL.md) (beta): configura o kit numa máquina uma vez, achando as pastas e os arquivos que as skills leem.
+
+### Engenharia com IA
+
+- [skill-forge](skills/harness/skill-forge/SKILL.md) (beta): cria ou corrige uma skill a partir de uma falha que você viu acontecer, conferida com evals contra o agente sem a skill.
+- [git-guardrails](skills/harness/git-guardrails/SKILL.md) (draft): instala, por projeto, um hook que impede o agente de rodar git destrutivo, com perfis interativo e AFK.
+
+**Status:** `beta` e `stable` são instaladas pelos dois caminhos. `draft` ainda está em teste e fica só no repositório, para ler ou copiar.
+
+## Por que estas skills
+
+Gerar código ficou barato. O que ainda diferencia um software é a engenharia em volta: arquitetura, testes e o harness que mantém o agente nos trilhos. Com conteúdo é igual: o agente escreve um roteiro em segundos, mas ele sai genérico, com fato sem fonte e gancho fraco.
+
+Uma skill aqui é o que eu aprendi corrigindo o agente, escrito para ele não errar de novo. Elas são pequenas e combináveis: leia, faça fork e adapte para a sua stack e a sua voz.
+
+Eu mostro como construo com IA no [Instagram](https://www.instagram.com/eusouosalmo/), no [YouTube](https://www.youtube.com/@eusouosalmo) e em [eusouosalmo.dev](https://eusouosalmo.dev).
+
+## Outras formas de instalar
 
 Há dois caminhos. Escolha um: a mesma skill instalada pelos dois carrega duas vezes, uma como `<nome>` e outra como `eusouosalmo-skills:<nome>`.
 
-Os dois instalam só as skills em beta ou stable. Os rascunhos ficam no repositório para leitura.
+<details>
+<summary>npx skills, para qualquer agente (sem versão)</summary>
 
-### Plugin do Claude Code
+Instala e atualiza a partir do último commit do `main`. Para uma skill só, acrescente `--skill <nome>`. Para atualizar ou remover:
 
-Versionado: você fica numa release até atualizar. Cada release e o changelog dela estão na página de [Releases](https://github.com/eusouosalmo/skills/releases).
+```bash
+npx skills@latest update
+npx skills@latest remove <nome>
+```
+
+</details>
+
+<details>
+<summary>Plugin do Claude Code (versionado)</summary>
+
+Você fica numa release até atualizar. Cada release e o changelog dela estão em [Releases](https://github.com/eusouosalmo/skills/releases).
 
 ```bash
 claude plugin marketplace add eusouosalmo/skills
@@ -39,47 +97,11 @@ claude plugin uninstall eusouosalmo-skills@eusouosalmo
 claude plugin marketplace remove eusouosalmo
 ```
 
-### npx skills, para qualquer agente
-
-Sem versão: instala e atualiza a partir do último commit do `main`. Funciona com Claude Code, Codex, Cursor e outros agentes.
-
-```bash
-npx skills@latest add eusouosalmo/skills
-```
-
-O instalador pergunta quais skills e em quais agentes instalar. Para uma skill só, acrescente `--skill <nome>`. Para atualizar ou remover:
-
-```bash
-npx skills@latest update
-npx skills@latest remove <nome>
-```
-
-## Skills
-
-- [skill-forge](skills/harness/skill-forge/SKILL.md) (beta): cria ou altera uma skill a partir de uma falha observada, conferida com evals.
-- [reel-motion](skills/content/reel-motion/SKILL.md) (beta): planeja quais trechos de um reel em talking-head viram motion e renderiza as cenas e os overlays transparentes de adesivos para o CapCut.
-- [reel-script](skills/content/reel-script/SKILL.md) (beta): escreve roteiros de vídeo curto a partir das anotações do autor, com gancho, um CTA falado, texto de teleprompter cronometrado e os prints das fontes para a edição.
-- [reel-cut](skills/content/reel-cut/SKILL.md) (beta): corta os brutos de um reel em talking-head num corte seco, escolhendo a tomada de cada fala e tirando bastidor e pausas longas, com uma tabela de tomadas aprovada antes do render.
-- [setup-eusouosalmo-skills](skills/content/setup-eusouosalmo-skills/SKILL.md) (beta): configura as skills deste kit numa máquina uma vez, achando as pastas e os arquivos que elas leem (nas de reel: a pasta dos reels, os roteiros, o arquivo de estilo, o design system e os projetos do CapCut) e gravando os caminhos onde elas procuram.
-
-Em draft, fora dos dois caminhos de instalação:
-
-- [reel-edit](skills/content/reel-edit/SKILL.md): edita um reel em talking-head dos brutos e do roteiro até o reel pronto, como projeto do CapCut ou mp4, chamando em ordem a reel-cut, a reel-motion e a reel-finish, com a aprovação do autor entre elas.
-- [reel-finish](skills/content/reel-finish/SKILL.md): monta o reel pronto, como projeto do CapCut ou como mp4 final sem CapCut, com o corte, os overlays das cenas, os keyframes e a divisão da tela dividida, os sfx, a abertura, os punch-ins e as palavras em destaque com som e a legenda no estilo de um projeto do próprio autor.
-- [git-guardrails](skills/harness/git-guardrails/SKILL.md): guardrails de git por projeto para agentes de código, com perfis interativo e AFK.
-- [eusouosalmo-voice](skills/content/eusouosalmo-voice/SKILL.md): escreve e revisa texto na voz do eusouosalmo, no registro falado ou escrito conforme o canal.
-- [post-caption](skills/content/post-caption/SKILL.md): escreve a legenda de um vídeo curto para Instagram, TikTok, YouTube Shorts ou LinkedIn a partir do roteiro, complementando o vídeo com um pedido, crédito da fonte e hashtags dentro do limite da plataforma.
-
-As instruções das skills são escritas em inglês; as skills de conteúdo entregam o resultado em português.
-
-| Categoria | O que reúne |
-|---|---|
-| [content](skills/content/README.md) | Escrita, roteiro, voz e marca. Resultado em pt-BR |
-| [harness](skills/harness/README.md) | Setup de repositório para trabalhar com IA com segurança, inclusive em modo AFK, e criação das skills que o agente usa |
+</details>
 
 ## Como o repositório funciona
 
-Toda skill segue a [especificação Agent Skills](https://agentskills.io/specification). As convenções (nomes, maturidade, língua) estão no [AGENTS.md](AGENTS.md), e o porquê de cada uma em [docs/adr](docs/adr). A estrutura deve muito às [skills do Matt Pocock](https://github.com/mattpocock/skills).
+Toda skill segue a [especificação Agent Skills](https://agentskills.io/specification). As instruções são escritas em inglês; as skills de conteúdo entregam o resultado em português. As convenções (nomes, maturidade, língua) estão no [AGENTS.md](AGENTS.md), e o porquê de cada uma em [docs/adr](docs/adr). A estrutura deve muito às [skills do Matt Pocock](https://github.com/mattpocock/skills).
 
 ## Licença
 
