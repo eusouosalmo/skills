@@ -470,6 +470,23 @@
         "Because of the course CTA, the photo of the person named is asked of the author, not searched"
       ],
       "human_feedback": ""
+    },
+    {
+      "id": 28,
+      "name": "urna-hybrid-split-full",
+      "prompt": "o SRT da parte 1 do reel da urna tá em parte-1.srt (a gravação ainda tô cortando). quero animação híbrida, tela dividida e animação fullscreen, bem detalhada. meu design system tá em ds/. planeja e para no plano.",
+      "setup": "Copy evals/files/urna-parte-1 into an empty folder inside a reels folder, add the author's design system export as ds/ and the author's style file at ../estilo.md (both kept outside the repo in .scratch/animating-reel-scenes), and run the prompt as a separate session or fresh subagent. The user is away: questions are written down with the recommended option taken, and the run stops at the plan gate.",
+      "files": [
+        "evals/files/urna-parte-1"
+      ],
+      "expected_output": "The hybrid mode as the author meant it: split screen for the whole reel in one HTML and one export, the panel growing to full screen in named stretches and coming back, the full-screen ranges listed for the caption height, and no face-only stretch where the panel leaves.",
+      "assertions": [
+        "The screen mode taken for 'híbrida' is split screen for the whole reel with the panel growing to full screen in chosen stretches, not mixed by stretch",
+        "The plan is one HTML and one export (the panel .mov) for the whole reel, not one file per scene",
+        "No stretch removes the panel to leave the face alone after the hook",
+        "timeline.md lists each full-screen range with start and end for the caption height"
+      ],
+      "human_feedback": ""
     }
   ]
 }
