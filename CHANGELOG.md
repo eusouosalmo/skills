@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.6.0](https://github.com/eusouosalmo/skills/compare/v0.5.0...v0.6.0) (2026-10-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* skills renamed: writing-short-video-scripts to reel-script, cutting-raw-takes to reel-cut, animating-reel-scenes to reel-motion, finishing-reels to reel-finish, editing-reels to reel-edit, writing-post-captions to post-caption, writing-as-eusouosalmo to eusouosalmo-voice, creating-skills to skill-forge, setting-up-git-guardrails to git-guardrails. Reinstall to get the new names; npx skills leaves the old folders behind.
+
+### Features
+
+* **content:** estimate script duration at the author's measured speaking rate ([5a2e248](https://github.com/eusouosalmo/skills/commit/5a2e248670890d7bcd2ecd240a9160efa09432ad))
+* **content:** hybrid screen mode in reel-motion ([9dbd050](https://github.com/eusouosalmo/skills/commit/9dbd050dc5dadab55089596efad2814599a26836))
+* rename every skill to a short, theme-first name ([8b5b419](https://github.com/eusouosalmo/skills/commit/8b5b4194486a999df4bcdf6d8874ceda345234ec))
+
+
+### Bug Fixes
+
+* **content:** upper-case CapCut captions so accented letters stay capital ([49a88e9](https://github.com/eusouosalmo/skills/commit/49a88e930ab93235b906925c7919caafa385c980))
+
 ## [0.5.0](https://github.com/eusouosalmo/skills/compare/v0.4.0...v0.5.0) (2026-10-27)
 
 
