@@ -536,6 +536,9 @@ def main():
         for n, a, b, text in srt(cap["srt"]):
             for wrong, right in cap.get("fixes", {}).items():
                 text = text.replace(wrong, right)
+            # upper-cased here, as render_mp4 does: ZY Resolve draws its lowercase as capitals and has no accented
+            # letters, so CapCut takes them from another font, and a lowercase "memória" came out as "MEMóRIA"
+            text = text.upper()
             ws = [w for w in words if w.get("cue") == n] if words and "cue" in words[0] else \
                  [w for w in words if a - 0.05 <= (w["s"] + w["e"]) / 2 <= b + 0.05]
             tokens, starts, ends = [], [], []
