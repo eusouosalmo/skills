@@ -56,19 +56,19 @@ npx skills@latest remove <nome>
 
 ## Skills
 
-- [creating-skills](skills/harness/creating-skills/SKILL.md) (beta): cria ou altera uma skill a partir de uma falha observada, conferida com evals.
-- [animating-reel-scenes](skills/content/animating-reel-scenes/SKILL.md) (beta): planeja quais trechos de um reel em talking-head viram motion e renderiza as cenas e os overlays transparentes de adesivos para o CapCut.
-- [writing-short-video-scripts](skills/content/writing-short-video-scripts/SKILL.md) (beta): escreve roteiros de vídeo curto a partir das anotações do autor, com gancho, um CTA falado, texto de teleprompter cronometrado e os prints das fontes para a edição.
-- [cutting-raw-takes](skills/content/cutting-raw-takes/SKILL.md) (beta): corta os brutos de um reel em talking-head num corte seco, escolhendo a tomada de cada fala e tirando bastidor e pausas longas, com uma tabela de tomadas aprovada antes do render.
+- [skill-forge](skills/harness/skill-forge/SKILL.md) (beta): cria ou altera uma skill a partir de uma falha observada, conferida com evals.
+- [reel-motion](skills/content/reel-motion/SKILL.md) (beta): planeja quais trechos de um reel em talking-head viram motion e renderiza as cenas e os overlays transparentes de adesivos para o CapCut.
+- [reel-script](skills/content/reel-script/SKILL.md) (beta): escreve roteiros de vídeo curto a partir das anotações do autor, com gancho, um CTA falado, texto de teleprompter cronometrado e os prints das fontes para a edição.
+- [reel-cut](skills/content/reel-cut/SKILL.md) (beta): corta os brutos de um reel em talking-head num corte seco, escolhendo a tomada de cada fala e tirando bastidor e pausas longas, com uma tabela de tomadas aprovada antes do render.
 - [setup-eusouosalmo-skills](skills/content/setup-eusouosalmo-skills/SKILL.md) (beta): configura as skills deste kit numa máquina uma vez, achando as pastas e os arquivos que elas leem (nas de reel: a pasta dos reels, os roteiros, o arquivo de estilo, o design system e os projetos do CapCut) e gravando os caminhos onde elas procuram.
 
 Em draft, fora dos dois caminhos de instalação:
 
-- [editing-reels](skills/content/editing-reels/SKILL.md): edita um reel em talking-head dos brutos e do roteiro até o reel pronto, como projeto do CapCut ou mp4, chamando em ordem a cutting-raw-takes, a animating-reel-scenes e a finishing-reels, com a aprovação do autor entre elas.
-- [finishing-reels](skills/content/finishing-reels/SKILL.md): monta o reel pronto, como projeto do CapCut ou como mp4 final sem CapCut, com o corte, os overlays das cenas, os keyframes e a divisão da tela dividida, os sfx, a abertura, os punch-ins e as palavras em destaque com som e a legenda no estilo de um projeto do próprio autor.
-- [setting-up-git-guardrails](skills/harness/setting-up-git-guardrails/SKILL.md): guardrails de git por projeto para agentes de código, com perfis interativo e AFK.
-- [writing-as-eusouosalmo](skills/content/writing-as-eusouosalmo/SKILL.md): escreve e revisa texto na voz do eusouosalmo, no registro falado ou escrito conforme o canal.
-- [writing-post-captions](skills/content/writing-post-captions/SKILL.md): escreve a legenda de um vídeo curto para Instagram, TikTok, YouTube Shorts ou LinkedIn a partir do roteiro, complementando o vídeo com um pedido, crédito da fonte e hashtags dentro do limite da plataforma.
+- [reel-edit](skills/content/reel-edit/SKILL.md): edita um reel em talking-head dos brutos e do roteiro até o reel pronto, como projeto do CapCut ou mp4, chamando em ordem a reel-cut, a reel-motion e a reel-finish, com a aprovação do autor entre elas.
+- [reel-finish](skills/content/reel-finish/SKILL.md): monta o reel pronto, como projeto do CapCut ou como mp4 final sem CapCut, com o corte, os overlays das cenas, os keyframes e a divisão da tela dividida, os sfx, a abertura, os punch-ins e as palavras em destaque com som e a legenda no estilo de um projeto do próprio autor.
+- [git-guardrails](skills/harness/git-guardrails/SKILL.md): guardrails de git por projeto para agentes de código, com perfis interativo e AFK.
+- [eusouosalmo-voice](skills/content/eusouosalmo-voice/SKILL.md): escreve e revisa texto na voz do eusouosalmo, no registro falado ou escrito conforme o canal.
+- [post-caption](skills/content/post-caption/SKILL.md): escreve a legenda de um vídeo curto para Instagram, TikTok, YouTube Shorts ou LinkedIn a partir do roteiro, complementando o vídeo com um pedido, crédito da fonte e hashtags dentro do limite da plataforma.
 
 As instruções das skills são escritas em inglês; as skills de conteúdo entregam o resultado em português.
 

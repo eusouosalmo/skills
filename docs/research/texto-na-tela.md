@@ -1,6 +1,6 @@
 # Texto na tela: quando destacar, quanto escrever e como conviver com a legenda
 
-Resumo: a pesquisa em aprendizagem multimídia dá base para três decisões da skill `animating-reel-scenes`. Primeiro, destacar ajuda quando é raro, curto e chega junto com a palavra falada; destacar muito apaga o efeito, e texto que pisca atrapalha. Segundo, poucas palavras-chave tiradas da fala ajudam a lembrar, enquanto uma frase escrita idêntica à fala, junto com imagem, atrapalha; num Reel com legenda automática, a fala já está escrita na tela, então um overlay com a frase inteira é uma terceira cópia das mesmas palavras. Terceiro, um texto um pouco reescrito bate o texto literal quando é frase inteira, mas reescrito demais perde; para carimbo de uma a três palavras, os estudos que funcionaram usaram termos tirados da fala. Quase toda a evidência vem de estudantes universitários em aulas multimídia de laboratório; a transferência para Reels é inferência e está marcada. Pesquisa de 2026-10-07, complementar a [psicologia-do-roteiro-curto.md](psicologia-do-roteiro-curto.md) (seção 3.7, sinalização em geral, que não é repetida aqui) e a [roteiro-de-video.md](roteiro-de-video.md) (seção 3.4, texto no primeiro frame). Não decide nada; a seção 6 propõe mudanças.
+Resumo: a pesquisa em aprendizagem multimídia dá base para três decisões da skill `reel-motion`. Primeiro, destacar ajuda quando é raro, curto e chega junto com a palavra falada; destacar muito apaga o efeito, e texto que pisca atrapalha. Segundo, poucas palavras-chave tiradas da fala ajudam a lembrar, enquanto uma frase escrita idêntica à fala, junto com imagem, atrapalha; num Reel com legenda automática, a fala já está escrita na tela, então um overlay com a frase inteira é uma terceira cópia das mesmas palavras. Terceiro, um texto um pouco reescrito bate o texto literal quando é frase inteira, mas reescrito demais perde; para carimbo de uma a três palavras, os estudos que funcionaram usaram termos tirados da fala. Quase toda a evidência vem de estudantes universitários em aulas multimídia de laboratório; a transferência para Reels é inferência e está marcada. Pesquisa de 2026-10-07, complementar a [psicologia-do-roteiro-curto.md](psicologia-do-roteiro-curto.md) (seção 3.7, sinalização em geral, que não é repetida aqui) e a [roteiro-de-video.md](roteiro-de-video.md) (seção 3.4, texto no primeiro frame). Não decide nada; a seção 6 propõe mudanças.
 
 ## Sumário
 
@@ -185,7 +185,7 @@ A seção 3.7 de psicologia-do-roteiro-curto.md já resume o princípio de sinal
 
 ## 6. Recomendações para a skill
 
-Recomendações para `skills/content/animating-reel-scenes/SKILL.md`. A decisão de aplicar é do autor.
+Recomendações para `skills/content/reel-motion/SKILL.md`. A decisão de aplicar é do autor.
 
 ### 6.1 Quando destacar
 

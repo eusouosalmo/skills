@@ -1,6 +1,6 @@
 # Psicologia do roteiro curto: gancho, motivo, fluidez e fidelidade
 
-Resumo: a pesquisa em psicologia explica os quatro defeitos que o autor apontou em roteiros gerados pela skill `writing-short-video-scripts`. Um gancho prende quando abre uma lacuna que o espectador sente como dele, com um detalhe concreto e uma expectativa quebrada; uma afirmação ganha motivo quando está na cadeia causal da ideia e o espectador perguntaria "por quê?"; frases curtas soltas perdem as relações de causa e contraste que ajudam a entender e lembrar; e exagerar o relato pessoal é a forma de erro que mais custa confiança. A seção 7 trata de um quinto ponto: marcas de tempo e de empregador no relato ("na empresa onde eu tô hoje"), que datam o vídeo e expõem a empresa sem servir à ideia. Pesquisa de 2026-10-05, complementar a [roteiro-de-video.md](roteiro-de-video.md), que não é repetida aqui. Não decide nada; a seção 8 propõe mudanças.
+Resumo: a pesquisa em psicologia explica os quatro defeitos que o autor apontou em roteiros gerados pela skill `reel-script`. Um gancho prende quando abre uma lacuna que o espectador sente como dele, com um detalhe concreto e uma expectativa quebrada; uma afirmação ganha motivo quando está na cadeia causal da ideia e o espectador perguntaria "por quê?"; frases curtas soltas perdem as relações de causa e contraste que ajudam a entender e lembrar; e exagerar o relato pessoal é a forma de erro que mais custa confiança. A seção 7 trata de um quinto ponto: marcas de tempo e de empregador no relato ("na empresa onde eu tô hoje"), que datam o vídeo e expõem a empresa sem servir à ideia. Pesquisa de 2026-10-05, complementar a [roteiro-de-video.md](roteiro-de-video.md), que não é repetida aqui. Não decide nada; a seção 8 propõe mudanças.
 
 ## Sumário
 
@@ -266,7 +266,7 @@ A pesquisa anterior (roteiro-de-video.md, seções 4.5, 6.1 e 6.3) já cobre o "
 ### 4.6 Estilo conversacional, não informal no conteúdo
 
 - **O que é:** GMM (2.5) mostrou ganho de aprendizagem com estilo conversacional: primeira e segunda pessoa, falar direto com quem lê. O estilo muda a forma, não o rigor.
-- **Por que existe:** a voz do autor (skill `writing-as-eusouosalmo`) já pede fala; esta evidência apoia que o ganho vem de falar com o espectador, não de frases mais curtas.
+- **Por que existe:** a voz do autor (skill `eusouosalmo-voice`) já pede fala; esta evidência apoia que o ganho vem de falar com o espectador, não de frases mais curtas.
 - **Fonte:** GMM.
 - **Confiança:** confirmado (texto instrucional escrito).
 
@@ -389,7 +389,7 @@ Verificação: nenhuma frase do relato tem nome de empregador, cliente ou colega
 
 ## 8. O que muda na skill
 
-Recomendações para `skills/content/writing-short-video-scripts/SKILL.md`, cada uma com o achado que a sustenta. A decisão de aplicar é do autor.
+Recomendações para `skills/content/reel-script/SKILL.md`, cada uma com o achado que a sustenta. A decisão de aplicar é do autor.
 
 1. **Passo 3, Hook:** trocar "a contradiction, a problem stated plainly or the author's scene" pelos cinco padrões da seção 2.9 e exigir que o gancho passe nas quatro perguntas (quem, o que de concreto, que pergunta fica aberta, o que contraria). Achados 2.1, 2.3, 2.4, 2.5, 2.6. Confiança: confirmado para os mecanismos.
 2. **Passo 3, nicho:** acrescentar que o gancho nomeia o papel ou a área com a palavra completa e de sentido único ("desenvolvedor", não "dev"), sem sigla nem gíria de grupo no primeiro segundo. Achado 2.7. Confiança: confirmado para o custo do jargão, inferência para a regra.

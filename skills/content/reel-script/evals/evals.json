@@ -1,0 +1,312 @@
+{
+  "skill_name": "reel-script",
+  "evals": [
+    {
+      "id": 1,
+      "name": "first-ask-book-chapter",
+      "prompt": "Eu quero falar sobre um capitulo que estou lendo do livro fundamentos de arquitetura. Vou descrever o que aprendi.\nNo capitulo 2 fala sobre pensamentos arquitetural.\n\nEu nao terminei, mas acredito que podemos trabalhar encima do que aprendi. No inicio fala sobre o papel do arquiteto e o papel do dev.\n\nO papel do arquiteto trabalhar em torno de 4 pilares (esqueci e estou sem minhas anotações),entender a diferença de design e arquiteura.. é decidir tecnologias, levantar requisitos com base no que entende do que vem do negocio, entender necessidades do produto e entao passar para o dev. E o do dev de definit objetos e classes, implementar, escrever testes/testar e alg assim.\n\nPorem o livro trás que o que é feito e se entende é algo de direção unica, o arquiteto pega essas informações e entrega ao dev. Causando problemas por exemplo de o dev (ou time) mudar alguma coisa e nao comunicas/dar feedback ao arquiteto como tambem do arquiteto nao mentorar ou ter esses feedbacks (acho que era isso).\n\nCom isso o livro propoe algo melhor e de via bidirecional.\n\nDepois o livro vai citando a questao do conhecimento do arquiteto que deve ser muito amplo para ele conhecer sobre muitas tecnologias, tecnicas e conseguir decidir. Porém, diferente do dev que precisa escolher algo e se aprofundar naquilo o arquiteto deve ser um conhecimneto mais amplo e nao tao profundo pois demandaria tempo ou esforço e aumentando a especialização que pode ser algo ruim. O dev por exemplo precisa se especializar e se atualizar contantemente naquela tecnologia ou conhecimento e o arquiteto é diferente. O livro mostra tambem alguma piramides bem interesses para ilustrar.\n\nBom, isso é tudo que lembro... talvez tenha deixado passar informações importantes mas sei que voce consegue verificar melhor. E como disse, estou sem minhas anotações (fiz no carderno) e nao il o capitulo todo ainda, mas ja da para criar um roteiro bem enriquecedor.\n\nLembrando que sao informações soltas e a ordem logica importa. Nao a ordem que trouxe aqui no texto.",
+      "setup": "Run the prompt from an empty folder, as a separate session outside any repository (claude -p from that folder), so no project CLAUDE.md or AGENTS.md leaks into the run. Allow reading ~/.claude/skills (--add-dir) so installed skills such as eusouosalmo-voice can load their files.",
+      "expected_output": "The request is read as a video script from book notes. Before writing, the agent asks for platform, duration and objective, and proposes the two ideas in the notes (breadth versus depth with the pyramid; the one-way flow between architect and team) as two separate videos.",
+      "assertions": [
+        "The output treats 'roteiro' as a video script, not as a study guide or chapter summary",
+        "Before any final script, the output asks for the video's platform or duration and for its objective",
+        "The two ideas in the notes (the architect's breadth versus the developer's depth; the one-way versus two-way flow) are proposed as separate videos, not merged into one text"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 2,
+      "name": "pyramid-reel",
+      "prompt": "monta o roteiro do reel sobre o conhecimento do arquiteto (a pirâmide), pro Instagram, de 60 a 90 segundos, no formato paradoxo resolvido em camadas. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/pyramid-reel/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3. The user is away: where the skill asks and waits (objective), the run notes the question, assumes the likeliest answer and continues, so the script assertions can be checked.",
+      "files": [
+        "evals/files/pyramid-reel"
+      ],
+      "expected_output": "Close to the approved script: hook 'O melhor arquiteto de software não é o dev que mais sabe de uma tecnologia', the pyramid explained once and then plain developer words (especialista, stack, se aprofundar), the user's case with a [falta: ...] for the technologies, no mention of the book in the spoken lines, CTA 'E tu, hoje, é mais especialista ou generalista?', about 195 words, book credit for the caption and the pyramid's layers in a list to check.",
+      "assertions": [
+        "The hook (the spoken lines of the first block) says 'arquitetura de software' or 'arquiteto de software'",
+        "No spoken line mentions the book, its title, the chapter or the act of reading it",
+        "After the pyramid is explained, no later spoken line (CTA included) uses pyramid words as vocabulary: topo, meio, base, crescer, alargar, pra cima, pros lados",
+        "The spoken lines have at most 200 words (about 90 s at 130 words per minute), not counting [falta: ...] markers",
+        "The output has a teleprompter part with only the spoken lines, one sentence per line, no block labels, and an estimated duration",
+        "No spoken line says the author is or became an architect ('virei arquiteto', 'sou arquiteto', 'quando eu era arquiteto')",
+        "The hook says 'desenvolvedor' where it names the developer role, never 'dev'",
+        "Any spoken claim that the developer must stay updated all the time carries a concrete reason (a new version, a vulnerability, a new library) or is absent",
+        "Any spoken claim that specialising too much is a problem carries a concrete reason or is absent",
+        "Outside the hook and one turning-point line, no two consecutive spoken sentences stand in a cause or contrast relation without a connective (porque, então, por isso, mas, só que)",
+        "No spoken line ties the author's story to a current job or a date ('hoje', 'atual', 'na empresa onde eu tô', 'no meu trabalho atual')",
+        "Every spoken sentence where the narrator says they learned technologies names one from the notes or carries a [falta: ...] asking which",
+        "The output says the facts were not researched (no web access) and every checkable technical fact the script states as fact (outside an example opened as hypothetical) is in 'A checar antes de gravar'"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 3,
+      "name": "two-way-reel",
+      "prompt": "monta o roteiro do reel sobre a arquitetura que só desce pro time e nunca volta, pro Instagram, de 60 a 90 segundos, no formato dúvida comum respondida de passagem. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/two-way-reel/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3. The user is away: where the skill asks and waits (objective), the run notes the question, assumes the likeliest answer and continues, so the script assertions can be checked.",
+      "files": [
+        "evals/files/two-way-reel"
+      ],
+      "expected_output": "Close to the approved script: hook 'Tem decisão de arquitetura de software que desce pro time e nunca mais volta', the traditional model and the one-way problem in both directions, the pipeline case (db as a queue, talking to the people who had been on the team longer) as proof, no mention of the book in the spoken lines, CTA 'No teu time, quem decide a arquitetura conversa com quem implementa?', about 195 words.",
+      "assertions": [
+        "The hook (the spoken lines of the first block) says 'arquitetura de software' or 'arquiteto de software'",
+        "No spoken line mentions the book, its title, the chapter or the act of reading it",
+        "The CTA question can be answered without the hook's image: it does not ask whether the architecture 'desce', 'volta' or goes one way or both",
+        "The spoken lines have at most 200 words (about 90 s at 130 words per minute), not counting [falta: ...] markers",
+        "The output has a teleprompter part with only the spoken lines, one sentence per line, no block labels, and an estimated duration",
+        "The hook says 'desenvolvedor' where it names the developer role, never 'dev'",
+        "The hook has a person (the viewer or the author) in it and leaves a question open: it does not end on its own conclusion ('e nunca volta')",
+        "No spoken sentence rests on a vague reference with no concrete referent ('era coisa de quem viveu aquilo', 'isso', 'aquilo')",
+        "Outside the hook and one turning-point line, no two consecutive spoken sentences stand in a cause or contrast relation without a connective (porque, então, por isso, mas, só que)",
+        "No spoken line ties the author's story to a current job or a date ('hoje', 'atual', 'na empresa onde eu tô', 'no meu trabalho atual')",
+        "Every 'então' or 'por isso' in the spoken lines introduces a consequence of the previous sentence",
+        "After the sentence that explains an image or metaphor, the next sentence does not restate the same image",
+        "The output says the facts were not researched (no web access) and every checkable technical fact the script states as fact (outside an example opened as hypothetical) is in 'A checar antes de gravar'"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 4,
+      "name": "format-menu-no-format",
+      "prompt": "monta o roteiro de um reel sobre JSONB no Postgres, pro Instagram, de 60 a 90 segundos, objetivo informar. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/format-menu-no-format/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3.",
+      "files": [
+        "evals/files/format-menu-no-format"
+      ],
+      "expected_output": "Before writing, the agent offers 2 or 3 formats from the menu (for instance symptom, cure and dose; common doubt answered in passing; experiment that reproduces everyday life), each with one line on why it fits the notes, and waits for the choice.",
+      "assertions": [
+        "Before any script, the output offers 2 or 3 named formats, each with one line on why it fits the notes",
+        "The offered formats come from at least 2 format families",
+        "The output stops and waits for the choice; no script blocks (Gancho, Contexto, Entrega, Conexão, CTA) are written"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 5,
+      "name": "format-ladder-single-close",
+      "prompt": "monta o roteiro de um reel sobre os comentários de um post com milhares de respostas, pro Instagram, de 60 a 90 segundos, objetivo informar, no formato sistema que cresce por problemas. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/format-ladder-single-close/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3.",
+      "files": [
+        "evals/files/format-ladder-single-close"
+      ],
+      "expected_output": "The script follows the format's blocks (minimal version, steps, turn against the video itself, rule and tool), the bug is only the hook and the author's guesses stay hypotheses, and the tool becomes the single closing question.",
+      "assertions": [
+        "The Bloco column uses the format's block names; no block is named Contexto or Conexão",
+        "The spoken lines end on exactly one question to the viewer, and no other question asking for the viewer's answer comes after the rule",
+        "The format's tool (the question the viewer can apply to their own system) is in that last question or stated before it, never as a second closing question",
+        "The output says the facts were not researched (no web access) and every checkable technical fact the script states as fact (outside an example opened as hypothetical) is in 'A checar antes de gravar'"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 6,
+      "name": "whatsapp-colors-return",
+      "prompt": "monta o roteiro de um reel sobre a criptografia do WhatsApp explicada com mistura de cores, pro Instagram, de 60 a 90 segundos, objetivo informar, no formato problema na analogia, solução em peças. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/whatsapp-colors-return/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3.",
+      "files": [
+        "evals/files/whatsapp-colors-return"
+      ],
+      "expected_output": "The paint analogy shows the failure (a carrier sees everything sent), then the mixing that solves it happens in the scene before the key exchange gets its name; the pieces follow, and the screen returns to the failure scene, solved.",
+      "assertions": [
+        "Before any spoken line names or defines the solution ('se chama', 'isso é', 'é isso que X faz'), a spoken line shows the object that solves the failure acting inside the analogy scene. Naming the subject in the hook as a label does not count.",
+        "The Bloco column uses the format's block names; no block is named Contexto or Conexão",
+        "The output says the facts were not researched (no web access) and every checkable technical fact the script states as fact (outside an example opened as hypothetical) is in 'A checar antes de gravar'",
+        "The Visual cell of the block that closes the format starts with 'Volta à analogia:' and shows the failure scene from the analogy (the two people, the carrier and the paint pots), now resolved",
+        "That return scene labels the image's parts with the subject's terms said in the image passage ('servidor', 'chave pública')",
+        "Every image part the spoken lines use gets its correspondence to the subject said aloud",
+        "After the spoken sentence with the last correspondence, no spoken line uses the image words (tinta, pote, cor, carteiro, misturar)",
+        "The CTA question can be answered without the image"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 7,
+      "name": "wall-cost-return",
+      "prompt": "monta o roteiro de um reel sobre a diferença entre arquitetura e design de software, pro Instagram, de 60 a 90 segundos, objetivo informar, no formato problema na analogia, solução em peças. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/wall-cost-return/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3.",
+      "files": [
+        "evals/files/wall-cost-return"
+      ],
+      "expected_output": "An analogy (such as a floor plan with a structural wall) shows a costly change, the idea that solves it acts in the scene before it gets its name, and the difference comes out as a matter of degree: the costlier to undo and the more spread the decision, the more it is architecture.",
+      "assertions": [
+        "Before any spoken line names or defines the solution ('se chama', 'isso é', 'é isso que X faz'), a spoken line shows the object that solves the failure acting inside the analogy scene. Naming the subject in the hook as a label does not count.",
+        "The Bloco column uses the format's block names; no block is named Contexto or Conexão",
+        "The output says the facts were not researched (no web access) and every checkable technical fact the script states as fact (outside an example opened as hypothetical) is in 'A checar antes de gravar'",
+        "The Visual cell of the block that closes the format starts with 'Volta à analogia:' and shows the failure scene from the analogy (the floor plan with the structural wall (or the image the script used)), now resolved",
+        "That return scene labels the image's parts with the subject's terms said in the image passage (the subject's terms that script's passage said for those parts, such as 'arquitetura', 'caro de desfazer' or the decision it named)",
+        "Every image part the spoken lines use gets its correspondence to the subject said aloud",
+        "After the spoken sentence with the last correspondence, no spoken line uses the image words (parede, pedreiro, armário, reforma, derrubar (or the words of the image the script used))",
+        "The CTA question can be answered without the image"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 8,
+      "name": "queue-half-truth-hook",
+      "prompt": "monta o roteiro de um reel sobre a fila de requisições que trava sem erro, pro Instagram, de 60 a 90 segundos, objetivo informar, no formato comparação absurda que separa duas métricas. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/queue-half-truth-hook/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3.",
+      "files": [
+        "evals/files/queue-half-truth-hook"
+      ],
+      "expected_output": "The main hook is a half-truth (a claim true in one metric, such as throughput), the body flips to the other metric (latency), and no case is invented for an author who has not lived it.",
+      "assertions": [
+        "The main hook is a half-truth: true in one metric, and the script later shows the metric where it is false",
+        "The Bloco column uses the format's block names; no block is named Contexto or Conexão",
+        "A spoken turn measures the same comparison in the second metric and the side that won in the first metric loses",
+        "No hook, main or alternative, addresses the viewer by role ('Se tu é desenvolvedor', 'Desenvolvedor,', 'Se tu é dev')",
+        "The two or three hooks (main and alternatives) each name a different pattern from hooks.md",
+        "The sentence right after the hook states the viewer's likely doubt and promises the proof",
+        "The output says the facts were not researched (no web access) and every checkable technical fact the script states as fact (outside an example opened as hypothetical) is in 'A checar antes de gravar'"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 9,
+      "name": "architecture-ladder-hook",
+      "prompt": "monta o roteiro de um reel sobre a diferença entre arquitetura e design de software, pro Instagram, de 60 a 90 segundos, objetivo informar, no formato sistema que cresce por problemas. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/architecture-ladder-hook/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3.",
+      "files": [
+        "evals/files/architecture-ladder-hook"
+      ],
+      "expected_output": "The hooks open on a situation, a scene or a contradiction, never by calling the viewer by role; each hook names its pattern from hooks.md and no two share one.",
+      "assertions": [
+        "No hook, main or alternative, addresses the viewer by role ('Se tu é desenvolvedor', 'Desenvolvedor,', 'Se tu é dev')",
+        "The two or three hooks (main and alternatives) each name a different pattern from hooks.md",
+        "The output says the facts were not researched (no web access) and every checkable technical fact the script states as fact (outside an example opened as hypothetical) is in 'A checar antes de gravar'"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 10,
+      "name": "architecture-degree-checked",
+      "prompt": "monta o roteiro de um reel sobre a diferença entre arquitetura e design de software, pro Instagram, de 60 a 90 segundos, objetivo informar, no formato sistema que cresce por problemas. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/architecture-degree-checked/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir), running wc and python3, and WebSearch and WebFetch.",
+      "files": [
+        "evals/files/architecture-degree-checked"
+      ],
+      "expected_output": "Before writing, the agent looks up primary sources on architecture versus design; the script treats the difference as a matter of degree (cost to undo, reach of the decision), and the delivery lists 'Conferido' with links apart from 'A checar antes de gravar'.",
+      "assertions": [
+        "The spoken lines treat the difference as one of degree (cost to undo, reach of the decision); no spoken line draws a fixed border ('design é o resto', 'isso é arquitetura, aquilo é design')",
+        "A 'Conferido' list holds the definition used, with a link to at least one primary source (Fowler, SEI, ISO/IEC/IEEE 42010, Martin or Richards); open the link and say whether it supports the claim",
+        "Every number said as fact in the spoken lines is in 'Conferido'; any other number is marked as a hypothesis in the spoken line or sits inside an example the spoken lines open as hypothetical ('imagina', 'digamos')",
+        "No claim appears in both 'Conferido' and 'A checar antes de gravar'"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 11,
+      "name": "jsonb-operators-checked",
+      "prompt": "monta o roteiro de um reel sobre JSONB no Postgres, pro Instagram, de 60 a 90 segundos, objetivo informar, no formato sintoma, cura e dose. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/jsonb-operators-checked/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir), running wc and python3, and WebSearch and WebFetch.",
+      "files": [
+        "evals/files/jsonb-operators-checked"
+      ],
+      "expected_output": "Before writing, the agent checks in the PostgreSQL docs which operators a GIN index on jsonb supports; the script says '->' does not use the GIN index and '@>' does, and 'Conferido' carries the postgresql.org link.",
+      "assertions": [
+        "The spoken lines say the '->' operator does not use the GIN index and '@>' does",
+        "A 'Conferido' list holds that claim with a link to postgresql.org; open the link and say whether it supports the claim",
+        "Every number said as fact in the spoken lines is in 'Conferido'; any other number is marked as a hypothesis in the spoken line or sits inside an example the spoken lines open as hypothetical ('imagina', 'digamos')",
+        "No claim appears in both 'Conferido' and 'A checar antes de gravar'"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 12,
+      "name": "comments-bug-ladder",
+      "prompt": "monta o roteiro de um reel sobre os comentários de um post com milhares de respostas, pro Instagram, de 60 a 90 segundos, objetivo informar, no formato processo percorrido por um caso só. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/comments-bug-ladder/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3. No web access.",
+      "files": [
+        "evals/files/comments-bug-ladder"
+      ],
+      "expected_output": "The bug only opens the video; the subject is how a comments system holds thousands of replies, each stage brought in by a problem the previous one left, and the ending returns to the bug through pieces already built, as hypothesis.",
+      "assertions": [
+        "The video's idea, stated without the bug, is how the comments system works; no body block is devoted to one possible cause of the bug",
+        "Every body block after the first names, in its spoken lines, a problem left by the previous block that brings this block's piece or stage in",
+        "No body block presents a suspect ('pode ser X', 'pode ter um X', 'o X tá velho?')",
+        "The ending returns to the bug only through pieces the body already built, marked as hypothesis, with no new suspect",
+        "The ending is not a list of questions, one per stage or piece"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 13,
+      "name": "comments-bug-journey-ladder",
+      "prompt": "monta o roteiro de um reel sobre os comentários de um post com milhares de respostas, pro Instagram, de 60 a 90 segundos, objetivo informar, no formato jornada de um objeto de ponta a ponta. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/comments-bug-journey-ladder/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3. No web access.",
+      "files": [
+        "evals/files/comments-bug-journey-ladder"
+      ],
+      "expected_output": "The bug only opens the video; the subject is how a comments system holds thousands of replies, each stage brought in by a problem the previous one left, and the ending returns to the bug through pieces already built, as hypothesis.",
+      "assertions": [
+        "The video's idea, stated without the bug, is how the comments system works; no body block is devoted to one possible cause of the bug",
+        "Every body block after the first names, in its spoken lines, a problem left by the previous block that brings this block's piece or stage in",
+        "No body block presents a suspect ('pode ser X', 'pode ter um X', 'o X tá velho?')",
+        "The ending returns to the bug only through pieces the body already built, marked as hypothesis, with no new suspect",
+        "The ending is not a list of questions, one per stage or piece"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 14,
+      "name": "jsonb-symptom-hook",
+      "prompt": "monta o roteiro de um reel sobre JSONB no Postgres, pro Instagram, de 60 a 90 segundos, objetivo informar, no formato sintoma, cura e dose. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/jsonb-symptom-hook/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3. No web access.",
+      "files": [
+        "evals/files/jsonb-symptom-hook"
+      ],
+      "expected_output": "The hook's Visual cell opens with the visual hook form the format points to, and no on-screen text repeats the spoken hook.",
+      "assertions": [
+        "The hook's Visual cell starts with 'Forma:' and names one of the five visual hook forms",
+        "No on-screen text in the hook repeats or summarises the spoken hook; any big text is the subject's or series' name, at most 4 words",
+        "The hook's form is the typed symptom: code or EXPLAIN output on screen from the first frame"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 15,
+      "name": "paradox-image-hook",
+      "prompt": "monta o roteiro de um reel sobre a diferença entre arquitetura e design de software, pro Instagram, de 60 a 90 segundos, objetivo informar, no formato paradoxo resolvido em camadas. minhas anotações tão em anotacoes.md",
+      "setup": "Copy evals/files/paradox-image-hook/anotacoes.md into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder). Allow reading ~/.claude/skills (--add-dir) and running wc and python3. No web access.",
+      "files": [
+        "evals/files/paradox-image-hook"
+      ],
+      "expected_output": "The hook's Visual cell opens with the visual hook form the format points to, and no on-screen text repeats the spoken hook.",
+      "assertions": [
+        "The hook's Visual cell starts with 'Forma:' and names one of the five visual hook forms",
+        "No on-screen text in the hook repeats or summarises the spoken hook; any big text is the subject's or series' name, at most 4 words",
+        "The hook's form is the image built on the word, with no big text in the hook"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 16,
+      "name": "celular-source-prints",
+      "prompt": "faz o roteiro do próximo reel respondendo esse comentário (comentario.png). a pesquisa tá em pesquisa.md. instagram, 90 a 180 s, objetivo puxar conversa, formato paradoxo resolvido em camadas.",
+      "setup": "Private input, kept out of the repo: .scratch/writing-short-video-scripts-workspace/private-inputs/celular-source-prints (from the author's vault). Run with bin/run_private.py: claude -p from that folder, outside the repo, with web access and python3 with playwright; the user is away. Input: the author's research note on whether the phone listens to conversations and the print of the follower's comment. Compare with the script the author recorded, whose prints and visual references table were made by hand in two sessions.",
+      "files": [],
+      "expected_output": "The script, plus prints of the sources it shows in assets/<script name>/ (top of the page and the passage marked in yellow, without ads or banners) and a 'Referências visuais para edição' table in the script: one row per print, falta rows for what only the author has (a stretch of the earlier paint video, a screen recording of the Meta AI button), and the comment print marked to blur the commenter's name and photo.",
+      "assertions": [
+        "The script file has a 'Referências visuais para edição' section with a table of block, file or what to capture, source and what to highlight",
+        "Every source in Conferido whose page the edit can show has a -trecho print in assets/<script name>/ next to the script, with the spoken claim marked in yellow",
+        "The row of the comment print says to blur the commenter's name and photo",
+        "What only the author can provide and the Visual column cites (a stretch of the earlier video, a screen recording on the phone) is a falta row saying what to capture"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 17,
+      "name": "existing-script-prints",
+      "prompt": "o roteiro da conta do lula tá pronto (roteiro a meta e a conta do lula.md). prepara os prints das fontes pra edição do vídeo.",
+      "setup": "Private input, kept out of the repo: .scratch/writing-short-video-scripts-workspace/private-inputs/existing-script-prints (from the author's vault). Run with bin/run_private.py: claude -p from that folder, outside the repo, with web access and python3 with playwright; the user is away. Input: the author's script about the Meta and Lula's ad account with its 'Referências visuais para edição' section removed. The hand-made prints of that script left ads in the page and a passage print identical to the page top (the Meta page opened in Portuguese and the mark was in English).",
+      "files": [],
+      "expected_output": "Prints of each source in assets/roteiro a meta e a conta do lula/, each passage print with the words of the claim marked as the page writes them (Portuguese on the Meta page), no ads, banners or empty ad boxes, and the script file gains the visual references table listing them.",
+      "assertions": [
+        "The prints are in assets/roteiro a meta e a conta do lula/ next to the script, and the script file gains a 'Referências visuais para edição' section listing them",
+        "Every -trecho print shows the yellow mark on the words its row says to highlight, in the page's own language",
+        "No print shows an ad, a cookie banner or the empty box an ad leaves ('Publicidade' over a blank area)"
+      ],
+      "human_feedback": ""
+    }
+  ]
+}

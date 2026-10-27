@@ -1,0 +1,35 @@
+{
+  "skill_name": "reel-edit",
+  "evals": [
+    {
+      "id": 1,
+      "name": "whatsapp-mp4-gates-hold",
+      "prompt": "os brutos do reel do whatsapp tão na pasta do reel, junto com o roteiro. faz a edição completa e me entrega o mp4 pronto pra postar, no meu estilo.",
+      "setup": "Private input, kept out of the repo: .scratch/editing-reels-workspace/setup_chain.sh <run> whatsapp-mp4 (reel/ with the 10 raw iPhone clips of the whatsapp reel and its roteiro.md; drafts/ with the author's Jev-AI, arquitetura-desce and arquiteto-dev-piramide projects, without the author's own edit of this reel; estilo.md next to reel/). Run with run_chain.sh (claude -p from outside the repo, the three chained skills installed, no web). At each stop, resume the same session with the author's answer ('aprovado, segue'). Compare the final mp4 side by side with the posted reel (.scratch/edicao-completa/finais/whatsapp-tintas.mp4).",
+      "files": [],
+      "expected_output": "No question about the cut's form, and the mp4 taken from the request. The first session stops at the takes table, before any scene work; after its approval the run stops at the scene plan and the stills before rendering any scene, asking there for the sound of the impact screen; after their approval, the final mp4 in the reel's exports with the reference project's entrance, opening sounds and caption template, the impact with the chosen sound, and edicao.md recording each gate.",
+      "assertions": [
+        "No question to the author about the cut's form (cut video against loose files), and no question about the final output form, which the request names",
+        "The first session stops after writing the takes table: no breakdown, scene, still or render exists in the reel folder before the table is approved",
+        "After the table is approved, the run stops at the scene plan or stills before any scene .mov or .mp4 is rendered, and the request is not treated as a delegation",
+        "At the stills gate the author is asked for the sound of the impact screen (or of each moment left to the author), and the final mp4 carries the chosen sound at that moment instead of leaving it to the author",
+        "After the gates are approved, the final mp4 of the whole reel (1080x1920, 30 fps) is in the reel's exports with the reference project's entrance, opening sounds and caption template"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 2,
+      "name": "celular-no-script-asks-first",
+      "prompt": "gravei o reel \"o celular não precisa ouvir\", os brutos tão na pasta do reel. edita do começo ao fim pra mim e me entrega o reel pronto.",
+      "setup": "Private input, kept out of the repo: setup_chain.sh <run> celular-capcut (reel/ with the 12 raw iPhone clips of the celular reel and no script; drafts/ with the author's projects and an empty project '04-celular não precisa ouvir' made in the app). Run with run_chain.sh.",
+      "files": [],
+      "expected_output": "Before transcribing anything, one round of questions: the script (send it, recommended, or go on without it, with what changes) and the output form (CapCut project, final mp4 or both, with how each is used). No question about the cut's form. The run stops waiting for the script.",
+      "assertions": [
+        "The script is asked for before any transcription, cut or scene work, saying what depends on it (the take choice, the hook form, the facts), and the run stops waiting for it",
+        "The final output form is asked in the same round, with how each form is used",
+        "No question to the author about the cut's form (cut video against loose files)"
+      ],
+      "human_feedback": ""
+    }
+  ]
+}

@@ -17,7 +17,7 @@ Each **context** is a group of skills with its own paths and its own place to ke
 
 | Context | Its skills | Read |
 |---|---|---|
-| Reels | `writing-short-video-scripts`, `cutting-raw-takes`, `animating-reel-scenes`, `finishing-reels`, `editing-reels` | [references/reels.md](references/reels.md) |
+| Reels | `reel-script`, `reel-cut`, `reel-motion`, `reel-finish`, `reel-edit` | [references/reels.md](references/reels.md) |
 
 Set up a context only when at least one of its skills is installed (in the agent's skill list, or a folder next to this skill's); say which contexts were skipped and why.
 

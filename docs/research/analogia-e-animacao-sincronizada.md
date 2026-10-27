@@ -274,7 +274,7 @@ Fora do "sim", mas com achado: "destaque que segue a causa" (marcado "não") tem
 O que muda para os tickets de melhoria:
 
 1. **Analogia na skill de roteiro:** a analogia diz em voz alta a correspondência de cada peça (GH), escolhe a base pela relação causal e não pela aparência (GEN), e diz onde a base quebra (GLY, SPI). Os três tipos com base mais firme são troca de uma peça, analogia em fila e um objeto em dois estados.
-2. **Na `animating-reel-scenes`:** transformação contínua quando a fala liga um estado ao outro, corte quando começa um evento novo (HR, MZ); uma mudança por etapa nas transformações complexas (HR); manter a base da analogia visível enquanto o alvo entra (RZH).
+2. **Na `reel-motion`:** transformação contínua quando a fala liga um estado ao outro, corte quando começa um evento novo (HR, MZ); uma mudança por etapa nas transformações complexas (HR); manter a base da analogia visível enquanto o alvo entra (RZH).
 3. **Desenho traço a traço:** a mão ou o lápis visível faz parte da técnica, não do estilo (FM).
 4. **Cor:** reconsiderar "destaque que segue a causa" para teste (BL); a cor que segue a causa entra sincronizada com a palavra (BL, experimento 2).
 5. **Sem base primária:** tela de impacto, contador, dado real, código como prova, fonte como print e caso-limite literal ficam como observação das referências. As baselines dos tickets de melhoria são a única evidência que vão ter.

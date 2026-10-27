@@ -229,7 +229,7 @@ Parte 2:
 > Urna eletrônica, parte 2 de 2: os boatos que não se sustentam e as falhas reais que pesquisadores acharam e foram corrigidas.
 > Começou por aqui? A parte 1 está no botão do vídeo.
 
-As duas começam com "Urna eletrônica" (5) e têm o número da parte nos primeiros 125 caracteres. O restante da legenda (o que o vídeo deixou de fora, crédito das fontes, hashtags, pedido único) segue a skill `writing-post-captions`. A frase "falhas reais que pesquisadores acharam e foram corrigidas" precisa bater com o que a parte 2 diz; se a parte 2 também fala da crítica de desenho (o eleitor não confere o próprio voto em papel), ajustar para não sugerir que todas as críticas foram resolvidas.
+As duas começam com "Urna eletrônica" (5) e têm o número da parte nos primeiros 125 caracteres. O restante da legenda (o que o vídeo deixou de fora, crédito das fontes, hashtags, pedido único) segue a skill `post-caption`. A frase "falhas reais que pesquisadores acharam e foram corrigidas" precisa bater com o que a parte 2 diz; se a parte 2 também fala da crítica de desenho (o eleitor não confere o próprio voto em papel), ajustar para não sugerir que todas as críticas foram resolvidas.
 
 ## 8. Perguntas abertas
 

@@ -1,0 +1,199 @@
+{
+  "skill_name": "reel-finish",
+  "evals": [
+    {
+      "id": 1,
+      "name": "split-whole-reel-from-reference",
+      "prompt": "monta no capcut o reel \"o celular não precisa ouvir\". criei o projeto vazio \"04-celular não precisa ouvir\" e fechei o capcut. o corte, as cenas, o sfx e a legenda tão na pasta do reel. quero abrir e já estar pronto, como eu faria à mão.",
+      "setup": "Private input, kept out of the repo: build the sandbox with .scratch/finishing-reels-workspace/setup_run.sh <run> celular (drafts/ with a copy of the empty project made in the app plus the author's Jev-AI, whatsapp-tintas, arquitetura-desce and arquiteto-dev-piramide drafts; reel/ with the cut, legenda.srt, words.json, timeline.md, exports/01-dossie-topo.mov and 00-sfx.wav, without the divider). Run with run_eval.sh from a folder outside the repo, so no project memory loads. Grade the written draft with inspect_draft.py against the project the author approved and posted (CapCut drafts/04-celular não precisa ouvir).",
+      "files": [],
+      "expected_output": "Before writing, a check that CapCut is closed and a backup of the empty project. The draft copies style from the author's reference project (Jev-AI, named as reference in timeline.md): the 'Balançar para cima e para a direita' entrance on the first clip, the camera click at 0.0 s and the reversed 'Keen' at 0.3 s, and the caption template '逐词显色大写 黄'. Recording in clips at 0, 5.90 (keyframe y 0 to about -0.396 in 0.4 s) and the close, with its speech audible. 01-dossie-topo.mov over the whole reel, a divider overlay with alpha from 5.90 s to the end, 00-sfx.wav at 0, 51 caption cues with word timing and the two fixes from timeline.md. Root and Timelines copies identical.",
+      "assertions": [
+        "Before writing the project, CapCut being closed is checked (tasklist or equivalent) and the empty project is backed up outside the drafts folder",
+        "The first recording clip carries the reference project's entrance animation ('Balançar para cima e para a direita')",
+        "The opening sounds of the reference project are on an audio track: camera click at 0.0 s and reversed 'Keen' at 0.3 s, with their volumes",
+        "The captions use the reference project's template '逐词显色大写 黄' (51 cues with word timing), with both caption errors timeline.md points out changed (cue 26 'o lança', cue 48 'teu filho')",
+        "A divider (a line with shadow between the panel and the footage) starts at the split-screen entry 5.90 s on its own track",
+        "The recording's speech stays audible: its video material has has_sound_separated false, has_audio true and no local_id from another file",
+        "The split-screen keyframe moves the recording from y 0 to about -0.396 between 5.90 and 6.30 s, and 01-dossie-topo.mov and 00-sfx.wav start at 0"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 2,
+      "name": "split-per-scene-entry-and-exit",
+      "prompt": "monta o reel do whatsapp no capcut, já criei o projeto vazio 05-whatsapp e o capcut tá fechado. tá tudo na pasta do reel.",
+      "setup": "Private input, kept out of the repo: setup_run.sh <run> whatsapp (drafts/ with an empty project made in the app named 05-whatsapp plus the author's drafts, whatsapp-tintas among them; reel/ with a clean cut rendered from the author's whatsapp-tintas main track without captions, whatsapp-tintas.srt, words.json, timeline.md and the 8 scene exports plus 00-sfx.wav). Run with run_eval.sh from outside the repo. Grade the draft with inspect_draft.py.",
+      "files": [],
+      "expected_output": "Each export at its timecode from the timeline (01 at 1.03, 02 at 3.70, 03 at 20.70, 04 at 32.80, 05 at 50.60, 06 at 66.93, 07 at 76.00, 08 at 89.17); the recording keyframed down to the lower half at the panel entry (3.70 s) and back up when the panel leaves (ending 88.40 s); a divider overlay only while the split lasts; the reference project's entrance, opening sounds and caption template; 42 caption cues; 00-sfx.wav at 0.",
+      "assertions": [
+        "Before writing the project, CapCut being closed is checked and the empty project is backed up outside the drafts folder",
+        "The first recording clip carries the reference project's entrance animation and the opening sounds (click 0.0 s, 'Keen' 0.3 s) are on an audio track",
+        "The captions use the author's main caption template '逐词显色大写 黄' (42 cues with word timing)",
+        "A divider overlay covers the split screen only: it starts at the entry (3.70 s) and ends by the exit (88.40 s)",
+        "The recording moves down at 3.70 s and back to y 0 by 88.40 s with keyframes, and the eight exports start at their timeline timecodes within one frame"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 3,
+      "name": "no-empty-project-asks-and-stops",
+      "prompt": "monta no capcut o reel do celular não precisa ouvir pra mim, tá tudo na pasta do reel.",
+      "setup": "Private input, kept out of the repo: setup_run.sh <run> noproject (the celular reel folder, and drafts/ with only the author's older projects: no project for this reel). Run with run_eval.sh from outside the repo.",
+      "files": [],
+      "expected_output": "The agent asks the author to create an empty project in the CapCut app (with the reel's name) and close CapCut, and stops: no project folder is created by hand and no existing project is changed.",
+      "assertions": [
+        "The questions or report ask the author to create an empty project in the CapCut app and keep CapCut closed",
+        "No new folder is created in drafts/ and no file of an existing project in drafts/ changes"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 4,
+      "name": "final-mp4-split-whole-reel",
+      "prompt": "gera o vídeo final do reel \"o celular não precisa ouvir\" pronto pra postar, sem passar pelo capcut. tá tudo na pasta do reel.",
+      "setup": "Private input, kept out of the repo: setup_run.sh <run> celular-mp4 (the celular reel folder and the author's drafts, Jev-AI as reference through estilo.md; no empty project). Run with run_eval.sh from outside the repo. Grade the mp4 against the reel the author posted (D:/Vídeos/04-celular não precisa ouvir/04-celular não precisa ouvir.mp4), frame by frame at the same times.",
+      "files": [],
+      "expected_output": "An mp4 of the whole reel (100.6 s, 1080x1920, 30 fps) in the reel's exports, with no CapCut project written. Frames 0 to 15 show the reference project's entrance as CapCut renders it: the frame swinging in with a directional motion blur and mirrored edges, never black corners. Captions in the reference template at the posted reel's size, breaking lines where CapCut breaks them ('APARECER POR / CAUSA', 'UMA CONVERSA / QUE', 'CONVERSA COM ELA' on one line), at y about 1645 px for the whole reel, the close included. Split-screen keyframe at 5.90 s, divider, dossier overlay, sfx and the two opening sounds.",
+      "assertions": [
+        "An mp4 of the whole reel (about 100.6 s, 1080x1920, 30 fps) is written in the reel's exports and no CapCut project is written",
+        "The entrance frames (0 to 15) have no black bars (the one dark wedge in the top-right corner of frame 0 is in the posted CapCut export too) and show a directional motion blur in frames 1 to 5, like the posted reel",
+        "Caption lines break where CapCut breaks them: 'APARECER POR' over 'CAUSA' and 'UMA CONVERSA' over 'QUE', with 'CONVERSA COM ELA' on one line",
+        "Captions stay at the posted reel's height (centre about 1645 px) for the whole reel, the close after 92.9 s included",
+        "The two opening sounds (camera click at 0.0 s, reversed whoosh at 0.3 s) and 00-sfx.wav are in the mix with the speech"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 5,
+      "name": "asks-output-form",
+      "prompt": "finaliza o reel do whatsapp pra mim, tá tudo na pasta do reel.",
+      "setup": "Private input, kept out of the repo: setup_run.sh <run> whatsapp-ask (the whatsapp reel folder with the clean cut, an empty project 05-whatsapp as the app makes it, the author's drafts). Run with run_eval.sh from outside the repo.",
+      "files": [],
+      "expected_output": "Before any render or write, the question of the output form: a CapCut project to open, adjust and export, or the final mp4 ready to post without CapCut, each with how it is used.",
+      "assertions": [
+        "Before any render or file write, the output form is asked (CapCut project or final mp4 without CapCut), with how each one is used",
+        "The answer recorded or chosen is carried out in that form only: no CapCut project written when the mp4 is chosen, no mp4 rendered when the project is chosen"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 6,
+      "name": "final-mp4-split-per-scene",
+      "prompt": "gera o mp4 final do reel do whatsapp, sem capcut, tá tudo na pasta do reel.",
+      "setup": "Private input, kept out of the repo: setup_run.sh <run> whatsapp-mp4 (the whatsapp reel folder with the clean cut and the author's drafts; no empty project). Run with run_eval.sh from outside the repo.",
+      "files": [],
+      "expected_output": "An mp4 of the whole reel (94.45 s) with the reference project's entrance (directional blur, mirrored edges), the eight scenes at their timeline timecodes, the recording down at 3.70 s and back by 88.40 s, the divider only during the split, captions in the reference template at one height under the panel for the whole reel, the sfx and the opening sounds.",
+      "assertions": [
+        "An mp4 of the whole reel (about 94.45 s, 1080x1920, 30 fps) is written and no CapCut project is written",
+        "The entrance frames (0 to 15) have no black bars (the one dark wedge in the top-right corner of frame 0 is in the posted CapCut export too) and show a directional motion blur in frames 1 to 5",
+        "Captions use the reference template ('逐词显色大写 黄' font and yellow highlight) at one height, centre about 1645 px, for the whole reel",
+        "Caption lines break where CapCut breaks them: a page wider than about 837 px at the template size goes to two lines with the first line fuller"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 7,
+      "name": "jev-dynamic-capcut-split-reel",
+      "prompt": "monta no capcut o reel \"o celular não precisa ouvir\" com a dinâmica do começo do reel do Jev no vídeo todo: os punch-ins e os sons de micro-interação. criei o projeto vazio \"04-celular não precisa ouvir\" e fechei o capcut. tá tudo na pasta do reel.",
+      "setup": "Private input, kept out of the repo: setup_run.sh <run> celular-dyn (the celular reel folder, an empty project made in the app and the author's drafts). Run with run_eval.sh from outside the repo; the baseline is the previous version of the skill. Gauge against the author's reference project Jev-AI, whose punch-ins are hard cuts to 1.59x and 1.68x for 0.7 to 1.0 s on a key word ('Jev' 6.73 s, 'OpenAI' 12.2 s), with the face filling the frame, each with a library sound on its first frame.",
+      "files": [],
+      "expected_output": "The project of scenario 1 plus punch-ins only where the face fills the frame: in the hook, after the entrance and before the split-screen entry at 5.90 s (key words such as 'microfone' 2.54 s or 'vinte e quatro horas' 4.34 s), none from 5.90 s on, where the face sits in the lower half under the panel. Each one is a hard cut to the reference's scale (about 1.6x), lowered only as far as the hook's overlays require (about 1.2 to 1.3x, author's verdict 2026-10-17: 'vale livre'), for 0.6 to 1.0 s, written as scale keyframes one frame apart, with the reference's punch-in sound (its mouse click) on the same frame. The panel's 00-sfx.wav stays as it is. Written by the skill's own assemble_draft.py from plan.json; the handover lists each punch-in.",
+      "assertions": [
+        "No punch-in (recording scale above 1.0) from the split-screen entry at 5.90 s to the end; at least one punch-in in the hook, between the end of the entrance (0.5 s) and 5.90 s",
+        "Each punch-in is a hard cut held 0.6 to 1.1 s, starting within two frames of a spoken word's start in words.json, at the reference project's scale (about 1.63x) or lower only as far as it takes for the zoomed head, hair included, to stay clear of the overlays (the hook's comment print and microphone sticker sit just above the head)",
+        "Each punch-in has the reference project's punch-in sound (its mouse click) starting on the same frame, at the reference volume",
+        "The punch-ins are listed in plan.json and the project is written by the skill's own assemble_draft.py, not by an edited copy",
+        "The handover lists each punch-in with its time and word"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 8,
+      "name": "jev-dynamic-mp4-split-and-close",
+      "prompt": "gera o mp4 final do reel do whatsapp, sem capcut, com a dinâmica do começo do reel do Jev do início ao fim (punch-in e os sons de micro-interação). tá tudo na pasta do reel.",
+      "setup": "Private input, kept out of the repo: setup_run.sh <run> whatsapp-dyn-mp4 (the whatsapp reel folder with the clean cut and the author's drafts; no empty project). Run with run_eval.sh from outside the repo; the baseline is the previous version of the skill. Gauge against the author's reference project Jev-AI, whose punch-ins are hard cuts to 1.59x and 1.68x for 0.7 to 1.0 s on a key word ('Jev' 6.73 s, 'OpenAI' 12.2 s), with the face filling the frame, each with a library sound on its first frame.",
+      "files": [],
+      "expected_output": "The mp4 of scenario 6 plus punch-ins only in the full-frame hook (0.5 to 3.70 s): the punch-in timeline.md suggests, 110% from 1.03 to 1.80 s on 'Mark Zuckerberg', so the finger keeps pointing at the photo. None in the split screen (3.70 to 88.40 s) and none in the closing shot (88.83 s on), which is already a close-up. Each punch-in with the reference project's punch-in sound on its first frame. Rendered by the skill's own render_mp4.py from plan.json.",
+      "assertions": [
+        "No zoom of the recording in the split screen (3.70 to 88.40 s) nor in the closing close-up (88.83 s to the end)",
+        "The hook punch-in follows the timeline's suggestion: 110% from about 1.03 to 1.80 s, with the finger still pointing at the photo",
+        "Each punch-in has a short library sound of the reference project starting on its first frame",
+        "The punch-ins are listed in plan.json and the mp4 is rendered by the skill's own render_mp4.py, not by an edited copy",
+        "An mp4 of the whole reel (about 94.45 s, 1080x1920, 30 fps) is written and no CapCut project is written"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 9,
+      "name": "jev-dynamic-both-outputs-same-plan",
+      "prompt": "quero o reel do celular não precisa ouvir nas duas formas: o projeto do capcut (já criei o vazio \"04-celular não precisa ouvir\" e fechei o capcut) e o mp4 pronto pra postar. a mesma dinâmica do Jev nas duas, o vídeo todo.",
+      "setup": "Private input, kept out of the repo: setup_run.sh <run> celular-both (the celular reel folder, an empty project made in the app and the author's drafts). Run with run_eval.sh from outside the repo; the baseline is the previous version of the skill. Gauge against the author's reference project Jev-AI, whose punch-ins are hard cuts to 1.59x and 1.68x for 0.7 to 1.0 s on a key word ('Jev' 6.73 s, 'OpenAI' 12.2 s), with the face filling the frame, each with a library sound on its first frame.",
+      "files": [],
+      "expected_output": "One plan.json with punch-ins in the hook only, read by both scripts: the CapCut project has scale keyframes and the mp4 has the zoom at the same times, scale and length, each with the reference's punch-in sound.",
+      "assertions": [
+        "Both the CapCut project and the mp4 carry punch-ins, without the author asking for them separately",
+        "The punch-ins match between the two outputs (same start, end and scale within one frame), read from one plan.json",
+        "No punch-in from the split-screen entry at 5.90 s to the end, in either output"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 10,
+      "name": "words-capcut-band-taken",
+      "prompt": "monta no capcut o reel \"o celular não precisa ouvir\" com as palavras soltas em destaque do começo do reel do Jev (aquelas amarelas com sombra) junto com os punch-ins. criei o projeto vazio \"04-celular não precisa ouvir\" e fechei o capcut. tá tudo na pasta do reel.",
+      "setup": "Private input, kept out of the repo: setup_run.sh <run> celular-words (the celular reel folder, an empty project made in the app and the author's drafts). Run with run_eval.sh from outside the repo; the baseline is the previous version of the skill. Gauge against the author's reference project Jev-AI, whose words on screen ('UMA' 4.73 s, 'FRASE' 5.30 s) sit in the free band above the head, behind the hair (a cut-out copy of the recording over them), in the template 'Title EN Basic Take Your Time' with the effect '黄字加投影', each with a mouse click.",
+      "files": [],
+      "expected_output": "The project with the punch-ins in the hook and no word on screen: the band above the head holds the comment print for the whole hook (0 to 5.90 s) and the rest is split screen, so the overlay already marks the idea (author's verdict 2026-10-17: a word enters only where the band above the head is free). The handover says why no word went in. Written by the skill's own assemble_draft.py from plan.json.",
+      "assertions": [
+        "No word on screen anywhere in the reel: none over the comment print or the hook's stickers, none below the chin or on the hands, none in the split screen from 5.90 s",
+        "The handover says why no word went in (the band above the head is taken by the hook's overlay)",
+        "The punch-ins and their click are written by the skill's own assemble_draft.py from plan.json, with no edited or extra script"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 11,
+      "name": "words-mp4-behind-head",
+      "prompt": "gera o mp4 final do reel do whatsapp sem capcut, com as palavras em destaque na tela como no começo do reel do Jev, as amarelas com sombra. tá tudo na pasta do reel.",
+      "setup": "Private input, kept out of the repo: setup_run.sh <run> whatsapp-words-mp4 (the whatsapp reel folder with the clean cut and the author's drafts; no empty project). Run with run_eval.sh from outside the repo. Gauge against the author's reference project Jev-AI, whose words on screen ('UMA' 4.73 s, 'FRASE' 5.30 s) sit in the free band above the head, behind the hair (a cut-out copy of the recording over them), in the template 'Title EN Basic Take Your Time' with the effect '黄字加投影', each with a mouse click.",
+      "files": [],
+      "expected_output": "The mp4 with the hook punch-in from the timeline and the name as words behind the head, one at a time: 'MARK' from 1.04 s and 'ZUCKERBERG' from 1.26 s to about 1.84 s, the Zuckerberg photo (a small sticker at the right) on top of them, each with its click (author's verdict 2026-10-17: 'A: uma palavra por vez'). No word in the split screen or in the closing close-up. Rendered by the skill's own render_mp4.py from plan.json.",
+      "assertions": [
+        "Words only in the hook's full-frame stretch: 'MARK' from about 1.04 s and 'ZUCKERBERG' from about 1.26 s, one at a time; none in the split screen (3.70 to 88.40 s) nor in the closing close-up",
+        "Each word sits behind the head and behind the Zuckerberg photo: the person, cut out of the recording, covers its letters where they meet, the photo stays on top, and the captions above all",
+        "The word has the reference's look: ZY Modern capitals, fill about #FBFD99, a hard black shadow down and right, starting within two frames of the spoken word, with the click on its first frame",
+        "The mp4 is rendered by the skill's own render_mp4.py from a plan.json that lists the words"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 12,
+      "name": "words-both-outputs-same-plan",
+      "prompt": "monta o reel do whatsapp no capcut (o projeto vazio 05-whatsapp já tá criado e o capcut fechado) e gera também o mp4 pronto pra postar. as duas com a dinâmica completa do começo do reel do Jev: punch-in, palavras em destaque e os sons.",
+      "setup": "Private input, kept out of the repo: setup_run.sh <run> whatsapp-both-words (the whatsapp reel folder, an empty project 05-whatsapp as the app makes it, the author's drafts). Run with run_eval.sh from outside the repo; the baseline is the previous version of the skill.",
+      "files": [],
+      "expected_output": "One plan.json read by both scripts: the timeline's punch-in at 1.03 s and 'MARK' (1.04 s) then 'ZUCKERBERG' (1.26 s), native text in the reference's word template in the CapCut project and the same words in the mp4, behind the head in both through the same cut-out .mov, under the photo, each with the click.",
+      "assertions": [
+        "Words only in the hook: 'MARK' from about 1.04 s and 'ZUCKERBERG' from about 1.26 s, one at a time; none on the chest or below the chin, none in the split screen or the close-up",
+        "In the CapCut project each word is a native text in the reference's word template (editable), and the mp4 shows the same word at the same time, position and size, both read from one plan.json",
+        "In both outputs the word sits behind the head, under the same cut-out .mov of the person"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 13,
+      "name": "mp4-without-capcut-cache",
+      "prompt": "gera o mp4 final do reel do whatsapp sem capcut, com as palavras em destaque na tela como no começo do reel do Jev, as amarelas com sombra. tá tudo na pasta do reel.",
+      "setup": "Private input, kept out of the repo: setup_run.sh <run> whatsapp-nocache-mp4 (the whatsapp reel folder and the author's drafts, Jev-AI as reference, with every CapCut cache path pointing to another user's cache that does not exist, as on another machine or after the cache is cleared). Run with run_eval.sh from outside the repo; the preamble names the same missing cache. Before the change, render_mp4.py stopped with 'word font ... not found; open the reference project once in CapCut so it downloads'.",
+      "files": [],
+      "expected_output": "The final mp4 of the whole reel, with the entrance, captions in the template's place and size, the words on screen and the opening and punch-in sounds, all drawn with our free fonts and synthesized sounds; the handover names each stand-in.",
+      "assertions": [
+        "An mp4 of the whole reel (1080x1920, 30 fps) is written in the reel's exports although the CapCut cache has none of the reference project's fonts and sounds",
+        "The mp4 has captions and the words on screen (seen on frames), and the opening sounds and the punch-in sound are in the mix",
+        "The report or the message to the author names which fonts and sounds are our stand-ins instead of CapCut's"
+      ],
+      "human_feedback": ""
+    }
+  ]
+}

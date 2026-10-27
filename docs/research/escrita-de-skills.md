@@ -497,7 +497,7 @@ Para este repo (MIT): trechos do skill-creator podem entrar, desde que mantidas 
 
 Nomes:
 
-- Qual o nome da skill de criação? O AGENTS.md exige gerúndio mais objeto e um nome único fora do repo. Nomes já usados localmente ou na comunidade: skill-creator, writing-skills (SP), writing-for-agents (MP), creating-skills (exemplo do SP).
+- Qual o nome da skill de criação? O AGENTS.md exige gerúndio mais objeto e um nome único fora do repo. Nomes já usados localmente ou na comunidade: skill-creator, writing-skills (SP), writing-for-agents (MP), skill-forge (exemplo do SP).
 - A regra de gerúndio do AGENTS.md vale mesmo quando a referência oficial usa substantivo nos próprios nomes?
 
 Escopo:

@@ -41,7 +41,7 @@ skills/<category>/<skill-name>/SKILL.md
 
 ## Names
 
-- **Skill:** gerund + object, kebab-case, the form the best practices prefer: `writing-scripts`, `applying-voice`, `setting-up-pre-commit`. Never vague or generic (`helper`, `voice`).
+- **Skill:** short noun phrase, kebab-case, theme first so a family sorts together and one prefix finds it: `reel-script`, `reel-cut`, `post-caption`, `eusouosalmo-voice`, `git-guardrails`. A name someone remembers and types as a command, specific enough to say what the skill does; never vague or generic (`helper`, `voice`). A setup skill is the exception: `setup-<kit>-skills`. See `docs/adr/0006`.
 - The frontmatter `name` equals the folder name (spec requirement): only `a-z`, `0-9` and `-`, up to 64 characters, no `--`, no leading or trailing hyphen.
 - The name must be unique outside this repo too: check `ls ~/.agents/skills` before creating one. Never use `claude`, `anthropic`, `synced` or `anthropic-skills`.
 - **Category:** domain noun, singular (`content`, `harness`).

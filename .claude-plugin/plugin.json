@@ -15,10 +15,10 @@
     "content"
   ],
   "skills": [
-    "./skills/content/animating-reel-scenes",
-    "./skills/content/cutting-raw-takes",
+    "./skills/content/reel-cut",
+    "./skills/content/reel-motion",
+    "./skills/content/reel-script",
     "./skills/content/setup-eusouosalmo-skills",
-    "./skills/content/writing-short-video-scripts",
-    "./skills/harness/creating-skills"
+    "./skills/harness/skill-forge"
   ]
 }

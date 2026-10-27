@@ -96,7 +96,7 @@ Exemplo concreto para o vídeo: o banco de dados. Num sistema de cadastro ele é
 
 ## 7. Ângulos de vídeo
 
-Ganchos são candidatos, a ajustar com a skill `writing-short-video-scripts` e a voz de eusouosalmo.
+Ganchos são candidatos, a ajustar com a skill `reel-script` e a voz de eusouosalmo.
 
 | Ângulo | Fonte | Gancho candidato |
 | - | - | - |

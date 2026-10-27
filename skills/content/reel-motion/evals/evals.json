@@ -1,0 +1,475 @@
+{
+  "skill_name": "reel-motion",
+  "evals": [
+    {
+      "id": 1,
+      "name": "jev-scene-plan",
+      "prompt": "gravei o reel do Jev em talking-head vertical, o SRT da narração tá em jev-ai-narracao.srt. planeja quais trechos viram cena de motion (vou fazer em HTML e renderizar, depois ponho por cima no CapCut) e quais ficam só comigo falando pra câmera",
+      "setup": "Copy evals/files/jev-scene-plan into an empty folder and run the prompt from it, as a separate session outside any repository (claude -p from that folder).",
+      "files": [
+        "evals/files/jev-scene-plan"
+      ],
+      "expected_output": "A scene plan close to the one approved on 2026-10-07: motion only for flows, comparisons, numbers and code (LLM text wall, broken JSON, how Jev works, numbers and demo, smart IF use cases, the code reading as its own scene); the introduction and authority claims, the transition 'o código continua sendo o teu', the caveats and the CTA stay on the face, the caveats and CTA as stickers in a transparent overlay; each scene with start and end in CapCut timecode HH:MM:SS:FF at 30fps.",
+      "assertions": [
+        "No full-screen motion scene covers the caveat block from 'mas calma' to just before the CTA (cues 54 to 66, 01:41,0 to 02:05,8)",
+        "The caveats are planned as stickers in one transparent overlay over the face video, entering and leaving with each sentence",
+        "The opening hook (cues 70 to 72, 'joga DOOM em tempo real / não sabe escrever uma frase') has no full-screen scene: the face stays in the frame, with the hook form in an overlay or a split screen",
+        "Every motion scene has start and end in CapCut timecode HH:MM:SS:FF at 30fps",
+        "breakdown.md exists and covers the whole speech, each stretch with an intent from the fixed list and anchor words with times",
+        "No stretch gets the intent `nome` (the Jev reel states facts and draws no analogy)"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 2,
+      "name": "jev-caveat-overlay",
+      "prompt": "do 'mas calma' (1:41) até o fim do jev-ai-narracao.srt eu fico falando pra câmera. faz os carimbos das ressalvas e da CTA como overlay transparente pra eu pôr por cima do meu vídeo no CapCut. meu design system tá em ds/. me entrega o arquivo pronto e onde ele entra na timeline",
+      "setup": "Copy evals/files/jev-caveat-overlay into an empty folder, add the author's design system export as ds/ (tokens.css plus project/, kept outside the repo in .scratch/animating-reel-scenes/ds), and run the prompt from it as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit and Bash allowed.",
+      "files": [
+        "evals/files/jev-caveat-overlay"
+      ],
+      "expected_output": "Stills first, composited over the recording frame, and a stop for the author's go-ahead (approved rule of 2026-10-07: always wait for stills approval); after it, one overlay video with alpha, 1080x1920 at 30fps, no audio, delivered as QuickTime Animation (.mov qtrle) only, with stickers entering on each caveat sentence and the CTA, placed in the band above the head; plus where it goes on the CapCut timeline in HH:MM:SS:FF (01:41:00 to 02:12:24 in the approved version) and a request to test the .mov in CapCut first.",
+      "assertions": [
+        "The overlay with alpha is delivered as QuickTime Animation (.mov, qtrle) and no other video format with alpha (.webm, ProRes) is delivered or offered",
+        "Where the overlay goes on the timeline is given as start and end in HH:MM:SS:FF at 30fps",
+        "Every overlay element sits in the band above the author's head (about y 300 to 730 of 1920), clear of the face and of the caption zone",
+        "The output asks the author to test the .mov in CapCut before going further",
+        "No video is rendered before the author approves the stills: the output shows the stills composited over the frame and stops for the go-ahead, even though the prompt asks for the finished file",
+        "Every sticker holds one to three words taken from the spoken line it marks; no sticker repeats or rewords a whole sentence",
+        "Files follow the reel layout: the overlay HTML in cenas/ with a timeline-order number (NN-name.html), stills in stills/NN-name/, a timeline.md row with the overlay's start and end, and the render planned to exports/NN-name.mov",
+        "No sticker, read alone, states the opposite of the sentence it marks: every caveat built on a negation (não, nunca, nem, sem, nenhum) keeps it in its words or in its drawing (term struck through, a NUNCA seal)",
+        "No rhythm goal (events per 10 s) is applied to the overlay"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 3,
+      "name": "jev-caveat-stickers-qa",
+      "prompt": "faz só o trecho de 1:45,8 a 1:58,3 do overlay do jev-ai-narracao.srt (nunca inventa opção, nunca quebra o formato, mas pode mandar atirar na hora errada): as duas garantias riscadas com um selo NUNCA e a frase da hora errada digitada com 'hora errada' destacado. fundo transparente, vai por cima do meu rosto no CapCut. meu design system tá em ds/. me manda uns stills pra eu conferir antes de renderizar o vídeo",
+      "setup": "Copy evals/files/jev-caveat-stickers-qa into an empty folder, add the author's design system export as ds/ (tokens.css plus project/, kept outside the repo in .scratch/animating-reel-scenes/ds), and run the prompt from it as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit and Bash allowed.",
+      "files": [
+        "evals/files/jev-caveat-stickers-qa"
+      ],
+      "expected_output": "An HTML scene with a deterministic render(t) and stills composited over a frame of the author's recording (asked for when missing), every element in the band above the head and out of the caption zone, inside the safe margins, and a render path to .mov qtrle; nothing is rendered to video before the author checks the stills.",
+      "assertions": [
+        "The stills are composited over a frame of the author's recording, or the output asks for that frame (or the recording) to check the placement",
+        "No overlay element enters the caption zone or the bottom margin (below about y 1267); the typed sentence sits in the overlay band above the head",
+        "The video render it prepares encodes the overlay as QuickTime Animation (.mov, qtrle)",
+        "The prompt asks for the typed sentence, so the output builds it and says it duplicates the caption, offering to mark only the key words (one to three) instead"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 4,
+      "name": "jev-numbers-assets",
+      "prompt": "faz a cena de motion dos números do Jev, de 1:06,9 a 1:17,4 no jev-ai-narracao.srt (40 a 200 vezes mais rápido, 10 decisões por segundo no DOOM, 7 dólares a hora). meu design system tá em ds/",
+      "setup": "Copy evals/files/jev-numbers-assets into an empty folder, add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), and run the prompt from it as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit, Bash, WebSearch and WebFetch allowed.",
+      "files": [
+        "evals/files/jev-numbers-assets"
+      ],
+      "expected_output": "Before building, the agent asks for the demo footage of Jev playing DOOM (proof only the author has, and third-party game footage that stays out of public repos), checks the three numbers against the company's public page or announcement and cites it, and builds the numbers without inventing gameplay; it does not download game footage or generate it.",
+      "assertions": [
+        "The output asks the author for footage of Jev actually playing DOOM for the demo beat (or records that question), possibly offering the company's official demo video as an option, instead of drawing a stand-in for the gameplay or downloading game footage",
+        "The three numbers are checked against a public source from the company (site, post, announcement or paper) and that source is named with its URL",
+        "When the game footage comes up, the output says it is third-party material (the game's rights belong to someone else) and asks whether the author can use it",
+        "The scene keeps the caption zone free and carries no caption strip, since the reel's captions go over everything in CapCut",
+        "No video is rendered before the author approves the stills, not even a draft"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 5,
+      "name": "desce-plan",
+      "prompt": "o SRT do reel novo tá em arquitetura-desce.srt (a gravação ainda tô cortando). meu design system tá em ds/. planeja as cenas",
+      "setup": "Copy evals/files/desce-plan into an empty folder, add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), and run the prompt from it as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit, Bash, WebSearch and WebFetch allowed.",
+      "files": [
+        "evals/files/desce-plan"
+      ],
+      "expected_output": "Before planning, multiple-choice questions with a recommended option: the recording (needed to time each word), the format mix, references or a style file. A plan with the face as default, overlays for the closing ask, full-screen or split-screen scenes for the one-way flow and the pipeline story, sound-effect marks and suggestions for the edit in timeline.md, a note that timing is estimated until the recording arrives, and a gate with options before building anything.",
+      "assertions": [
+        "The output asks for the recording to time each word and says the timing is estimated until it arrives",
+        "Before building, the plan ends on a gate with numbered or listed options, one marked as recommended",
+        "The plan marks sound-effect moments",
+        "timeline.md lists suggestions for the edit in CapCut with time and reason",
+        "The output offers to start a style file from the author's reference reels",
+        "The format mix (face, overlay, full screen, split screen) is offered as a choice",
+        "breakdown.md exists and covers the whole speech; each stretch has an intent from the fixed list and at least one anchor word with its time",
+        "The destination of each stretch follows the rule of its intent",
+        "Every plan line says what is seen, what moves and on which word; no line says only 'idem' or 'same scene'",
+        "Steps of a sequence enter each on its own word, in the spoken order",
+        "The format question offers the whole-video modes (split screen for the whole reel, without face, full screen with the face at the turns) and recommends 'mixed, by stretch', since no format is named"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 6,
+      "name": "vpn-caveat-overlay",
+      "prompt": "fico falando pra câmera o vídeo todo do vpn-narracao.srt. faz os carimbos das ressalvas como overlay transparente pra eu pôr por cima do meu rosto no CapCut. meu design system tá em ds/. decide por mim nas perguntas, me mostra os stills",
+      "setup": "Copy evals/files/vpn-caveat-overlay into an empty folder inside a reels folder, add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), put the author's style file at ../estilo.md (from .scratch/animating-reel-scenes/exemplos/estilo.md), and run the prompt as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit, Bash, WebSearch and WebFetch allowed.",
+      "files": [
+        "evals/files/vpn-caveat-overlay"
+      ],
+      "expected_output": "Stickers for each caveat that keep the negation: 'não significa que tu fica anônimo' marked as 'não é anônimo' or 'anônimo' struck through, never 'anônimo' alone.",
+      "assertions": [
+        "No sticker, read alone, states the opposite of the sentence it marks: every caveat built on a negation (não, nunca, nem, sem, nenhum) keeps it in its words or in its drawing (term struck through, a NUNCA seal)",
+        "Every sticker holds one to three words taken from the spoken line it marks, the negation counted inside them"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 7,
+      "name": "git-commit-choreography",
+      "prompt": "faz uma cena de motion em tela cheia para o git-commit.srt. meu design system tá em ds/. decide por mim nas perguntas e nos gates e renderiza",
+      "setup": "Copy evals/files/git-commit-choreography into an empty folder inside a reels folder, add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), put the author's style file at ../estilo.md (from .scratch/animating-reel-scenes/exemplos/estilo.md), and run the prompt as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit, Bash, WebSearch and WebFetch allowed.",
+      "files": [
+        "evals/files/git-commit-choreography"
+      ],
+      "expected_output": "One full-screen scene where the file becomes a blob, gains its hash, becomes a tree node and joins the chain, the same object transforming instead of being cut.",
+      "assertions": [
+        "At least one object persists and transforms between states: the same DOM element changes, without being hidden and swapped for another",
+        "The scene uses at least 3 kinds of element (drawn object, running number, code, chart, character)",
+        "No state stays still for more than 4 s",
+        "A still and the video frame at the same t match (deterministic render(t))",
+        "Palette and caption zone of the design system are respected"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 8,
+      "name": "desce-split-whole",
+      "prompt": "quero o reel inteiro do arquitetura-desce.srt em tela dividida, o painel de cima animado do começo ao fim. meu design system tá em ds/. planeja",
+      "setup": "Copy evals/files/desce-split-whole into an empty folder inside a reels folder, add the recording .scratch/animating-reel-scenes/exemplos/arquitetura-desce/arquitetura-desce.mp4, add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), put the author's style file at ../estilo.md (from .scratch/animating-reel-scenes/exemplos/estilo.md), and run the prompt as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit, Bash, WebSearch and WebFetch allowed.",
+      "files": [
+        "evals/files/desce-split-whole"
+      ],
+      "expected_output": "A plan with one panel file for the whole reel, the hook per its form, rest or empty at each face stretch, and no explanation stretch longer than 4 s without a new state.",
+      "assertions": [
+        "The plan has one panel file (one HTML and one NN-name-topo.mov with alpha) and a single row in timeline.md, not N scenes to align",
+        "The opening follows the hook form; with a face-only hook, the face is full frame and the panel comes down with a keyframe in CapCut, its first and last frames drawn and the first new event waiting for the panel to settle",
+        "For each face stretch (turn, opinion), the plan says whether the panel rests or empties, with the reason",
+        "No explanation stretch goes more than 4 s without a new state in the panel, by the entrance times the plan takes from words.json"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 9,
+      "name": "desce-frames",
+      "prompt": "o SRT e a gravação do arquitetura-desce tão aqui. meu design system tá em ds/. planeja as cenas, decide por mim nas perguntas",
+      "setup": "Copy evals/files/desce-plan into an empty folder inside a reels folder, add the recording .scratch/animating-reel-scenes/exemplos/arquitetura-desce/arquitetura-desce.mp4, add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), put the author's style file at ../estilo.md (from .scratch/animating-reel-scenes/exemplos/estilo.md), and run the prompt as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit, Bash, WebSearch and WebFetch allowed.",
+      "files": [
+        "evals/files/desce-plan"
+      ],
+      "expected_output": "A breakdown that reads the take: each stretch notes the take and head position with a frame time; the take change near 75 s is recorded and the CTA stickers follow it.",
+      "assertions": [
+        "breakdown.md notes, in each stretch, the take and the head position, citing the time of a frame",
+        "breakdown.md records the change of take around 75 s",
+        "No CTA sticker is placed above the head where the new take leaves no free band",
+        "When a destination rests on the take, the plan cites a frame (time and what it shows)"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 10,
+      "name": "colors-hook-gesture",
+      "prompt": "gravei o reel da criptografia do WhatsApp com as tintas, tá aí o vídeo, o SRT e o roteiro. meu design system tá em ds/. planeja as cenas, decide por mim nas perguntas",
+      "setup": "Copy evals/files/colors-hook-gesture into an empty folder inside a reels folder, add the recording .scratch/referencias-reels/gravacao-cores/whatsapp-tintas.mp4 (outside git: it shows the author's face, so the case runs only where it exists), add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), put the author's style file at ../estilo.md (from .scratch/animating-reel-scenes/exemplos/estilo.md), and run the prompt as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit, Bash, WebSearch and WebFetch allowed.",
+      "files": [
+        "evals/files/colors-hook-gesture"
+      ],
+      "expected_output": "The breakdown catches the author pointing up in the first 2 s; the hook takes 'source or subject over the face' with the photo entering where the finger points, the face kept on screen.",
+      "assertions": [
+        "breakdown.md notes the gesture of pointing up between 0 and 2 s, citing the frame time",
+        "The hook uses 'fonte ou assunto sobre o rosto': the photo of Mark Zuckerberg enters on 'Zuckerberg', where the finger points, clear of the eyes, mouth and caption",
+        "The gate states the hook form and its reason (the gesture)",
+        "The hook is not a full-screen scene and the face stays in the frame",
+        "breakdown.md notes, in each stretch, the take and the head position, citing the time of a frame",
+        "Nothing placed over the hook covers the pointing hand: the image sits beyond the fingertip, where it points"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 11,
+      "name": "colors-hook-faceless",
+      "prompt": "o reel da criptografia do WhatsApp com tintas: quero ele sem rosto, só a minha voz com animação o tempo todo. tá aí o vídeo e o SRT. meu design system tá em ds/. decide por mim nas perguntas e nos gates e me mostra os stills do gancho",
+      "setup": "Copy evals/files/colors-hook-faceless into an empty folder inside a reels folder, add the recording .scratch/referencias-reels/gravacao-cores/whatsapp-tintas.mp4 (outside git: it shows the author's face, so the case runs only where it exists), add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), put the author's style file at ../estilo.md (from .scratch/animating-reel-scenes/exemplos/estilo.md), and run the prompt as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit, Bash, WebSearch and WebFetch allowed.",
+      "files": [
+        "evals/files/colors-hook-faceless"
+      ],
+      "expected_output": "The first frame shows the subject in one of the five hook forms.",
+      "assertions": [
+        "The first frame shows the subject (the WhatsApp message, the paints or the photo) in one of the five visual hook forms",
+        "The only object in the first frame is not a placeholder"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 12,
+      "name": "jsonb-hook-form-kept",
+      "prompt": "o roteiro e o SRT do reel de JSONB tão aqui, a gravação ainda tô cortando. meu design system tá em ds/. planeja as cenas, decide por mim nas perguntas",
+      "setup": "Copy evals/files/jsonb-hook-form-kept into an empty folder inside a reels folder, add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), put the author's style file at ../estilo.md (from .scratch/animating-reel-scenes/exemplos/estilo.md), and run the prompt as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit, Bash, WebSearch and WebFetch allowed.",
+      "files": [
+        "evals/files/jsonb-hook-form-kept"
+      ],
+      "expected_output": "The plan keeps the script's hook form and enters it as the table says, split screen from frame 0, the face on screen.",
+      "assertions": [
+        "The plan keeps the script's hook form ('imagem que se monta na palavra')",
+        "The hook enters as split screen from frame 0, since the code grows, with the face in the frame and no full-screen scene in the hook"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 13,
+      "name": "colors-faceless-regime",
+      "prompt": "faz o trecho de 32 a 63 s do reel das tintas sem rosto, em tela cheia. tá aí o vídeo, o SRT e o words.json. meu design system tá em ds/. decide por mim nas perguntas e nos gates e renderiza",
+      "setup": "Copy evals/files/colors-faceless-regime into an empty folder inside a reels folder, add the recording .scratch/referencias-reels/gravacao-cores/whatsapp-tintas.mp4 (outside git: it shows the author's face, so the case runs only where it exists), add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), put the author's style file at ../estilo.md (from .scratch/animating-reel-scenes/exemplos/estilo.md), and run the prompt as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit, Bash, WebSearch and WebFetch allowed.",
+      "files": [
+        "evals/files/colors-faceless-regime"
+      ],
+      "expected_output": "Scenes in one density regime, the main piece at 2/3 of the stage, at least 3 events per 10 s.",
+      "assertions": [
+        "The plan states the density regime and the reason",
+        "In every still, the main piece spans at least 2/3 of the stage's width with its centre in the middle third, or the zones cover the stage from margin to margin; no still holds only small loose pieces",
+        "timeline.md lists each new state with its time and marks each rest with its reason",
+        "By the plan's list, no explanation stretch goes over 4 s without a new state, except a declared rest of up to 6 s",
+        "Measured on the .mp4 with evals/scripts/rhythm.py (caption band masked): at least 3 events per 10 s and no still stretch over 4 s outside the plan's rests"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 14,
+      "name": "colors-split-regime",
+      "prompt": "faz o trecho de 32 a 63 s do reel das tintas em tela dividida, painel em cima e eu embaixo. tá aí o vídeo, o SRT e o words.json. meu design system tá em ds/. decide por mim nas perguntas e nos gates e renderiza",
+      "setup": "Copy evals/files/colors-split-regime into an empty folder inside a reels folder, add the recording .scratch/referencias-reels/gravacao-cores/whatsapp-tintas.mp4 (outside git: it shows the author's face, so the case runs only where it exists), add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), put the author's style file at ../estilo.md (from .scratch/animating-reel-scenes/exemplos/estilo.md), and run the prompt as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit, Bash, WebSearch and WebFetch allowed.",
+      "files": [
+        "evals/files/colors-split-regime"
+      ],
+      "expected_output": "The same regime and rhythm rules inside the 1080x960 panel.",
+      "assertions": [
+        "The plan states the density regime and the reason",
+        "In every still of the panel, the main piece spans at least 2/3 of the 1080x960 panel's width, or the zones cover it",
+        "timeline.md lists each new state with its time and marks each rest with its reason",
+        "Measured on the panel export with evals/scripts/rhythm.py --panel: at least 3 events per 10 s and no still stretch over 4 s outside the plan's rests"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 15,
+      "name": "whatsapp-colors-mixing",
+      "prompt": "faz o trecho de 32 a 63 s do reel das tintas sem rosto. tá aí o vídeo, o SRT e o words.json. meu design system tá em ds/. decide por mim nas perguntas e nos gates e renderiza",
+      "setup": "Copy evals/files/whatsapp-colors-mixing into an empty folder inside a reels folder, add the recording .scratch/referencias-reels/gravacao-cores/whatsapp-tintas.mp4 (outside git: it shows the author's face, so the case runs only where it exists), add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), put the author's style file at ../estilo.md (from .scratch/animating-reel-scenes/exemplos/estilo.md), and run the prompt as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit, Bash, WebSearch and WebFetch allowed.",
+      "files": [
+        "evals/files/whatsapp-colors-mixing"
+      ],
+      "expected_output": "Each mix shows the two paints moving together and the new colour born from the join; 'impossível desfazer' shows a failed attempt.",
+      "assertions": [
+        "In each mix, the two input paints move toward each other and the new colour is born from the join; no drop changes colour in place without the input pieces moving (in render(t), the input elements change position before the result appears)",
+        "The mix happens in visible steps (join, swirl, settle), tied to the words 'misturo' and 'pingo'",
+        "On 'impossível desfazer', no frame shows the original colours separated again, not even as '?' or dashed; a failed attempt appears",
+        "Blind judge, stills of the stretch only, no audio: can one tell the mix does not come back?"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 16,
+      "name": "password-hash-process",
+      "prompt": "faz uma cena de motion em tela cheia para o password-hash.srt. meu design system tá em ds/. decide por mim nas perguntas e nos gates e renderiza",
+      "setup": "Copy evals/files/password-hash-process into an empty folder inside a reels folder, add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), put the author's style file at ../estilo.md (from .scratch/animating-reel-scenes/exemplos/estilo.md), and run the prompt as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit, Bash, WebSearch and WebFetch allowed.",
+      "files": [
+        "evals/files/password-hash-process"
+      ],
+      "expected_output": "Password and salt join and get scrambled in steps; 'não volta' shows a failed attempt; 'cadastrando para pronto' stays a plain before and after.",
+      "assertions": [
+        "Password and salt join and are scrambled in steps into the hash; the input characters move and mix, with no text swapped in place",
+        "On 'não volta', no frame shows the password rebuilt from the hash; a failed attempt appears",
+        "Control: 'cadastrando para pronto' stays a before and after (a simple state change), with no process animation",
+        "Blind judge, stills only: can one tell the hash does not turn back into the password?"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 17,
+      "name": "whatsapp-colors-naming",
+      "prompt": "gravei o reel da criptografia do WhatsApp com as tintas, tá aí o vídeo e o SRT. meu design system tá em ds/. planeja o reel inteiro, decide por mim nas perguntas",
+      "setup": "Copy evals/files/whatsapp-colors-naming into an empty folder inside a reels folder, add the recording .scratch/referencias-reels/gravacao-cores/whatsapp-tintas.mp4 (outside git: it shows the author's face, so the case runs only where it exists), add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), put the author's style file at ../estilo.md (from .scratch/animating-reel-scenes/exemplos/estilo.md), and run the prompt as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit, Bash, WebSearch and WebFetch allowed.",
+      "files": [
+        "evals/files/whatsapp-colors-naming"
+      ],
+      "expected_output": "The naming stretch returns to the paints scene with Diffie-Hellman, Signal/X3DH and AES as labels on their parts, plus a checked datum from the WhatsApp security whitepaper.",
+      "assertions": [
+        "breakdown.md marks the naming stretch with the intent `nome` and points to the scene of the image it names",
+        "The plan line for that stretch repeats that scene's composition, with each spoken name as a label on its part (Diffie-Hellman on the mixing, Signal/X3DH on the exchange, AES on the locked message)",
+        "No name from the stretch appears only as loose text, a window or an icon without its part",
+        "The scene carries at least one datum the speech does not say, with the primary source URL in breakdown.md (AES-256 or Curve25519 from the WhatsApp security whitepaper); when none is found, the plan says why",
+        "Example content (ciphertext, key) is marked as shape, not as fact"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 18,
+      "name": "postgres-index-naming",
+      "prompt": "o SRT do reel do índice tá aí, a gravação ainda tô cortando. meu design system tá em ds/. planeja as cenas, decide por mim nas perguntas",
+      "setup": "Copy evals/files/postgres-index-naming into an empty folder inside a reels folder, add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), put the author's style file at ../estilo.md (from .scratch/animating-reel-scenes/exemplos/estilo.md), and run the prompt as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit, Bash, WebSearch and WebFetch allowed.",
+      "files": [
+        "evals/files/postgres-index-naming"
+      ],
+      "expected_output": "The naming stretch returns to the card catalogue scene with B-tree, entry and page as labels, plus the 8 kB page from the PostgreSQL docs.",
+      "assertions": [
+        "breakdown.md marks the naming stretch with the intent `nome` and points to the scene of the image it names",
+        "The plan line for that stretch repeats the card catalogue scene's composition, with 'índice B-tree' on the catalogue, 'entrada' on a card and 'página' on the shelf",
+        "No name from the stretch appears only as loose text, a window or an icon without its part",
+        "The scene carries at least one datum the speech does not say, with the primary source URL in breakdown.md (the 8 kB page from the PostgreSQL docs, Database Page Layout); when none is found, the plan says why"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 19,
+      "name": "colors-impact-climax",
+      "prompt": "faz o trecho de 32 a 63 s do reel das tintas sem rosto. tá aí o vídeo, o SRT e o words.json. meu design system tá em ds/. decide por mim nas perguntas e nos gates e renderiza",
+      "setup": "Copy evals/files/colors-impact-climax into an empty folder inside a reels folder, add the recording .scratch/referencias-reels/gravacao-cores/whatsapp-tintas.mp4 (outside git: it shows the author's face, so the case runs only where it exists), add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), put the author's style file at ../estilo.md (from .scratch/animating-reel-scenes/exemplos/estilo.md), and run the prompt as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit, Bash, WebSearch and WebFetch allowed.",
+      "files": [
+        "evals/files/colors-impact-climax"
+      ],
+      "expected_output": "The plan marks the climax at 'o mesmo marrom' and the brown floods the stage for 0.5 to 1.5 s, cut in hard, once.",
+      "assertions": [
+        "The plan marks the climax at 'o mesmo marrom', with the reason",
+        "In the stills between the anchor words, the brown covers at least 90% of the stage",
+        "The impact screen lasts 0.5 to 1.5 s and enters with a dry cut (the frame before has no full-screen brown, no fade)",
+        "There is a single impact screen in the stretch, and no frame has a full-screen saturated red",
+        "timeline.md has its own sound line for the impact"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 20,
+      "name": "pool-impact-midvideo",
+      "prompt": "faz uma cena de motion em tela cheia para o pool-pico.srt. meu design system tá em ds/. decide por mim nas perguntas e nos gates e renderiza",
+      "setup": "Copy evals/files/pool-impact-midvideo into an empty folder inside a reels folder, add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), put the author's style file at ../estilo.md (from .scratch/animating-reel-scenes/exemplos/estilo.md), and run the prompt as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit, Bash, WebSearch and WebFetch allowed.",
+      "files": [
+        "evals/files/pool-impact-midvideo"
+      ],
+      "expected_output": "The climax is the queue stopping mid-video, not the fix at the end.",
+      "assertions": [
+        "The plan picks the pool running out and the queue stopping as the climax, not the fix at the end",
+        "In the stills between the climax's anchor words, the piece of the stopped queue or the accent colour covers at least 90% of the stage",
+        "The impact screen lasts 0.5 to 1.5 s, enters with a dry cut, and happens once"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 21,
+      "name": "tools-list-no-climax",
+      "prompt": "faz uma cena de motion em tela cheia para o git-tres-comandos.srt. meu design system tá em ds/. decide por mim nas perguntas e nos gates",
+      "setup": "Copy evals/files/tools-list-no-climax into an empty folder inside a reels folder, add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), put the author's style file at ../estilo.md (from .scratch/animating-reel-scenes/exemplos/estilo.md), and run the prompt as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit, Bash, WebSearch and WebFetch allowed.",
+      "files": [
+        "evals/files/tools-list-no-climax"
+      ],
+      "expected_output": "The plan says 'sem clímax' with the reason and no scene takes the frame with a hard cut.",
+      "assertions": [
+        "The plan declares 'sem clímax' with the reason",
+        "No scene takes the whole stage with a dry cut as an impact screen"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 22,
+      "name": "whatsapp-colors-trace",
+      "prompt": "faz o trecho de 5 a 46 s do reel das tintas sem rosto, em tela cheia. tá aí o vídeo, o SRT e o words.json. meu design system tá em ds/. decide por mim nas perguntas e nos gates e renderiza",
+      "setup": "Copy evals/files/whatsapp-colors-trace into an empty folder inside a reels folder, add the recording .scratch/referencias-reels/gravacao-cores/whatsapp-tintas.mp4 (outside git: it shows the author's face, so the case runs only where it exists), add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), put the author's style file at ../estilo.md (from .scratch/animating-reel-scenes/exemplos/estilo.md), and run the prompt as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit, Bash, WebSearch and WebFetch allowed.",
+      "files": [
+        "evals/files/whatsapp-colors-trace"
+      ],
+      "expected_output": "Connectors draw in the direction of sending and end inside their word; labels, drops and icons enter whole.",
+      "assertions": [
+        "Each connector (phone, internet, phone) traces in the direction of sending and ends inside the word that names it: in render(t), the path's stroke-dashoffset reaches zero inside that word's interval in words.json",
+        "The emphasis mark on 'qualquer um no caminho' traces on the word",
+        "Control: the labels EU, VOCÊ and INTERNET, the paint drops and the icons enter whole, with no stroke-dashoffset"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 23,
+      "name": "tcp-segment-trace",
+      "prompt": "faz uma cena de motion em tela cheia para o tcp-segment.srt. meu design system tá em ds/. decide por mim nas perguntas e nos gates e renderiza",
+      "setup": "Copy evals/files/tcp-segment-trace into an empty folder inside a reels folder, add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), put the author's style file at ../estilo.md (from .scratch/animating-reel-scenes/exemplos/estilo.md), and run the prompt as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit, Bash, WebSearch and WebFetch allowed.",
+      "files": [
+        "evals/files/tcp-segment-trace"
+      ],
+      "expected_output": "The header outline traces on 'cabeçalho TCP' and each division on its field's word; the field names enter whole.",
+      "assertions": [
+        "The header outline traces on 'cabeçalho TCP'; each division (the one between the two ports, the one opening the sequence line) traces on its field's word, in the spoken order",
+        "Control: the field names enter whole, as text",
+        "No trace lasts over 1 s or crosses the next word that asks for movement"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 24,
+      "name": "colors-overlay-request",
+      "prompt": "o reel das tintas: a animação vai por cima de mim, explicando junto com a fala, o vídeo todo. tá aí o vídeo e o SRT. meu design system tá em ds/. planeja, decide por mim nas perguntas",
+      "setup": "Copy evals/files/colors-overlay-request into an empty folder inside a reels folder, add the recording .scratch/referencias-reels/gravacao-cores/whatsapp-tintas.mp4 (outside git: it shows the author's face, so the case runs only where it exists), add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), put the author's style file at ../estilo.md (from .scratch/animating-reel-scenes/exemplos/estilo.md), and run the prompt as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit, Bash, WebSearch and WebFetch allowed.",
+      "files": [
+        "evals/files/colors-overlay-request"
+      ],
+      "expected_output": "The plan does not build an explanation in steps over the face; it says why and offers the three whole-video modes.",
+      "assertions": [
+        "The plan does not build an explanation in steps in the overlay: it says why and offers split screen for the whole reel, without face, or full screen with the face at the turns, with the reason for each",
+        "The CTA in close-up uses the image over the face (source, subject or pointed image, never the speech's text) or stays on the face with the reason; never a sticker over the face",
+        "Every image over the face sits in the top half, fades toward the forehead, lasts up to 4 s and is still or has one move"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 25,
+      "name": "journey-format-mode",
+      "prompt": "o SRT do reel dos comentários tá aí, é no formato jornada de um objeto de ponta a ponta. a gravação ainda tô cortando. meu design system tá em ds/. planeja",
+      "setup": "Copy evals/files/journey-format-mode into an empty folder inside a reels folder, add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), put the author's style file at ../estilo.md (from .scratch/animating-reel-scenes/exemplos/estilo.md), and run the prompt as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit, Bash, WebSearch and WebFetch allowed.",
+      "files": [
+        "evals/files/journey-format-mode"
+      ],
+      "expected_output": "The format question recommends without face or full screen with the face at the turns, citing the format; one file for the whole reel.",
+      "assertions": [
+        "The format question recommends full screen with the face at the turns or without face, citing the format as the reason",
+        "The explanation is one HTML and one .mp4 for the whole reel, with a single row in timeline.md; the hook form and the stickers may be files of their own",
+        "Each face stretch is marked, with rest or empty and the reason",
+        "No explanation stretch goes more than 4 s without a new state"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 26,
+      "name": "colors-public-figure-photo",
+      "prompt": "gravei o reel da criptografia do WhatsApp com as tintas, tá aí o vídeo e o SRT. meu design system tá em ds/. planeja as cenas, decide por mim nas perguntas",
+      "setup": "Copy evals/files/colors-public-figure-photo into an empty folder inside a reels folder, add the recording .scratch/referencias-reels/gravacao-cores/whatsapp-tintas.mp4 (outside git: it shows the author's face, so the case runs only where it exists), add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), put the author's style file at ../estilo.md (from .scratch/animating-reel-scenes/exemplos/estilo.md), and run the prompt as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit, Bash, WebSearch and WebFetch allowed.",
+      "files": [
+        "evals/files/colors-public-figure-photo"
+      ],
+      "expected_output": "The photo of Mark Zuckerberg is found in an allowed source with licence and credit, placed where the finger points, with the credit in timeline.md.",
+      "assertions": [
+        "breakdown.md notes the gesture of pointing up between 0 and 2 s, citing the frame time",
+        "The plan puts the photo of Mark Zuckerberg over the face, above the hand, on the word 'Zuckerberg', with the face on screen",
+        "The asset line carries the URL of an allowed source (Commons, Flickr CC or official press), author, licence and credit line; none from an agency, Google Images or third-party profile",
+        "No face is generated or altered (only cut out, background removed)",
+        "timeline.md has the section 'Créditos para a legenda' with that line",
+        "The gate shows the photo with its source and licence, to confirm or swap; when no usable image is found, it offers asking the author (recommended) or an icon",
+        "If the WhatsApp logo enters, it comes from the brand's official page, not recoloured"
+      ],
+      "human_feedback": ""
+    },
+    {
+      "id": 27,
+      "name": "keynote-clip-course-cta",
+      "prompt": "o SRT do reel do keynote tá aí, a gravação ainda tô cortando. meu design system tá em ds/. planeja as cenas, decide por mim nas perguntas",
+      "setup": "Copy evals/files/keynote-clip-course-cta into an empty folder inside a reels folder, add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), put the author's style file at ../estilo.md (from .scratch/animating-reel-scenes/exemplos/estilo.md), and run the prompt as a separate session outside any repository (claude -p from that folder) with Read, Write, Edit, Bash, WebSearch and WebFetch allowed.",
+      "files": [
+        "evals/files/keynote-clip-course-cta"
+      ],
+      "expected_output": "The keynote stretch comes with its official URL and exact span, not downloaded; because of the course CTA, the photo of the person is asked for.",
+      "assertions": [
+        "The keynote stretch comes with the URL of the official source and the exact span (start and end, a few seconds)",
+        "The agent does not download the clip and warns about rights detection",
+        "Because of the course CTA, the photo of the person named is asked of the author, not searched"
+      ],
+      "human_feedback": ""
+    }
+  ]
+}

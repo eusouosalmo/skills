@@ -1,6 +1,6 @@
 # Orquestração de skills: pipeline com portões humanos e artefatos em arquivo
 
-Resumo: nenhuma fonte oficial define um mecanismo de uma skill chamar outra, nem de declarar dependência entre skills. O que existe é o modelo invocando outra skill pelo nome (a Skill tool, no Claude Code), workflows com checklist e loops de validação dentro de uma skill, arquivos intermediários como estado verificável, e o aviso de que agentes podem parar para feedback humano em checkpoints. Para o pipeline do reel (cutting-raw-takes, animating-reel-scenes, finishing-reels), três fatos oficiais pesam mais: as sub-skills perguntam ao autor e o `AskUserQuestion` não existe em subagent, então tudo roda na conversa principal; depois de uma compactação o Claude Code guarda só o começo de cada skill invocada, num orçamento comum, então o estado precisa estar em arquivo; e nada instala as sub-skills junto com a orquestradora, então a orquestradora precisa conferir que elas existem. O resto (arquivo de estado, ledger, retomar de onde parou, não pedir aprovação duas vezes) é prática de comunidade.
+Resumo: nenhuma fonte oficial define um mecanismo de uma skill chamar outra, nem de declarar dependência entre skills. O que existe é o modelo invocando outra skill pelo nome (a Skill tool, no Claude Code), workflows com checklist e loops de validação dentro de uma skill, arquivos intermediários como estado verificável, e o aviso de que agentes podem parar para feedback humano em checkpoints. Para o pipeline do reel (reel-cut, reel-motion, reel-finish), três fatos oficiais pesam mais: as sub-skills perguntam ao autor e o `AskUserQuestion` não existe em subagent, então tudo roda na conversa principal; depois de uma compactação o Claude Code guarda só o começo de cada skill invocada, num orçamento comum, então o estado precisa estar em arquivo; e nada instala as sub-skills junto com a orquestradora, então a orquestradora precisa conferir que elas existem. O resto (arquivo de estado, ledger, retomar de onde parou, não pedir aprovação duas vezes) é prática de comunidade.
 
 Pesquisa feita em 2026-10-17, para o desenho da skill que recebe os brutos e o roteiro e entrega o reel pronto. Complementa [escrita-de-skills.md](escrita-de-skills.md) (seções 4.8, 4.9, 5.2, 5.6, 5.7 e 5.8 já cobrem checklist, plan-validate-execute, `disable-model-invocation`, ciclo de vida da skill no contexto, `context: fork` e a forma de chamar outra skill) e [harness-de-agentes.md](harness-de-agentes.md) (seções 6.3, 9.2, 10.4 e 10.10 já cobrem lista de status, o fluxo pesquisa, plano e implementação da HumanLayer, humanos sobre o loop e estado compartilhado). Aqui esses pontos aparecem só por referência.
 
@@ -46,7 +46,7 @@ Os documentos de SPEC, AS, BP, CC e VL foram baixados em Markdown em 2026-10-17 
 
 ### 2.1 Não há mecanismo próprio; o modelo invoca pelo nome
 
-- **O que é:** a SPEC não tem campo nem sintaxe para uma skill chamar outra. O corpo do SKILL.md não tem "format restrictions". O que torna a chamada possível é o cliente: no Claude Code, o modelo carrega skills pela Skill tool, e "Claude can invoke any skill that doesn't have `disable-model-invocation: true` set" (CC, Restrict Claude's skill access). Uma instrução no corpo da orquestradora ("use a skill `cutting-raw-takes`") é só texto que leva o modelo a fazer essa chamada.
+- **O que é:** a SPEC não tem campo nem sintaxe para uma skill chamar outra. O corpo do SKILL.md não tem "format restrictions". O que torna a chamada possível é o cliente: no Claude Code, o modelo carrega skills pela Skill tool, e "Claude can invoke any skill that doesn't have `disable-model-invocation: true` set" (CC, Restrict Claude's skill access). Uma instrução no corpo da orquestradora ("use a skill `reel-cut`") é só texto que leva o modelo a fazer essa chamada.
 - **O que as fontes oficiais dizem sobre compor:** a BP lista como benefício "Combine Skills for complex, multistep tasks" (overview), sem dizer como. O ENG chama skills de "composable resources" e não trata de uma skill invocando outra. A AS compara o escopo de uma skill ao de uma função, "a coherent unit of work that composes well with other skills", e avisa que skills estreitas demais "force multiple skills to load for a single task, risking overhead and conflicting instructions".
 - **Confiança:** confirmado que não existe mecanismo na SPEC e que a chamada é do modelo; a forma exata da frase que chama (nome da tool, uma chamada por skill) está em [escrita-de-skills.md, 5.8](escrita-de-skills.md#58-como-uma-skill-chama-outra) e é convenção.
 
@@ -67,19 +67,19 @@ Os documentos de SPEC, AS, BP, CC e VL foram baixados em Markdown em 2026-10-17 
 ### 3.1 A SPEC não tem campo de dependência
 
 - **O que é:** os campos da SPEC são `name`, `description`, `license`, `compatibility`, `metadata` e `allowed-tools`. Nenhum lista outras skills. O `compatibility` é texto livre de até 500 caracteres para "environment requirements (intended product, system packages, network access, etc.)", e a própria SPEC diz que a maioria das skills não precisa dele. Em `scripts/`, pede que o código seja "self-contained or clearly document dependencies".
-- **Leitura:** citar as skills necessárias no `compatibility` ("Needs the cutting-raw-takes, animating-reel-scenes and finishing-reels skills installed") cabe no texto livre, mas nenhum exemplo oficial usa o campo assim e nenhum cliente o lê como dependência. É inferência desta nota.
+- **Leitura:** citar as skills necessárias no `compatibility` ("Needs the reel-cut, reel-motion and reel-finish skills installed") cabe no texto livre, mas nenhum exemplo oficial usa o campo assim e nenhum cliente o lê como dependência. É inferência desta nota.
 - **Confiança:** confirmado quanto à ausência; o uso do `compatibility` para isso é inferência.
 
 ### 3.2 O instalador não resolve dependências
 
 - **O que é:** o `npx skills add` instala o que for pedido, por `--skill <nome>`, `--skill '*'` ou `--all`; o README não menciona dependência entre skills. Skills com `metadata.internal: true` ficam ocultas, "shown and installed" só com `INSTALL_INTERNAL_SKILLS=1` (VL, Environment Variables).
-- **Consequência:** quem instalar só a orquestradora fica sem as sub-skills. E enquanto `finishing-reels` for `draft` (com `internal: true`), um `npx skills add eusouosalmo/skills --all` comum não a instala.
+- **Consequência:** quem instalar só a orquestradora fica sem as sub-skills. E enquanto `reel-finish` for `draft` (com `internal: true`), um `npx skills add eusouosalmo/skills --all` comum não a instala.
 - **Confiança:** confirmado.
 
 ### 3.3 Plugin do Claude Code: dependência entre plugins, não entre skills
 
 - **O que é:** o `plugin.json` tem `dependencies`, "Plugins that must be enabled for this one to work" (CC, Plugins reference). Não há equivalente por skill. Dentro de um mesmo plugin, todas as skills listadas são instaladas juntas.
-- **Consequência para este repositório:** o plugin só leva skills `beta` e `stable` (ADR 0005). Hoje `cutting-raw-takes` e `animating-reel-scenes` estão lá e `finishing-reels`, `draft`, não. Uma orquestradora `beta` no plugin chamaria uma sub-skill ausente do plugin.
+- **Consequência para este repositório:** o plugin só leva skills `beta` e `stable` (ADR 0005). Hoje `reel-cut` e `reel-motion` estão lá e `reel-finish`, `draft`, não. Uma orquestradora `beta` no plugin chamaria uma sub-skill ausente do plugin.
 - **Confiança:** confirmado (CC); o estado do plugin vem do `.claude-plugin/plugin.json` em 2026-10-17.
 
 ### 3.4 O princípio vizinho: não supor o que está instalado
@@ -124,7 +124,7 @@ A base já está em [escrita-de-skills.md, 4.8 e 4.9](escrita-de-skills.md#48-cr
 
 ### 6.3 Cada sub-skill já tem seus portões
 
-- **Estado no repositório:** `cutting-raw-takes` pergunta a forma de saída e aprova a tabela de tomadas "before anything is rendered"; `finishing-reels` pergunta a forma de saída antes de qualquer render; `animating-reel-scenes` decide com o autor quais trechos viram cena. Um portão da orquestradora entre etapas se soma a esses.
+- **Estado no repositório:** `reel-cut` pergunta a forma de saída e aprova a tabela de tomadas "before anything is rendered"; `reel-finish` pergunta a forma de saída antes de qualquer render; `reel-motion` decide com o autor quais trechos viram cena. Um portão da orquestradora entre etapas se soma a esses.
 - **O que a comunidade faz com isso:**
   - O PK manda reaproveitar a aprovação já dada: depois que o usuário aprova o plano, seguir "directly into the execution stage, no separate "should I proceed?" prompt", e só perguntar se surgir decisão material nova. Relato.
   - O SP, em `executing-plans`, proíbe pausas de "posso continuar?" entre tarefas e lista quatro únicas paradas (operação destrutiva, ação sensível de segurança, efeito fora do worktree como push ou publicação, plano quebrado). Em `brainstorming`, um HARD-GATE impede construir antes da aprovação, com a ressalva "Approval covers what you showed them". Relato.
@@ -136,7 +136,7 @@ A base já está em [escrita-de-skills.md, 4.8 e 4.9](escrita-de-skills.md#48-cr
 ### 7.1 Várias SKILL.md na mesma sessão
 
 - **O que é:** a skill invocada entra uma vez como mensagem e fica; o Claude Code não relê o arquivo. Na compactação, ele religa a invocação mais recente de cada skill guardando "the first 5,000 tokens of each", num orçamento conjunto de 25.000 tokens preenchido a partir da skill invocada por último, de modo que "older skills can be dropped entirely after compaction if you have invoked many in one session" (CC, Skill content lifecycle). O remédio oficial: "invoke the skill again to restore its full content", e pôr o mais importante no topo.
-- **Números do pipeline (estimativa grosseira, cerca de 4 caracteres por token):** `cutting-raw-takes` tem 9,2 mil caracteres (uns 2,3 mil tokens), `animating-reel-scenes` 32,8 mil (uns 8 mil) e `finishing-reels` 13,5 mil (uns 3,4 mil). A `animating-reel-scenes` passa dos 5 mil e volta cortada depois de uma compactação. Somadas à orquestradora, cabem nos 25 mil, mas a sessão de um reel inteiro (transcrição, renders, revisões) tem boa chance de compactar no meio.
+- **Números do pipeline (estimativa grosseira, cerca de 4 caracteres por token):** `reel-cut` tem 9,2 mil caracteres (uns 2,3 mil tokens), `reel-motion` 32,8 mil (uns 8 mil) e `reel-finish` 13,5 mil (uns 3,4 mil). A `reel-motion` passa dos 5 mil e volta cortada depois de uma compactação. Somadas à orquestradora, cabem nos 25 mil, mas a sessão de um reel inteiro (transcrição, renders, revisões) tem boa chance de compactar no meio.
 - **Confiança:** confirmado (regras do CC); os tamanhos foram medidos em 2026-10-17.
 
 ### 7.2 context: fork e subagentes não servem às sub-skills
@@ -163,7 +163,7 @@ A base já está em [escrita-de-skills.md, 4.8 e 4.9](escrita-de-skills.md#48-cr
 
 ### 8.2 Duas formas de saber em que etapa se está
 
-- **Estado derivado dos artefatos:** a etapa atual é deduzida do que já existe na pasta. As skills do repositório já descrevem esse contrato: `finishing-reels` espera "a reel folder with the cut, `legenda.srt`, `words.json`, `timeline.md` and `exports/`". Sem arquivo extra, mas ambíguo quando um artefato existe e não foi aprovado.
+- **Estado derivado dos artefatos:** a etapa atual é deduzida do que já existe na pasta. As skills do repositório já descrevem esse contrato: `reel-finish` espera "a reel folder with the cut, `legenda.srt`, `words.json`, `timeline.md` and `exports/`". Sem arquivo extra, mas ambíguo quando um artefato existe e não foi aprovado.
 - **Arquivo de estado explícito:** um arquivo que lista as etapas concluídas. O MS sugere `pipeline_state.json` com `completed_steps` e `current_step`, gravado após cada etapa, lido no início para pular o que já foi feito, o que só é seguro com etapas idempotentes. O SP usa um ledger em Markdown (`progress.md`), com a identidade do plano na primeira linha, uma linha "complete" por tarefa, retomada na primeira tarefa sem essa linha e a regra de, depois de compactação, confiar no ledger e no `git log` mais que na própria memória. Relato em cada caso.
 - **Confiança:** as duas formas são relato; a necessidade de alguma delas decorre de 7.1 e 7.3.
 
@@ -212,8 +212,8 @@ Não são decisões, são consequências das fontes acima para o desenho.
 
 1. **Rodar tudo na conversa principal.** As sub-skills perguntam ao autor e subagent não tem `AskUserQuestion` (6.2, 7.2). Nada de `context: fork` na orquestradora nem nas sub-skills.
 2. **Chamar cada sub-skill pelo nome, uma chamada por vez**, e manter as três model-invoked. A orquestradora pode ser user-invoked (2.2).
-3. **Conferir as dependências no início.** Nem o instalador nem a SPEC garantem que as três existam (3, 4). Hoje `finishing-reels` é `draft` e fica fora do plugin e do `--all` comum: a orquestradora só pode ir para `beta` no plugin junto com ela, ou precisa dizer como instalá-la.
-4. **Estado em disco, na pasta do reel.** Depois de uma compactação, a `animating-reel-scenes` volta cortada e a skill mais antiga pode sumir (7.1). O que já foi feito e aprovado precisa estar escrito para retomar sem refazer, e a orquestradora deve mandar reinvocar a sub-skill da etapa corrente ao retomar.
+3. **Conferir as dependências no início.** Nem o instalador nem a SPEC garantem que as três existam (3, 4). Hoje `reel-finish` é `draft` e fica fora do plugin e do `--all` comum: a orquestradora só pode ir para `beta` no plugin junto com ela, ou precisa dizer como instalá-la.
+4. **Estado em disco, na pasta do reel.** Depois de uma compactação, a `reel-motion` volta cortada e a skill mais antiga pode sumir (7.1). O que já foi feito e aprovado precisa estar escrito para retomar sem refazer, e a orquestradora deve mandar reinvocar a sub-skill da etapa corrente ao retomar.
 5. **Um contrato de artefatos por etapa**, no estilo da handoff matrix: o que cada etapa entrega e o que a seguinte exige (o corte; o SRT que o autor gera no CapCut; as cenas em `exports/`). A checagem desses arquivos é o gate programático do BEA entre etapas (5, 6.1, 8.3).
 6. **Não pedir aprovação duas vezes.** As sub-skills já têm portões; o da orquestradora entre etapas só se justifica onde há algo novo para o autor ver (o corte pronto antes das cenas, as cenas antes do acabamento) ou trabalho caro a seguir (6.3).
 7. **Prever passos que só o autor faz.** Entre o corte e as cenas, o autor legenda no CapCut e exporta o SRT. O portão ali não é aprovação, é espera por um arquivo; o checkpoint por "blocker" do BEA (6.1).
@@ -223,7 +223,7 @@ Não são decisões, são consequências das fontes acima para o desenho.
 - O estado fica derivado dos artefatos ou num arquivo explícito na pasta do reel? Se explícito, o `timeline.md` que as skills já usam serve, ou é preciso um arquivo novo?
 - Que portões da orquestradora sobram depois de contar os das sub-skills? Precisa de eval com e sem portão para ver se algum é só fricção.
 - Como a orquestradora confere, de forma portátil, que as sub-skills estão instaladas? Olhar a lista de skills disponíveis no contexto é o único jeito que vale para qualquer agente, e nenhuma fonte diz o quanto o modelo acerta nisso.
-- A pergunta de forma de saída aparece em `cutting-raw-takes` e em `finishing-reels`. A orquestradora pergunta uma vez e passa a resposta adiante, ou deixa cada sub-skill perguntar? Passar adiante exige que as sub-skills aceitem a escolha já feita.
+- A pergunta de forma de saída aparece em `reel-cut` e em `reel-finish`. A orquestradora pergunta uma vez e passa a resposta adiante, ou deixa cada sub-skill perguntar? Passar adiante exige que as sub-skills aceitem a escolha já feita.
 - A sessão de um reel inteiro cabe numa conversa, ou o desenho deve prever um handoff para outra sessão no meio (padrão `handoff` do MP)?
 
 ## 13. Fontes

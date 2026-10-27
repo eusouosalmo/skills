@@ -423,7 +423,7 @@ Sem decisão aqui; só o que precisa ser decidido.
 
 ## 12. Guardrails em outros agentes
 
-Pesquisa feita em 2026-10-02. A pergunta: a skill `setting-up-git-guardrails` consegue instalar, por projeto, o bloqueio de git destrutivo nos agentes que o `npx skills` atende, e não só no Claude Code? Fontes: README e código do vercel-labs/skills (via `gh api`), a doc oficial de cada agente, os READMEs e exemplos nos repositórios oficiais do Cline e do Gemini CLI, e os READMEs do dcg e do CC Safety Net.
+Pesquisa feita em 2026-10-02. A pergunta: a skill `git-guardrails` consegue instalar, por projeto, o bloqueio de git destrutivo nos agentes que o `npx skills` atende, e não só no Claude Code? Fontes: README e código do vercel-labs/skills (via `gh api`), a doc oficial de cada agente, os READMEs e exemplos nos repositórios oficiais do Cline e do Gemini CLI, e os READMEs do dcg e do CC Safety Net.
 
 Essas docs mudam ainda mais rápido que a do Claude Code. Durante a pesquisa: a doc do Codex redireciona para learn.chatgpt.com, o Windsurf virou Devin Desktop (docs.devin.ai), o Kiro trocou o formato de hooks na CLI 3.0 e IDE 1.0, e o Cline levou a doc de hooks para o SDK. Confira cada link antes de implementar.
 
