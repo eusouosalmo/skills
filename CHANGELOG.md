@@ -5,7 +5,6 @@
 
 ### Features
 
-* promote all draft skills to beta ([c001c07](https://github.com/eusouosalmo/skills/commit/c001c070d08e987b34e0de16cfb8695b8e5afd12))
 * promote all draft skills to beta ([58eea5c](https://github.com/eusouosalmo/skills/commit/58eea5c8d492c806b8df80a7eb5c942df63ebf8c))
 
 ## [0.6.0](https://github.com/eusouosalmo/skills/compare/v0.5.0...v0.6.0) (2026-10-27)
