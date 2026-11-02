@@ -3,8 +3,7 @@ name: reel-edit
 description: Edits a talking-head Reel or Short from its raw clips and script to the finished reel, as a CapCut project or a final mp4, by running the reel-cut, reel-motion and reel-finish skills in order with the author's approval between them. Use when the user hands over the raw recordings of a reel and wants it edited end to end (edição completa, do bruto ao reel pronto, edita tudo).
 compatibility: Needs the reel-cut, reel-motion and reel-finish skills installed, plus what each of them needs. Multiple-choice questions use the agent's question tool when it has one (AskUserQuestion in Claude Code).
 metadata:
-  status: draft
-  internal: true
+  status: beta
 ---
 
 # Editing reels

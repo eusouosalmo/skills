@@ -39,21 +39,21 @@ In the order they enter a reel. All deliver their output in Portuguese.
 1. [reel-script](skills/content/reel-script/SKILL.md) (beta): writes the script from your notes, with hook, one spoken CTA, timed teleprompter text and prints of its sources for the edit.
 2. [reel-cut](skills/content/reel-cut/SKILL.md) (beta): joins the raw clips into a rough cut, picking the take to keep for each line and dropping backstage talk and long pauses, with a takes table approved before rendering.
 3. [reel-motion](skills/content/reel-motion/SKILL.md) (beta): decides which stretches become animation and renders the scenes and sticker overlays, timed to each spoken word.
-4. [reel-finish](skills/content/reel-finish/SKILL.md) (draft): puts the finished reel together, as a CapCut project or as the final mp4 without CapCut, with captions, sounds, punch-ins and split screen in the style of one of your projects.
-5. [post-caption](skills/content/post-caption/SKILL.md) (draft): writes the post caption for Instagram, TikTok, YouTube Shorts or LinkedIn, with one ask, source credit and hashtags within the platform's limits.
+4. [reel-finish](skills/content/reel-finish/SKILL.md) (beta): puts the finished reel together, as a CapCut project or as the final mp4 without CapCut, with captions, sounds, punch-ins and split screen in the style of one of your projects.
+5. [post-caption](skills/content/post-caption/SKILL.md) (beta): writes the post caption for Instagram, TikTok, YouTube Shorts or LinkedIn, with one ask, source credit and hashtags within the platform's limits.
 
 And the ones working around that sequence:
 
-- [reel-edit](skills/content/reel-edit/SKILL.md) (draft): does the whole edit, from raw clips to finished reel, running reel-cut, reel-motion and reel-finish in order, with your approval between them.
-- [eusouosalmo-voice](skills/content/eusouosalmo-voice/SKILL.md) (draft): writes and reviews text in my voice, spoken or written by channel. A model for building a skill of your own voice.
+- [reel-edit](skills/content/reel-edit/SKILL.md) (beta): does the whole edit, from raw clips to finished reel, running reel-cut, reel-motion and reel-finish in order, with your approval between them.
+- [eusouosalmo-voice](skills/content/eusouosalmo-voice/SKILL.md) (beta): writes and reviews text in my voice, spoken or written by channel. A model for building a skill of your own voice.
 - [setup-eusouosalmo-skills](skills/content/setup-eusouosalmo-skills/SKILL.md) (beta): sets up the kit on a machine once, finding the folders and files the skills read.
 
 ### Engineering with AI
 
 - [skill-forge](skills/harness/skill-forge/SKILL.md) (beta): creates or fixes a skill from a failure you saw happen, checked with evals against the agent without the skill.
-- [git-guardrails](skills/harness/git-guardrails/SKILL.md) (draft): installs, per project, a hook that stops the agent from running destructive git, with interactive and AFK profiles.
+- [git-guardrails](skills/harness/git-guardrails/SKILL.md) (beta): installs, per project, a hook that stops the agent from running destructive git, with interactive and AFK profiles.
 
-**Status:** `beta` and `stable` are installed by both paths. `draft` is still being tested and stays in the repo, to read or copy.
+**Status:** `beta` and `stable` are installed by both paths. `draft` is still being tested and stays in the repo, to read or copy (none right now).
 
 ## Why these skills
 

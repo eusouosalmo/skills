@@ -3,8 +3,7 @@ name: eusouosalmo-voice
 description: Writes and reviews text in the voice of eusouosalmo, picking the spoken or written register by channel. Use when the user asks for a video script, teleprompter text, Instagram caption, LinkedIn post or site text in their voice, or to fix a draft that sounds like AI (roteiro, legenda, na minha voz, parece IA).
 compatibility: scripts/check-voice.py needs Python 3.8+.
 metadata:
-  status: draft
-  internal: true
+  status: beta
 ---
 
 # Writing as eusouosalmo

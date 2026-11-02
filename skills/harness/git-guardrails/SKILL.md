@@ -2,8 +2,7 @@
 name: git-guardrails
 description: Installs per-project git guardrails for coding agents (Claude Code, Codex, Gemini CLI), a hook that stops the agent from running destructive git, history rewrites and risky pushes, with interactive and AFK profiles. Use when the user wants to stop an agent from running dangerous git commands, prepare an unattended agent loop, or loosen or tighten what the agent may do with git (guardrails de git, modo AFK).
 metadata:
-  status: draft
-  internal: true
+  status: beta
 ---
 
 # Setting up git guardrails

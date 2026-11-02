@@ -3,8 +3,7 @@ name: post-caption
 description: Writes the caption (post text, description) for a short video on Instagram, TikTok, YouTube Shorts or LinkedIn from its script, with a first line for search, what the video left out, one ask, source credit and hashtags within the platform's limits. Use when the user asks for a post caption or video description (legenda do reel, descrição do short, texto do post, hashtags). Not for subtitles or SRT files.
 compatibility: scripts/check-caption.py needs Python 3.8+.
 metadata:
-  status: draft
-  internal: true
+  status: beta
 ---
 
 # Writing post captions
