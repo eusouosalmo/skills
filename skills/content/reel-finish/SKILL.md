@@ -3,8 +3,7 @@ name: reel-finish
 description: Finishes a talking-head Reel or Short from its cut, scenes, sfx and captions, either as a CapCut desktop project ready to open or as the final mp4 rendered without CapCut, in the editing style of one of the author's own CapCut projects (entrance, opening sounds, punch-ins and words on screen with their sound, caption template, split-screen keyframes and divider). Use when the user wants a recorded reel put together or finished (montar no capcut, finalizar o reel, vídeo final sem capcut, mp4 pronto pra postar).
 compatibility: The CapCut output is confirmed on CapCut desktop 9.6 for Windows, written from WSL. Needs Python 3.8+, ffmpeg (with libass) and ffprobe; the mp4 also needs numpy and fontTools, and words behind the head need numpy, Pillow and mediapipe in both outputs (python3 -m venv .venv && .venv/bin/pip install numpy fonttools pillow mediapipe; the segmentation model downloads once into ~/.cache/reel-finish). Without the CapCut cache, the mp4 downloads its stand-in fonts once from Google Fonts into the same folder. Multiple-choice questions use the agent's question tool when it has one (AskUserQuestion in Claude Code).
 metadata:
-  status: draft
-  internal: true
+  status: beta
 ---
 
 # Finishing reels

@@ -15,10 +15,15 @@
     "content"
   ],
   "skills": [
+    "./skills/content/eusouosalmo-voice",
+    "./skills/content/post-caption",
     "./skills/content/reel-cut",
+    "./skills/content/reel-edit",
+    "./skills/content/reel-finish",
     "./skills/content/reel-motion",
     "./skills/content/reel-script",
     "./skills/content/setup-eusouosalmo-skills",
+    "./skills/harness/git-guardrails",
     "./skills/harness/skill-forge"
   ]
 }
