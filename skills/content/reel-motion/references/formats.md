@@ -47,7 +47,7 @@ In mixed mode with the face or in an overlay, the impact screen is its own full-
 The primary source of a fact, on screen, with the cited sentence highlighted as it is said.
 
 1. `python3 scripts/source_shot.py "<url>" "<exact sentence from the page>" -o cenas/assets/NN-fonte` writes the page crop (`.png`, 1080 px wide, text at double size) and the sentence's boxes (`.json`, one per line it wraps to). The sentence must be copied from the page as written.
-2. In the scene, show the image inside the stage with the page's URL in small mono text on top (the viewer sees where it comes from), and grow a highlight (the design system's yellow) over each box, line by line, from the time the author starts saying it in `words.json`.
+2. In the scene, show the image inside the stage with the page's URL in small mono text on top (the viewer sees where it comes from), and grow a highlight (the design system's highlighter colour) over each box, line by line, from the time the author starts saying it in `words.json`.
 3. Credit stays on screen the whole shot. The page is someone else's text: quote one sentence, never a whole page, and only to support what is said.
 
 ## Sound effects
