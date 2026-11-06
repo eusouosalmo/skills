@@ -10,7 +10,8 @@ What it reproduces from the reference project (read from the CapCut drafts and t
   reference project's punch-in sound;
 - the caption template: font, size, max line width, white text with the spoken word in the template colour,
   black stroke and hard shadow, pages of up to three words.
-Everything else comes from the plan: the recording with its split-screen keyframes, the overlays, the reel's audio.
+Everything else comes from the plan: the recording with its split-screen keyframes, the overlays (the ones marked
+behind under a cut-out of the person), the reel's audio.
 
 Requires ffmpeg with libass, numpy (the entrance) and fontTools (accented capitals for a font that lacks them):
     python3 -m venv .venv && .venv/bin/pip install numpy fonttools
@@ -26,8 +27,9 @@ import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from assemble_draft import (US, WORD_CAP_PX, WORD_LIFT_PX, WORD_SHADOW, Draft, cutouts, die,  # noqa: E402
-                            load_json, local_path, probe, punch_ins, screen_words, sound_times)
+from assemble_draft import (US, WORD_CAP_PX, WORD_LIFT_PX, WORD_SHADOW, Draft, behind_overlays,  # noqa: E402
+                            behind_spans, cutouts, die, load_json, local_path, probe, punch_ins, screen_words,
+                            sound_times)
 import own_assets  # noqa: E402
 
 W, H, FPS = 1080, 1920, 30
@@ -431,6 +433,7 @@ def main():
     split = [(b["t"], bps[i + 1]["t"] if i + 1 < len(bps) else 1e9) for i, b in enumerate(bps) if b.get("y", 0)]
     punches = [p for p in punch_ins(plan, ref, probe(rec)) if p["t"] < dur]
     ws = [w for w in screen_words(plan, ref, probe(rec)) if w["t"] < dur]
+    behind = [o for o in behind_overlays(plan, ref, probe(rec)) if o["start"] < dur]
 
     filt = [f"color=black:s={W}x{H}:r={FPS}:d={dur:.3f}[bg]",
             f"[0:v]scale={W}:{H},setsar=1" + (f",split={len(punches) + 1}[r0]" + "".join(f"[pz{i}]" for i in range(len(punches)))
@@ -454,7 +457,14 @@ def main():
             inputs += ["-i", str(ent)]
             filt.append(f"[{last}][{n}:v]overlay=0:0:eof_action=pass[v{n}]")
             last, n = f"v{n}", n + 1
-    # words on screen, then the cut-out of the person over the ones behind the head
+    def overlay(o):
+        nonlocal last, n
+        inputs.extend(["-itsoffset", f"{o['start']:.4f}", "-i", o["file"]])
+        end = o.get("end", 1e9)
+        filt.append(f"[{last}][{n}:v]overlay=0:0:eof_action=pass:enable='between(t,{o['start']:.4f},{end:.4f})'[v{n}]")
+        last, n = f"v{n}", n + 1
+
+    # words on screen and the overlays behind the head, then the cut-out of the person over them
     if ws:
         wseg, wtmpl = ref.word_template()
         wst = json.loads(ref.idx[wtmpl["text_info_resources"][0]["text_material_id"]][1]["content"])["styles"][0]
@@ -468,16 +478,14 @@ def main():
                         fill, shadow)
         filt.append(f"[{last}]ass={work / 'words.ass'}:fontsdir={work / 'fonts'}[vw]")
         last = "vw"
-        for w, f in cutouts(plan, ws, punches):
-            inputs += ["-itsoffset", f"{w['t']:.4f}", "-i", str(f)]
-            filt.append(f"[{last}][{n}:v]overlay=0:0:eof_action=pass:enable='between(t,{w['t']:.4f},{w['end']:.4f})'[v{n}]")
-            last, n = f"v{n}", n + 1
-    # overlays, in plan order (later ones on top), each from its start
+    for o in behind:
+        overlay(o)
+    for (a, b), f in cutouts(plan, behind_spans(ws, behind), punches):
+        overlay({"file": str(f), "start": a, "end": b})
+    # the other overlays, in plan order (later ones on top), each from its start
     for o in plan.get("overlays", []):
-        inputs += ["-itsoffset", f"{o['start']:.4f}", "-i", o["file"]]
-        end = o.get("end", 1e9)
-        filt.append(f"[{last}][{n}:v]overlay=0:0:eof_action=pass:enable='between(t,{o['start']:.4f},{end:.4f})'[v{n}]")
-        last, n = f"v{n}", n + 1
+        if not o.get("behind"):
+            overlay(o)
     # captions
     cap = plan.get("captions")
     if cap:

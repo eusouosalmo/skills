@@ -1,4 +1,4 @@
-"""Cuts the person out of the recording, as a .mov with alpha, for the words that sit behind the head.
+"""Cuts the person out of the recording, as a .mov with alpha, for the words and overlays that sit behind the head.
 
 The reference project puts a copy of the recording with CapCut's background removal over its words, so the hair
 covers them. CapCut keeps that cut-out in its own mask format inside the project; this script makes the same layer as a

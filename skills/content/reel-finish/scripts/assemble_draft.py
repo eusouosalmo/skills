@@ -19,7 +19,8 @@ The plan (JSON, paths in the local filesystem; see SKILL.md for each field):
              "behind": false}],
   "words_fill": "#FFFFFF",
   "exports": "<reel>/exports",
-  "overlays": [{"file": "<reel>/exports/01-x.mov", "start": 0, "end": 100.6, "volume": 0}],
+  "overlays": [{"file": "<reel>/exports/01-x.mov", "start": 0, "end": 100.6, "volume": 0},
+               {"file": "<reel>/exports/03-palavra-atras.mov", "start": 12.4, "end": 15.0, "behind": true}],
   "audio": [{"file": "<reel>/exports/00-sfx.wav", "start": 0}],
   "captions": {"srt": "<reel>/legenda.srt", "words": "<reel>/words.json",
                "fixes": {"wrong text": "right text"}, "y_split": -0.71, "y_full": null,
@@ -268,20 +269,60 @@ def sound_times(punches, ws):
     return out
 
 
-def cutouts(plan, ws, punches, render=True):
-    """The cut-out .mov laid over each word behind the head, rendered once into the reel's exports folder
+MAX_BEHIND = 8.0  # an overlay behind the head is an effect on a stretch, not a layer for the whole reel
+
+
+def behind_overlays(plan, ref, rec_dur):
+    """The plan's overlays marked 'behind': a scene element the person stands in front of (a giant word on the wall,
+    the room going dark), checked to lie where the face fills the frame, since the cut-out is made at full frame."""
+    ent = ref.entrance() if plan.get("entrance", True) else None
+    ent_end = (ent or {}).get("duration", 0) / US
+    blocked = moving_ranges(plan["main"], rec_dur)
+    out = []
+    for o in plan.get("overlays", []):
+        if not o.get("behind"):
+            continue
+        t = round(o["start"] / FRAME) * FRAME
+        e = round(min(o.get("end", o["start"] + probe(Path(o["file"]))), rec_dur) / FRAME) * FRAME
+        if not 0 < e - t <= MAX_BEHIND:
+            die(f"overlay behind the head at {t:.2f}: it must last more than 0 and at most {MAX_BEHIND:.0f} s")
+        if t < ent_end:
+            die(f"overlay behind the head at {t:.2f} overlaps the entrance animation (0 to {ent_end:.2f} s)")
+        hit = next(((a, b) for a, b in blocked if t < b and e > a), None)
+        if hit:
+            die(f"overlay behind the head at {t:.2f}-{e:.2f} falls in a split screen or its keyframe "
+                f"({hit[0]:.2f}-{hit[1]:.2f} s): only where the face fills the frame")
+        out.append({**o, "start": t, "end": e})
+    return out
+
+
+def behind_spans(ws, behind):
+    """Where the cut-out of the person goes: each word behind the head and each overlay behind it, merged where they
+    overlap, so one cut-out covers both."""
+    spans = sorted([(w["t"], w["end"]) for w in ws if w["behind"]] + [(o["start"], o["end"]) for o in behind])
+    out = []
+    for a, b in spans:
+        if out and a <= out[-1][1] + 1e-6:
+            out[-1] = (out[-1][0], max(out[-1][1], b))
+        else:
+            out.append((a, b))
+    return out
+
+
+def cutouts(plan, spans, punches, render=True):
+    """The cut-out .mov laid over each span behind the head, rendered once into the reel's exports folder
     (skipped, not rendered, when render is false)."""
     exports = Path(plan.get("exports") or Path(plan["recording"]).parent / "exports")
     scale_at = lambda t: next((p["scale"] for p in punches if p["t"] - 1e-6 <= t < p["end"] - 1e-6), 1.0)
     out = []
-    for w in (w for w in ws if w["behind"]):
-        f = exports / f"recorte-{w['t']:.2f}-{w['end']:.2f}.mov"
+    for a, b in spans:
+        f = exports / f"recorte-{a:.2f}-{b:.2f}.mov"
         if not f.exists():
             if not render:
                 continue
             import cutout
-            cutout.render(Path(plan["recording"]), f, w["t"], w["end"], scale_at, die)
-        out.append((w, f))
+            cutout.render(Path(plan["recording"]), f, a, b, scale_at, die)
+        out.append(((a, b), f))
     return out
 
 
@@ -406,7 +447,8 @@ def main():
     # 2. words on screen in the reference project's word template, and over each word behind the head, the cut-out of
     # the person (render_index orders the layers: recording, words, cut-out, overlays, captions)
     shown = screen_words(plan, ref, rec_dur)
-    cuts = cutouts(plan, shown, punches, render=not dry) if shown else []
+    behind = behind_overlays(plan, ref, rec_dur)
+    cuts = cutouts(plan, behind_spans(shown, behind), punches, render=not dry)
     if shown:
         wseg, wtmpl = ref.word_template()
         wtext = ref.idx[wtmpl["text_info_resources"][0]["text_material_id"]][1]
@@ -435,18 +477,21 @@ def main():
     if cuts:
         src, mt, st = find_local("videos", ".mov")
         segs = []
-        for w, f in cuts:
+        for (a, b), f in cuts:
             m = media("videos", mt, f, probe(f), has_audio=False, width=1080, height=1920)
-            s = seg_from(src, st, m, w["t"], w["end"] - w["t"])
+            s = seg_from(src, st, m, a, b - a)
             s["volume"], s["render_index"] = 0.0, 2
             segs.append(s)
         tracks.append(track("video", segs))
 
-    # 3. overlays (.mov with alpha): packed onto as few tracks as possible without overlap
-    if plan.get("overlays"):
+    # 3. overlays (.mov with alpha): packed onto as few tracks as possible without overlap; the ones behind the head
+    # under the cut-out (render_index 1), the others over it
+    for group, base in ((behind, 1), ([o for o in plan.get("overlays", []) if not o.get("behind")], 3)):
+        if not group:
+            continue
         src, mt, st = find_local("videos", ".mov")
         lanes = []
-        for o in sorted(plan["overlays"], key=lambda o: o["start"]):
+        for o in sorted(group, key=lambda o: o["start"]):
             f = Path(o["file"])
             fd = probe(f)
             dur = min(o.get("end", o["start"] + fd), rec_dur) - o["start"]
@@ -460,7 +505,7 @@ def main():
             lane.append((o["start"], o["start"] + dur, s))
         for i, l in enumerate(lanes):
             for x in l:
-                x[2]["render_index"] = 3 + i
+                x[2]["render_index"] = base if base == 1 else base + i
         tracks += [track("video", [x[2] for x in l]) for l in lanes]
 
     # 4. audio files of the reel (00-sfx.wav), each on its own track
@@ -605,6 +650,7 @@ def main():
     summary = [(t["type"], len(t["segments"])) for t in tracks]
     pin = [(round(p["t"], 2), round(p["end"], 2), round(p["scale"], 2)) for p in punches]
     pin = f"{pin}, words {[(round(w['t'], 2), w['text'], 'behind' if w['behind'] else 'front') for w in shown]}"
+    pin += f", overlays behind the head {[(round(o['start'], 2), round(o['end'], 2)) for o in behind]}"
     if dry:
         print(f"dry run: {rec_dur:.2f} s, tracks {summary}, split ranges {split_ranges}, punch-ins {pin}")
         return
