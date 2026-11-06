@@ -17,6 +17,7 @@ The plan (JSON, paths in the local filesystem; see SKILL.md for each field):
   "punch_ins": [{"t": 2.54, "end": 3.3, "word": "microfone"}, {"t": 1.03, "end": 1.8, "scale": 1.1}],
   "words": [{"t": 4.34, "end": 5.1, "text": "24 HORAS"}, {"t": 6.73, "end": 7.43, "text": "JEV", "y": 0, "scale": 1.98,
              "behind": false}],
+  "words_fill": "#FFFFFF",
   "exports": "<reel>/exports",
   "overlays": [{"file": "<reel>/exports/01-x.mov", "start": 0, "end": 100.6, "volume": 0}],
   "audio": [{"file": "<reel>/exports/00-sfx.wav", "start": 0}],
@@ -43,9 +44,9 @@ FRAME = 1 / 30  # the reels are 30 fps; punch-ins snap to this grid
 # The word template ("Title EN Basic Take Your Time" with the "黄字加投影" effect), measured on the author's reel at size 15:
 # "UMA" at scale 1.28 has capitals 248 px tall (190.7 px per unit of scale gives that height with the font's overshoot,
 # checked against "JEV" at 1.98, 385 px); the template squeezes the text across by its own x/y scale; it lifts the text 234.5 px per
-# unit of scale above the clip's y (capitals from 258 px at y 0.29 and scale 1.28, from 303 px at y 0 and scale 1.98); fill #FBFD99 (the effect's
-# colour, not the text's), a hard black shadow down and right of about 3.2% of the capital height, no stroke.
-WORD_CAP_PX, WORD_LIFT_PX, WORD_FILL, WORD_SHADOW = 190.7, 236.8, (0xFB, 0xFD, 0x99), 0.032
+# unit of scale above the clip's y (capitals from 258 px at y 0.29 and scale 1.28, from 303 px at y 0 and scale 1.98); a hard black shadow down and
+# right of about 3.2% of the capital height, no stroke. The colour comes from the text effect (render_mp4.word_style).
+WORD_CAP_PX, WORD_LIFT_PX, WORD_SHADOW = 190.7, 236.8, 0.032
 # Instagram crops about 98 px off each side of a tall phone screen (the author's posted reel, 2026-10-16): a word
 # stays between x 110 and 970.
 SAFE_X = 110

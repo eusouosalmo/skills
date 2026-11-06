@@ -81,7 +81,7 @@ Run `scripts/render_mp4.py plan.json <reel>/exports/<reel name> - final.mp4 --pr
 - the caption template: its font with the pt-BR accented capitals added when the font lacks them, the size, colour, stroke and shadow, pages of up to three words, lines broken where CapCut breaks them;
 - the opening sounds, from the cache files the reference project uses;
 - the punch-ins, as hard cuts around the frame centre, with the reference project's punch-in sound;
-- the words in the reference's word template: its font, the effect's yellow and hard shadow, the template's size and position, with the person cut out over them.
+- the words in the reference's word template: its font, the colour and shadow of its text effect, the template's size and position, with the person cut out over them. When the script cannot read the effect's colour, it stops and asks for `words_fill` (`"#RRGGBB"`) in the plan: take it from a frame of a reel made with that template.
 
 When the cache lacks one of these files (another machine, a cleared cache), the script takes our own version from `scripts/own_assets.py` and prints which: a free font sized to the CapCut font's capitals and line width (Lexend for the caption, Kanit for the words) and a synthesized sound (camera click, reversed whoosh, mouse click). Render on, and name each stand-in in the handover, so the author knows what to compare. `"own_assets": true` in the plan uses ours even with the cache, for a side-by-side with CapCut's.
 

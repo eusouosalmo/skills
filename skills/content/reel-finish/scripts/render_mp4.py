@@ -19,13 +19,14 @@ import json
 import math
 import re
 import shutil
+import struct
 import subprocess
 import sys
 import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from assemble_draft import (US, WORD_CAP_PX, WORD_FILL, WORD_LIFT_PX, WORD_SHADOW, Draft, cutouts, die,  # noqa: E402
+from assemble_draft import (US, WORD_CAP_PX, WORD_LIFT_PX, WORD_SHADOW, Draft, cutouts, die,  # noqa: E402
                             load_json, local_path, probe, punch_ins, screen_words, sound_times)
 import own_assets  # noqa: E402
 
@@ -322,7 +323,50 @@ def srt_cues(p, words, fixes):
     return out
 
 
-def write_words_ass(path, ws, font, family, size, squeeze):
+def effect_colours(prefab):
+    """The colours a shader text effect stores in its binary prefab: every RGBA of floats in 0..1 with full alpha and
+    at least one channel strictly between 0 and 1 (a pure 0/1 vector is a mask or an axis, not a colour). A read that
+    starts 4 or 8 bytes before another hit is the same floats shifted, so only the last of such a chain is kept."""
+    b = prefab.read_bytes()
+    hits = {}
+    for o in range(len(b) - 16):
+        v = struct.unpack_from("<4f", b, o)
+        if all(0 <= x <= 1 for x in v) and v[3] > 0.99 and any(0.01 < x < 0.99 for x in v[:3]):
+            hits[o] = v[:3]
+    return [c for o, c in hits.items() if o + 4 not in hits and o + 8 not in hits]
+
+
+def word_style(plan, wst):
+    """Fill colour (0..255 RGB) and hard-shadow size (fraction of the capital height) of the words on screen, taken
+    from the plan's words_fill, else from the reference's text effect: its effectStyle.json (fill and shadows) or the
+    colours stored in a shader effect's prefab (averaged, since such effects shade a gradient between them; the shadow
+    keeps the size measured on the author's reel). The text's own fill is ignored: the effect paints over it."""
+    hexfill = plan.get("words_fill")
+    eff = local_path(wst.get("effectStyle", {}).get("path", "")) if wst.get("effectStyle") else None
+    shadow = WORD_SHADOW
+    rgb = None
+    if eff and (eff / "effectStyle.json").exists():
+        es = load_json(eff / "effectStyle.json")
+        fc = es.get("fill", {}).get("content", {})
+        if fc.get("render_type") == "gradient":
+            cols = fc["gradient"]["color"]
+            rgb = [sum(c[i] for c in cols) / len(cols) for i in range(3)]
+        elif fc.get("solid"):
+            rgb = fc["solid"]["color"][:3]
+        shadow = WORD_SHADOW if es.get("shadows") else 0.0
+    elif eff and (eff / "effect.prefab").exists():
+        cols = effect_colours(eff / "effect.prefab")
+        if cols:
+            rgb = [sum(c[i] for c in cols) / len(cols) for i in range(3)]
+    if hexfill:
+        return tuple(int(hexfill.lstrip("#")[i:i + 2], 16) for i in (0, 2, 4)), shadow
+    if rgb is None:
+        die("cannot read the colour of the reference's word effect; set \"words_fill\": \"#RRGGBB\" in the plan, "
+            "from a frame of a reel made with that template")
+    return tuple(round(x * 255) for x in rgb), shadow
+
+
+def write_words_ass(path, ws, font, family, size, squeeze, fill, shadow):
     """One event per word, centred on x, its capitals placed where CapCut draws the word template."""
     from fontTools.ttLib import TTFont
     f = TTFont(font)
@@ -336,10 +380,10 @@ def write_words_ass(path, ws, font, family, size, squeeze):
         centre = HALF - w["y"] * HALF - WORD_LIFT_PX * w["scale"] * size / 15
         base = centre + cap_px / 2
         box = base - (asc + desc) * fs / em / 2  # libass centres the ascent-descent box
-        sh = WORD_SHADOW * cap_px
+        sh = shadow * cap_px
         out.append(f"Dialogue: 0,{ass_time(w['t'])},{ass_time(w['end'])},Word,,0,0,0,,"
                    f"{{\\an5\\pos(540,{box:.0f})\\fs{fs:.1f}\\fscx{squeeze * 100:.1f}\\xshad{sh:.1f}\\yshad{sh:.1f}}}{w['text']}")
-    r, g, b = WORD_FILL
+    r, g, b = fill
     head = (f"[Script Info]\nScriptType: v4.00+\nPlayResX: {W}\nPlayResY: {H}\nWrapStyle: 2\nScaledBorderAndShadow: yes\n\n"
             "[V4+ Styles]\nFormat: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, "
             "Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, "
@@ -418,7 +462,10 @@ def main():
         (work / "fonts").mkdir(exist_ok=True)
         wfam = accent_font(wfont, work / "fonts" / "word.ttf", wfam)
         sc = wtmpl["text_info_resources"][0]["attach_info"]["clip"]["scale"]
-        write_words_ass(work / "words.ass", ws, work / "fonts" / "word.ttf", wfam, wst.get("size", 15), sc["x"] / sc["y"] * wsx)
+        fill, shadow = word_style(plan, wst)
+        print(f"render_mp4: words in #{fill[0]:02X}{fill[1]:02X}{fill[2]:02X}" + ("" if shadow else ", no shadow"))
+        write_words_ass(work / "words.ass", ws, work / "fonts" / "word.ttf", wfam, wst.get("size", 15), sc["x"] / sc["y"] * wsx,
+                        fill, shadow)
         filt.append(f"[{last}]ass={work / 'words.ass'}:fontsdir={work / 'fonts'}[vw]")
         last = "vw"
         for w, f in cutouts(plan, ws, punches):
