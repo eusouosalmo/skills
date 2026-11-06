@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.8.0](https://github.com/eusouosalmo/skills/compare/v0.7.0...v0.8.0) (2026-11-06)
+
+
+### Features
+
+* **reel-finish:** put overlays marked behind under the cut-out of the person ([d9a955e](https://github.com/eusouosalmo/skills/commit/d9a955e5c7d6001edf56260a45fd395c358bd091))
+* **reel-motion:** offer named effects from a catalog at the plan gate ([49ff724](https://github.com/eusouosalmo/skills/commit/49ff72449b3818b913822731c69a19e5da644374))
+
+
+### Bug Fixes
+
+* **reel-finish:** read the words colour from the reference text effect ([8cbe5ab](https://github.com/eusouosalmo/skills/commit/8cbe5abe68bad4c708f742a513f64ac2f464e4b5))
+* **reel-motion:** use the design system highlighter colour in source shots ([d60624e](https://github.com/eusouosalmo/skills/commit/d60624e1347b384e57d5fb2b8dd16dab0c04081d))
+
 ## [0.7.0](https://github.com/eusouosalmo/skills/compare/v0.6.0...v0.7.0) (2026-11-02)
 
 
