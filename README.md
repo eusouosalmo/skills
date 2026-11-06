@@ -38,7 +38,7 @@ Na ordem em que entram num reel. Todas entregam o resultado em português.
 
 1. [reel-script](skills/content/reel-script/SKILL.md) (beta): escreve o roteiro a partir das suas anotações, com gancho, um CTA falado, texto de teleprompter cronometrado e os prints das fontes para a edição.
 2. [reel-cut](skills/content/reel-cut/SKILL.md) (beta): junta os brutos num corte seco, escolhendo a tomada de cada fala e tirando bastidor e pausas longas, com uma tabela de tomadas aprovada antes do render.
-3. [reel-motion](skills/content/reel-motion/SKILL.md) (beta): decide quais trechos viram animação e renderiza as cenas e os overlays de adesivos, sincronizados com cada palavra falada.
+3. [reel-motion](skills/content/reel-motion/SKILL.md) (beta): decide quais trechos viram animação, propõe efeitos de um catálogo (como uma palavra gigante atrás da sua cabeça) e renderiza as cenas e os overlays, sincronizados com cada palavra falada.
 4. [reel-finish](skills/content/reel-finish/SKILL.md) (beta): monta o reel pronto, como projeto do CapCut ou como mp4 final sem CapCut, com legenda, sons, punch-ins e tela dividida no estilo de um projeto seu.
 5. [post-caption](skills/content/post-caption/SKILL.md) (beta): escreve a legenda do post para Instagram, TikTok, YouTube Shorts ou LinkedIn, com um pedido, crédito da fonte e hashtags dentro do limite da plataforma.
 

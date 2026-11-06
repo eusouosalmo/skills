@@ -38,7 +38,7 @@ In the order they enter a reel. All deliver their output in Portuguese.
 
 1. [reel-script](skills/content/reel-script/SKILL.md) (beta): writes the script from your notes, with hook, one spoken CTA, timed teleprompter text and prints of its sources for the edit.
 2. [reel-cut](skills/content/reel-cut/SKILL.md) (beta): joins the raw clips into a rough cut, picking the take to keep for each line and dropping backstage talk and long pauses, with a takes table approved before rendering.
-3. [reel-motion](skills/content/reel-motion/SKILL.md) (beta): decides which stretches become animation and renders the scenes and sticker overlays, timed to each spoken word.
+3. [reel-motion](skills/content/reel-motion/SKILL.md) (beta): decides which stretches become animation, offers effects from a catalog (such as a giant word behind your head) and renders the scenes and overlays, timed to each spoken word.
 4. [reel-finish](skills/content/reel-finish/SKILL.md) (beta): puts the finished reel together, as a CapCut project or as the final mp4 without CapCut, with captions, sounds, punch-ins and split screen in the style of one of your projects.
 5. [post-caption](skills/content/post-caption/SKILL.md) (beta): writes the post caption for Instagram, TikTok, YouTube Shorts or LinkedIn, with one ask, source credit and hashtags within the platform's limits.
 

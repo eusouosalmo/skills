@@ -96,6 +96,8 @@ The intent of each stretch picks its destination, following the screen mode (the
 
 **Climax.** When the breakdown marks a `clímax`, propose an impact screen at its anchor word (step 5). When it marks none, write "sem clímax" with the reason; forcing one turns the technique into a tic.
 
+**Effects.** With the destinations set, pick the effects to offer from the catalog in [references/effects.md](references/effects.md) (a giant word on the wall behind the author, the room going dark, a comment that types itself in, a frozen frame with an arrow): read it now. It sets which moments each effect fits, the budget (about one per 15 s, never two stretches in a row) and how to offer them at the gate. The author picks effects by name and by a still, so the plan proposes and the author chooses; a reel with every effect it could hold reads as a demo reel.
+
 One concept per scene: split when two parts ask for different reading paces. In a reel about a sorting algorithm, the quick list of where it is used and the slow step-by-step of a swap are two scenes. Scenes need not touch each other: face time between them is fine. In the whole-video modes there is one scene file for the whole reel instead (see [references/formats.md](references/formats.md)).
 
 Write the plan into `timeline.md`:
@@ -104,13 +106,14 @@ Write the plan into `timeline.md`:
 - **Density regime** for the video, and any change at a turn with its reason (step 5, "Composition").
 - **Visual events:** for every scene in the without-face mode, every split-screen panel and every explanation stretch of the face-at-the-turns mode, each new state with its time, and each **rest** with its reason (step 5, "Rhythm").
 - **Climax** with its stretch and reason, or "sem clímax" with the reason.
+- **Efeitos propostos:** one line per effect from the catalog, with the stretch, the anchor word and its time, and the reason; or "nenhum" with the reason.
 - **Sound effects:** a sound for every motion event, so what moves on screen also lands in the ear: each object that appears, each line traced, each state change, each scene or overlay coming in and going out, and its own line for the impact screen, marked as impact, with the sound left to the author. Vary the sound by the kind of event and, when the object is made of something (water, paint, a coin, a lock), use the sound of that material; keep it under the speech, and let `estilo.md` set the density for this author.
 - **Suggestions for the edit:** cuts the author makes in CapCut on the recording itself (punch-in zoom, black and white for an aside), with the time and the reason. Transitions the design system forbids (wipes, glitches) only when `estilo.md` allows them.
 - **Credits:** a section headed `## Créditos para a legenda`, one line per image or clip found that asks for credit, ready for the post caption.
 
 Before the gate, count the intervals in the list of visual events, merging entries less than a second apart into one beat: wherever the rhythm rule applies, no stretch of more than 4 s without a new state outside a declared rest, and at least 3 events per 10 s. Fix the plan where it fails.
 
-Gate: show the plan with the screen mode, the density regime, the hook form and its reason, the climax (or "sem clímax") and each image found with its source and licence, and ask whether to go ahead, with options (recommended first): build as planned; adjust a named scene; change the format mix; redo the plan. When one scene rests on a visual metaphor that is not obvious from its line, you may add one draft still of it. Wait for the answer: a plan fixed here costs no render.
+Gate: show the plan with the screen mode, the density regime, the hook form and its reason, the climax (or "sem clímax") and each image found with its source and licence, and ask whether to go ahead, with options (recommended first): build as planned; adjust a named scene; change the format mix; redo the plan. In the same round, ask which proposed effects go in, as [references/effects.md](references/effects.md) says. When one scene rests on a visual metaphor that is not obvious from its line, you may add one draft still of it. Wait for the answer: a plan fixed here costs no render.
 
 Done when every stretch has a destination with its reason, every scene and overlay has its line in `timeline.md`, the intervals pass, and the author approved the plan.
 
@@ -192,6 +195,8 @@ At the climax the breakdown marked, the scene takes the whole stage for 0.5 to 1
 - **Sticker:** in the free area of the recording frame, between the top safe margin and the top of the head in the usual chest-up framing, never over the face or the caption zone.
 - **Image over the face:** the source (a cover, a page), the subject (a logo, an object) or the image a gesture points at, in the top half of the frame, fading into transparency down to the forehead, never over the eyes, the mouth or the caption zone; for up to about 4 s, still or with one move (enter, settle, leave). Never a label, a diagram in steps or text that repeats the speech: longer or busier, it competes with the face, which is the reason to be in this mode. A CTA in close-up with no free band above the head may use this size.
 
+An overlay may also go **behind the head**: the author stands in front of it (a giant word on the wall, the room going dark), and the `reel-finish` skill lays a cut-out of the person over it. It may span the frame behind the face, since the head covers it; its row in `timeline.md` says "atrás da cabeça", and its limits are in [references/effects.md](references/effects.md).
+
 A hook form in an overlay may reach below the band toward where a gesture points, by the same limits as the image over the face. An explanation in steps with the face present goes to the split screen, never to an overlay.
 
 Done when the scene has a `render(t)` covering its whole duration and every sticker, label and choreography item passes the rules above.
@@ -202,7 +207,7 @@ Done when the scene has a `render(t)` covering its whole duration and every stic
 2. Look at every still: inside the safe margins; nothing over the face or the caption zone; text fits its sticker; the main piece spans 2/3 of the stage or the zones cover it; every sticker and label read alone says what its sentence says; no frame draws a state the speech denies; the impact screen fills its stage. Fix and repeat.
 3. Gate: show the composited stills and ask, with options (recommended first): render; adjust a named still; back to the plan. Render only after the author approves, also when the request asks for the finished file or you would call the render a draft: placement and wording are fixed on stills in seconds, while every change after a render costs a new render.
 4. Render:
-   - overlay: `python3 scripts/render.py video cenas/NN-name.html DURATION exports/NN-name.mov --alpha`, which writes QuickTime Animation (qtrle), the alpha format that kept its transparency in CapCut. Deliver only this file: a VP9 `.webm` with alpha came out black there, and ProRes 4444 runs to hundreds of MB. Ask the author to test the `.mov` in CapCut before the next scene.
+   - overlay, behind the head included: `python3 scripts/render.py video cenas/NN-name.html DURATION exports/NN-name.mov --alpha`, which writes QuickTime Animation (qtrle), the alpha format that kept its transparency in CapCut. Deliver only this file: a VP9 `.webm` with alpha came out black there, and ProRes 4444 runs to hundreds of MB. Ask the author to test the `.mov` in CapCut before the next scene.
    - full scene: `python3 scripts/render.py video cenas/NN-name.html DURATION exports/NN-name.mp4`.
    - split screen, whole-video modes and sound track: as in [references/formats.md](references/formats.md).
 

@@ -487,6 +487,24 @@
         "timeline.md lists each full-screen range with start and end for the caption height"
       ],
       "human_feedback": ""
+    },
+    {
+      "id": 29,
+      "name": "vpn-effects-offer",
+      "prompt": "fico falando pra câmera o vídeo todo do vpn-narracao.srt, modo misto. meu design system tá em ds/. planeja e para no plano, quero ver que efeitos tu sugere",
+      "setup": "Copy evals/files/vpn-caveat-overlay into an empty folder inside a reels folder, add the author's design system export as ds/ (kept outside the repo in .scratch/animating-reel-scenes/ds), put the author's style file at ../estilo.md (from .scratch/animating-reel-scenes/exemplos/estilo.md), and run the prompt as a separate session or fresh subagent. The user is away: questions are written down with the recommended option taken, and the run stops at the plan gate.",
+      "files": [
+        "evals/files/vpn-caveat-overlay"
+      ],
+      "expected_output": "A plan with a short list of named effects, each tied to a stretch and an anchor word with a reason: a denied belief such as 'invisível' gets a giant word behind the head struck through on the negation, within the budget of about one effect per 15 s, offered as a multi-select with the recommended ones first, and nothing behind the head over a split screen.",
+      "assertions": [
+        "The plan has a block of proposed effects, each with its stretch, anchor word and time, and a reason",
+        "The opening myth ('tua VPN não te deixa invisível') gets a named effect that keeps the negation (the word struck through, or the negation in the words)",
+        "There are at most three proposed effects for the 35 s reel and no two in consecutive stretches",
+        "Any effect behind the head is placed where the face fills the frame, not in a split screen",
+        "The effects are offered as a multi-select question with the recommended ones first, not applied without asking"
+      ],
+      "human_feedback": ""
     }
   ]
 }
