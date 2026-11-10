@@ -9,6 +9,8 @@ Resumo: uma fábrica de software é o passo seguinte ao loop AFK. Em vez de uma 
 5. **Multiagente custa caro e rende pouco em código.** A Anthropic mede cerca de 15 vezes os tokens de um chat em sistemas multiagente e diz que a maioria das tarefas de código não se beneficia. O Akita chega ao mesmo lugar por benchmark próprio. Paralelismo vale para tickets independentes e para revisão e pesquisa.
 6. **Custo e termos são o ponto mais instável.** Hoje a assinatura cobre GitHub Action com OAuth token, routines e `claude -p`, mas os limites pressupõem uso "ordinary, individual", e uma mudança de cobrança anunciada para junho de 2026 foi pausada, não cancelada.
 
+Em 2026-11-10 o desenho virou um kit de sete skills (seção 11): quatro `factory-*`, que só existem na fábrica, duas novas que servem fora dela (`review-policy`, `verification-gates`) e a `git-guardrails`, que já existe. O perfil de runner padrão é o hospedado do GitHub, com `local` e `vps` como opção, e tudo começa no Opus 5.5 com effort fixado por tarefa até a telemetria mostrar onde trocar de modelo.
+
 Pesquisa feita em 2026-11-06, só leitura, sem ticket próprio. Complementa [harness-de-agentes.md](harness-de-agentes.md) e [guardrails-e-modo-afk.md](guardrails-e-modo-afk.md), que já cobrem harness, condição de parada, Ralph loop, Sandcastle como loop local, `stream-json`, sandbox, container, worktrees, permission modes e a lethal trifecta. Esses pontos aparecem aqui só por referência. A doc do Claude Code muda toda semana; confira a página antes de decidir.
 
 ## Sumário
@@ -23,8 +25,9 @@ Pesquisa feita em 2026-11-06, só leitura, sem ticket próprio. Complementa [har
 8. [Segurança](#8-segurança)
 9. [Arquiteturas em degraus, de 0 a 5](#9-arquiteturas-em-degraus-de-0-a-5)
 10. [Onde as fontes concordam e divergem](#10-onde-as-fontes-concordam-e-divergem)
-11. [Perguntas abertas](#11-perguntas-abertas)
-12. [Fontes](#12-fontes)
+11. [Desenho do kit de skills (2026-11-10)](#11-desenho-do-kit-de-skills-2026-11-10)
+12. [Perguntas abertas](#12-perguntas-abertas)
+13. [Fontes](#13-fontes)
 
 ## 1. Método e níveis de confiança
 
@@ -268,7 +271,107 @@ Notas sobre a escada:
 - **Quanto automatizar o merge.** A Anthropic dispensa humano em mudança de baixo risco; a TLC deixa auto-merge desligado salvo mudança reversível; o action oficial nem abre o PR.
 - **Nomes.** O Akita chama loop e harness engineering de taxonomia vendida como curso, mas o próprio repositório dele tem uma skill pequena de loop com critério de sucesso tipado e teto de tentativas. A divergência é mais sobre o rótulo que sobre a prática.
 
-## 11. Perguntas abertas
+## 11. Desenho do kit de skills (2026-11-10)
+
+Decisões tomadas com o usuário em 2026-11-10, a partir de três pesquisas curtas do mesmo dia (granularidade e nomes, lugar do runner, telemetria) e de uma quarta sobre sessão persistente na VPS. As fontes novas estão linkadas no texto; as que já estavam na nota aparecem pela seção. Nenhuma skill foi escrita ainda: tudo aqui é desenho, e cada skill nasce `draft` pela `skill-forge` (ver [skills-que-evoluem-com-uso.md](skills-que-evoluem-com-uso.md) e `docs/adr/0007`).
+
+### 11.1 Critérios de corte e de nome
+
+- **Separar quando pelo menos dois critérios valem:** a peça é útil instalada sozinha; tem gatilho próprio, com palavra que a chama; tem artefato e ciclo de vida diferentes (texto que muda por decisão humana contra código que roda e precisa de teste); outra skill precisa chamá-la. Juntar quando o usuário nunca pede uma sem a outra ou quando o corte deixaria uma skill de poucas linhas. Síntese minha a partir da unidade coerente do padrão ([agentskills.io, best practices](https://agentskills.io/skill-creation/best-practices)), do Matt (corta só quando há palavra que dispara sozinha, e junta o que compõe) e do superpowers, que separa revisão e verificação por momento de disparo ([obra/superpowers](https://github.com/obra/superpowers), commit `22f0b46`). **Confirmado** nas fontes; os critérios são inferência.
+- **Quantas skills por tarefa.** O SkillsBench v4 mede que 2 a 3 skills anexadas a uma tarefa rendem o mesmo que 1 (+19,0 contra +18,0 pontos), 4 ou mais caem para +10,1, e um SKILL.md abrangente quase não ajuda ([arXiv 2602.12670](https://arxiv.org/abs/2602.12670)). Na LangChain, a confusão de seleção apareceu com cerca de 20 skills parecidas e sumiu com 12 ([Evaluating skills](https://www.langchain.com/blog/evaluating-skills)). Um kit de sete skills de gatilhos distintos fica longe dos dois limites. **Confirmado**, dados observacionais de uma suíte cada.
+- **Revisão e verificação ficam separadas.** Verificação é determinística (o check passa ou falha); revisão é julgamento (quem lê, com que contexto, o que bloqueia). O revisor com contexto limpo é revisão. As duas servem fora da fábrica: política de review a um time humano, verificação à sessão interativa e ao loop AFK.
+- **Sem orquestradora por enquanto.** Ela só se paga com o que a `reel-edit` tem: perguntas feitas uma vez para todas, ordem que importa e estado passado adiante. A `factory-install` pode virar uma orquestradora fina se a montagem à mão mostrar ordem ou estado entre as peças; nesse caso, chamando as outras pelo nome (`docs/adr/0002`).
+- **Regra de nome.** `factory-*` só para o que existe apenas na fábrica. O que serve fora dela leva o nome do objeto, tema primeiro (`docs/adr/0006`). A `git-guardrails` mantém o nome: o tema é git, ela serve fora da fábrica, seria a segunda renomeação sem alias (o Claude Code só tem alias para skill embutida, [skills](https://code.claude.com/docs/en/skills)) e os arquivos que ela instala nos projetos levam o nome no caminho.
+- **Instalação modular pelo instalador, não por skill.** O `npx skills add <repo> --skill a --skill b` já instala uma combinação ([vercel-labs/skills, commands](https://github.com/vercel-labs/skills/blob/main/docs/commands.md)); o README traz um comando por combinação (só guardrails, harness, fábrica). O instalador não resolve dependência, então quem depende de outra skill declara no `compatibility` e confere na entrada, como a `reel-edit`. Um segundo plugin do Claude Code para a fábrica só quando houver skills `beta` suficientes. **Confirmado** o mecanismo.
+
+### 11.2 O kit
+
+| Skill | O que faz | Serve fora da fábrica | Perfis |
+| :- | :- | :- | :- |
+| `factory-install` | Monta a fila no repo: labels `agent:implement`, `agent:review`, `agent:blocked`, uma run por issue, só issue sem bloqueador, teto de tentativas e o estado "feito, aguardando verificação". Grava a configuração no repo (ex. `.factory/config.yml`) | não | runner `github` (padrão), `local`, `vps` |
+| `factory-runner` | Prepara a máquina self-hosted: serviço do runner, usuário isolado, container por run, firewall de saída, teto de recursos e sessão persistente (11.5) | não | `local`, `vps` |
+| `review-policy` | Escreve a política de revisão: `REVIEW.md`, risco por caminho, revisor com contexto limpo | sim (time humano, Code Review gerenciado) | nenhum |
+| `verification-gates` | Instala os checks que o agente não contorna: stop hook, testes protegidos, pre-commit, gates de CI. Nome a conferir como único | sim (sessão interativa, loop AFK) | nenhum |
+| `git-guardrails` | Já existe: hook que barra git destrutivo, perfis interativo e AFK | sim | interativo, AFK |
+| `factory-telemetry` | Marca cada run (tarefa, gatilho, issue, PR), guarda o resultado com teto de gasto e gera um relatório que cruza custo com o GitHub | não | `file` (padrão), `posthog`, `otlp` |
+| `factory-triage` | Transforma alerta e relógio em issue na mesma fila: Sentry, PostHog, scheduled tasks com `/fire` | não | por fonte de sinal |
+
+A configuração por repositório resolve um atrito que a pesquisa de nomes apontou: o `setup-eusouosalmo-skills` grava caminhos por máquina, e a fábrica é configurada por repo (labels, workflows, `REVIEW.md`), como o setup do Matt. Por isso a `factory-install` grava no próprio repo e não vira um contexto do setup atual. O arquivo leva, por tarefa, o modelo e o effort (11.7), o perfil de runner e um campo `agent: claude`, sem suporte a outros agentes por enquanto.
+
+### 11.3 Perfis de runner
+
+O mesmo workflow serve aos três perfis; o que muda é o que cerca o job (isolamento, segredo, quem limpa a máquina). A ideia é ler `runs-on` de uma variável do repositório, o que ainda precisa ser conferido na doc de sintaxe do GitHub (pendência em 11.9).
+
+| Perfil | Custo | Disponibilidade | Isolamento |
+| :- | :- | :- | :- |
+| `github` (padrão) | repo público: minutos grátis no runner padrão; privado: US$ 12 por mês de computação no Free e US$ 18 no Pro, depois US$ 0,006 por minuto de Linux; mais tokens ([billing](https://docs.github.com/en/billing/concepts/product-billing/github-actions)) | não depende de máquina sua; 6 horas por job ([limits](https://docs.github.com/en/actions/reference/limits)) | VM nova por job; rede de saída aberta; log público em repo público |
+| `local` (opt-in, repo privado) | grátis em minutos; só tokens | só com o PC ligado, e o WSL desliga sozinho quando ocioso ([wsl-config](https://learn.microsoft.com/en-us/windows/wsl/wsl-config)); o job espera até 24 horas na fila | nenhum por padrão: precisa de usuário Linux próprio e container descartável ou `srt`. O GitHub diz que self-hosted "should almost never be used for public repositories" ([secure-use](https://docs.github.com/en/actions/reference/security/secure-use)), então a skill recusa o perfil em repo público |
+| `vps` (quando houver motivo medido) | cerca de € 5,49 a 30,49 por mês na Hetzner, mais tokens ([Hetzner](https://www.hetzner.com/cloud/regular-performance/)); 4 GB é o mínimo confortável com Docker (inferência) | ligada sempre; job de até 5 dias | o que você montar: runner JIT ou `--ephemeral`, container por run, firewall de saída, usuário não root. O GitHub avisa que reaproveitar o hardware do runner JIT ainda pode vazar dados do ambiente ([self-hosted runners](https://docs.github.com/en/actions/reference/runners/self-hosted-runners)) |
+
+O self-hosted não custa minutos: a taxa de US$ 0,002 por minuto anunciada para março de 2026 foi adiada sem data nova ([changelog](https://github.blog/changelog/2025-12-16-coming-soon-simpler-pricing-and-a-better-experience-for-github-actions/)). Motivos medidos para sair do `github`: job acima de 6 horas, minutos privados estourando, acesso a serviço interno. **Confirmado** os números; a escolha do padrão é decisão.
+
+A nuvem da Anthropic não é perfil de runner: entra pela `factory-triage`, porque as scheduled tasks já recebem alerta pelo `/fire` e rodam em VM com proxy de rede no plano individual ([routines](https://code.claude.com/docs/en/routines)). `/loop`, `claude --bg` e as tarefas do Desktop também ficam fora dos perfis: servem para acompanhar com o humano por perto, não são gatilho.
+
+### 11.4 Repo público: quem pode disparar
+
+O label já exige papel Triage ou acima, e o `claude-code-action` exige write access do ator em evento de issue (seção 8). O que sobra é o texto da issue, que qualquer um escreve. A decisão:
+
+- **Gate determinístico no workflow, antes de chamar o modelo.** Quem pôs o label é o dono do repo; o autor da issue tem `author_association` OWNER, MEMBER ou COLLABORATOR; o agente não lê comentários de terceiros. A lista exata de valores de `author_association` ainda vai ser conferida na doc do GitHub.
+- **Interaction limits como apoio.** O GitHub permite limitar, num repo público, quem comenta, abre issue e cria PR (usuários existentes, contribuidores anteriores ou colaboradores), por 24 horas, 3 dias, 1 semana, 1 mês ou 6 meses; o máximo é 6 meses e o limite expira ([limiting interactions](https://docs.github.com/en/communities/moderating-comments-and-conversations/limiting-interactions-in-your-repository)). **Confirmado** nesta pesquisa. Como expira, é apoio, não o controle: o controle é o gate no workflow.
+
+### 11.5 Sessão persistente na VPS: tmux, mosh e systemd
+
+A pergunta era se a VPS da fábrica precisa de multiplexador de terminal ou de mosh. Depende do que roda nela.
+
+**(a) O runner da fábrica não precisa de nada disso.** O `svc.sh` instala o runner como serviço do systemd para que ele "automatically start the runner application when the machine starts", com um argumento opcional para rodar como outro usuário ([configure the application](https://docs.github.com/en/actions/how-tos/manage-runners/self-hosted-runners/configure-the-application)). Serviço do sistema não pertence a nenhuma sessão de login, então a queda do SSH não o afeta. **Confirmado** o serviço; o efeito sobre o SSH é como o systemd trata serviços de sistema. No perfil JIT, quem cria o runner a cada job também deve ser um serviço ou timer do systemd, não um script aberto num terminal (inferência).
+
+**(b) Sessões do Claude Code que o usuário quer deixar rodando e reconectar.**
+
+- **Interativa ou Remote Control: tmux ou screen são o caminho oficial.** A doc do Remote Control diz que o processo local precisa continuar vivo e que, numa máquina remota, deve-se iniciar o `claude` "inside `tmux` or `screen` to keep the session running after you disconnect from SSH" ([remote-control](https://code.claude.com/docs/en/remote-control)). O Remote Control reconecta sozinho depois de queda de rede; em server mode desiste depois de cerca de 10 minutos sem rede, e numa sessão interativa continua tentando enquanto a queda durar. Exige assinatura, não aceita API key. **Confirmado.**
+- **`claude --bg` e agent view: não precisam de tmux, mas a doc não fala de SSH.** Um supervisor separado mantém as sessões sem terminal aberto; fechar o shell não para nada; desligar ou reiniciar a máquina para; ao voltar, a sessão aparece como `failed` por até 48 horas e reinicia ao anexar ([agent-view](https://code.claude.com/docs/en/agent-view)). Se o supervisor for morto de fora, no Linux as sessões param em cerca de um minuto, salvo se outro supervisor conectar. A doc não cita SSH, logout, systemd nem linger. **Confirmado** o que está escrito; o comportamento no logout é a lacuna do item seguinte.
+- **O que pode matar o supervisor no logout é o `logind`.** Com `KillUserProcesses=yes`, os processos da sessão de login morrem quando o usuário sai, e o próprio manual avisa que isso "will break tools like screen(1) and tmux(1)" se eles não forem tirados do escopo da sessão ([logind.conf](https://www.freedesktop.org/software/systemd/man/latest/logind.conf.html)). O padrão do upstream é `yes`; muitas distribuições trocam para `no`, o que não conferi para a imagem da VPS. **Confirmado** o manual; a configuração da distro fica para testar.
+- **systemd de usuário com linger é a forma robusta.** `loginctl enable-linger` faz o gerenciador do usuário subir no boot e continuar depois do logout, para que "users who are not logged in" rodem serviços longos ([loginctl](https://www.freedesktop.org/software/systemd/man/latest/loginctl.html)). Sem linger, os serviços de usuário morrem quando a última sessão termina ([systemd-run](https://www.freedesktop.org/software/systemd/man/latest/systemd-run.html)). `systemd-run --user` cria uma unidade transitória para qualquer comando. **Confirmado.** Rodar o supervisor do Claude Code ou um `tmux` assim é inferência minha, sem exemplo oficial.
+
+**(c) mosh é opcional e não substitui o tmux.** O mosh mantém o terminal vivo ao trocar de rede e retoma quando a rede volta, mas cliente e servidor duram só enquanto a conexão dura, sincroniza só a tela visível (o próprio FAQ manda usar screen ou tmux para o histórico) e exige abrir portas UDP entre 60000 e 61000 ([mosh.org](https://mosh.org/)). **Confirmado.** Serve para quem acompanha a sessão do celular ou de rede ruim; para a fábrica, que roda sem terminal, não serve.
+
+**Teto de recursos.** Em unidade do systemd, `MemoryHigh=` estrangula a memória e `MemoryMax=` chama o OOM killer dentro da unidade quando o uso não cabe no limite; `TasksMax=` e `CPUQuota=` limitam processos e CPU ([systemd.resource-control](https://www.freedesktop.org/software/systemd/man/latest/systemd.resource-control.html)). Os controles de memória são do cgroup v2, e o `user@.service` repassa os controladores para unidades de usuário que têm limite configurado. **Confirmado.** Para a `factory-runner`, inferência: pôr `MemoryHigh` e `MemoryMax` no serviço do runner por drop-in, e `systemd-run --user -p MemoryMax=...` para sessões avulsas; o container por run ganha o teto do próprio Docker, que não li nesta pesquisa.
+
+**O que a `factory-runner` instala:** necessário, o runner como serviço do systemd com usuário próprio e teto de memória; opcional, linger e uma unidade de usuário (ou tmux) para quem quiser sessões do Claude Code na mesma máquina, e mosh para acompanhar de rede ruim; não serve, tmux ou screen para o runner, e mosh como forma de manter processo vivo.
+
+### 11.6 Telemetria
+
+- **O Claude Code mede o gasto; o GitHub mede se valeu.** O `result` de `claude -p --output-format json` traz `total_cost_usd`, turnos, duração e desfecho, e `--max-budget-usd` corta a run no teto ([headless](https://code.claude.com/docs/en/headless), [cost tracking](https://code.claude.com/docs/en/agent-sdk/cost-tracking)); o `claude-code-action` devolve um `execution_file` com o mesmo `result` ([action.yml](https://github.com/anthropics/claude-code-action/blob/main/action.yml)). Taxa de merge, rodadas de revisão, tempo do label ao merge e reverts saem da API do GitHub, como a [timeline de issue](https://docs.github.com/en/rest/issues/timeline). Custo em dólar é estimativa, e na assinatura é preço de lista equivalente. **Confirmado** os campos.
+- **Perfil `file` (padrão):** uma linha JSONL por run num branch de métricas ou artifact, sem conta nova nem segredo novo.
+- **Perfil `posthog`:** o PostHog tem um plugin de Claude Code para LLM analytics que lê a transcrição num hook `SessionEnd`, com modo de privacidade e propriedades customizadas para marcar issue e PR ([Claude Code LLM analytics](https://posthog.com/docs/llm-analytics/installation/claude-code)); a alternativa é OTLP de logs para o endpoint completo `/i/v1/logs` ([logs](https://posthog.com/docs/logs/installation/other.md)). Métricas OTLP no PostHog estão em alpha. Num projeto PostHog separado do produto. Não testado em `-p` nem no Actions.
+- **Perfil `otlp`:** as variáveis do OpenTelemetry nativo com `OTEL_RESOURCE_ATTRIBUTES` marcando a run ([monitoring](https://code.claude.com/docs/en/monitoring-usage)), para Grafana Cloud, Honeycomb ou Sentry (este só logs e traces, [Sentry OTLP](https://docs.sentry.io/concepts/otlp/)).
+- **Nunca exportar conteúdo.** Em nenhum perfil ligar `OTEL_LOG_USER_PROMPTS`, `OTEL_LOG_ASSISTANT_RESPONSES`, `OTEL_LOG_TOOL_CONTENT` ou `OTEL_LOG_RAW_API_BODIES`, nem publicar transcrição em repo público: o conteúdo vem de issue e alerta não confiáveis. Os nomes de skill próprios só saem com `OTEL_LOG_TOOL_DETAILS=1`, que também exporta comandos Bash; ligar só se a medição por skill for necessária.
+
+### 11.7 Modelos e effort
+
+- **Tudo começa no Opus 5.5** (US$ 4 de input e 20 de output por milhão, seção 7.1), com effort por tarefa: `high` para código e review, `low` para triagem e docs. Sonnet 5.5 (US$ 2 e 10) e Haiku 5.5 (US$ 0,10 e 0,50 até 100 mil tokens de prompt) entram só quando a telemetria mostrar ganho.
+- **Por quê:** medir o modelo mais capaz com effort menor antes de montar cascata; o cache é por modelo, então trocar de modelo no meio da tarefa perde o cache; e o que importa é o custo por tarefa concluída, não por token.
+- **Fixar o effort é obrigatório.** Opus 5.5, Sonnet 5.5 e Haiku 5.5 começam em `medium`, e um `effortLevel` no topo das configurações de usuário não vale para o Opus 5.5. A ordem de precedência é `CLAUDE_CODE_EFFORT_LEVEL`, a escolha na sessão, `--effort` e por fim as configurações por modelo ([model-config](https://code.claude.com/docs/en/model-config)). **Confirmado.** Na fábrica, passar `--effort` ou a variável de ambiente por tarefa, lidos do `.factory/config.yml`.
+
+### 11.8 Limite de uso da assinatura
+
+- `autoContinueAtUsageLimit` espera o reset do limite do claude.ai na sessão aberta e continua a tarefa; vem ligado por padrão e só é lido das configurações de usuário, de `--settings` e das gerenciadas ([settings reference](https://code.claude.com/docs/en/settings-reference)). **Confirmado.** A doc o descreve para sessão aberta; numa run headless não está verificado, e isso vira ticket.
+- **Plano B:** a run que bate no limite recebe `agent:blocked` com o motivo, e o gatilho de relógio re-enfileira a issue depois do reset.
+- Com API key não há janela de uso, só rate limit, que o SDK já trata com retry.
+
+### 11.9 Fora do mapa e pendências
+
+Fora do mapa de tickets: uma sessão de desenho com a skill `software-factory` do Matt e duas semanas de baseline rodando a fábrica à mão, antes de qualquer skill. Pela regra do repo, as skills nascem `draft` a partir do que doer nesse período.
+
+Pendências:
+
+1. Primeiro projeto onde a fábrica roda: decisão do usuário.
+2. `runs-on` lido de variável do repositório funciona no gatilho `issues: labeled`?
+3. Valores de `author_association` e onde o workflow os lê.
+4. `autoContinueAtUsageLimit` numa run headless.
+5. Webhook de alerta do PostHog para o `/fire`.
+6. Nome `verification-gates` único fora do repo.
+
+## 12. Perguntas abertas
 
 Sem decisão aqui.
 
@@ -302,7 +405,7 @@ Sem decisão aqui.
 
 12. A retro a cada N PRs propõe mudança nas skills da fábrica; isso passa pelo fluxo de eval contra baseline deste repositório, como qualquer mudança de skill?
 
-## 12. Fontes
+## 13. Fontes
 
 Todas acessadas em 2026-11-06.
 

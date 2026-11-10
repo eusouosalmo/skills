@@ -48,7 +48,7 @@ Os dados do repo saem do `git log` (114 commits, de 2026-10-01 a 2026-11-06), do
 
 O detalhe que importa para esta decisão: a skill autogerada foi escrita antes de resolver a tarefa, sem rodar nada e sem feedback. Os autores apontam procedimentos vagos e a ausência das particularidades que o verificador exige. Ou seja, o resultado condena escrever a skill no vazio, não criar cedo a partir de execução real.
 
-Outros números do mesmo trabalho que voltam mais adiante: 16 das 84 tarefas pioraram com a skill curada (pior caso, -39,3 pp); skills detalhadas e compactas ganharam bem (+18,8 e +17,1 pp), skills abrangentes perderam (-2,9 pp); de 2 a 3 skills por tarefa rendeu +18,6 pp, 4 ou mais só +5,9 pp. O paper tem pequenas inconsistências internas (84 ou 86 tarefas; uma legenda com +12,66 pp).
+Outros números do mesmo trabalho que voltam mais adiante: 16 das 84 tarefas pioraram com a skill curada (pior caso, -39,3 pp); skills detalhadas e compactas ganharam bem (+18,8 e +17,1 pp), skills abrangentes perderam (-2,9 pp); de 2 a 3 skills por tarefa rendeu +18,6 pp, 4 ou mais só +5,9 pp. O paper tem pequenas inconsistências internas (84 ou 86 tarefas; uma legenda com +12,66 pp). Esses números são da v1 (2026-02-13). A v4 (2026-06-14, 87 tarefas, 18 configurações) dá skill curada de 33,9% para 50,5% (+16,6 pp); por número de skills, 1 rende +18,0 pp, 2 a 3 rendem +19,0 pp e 4 ou mais +10,1 pp; por tamanho, a abrangente fica em +0,7 pp, com só 5 tarefas. A direção é a mesma e o efeito encolheu.
 
 ### 3.2 Rascunho testado mais uma rodada de uso supera a skill curada
 
@@ -127,7 +127,7 @@ APE (Zhou et al., ICLR 2023), OPRO (Yang et al., ICLR 2024), MIPRO (Opsahl-Ong e
 - **Demystifying evals for AI agents** (Grace et al., 2026-01-09, confirmado): começar cedo e pequeno, com 20 a 50 tarefas tiradas de falhas reais; em produção, transformar falhas relatadas em casos; ler as transcrições. Também diz que evals ficam mais difíceis de montar quanto mais se espera.
 - **Effective context engineering for AI agents** (2025-09-29, confirmado): começar com um prompt mínimo no melhor modelo e acrescentar instruções a partir das falhas do teste inicial.
 - **Skills no Claude Code** (confirmado): medir separadamente se a skill dispara e se a saída presta, com alguns prompts realistas em sessão nova, com a skill ligada e desligada. O `/skill-doctor` aponta skills nunca invocadas e o custo de contexto.
-- **Monitoring usage** (confirmado): com telemetria OpenTelemetry e detalhes de ferramenta ligados, os eventos da ferramenta Skill trazem `skill_name`, e os eventos de custo e tokens trazem o nome da skill. Isso torna o uso mensurável sem suíte (seção 9).
+- **Monitoring usage** (confirmado): com telemetria OpenTelemetry ligada, os eventos da ferramenta Skill e as métricas de custo e tokens trazem o nome da skill; uma skill do próprio usuário só aparece com o nome real com `OTEL_LOG_TOOL_DETAILS=1`, sem isso vira `custom_skill`. Isso torna o uso mensurável sem suíte (seção 9).
 
 ### 4.2 agentskills.io
 
