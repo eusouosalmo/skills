@@ -10,6 +10,14 @@ A public collection of agent skills and the method used to create and evaluate t
 Something that went wrong when actually run, never only imagined: an agent doing a real task without the skill (or with its previous version), or, when there is no such case yet, the existing tool or community skill for the job run against realistic inputs. One of the two valid reasons to create or change a skill; the other is a reference gap.
 _Avoid_: imagined problem, nice-to-have
 
+**Seed case**:
+The real run of a repeating task that a draft skill is born from: prompt, what happened, what should have happened. One or two are enough to start; the evals grow from the corrections that follow.
+_Avoid_: example, spec
+
+**Correction log**:
+A skill's `evals/corrections.md`: each real use that taught something (prompt, what happened, what should have happened, the lesson the user confirmed) and a line per clean use. What a promotion counts.
+_Avoid_: changelog, feedback
+
 **Reference gap**:
 A technique that a high-performing reference uses and that the baseline's output lacks, shown by running the baseline on the same kind of input. The other valid reason to create or change a skill: measured, like an observed failure, so it is never a nice-to-have by another name.
 _Avoid_: inspiration, best practice
@@ -19,7 +27,7 @@ The run of an eval scenario without the skill, or with the previous version when
 _Avoid_: control, before
 
 **Eval scenario**:
-One realistic prompt plus what a good result looks like (expected output, assertions, human feedback). Three of them, drawn from observed failures, come before the skill is written.
+One realistic prompt plus what a good result looks like (expected output, assertions, human feedback). Drawn from the seed case and from logged corrections that could come back; at least three before a promotion.
 _Avoid_: test case, example
 
 **Assertion**:

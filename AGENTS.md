@@ -74,10 +74,10 @@ metadata:
 
 ## When to create a skill
 
-- Only after doing the work by hand a few times. The skill covers what actually hurt, not what one imagines hurts.
-- With no case of your own yet (a preventive skill for the kit), run the existing tool or community skill against realistic inputs and record where it fails. That counts as the observed failure (see `CONTEXT.md`); the skill stays `draft` until used in a real project.
+- Start a skill as soon as a task that repeats has been done for real once or twice: that run is the seed case (see `CONTEXT.md`). The skill is born `draft` and hardens through the corrections made in use, logged in `evals/corrections.md` (see `docs/adr/0007`).
+- With no case of your own yet (a preventive skill for the kit), run the existing tool or community skill against realistic inputs and use what fails as the seed case.
 - A reference gap (see `CONTEXT.md`) also justifies a change: a technique a high-performing reference uses that the baseline's output lacks, shown by running the baseline on the same kind of input. Learning from references does not wait for the failure to show up in a real project.
-- The official docs recommend the same path: run the task without a skill and note where it fails, write 3 evaluation scenarios, then the minimum instructions to pass them ("Build evaluations first" in the best practices).
+- Promotion to `beta` or `stable` is where the full baseline runs, over the scenarios collected in use. The `skill-forge` skill carries the method.
 - First, a research pass (`research` skill) on how the community solves the problem, separating what is confirmed (primary source) from what is anecdotal.
 
 ## Writing rules

@@ -28,8 +28,8 @@ A summary, in this skill's own words, of the checklist in Anthropic's skill auth
 
 ## Evals
 
-- Three scenarios, each from an observed failure, each failing its baseline.
+- `evals/corrections.md` shows the uses the promotion asks for (three for beta; the last three without a new correction for stable).
+- At least three scenarios, each from a logged correction or the seed case, each failing its baseline.
 - Every scenario passes with the skill, and every `human_feedback` is empty.
-- For a change: every scenario that existed before still passes.
 - For a model-invoked skill: the trigger queries pass.
 - Run on every model the skill is meant for; by default, the model in use.

@@ -1,5 +1,27 @@
 # Evals format
 
+A skill's `evals/` folder grows with it: a draft has `corrections.md` and `trigger-queries.json`; scenarios join `evals.json` as corrections come in; a promotion runs them all.
+
+## evals/corrections.md
+
+The skill's log of real uses, newest last. One entry per use that taught something, plus one line per clean use, so a promotion can count both.
+
+```markdown
+## 2026-11-10: hashtags came out in English
+
+- Prompt: "faz a legenda do reel da urna, pro Instagram"
+- What happened: the five hashtags were English words.
+- What should have happened: hashtags in pt-BR, the language of the caption.
+- Lesson (confirmed by the user): hashtags follow the caption's language.
+- Scenario: added as id 6.
+
+## 2026-11-12: clean use
+
+- Prompt: "legenda do reel sobre DNS, LinkedIn". No correction.
+```
+
+Write each entry in the words of the case, but keep out what the repo forbids publishing (private paths, work data, other people's names): the log ships with the skill.
+
 ## evals/evals.json
 
 One file per skill, inside the skill folder, in the agentskills.io format plus two fields: `setup` and `human_feedback`.

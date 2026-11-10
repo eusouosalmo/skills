@@ -50,7 +50,7 @@ E as que trabalham em volta dessa sequência:
 
 ### Engenharia com IA
 
-- [skill-forge](skills/harness/skill-forge/SKILL.md) (beta): cria ou corrige uma skill a partir de uma falha que você viu acontecer, conferida com evals contra o agente sem a skill.
+- [skill-forge](skills/harness/skill-forge/SKILL.md) (beta): cria uma skill cedo a partir de trabalho real e a melhora com as correções feitas no uso, com evals que crescem até a promoção.
 - [git-guardrails](skills/harness/git-guardrails/SKILL.md) (beta): instala, por projeto, um hook que impede o agente de rodar git destrutivo, com perfis interativo e AFK.
 
 **Status:** `beta` e `stable` são instaladas pelos dois caminhos. `draft` ainda está em teste e fica só no repositório, para ler ou copiar (hoje nenhuma).
