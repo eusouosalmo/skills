@@ -66,6 +66,20 @@ _Avoid_: rule, convention (a guardrail is enforced, not asked for)
 Something that tells whether the work is right or done: tests, type checks, lint, review, quality gates. Fed back to the agent so it can correct itself. A blocking verification needs a guardrail so the agent cannot disarm it (`--no-verify`, deleting tests).
 _Avoid_: guardrail, backpressure, sensor
 
+### Factory
+
+**Software factory**:
+A setup in which a trigger (an issue label, a production alert, the clock), not a person, starts an agent session, so more work runs unattended and the person's time goes to the decisions and reviews that need them.
+_Avoid_: pipeline, bot, automation (each names only a part)
+
+**Runner profile**:
+Where a factory run executes: on a runner hosted by GitHub, on the user's own machine, or on a rented server. Chosen per repository; the work the run does is the same in all three.
+_Avoid_: environment, host
+
+**Agent label**:
+An issue label that starts a factory run or records its state (implement, in progress, blocked). Distinct from a triage label, which says whether an issue is ready for an agent at all; a run starts only on an issue that triage has already cleared.
+_Avoid_: status, triage label
+
 ### Script
 
 **Script**:

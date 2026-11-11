@@ -354,7 +354,7 @@ A pergunta era se a VPS da fábrica precisa de multiplexador de terminal ou de m
 
 ### 11.8 Limite de uso da assinatura
 
-- `autoContinueAtUsageLimit` espera o reset do limite do claude.ai na sessão aberta e continua a tarefa; vem ligado por padrão e só é lido das configurações de usuário, de `--settings` e das gerenciadas ([settings reference](https://code.claude.com/docs/en/settings-reference)). **Confirmado.** A doc o descreve para sessão aberta; numa run headless não está verificado, e isso vira ticket.
+- `autoContinueAtUsageLimit` espera o reset do limite do claude.ai na sessão aberta e continua a tarefa; vem ligado por padrão e só é lido das configurações de usuário, de `--settings` e das gerenciadas ([settings reference](https://code.claude.com/docs/en/settings-reference)). **Confirmado.** Não vale para a fábrica: a doc diz que essa espera não é oferecida em runs `-p` nem em sessões em background. Para CI e workers sem ninguém olhando, a doc indica `CLAUDE_CODE_RETRY_WATCHDOG=1`, que espera o reset dentro da run, com o teto de espera abaixo do timeout do job (ver a nota do ticket [Pesquisa: run sem ninguém olhando que bate no limite de uso](https://github.com/eusouosalmo/skills/issues/106)).
 - **Plano B:** a run que bate no limite recebe `agent:blocked` com o motivo, e o gatilho de relógio re-enfileira a issue depois do reset.
 - Com API key não há janela de uso, só rate limit, que o SDK já trata com retry.
 
@@ -367,7 +367,7 @@ Pendências:
 1. Primeiro projeto onde a fábrica roda: decisão do usuário.
 2. `runs-on` lido de variável do repositório funciona no gatilho `issues: labeled`?
 3. Valores de `author_association` e onde o workflow os lê.
-4. `autoContinueAtUsageLimit` numa run headless.
+4. ~~`autoContinueAtUsageLimit` numa run headless~~: resolvido no ticket de limite de uso.
 5. Webhook de alerta do PostHog para o `/fire`.
 6. Nome `verification-gates` único fora do repo.
 
