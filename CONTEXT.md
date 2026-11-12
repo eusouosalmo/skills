@@ -66,6 +66,10 @@ _Avoid_: rule, convention (a guardrail is enforced, not asked for)
 Something that tells whether the work is right or done: tests, type checks, lint, review, quality gates. Fed back to the agent so it can correct itself. A blocking verification needs a guardrail so the agent cannot disarm it (`--no-verify`, deleting tests).
 _Avoid_: guardrail, backpressure, sensor
 
+**Risk level**:
+How much a change can break (low, medium, high), set by the paths it touches and by signals in the diff such as a migration, a new dependency or a workflow change. A change takes the highest level any of its parts has. It sets how deep the review goes and how much attention the owner gives the change. It belongs to the change, not to its author.
+_Avoid_: severity (that belongs to a review finding), risk tier
+
 ### Factory
 
 **Software factory**:
