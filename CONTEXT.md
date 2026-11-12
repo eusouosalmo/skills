@@ -77,7 +77,7 @@ _Avoid_: severity (that belongs to a review finding), risk tier
 ### Factory
 
 **Software factory**:
-A setup in which a trigger (an issue label, a production alert, the clock), not a person, starts an agent session, so more work runs unattended and the person's time goes to the decisions and reviews that need them.
+A setup in which a trigger (an issue label, a production alert, the clock), not a person, starts an agent session, so more work runs unattended and the person's time goes to the decisions and reviews that need them. Installed per repository from the same kit; the factory report reads several repositories and adds them up.
 _Avoid_: pipeline, bot, automation (each names only a part)
 
 **Runner profile**:
