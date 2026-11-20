@@ -88,7 +88,9 @@ claude plugin marketplace add eusouosalmo/skills
 claude plugin install eusouosalmo-skills@eusouosalmo
 ```
 
-As skills aparecem como `eusouosalmo-skills:<nome>`. Para atualizar, atualize o marketplace e depois o plugin (ou ligue a atualização automática do `eusouosalmo` em `/plugin`, Marketplaces):
+As skills aparecem como `eusouosalmo-skills:<nome>`. Use um caminho só: com o plugin e o `npx skills` ao mesmo tempo, cada skill aparece duas vezes.
+
+A atualização automática vem desligada para marketplaces que não são da Anthropic. Para receber as versões novas sem fazer nada, ligue a do `eusouosalmo` em `/plugin`, Marketplaces. Ou atualize à mão, o marketplace e depois o plugin:
 
 ```bash
 claude plugin marketplace update eusouosalmo
