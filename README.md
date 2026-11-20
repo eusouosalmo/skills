@@ -45,7 +45,6 @@ Na ordem em que entram num reel. Todas entregam o resultado em português.
 E as que trabalham em volta dessa sequência:
 
 - [reel-edit](skills/content/reel-edit/SKILL.md) (beta): faz a edição inteira, dos brutos ao reel pronto, chamando reel-cut, reel-motion e reel-finish em ordem, com a sua aprovação entre elas.
-- [eusouosalmo-voice](skills/content/eusouosalmo-voice/SKILL.md) (beta): escreve e revisa texto na minha voz, falada ou escrita conforme o canal. Serve de modelo para criar a skill da sua voz.
 - [setup-eusouosalmo-skills](skills/content/setup-eusouosalmo-skills/SKILL.md) (beta): configura o kit numa máquina uma vez, achando as pastas e os arquivos que as skills leem.
 
 ### Engenharia com IA

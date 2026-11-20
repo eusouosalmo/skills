@@ -1,6 +1,6 @@
 # content
 
-Skills de vídeo curto, escrita e voz do eusouosalmo. Instruções em inglês, resultado em pt-BR.
+Skills de vídeo curto e escrita do eusouosalmo. Instruções em inglês, resultado em pt-BR.
 
 Na ordem em que entram num reel:
 
@@ -13,5 +13,4 @@ Na ordem em que entram num reel:
 Em volta dessa sequência:
 
 - [reel-edit](reel-edit/SKILL.md) (beta): faz a edição inteira, dos brutos ao reel pronto, chamando reel-cut, reel-motion e reel-finish em ordem, com a sua aprovação entre elas.
-- [eusouosalmo-voice](eusouosalmo-voice/SKILL.md) (beta): escreve e revisa texto na minha voz, falada ou escrita conforme o canal. Serve de modelo para criar a skill da sua voz.
 - [setup-eusouosalmo-skills](setup-eusouosalmo-skills/SKILL.md) (beta): configura o kit numa máquina uma vez, achando as pastas e os arquivos que as skills leem.
