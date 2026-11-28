@@ -44,7 +44,7 @@ In the order they enter a reel. All deliver their output in Portuguese.
 
 And the ones working around that sequence:
 
-- [reel-edit](skills/content/reel-edit/SKILL.md) (beta): does the whole edit, from raw clips to finished reel, running reel-cut, reel-motion and reel-finish in order, with your approval between them.
+- [reel-edit](skills/content/reel-edit/SKILL.md) (beta): does the whole edit, from raw clips to finished reel, running reel-cut, reel-motion and reel-finish in order, with your approval between them, and picks up where it stopped in any session.
 - [setup-eusouosalmo-skills](skills/content/setup-eusouosalmo-skills/SKILL.md) (beta): sets up the kit on a machine once, finding the folders and files the skills read.
 
 ### Engineering with AI

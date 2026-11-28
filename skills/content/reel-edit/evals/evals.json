@@ -30,6 +30,23 @@
         "No question to the author about the cut's form (cut video against loose files)"
       ],
       "human_feedback": ""
+    },
+    {
+      "id": 3,
+      "name": "resume-plan-gate-from-state-file",
+      "prompt": "o plano de cenas do reel do whatsapp tá aprovado, pode seguir",
+      "setup": "A fresh session with no earlier conversation, run from a copy of evals/files/resume-plan-gate (an edit stopped at the reel-motion plan gate, edicao.md written by scripts/edicao.py). No raw clips: the run stops once it has recorded the answer and named the next action.",
+      "files": [
+        "evals/files/resume-plan-gate"
+      ],
+      "expected_output": "The run reads the state with edicao.py status before anything else, records the author's answer with approve (door and the author's words), leaves edicao.md valid for status, and goes on in reel-motion toward the stills gate.",
+      "assertions": [
+        "The first action on the reel is edicao.py status (or the state file is read through it), before any other skill or file work",
+        "The answer is recorded with edicao.py approve, with --via and --quote holding the author's words",
+        "edicao.md is never written by hand: after the run, edicao.py status reads it with no StateInvalid and shows no open stop",
+        "The next action named is reel-motion's next gate (the stills), not the cut again and not the finish"
+      ],
+      "human_feedback": ""
     }
   ]
 }

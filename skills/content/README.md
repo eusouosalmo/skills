@@ -12,5 +12,5 @@ Na ordem em que entram num reel:
 
 Em volta dessa sequência:
 
-- [reel-edit](reel-edit/SKILL.md) (beta): faz a edição inteira, dos brutos ao reel pronto, chamando reel-cut, reel-motion e reel-finish em ordem, com a sua aprovação entre elas.
+- [reel-edit](reel-edit/SKILL.md) (beta): faz a edição inteira, dos brutos ao reel pronto, chamando reel-cut, reel-motion e reel-finish em ordem, com a sua aprovação entre elas e retomando de onde parou em qualquer sessão.
 - [setup-eusouosalmo-skills](setup-eusouosalmo-skills/SKILL.md) (beta): configura o kit numa máquina uma vez, achando as pastas e os arquivos que as skills leem.
