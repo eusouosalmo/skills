@@ -43,7 +43,7 @@ At each gate, show what the skill shows there and stop until the author answers,
 - **On the author's answer:** `approve --via live --quote "<their words>"`, first-hand only, then go on. Changes asked at the gate are not an approval: redo them and show the gate again, still on hold.
 - **Work only the author can do** (the empty CapCut project): `hold --kind human-step`; when they say it is done, `log` it.
 - **A failure that needs a decision:** `hold --kind problem`; `log` the decision taken.
-- **Work done with no stop** (the final mp4 or project): `log --step <skill> --note <what> --file <path>`.
+- **Each step's output, once it exists** (the cut with `legenda.srt` and `cortes.json`, the rendered scenes, the final mp4 or project): `log --step <skill> --note <what> --file <path>`, so a session that ends after a render resumes past it.
 - **Resuming:** run `status <reel-folder>` first, before anything else, then invoke the skill of its `step` again and follow its `next`.
 
 When a verb refuses, its JSON says what to do next: follow it, and leave `edicao.md` as the verb left it.

@@ -16,6 +16,8 @@ STATE = 'edicao.md'
 STEPS = ('reel-cut', 'reel-motion', 'reel-finish')
 OUTPUTS = ('capcut', 'mp4', 'both')
 KINDS = ('approval', 'publish', 'human-step', 'problem')
+AUTHOR_KINDS = ('approval', 'publish')  # cleared only by approve, on the author's word
+DOORS = ('live', 'openbot', 'github')  # where the author's words came through
 
 EXIT = {'NotStarted': 3, 'StateInvalid': 4, 'AlreadyWaiting': 5, 'NotWaitingApproval': 6,
         'MissingFile': 7, 'WaitingApproval': 8, 'AlreadyStarted': 9}
@@ -29,14 +31,18 @@ class Fail(Exception):
 
 # ---- the file -------------------------------------------------------------
 
+def hash_note(ap):
+    return f", {ap['hash']}" if ap.get('hash') else ''
+
+
 def render(s):
     lines = [f"# Edição: {s['title']}",
              f"- Roteiro: {s['script']}",
              f"- Saída: {s['output']}",
              f"- Etapa: {s['step']}"]
     for ap in s['approved']:
-        h = f", {ap['hash']}" if ap.get('hash') else ''
-        lines.append(f"- Aprovado: {ap['step']}: {ap['gate']} ({ap['date']}, autor, via {ap['via']}, \"{ap['quote']}\"{h})")
+        lines.append(f"- Aprovado: {ap['step']}: {ap['gate']} ({ap['date']}, autor, via {ap['via']}, "
+                     f"\"{ap['quote']}\"{hash_note(ap)})")
     w = s.get('waiting')
     if w:
         lines.append(f"- Aguardando: {w['kind']} - {w['step']}: {w['reason']}")
@@ -50,15 +56,14 @@ def parse(path):
     lines = text.splitlines()
 
     def bad(what):
-        return Fail('StateInvalid', f'{path}: {what}', f'put the line named here back in the format of edicao.py --help, or restore {path} from a copy; '
-                    'then run status again')
+        return Fail('StateInvalid', f'{path}: {what}', f'restore {path} from a copy, or show the author this error and ask how to go on')
 
     if not lines or not lines[0].startswith('# Edição: '):
         raise bad('first line must be "# Edição: <title>"')
     s = {'title': lines[0][len('# Edição: '):], 'approved': [], 'history': []}
     fields = {'Roteiro': 'script', 'Saída': 'output', 'Etapa': 'step'}
     waiting_re = re.compile(rf"- Aguardando: ({'|'.join(KINDS)}) - ({'|'.join(STEPS)}): (.+)")
-    approved_re = re.compile(rf'- Aprovado: ({"|".join(STEPS)}): (.+) \((\d{{4}}-\d\d-\d\d), autor, via ([a-z-]+), "(.+)"(?:, ([0-9a-f]{{12}}))?\)')
+    approved_re = re.compile(rf'- Aprovado: ({"|".join(STEPS)}): (.+) \((\d{{4}}-\d\d-\d\d), autor, via ({"|".join(DOORS)}), "(.+)"(?:, ([0-9a-f]{{12}}))?\)')
     i = 1
     while i < len(lines) and lines[i] != '## Histórico':
         if lines[i].startswith('- Aguardando: '):
@@ -143,14 +148,10 @@ def cmd_start(a):
         if path.exists():
             raise Fail('AlreadyStarted', f'{path} already exists',
                        'run status and resume from it; never start a reel twice')
-        return _start(a, path)
-
-
-def _start(a, path):
-    s = {'title': a.title, 'script': a.script, 'output': a.output, 'step': STEPS[0], 'approved': [],
-         'history': [history_line('início', f'saída {a.output}, roteiro {a.script}')]}
-    write(path, s)
-    return status_of(s)
+        s = {'title': a.title, 'script': a.script, 'output': a.output, 'step': STEPS[0], 'approved': [],
+             'history': [history_line('início', f'saída {a.output}, roteiro {a.script}')]}
+        write(path, s)
+        return status_of(s)
 
 
 def files_note(files):
@@ -190,7 +191,7 @@ def cmd_approve(a):
     with locked(a.reel):
         path, s = read(a.reel)
         w = s.get('waiting')
-        if not w or w['kind'] not in ('approval', 'publish'):
+        if not w or w['kind'] not in AUTHOR_KINDS:
             raise Fail('NotWaitingApproval', f'{path} has no approval or publish stop to clear',
                        'run status; approve only answers a stop recorded with hold --kind approval|publish')
         ap = {'step': w['step'], 'gate': w['reason'], 'date': datetime.date.today().isoformat(), 'via': a.via, 'quote': a.quote,
@@ -203,8 +204,7 @@ def cmd_approve(a):
             ap['hash'] = files_hash(a.reel, a.file)
         s['approved'].append(ap)
         s['waiting'] = None
-        h = f", {ap['hash']}" if ap['hash'] else ''
-        s['history'].append(history_line(w['step'], f'aprovado via {a.via}: "{a.quote}"{h}'))
+        s['history'].append(history_line(w['step'], f'aprovado via {a.via}: "{a.quote}"{hash_note(ap)}'))
         write(path, s)
         return status_of(s)
 
@@ -214,7 +214,7 @@ def cmd_log(a):
     with locked(a.reel):
         path, s = read(a.reel)
         w = s.get('waiting')
-        if w and w['kind'] in ('approval', 'publish'):
+        if w and w['kind'] in AUTHOR_KINDS:
             raise Fail('WaitingApproval', f"{path} waits for the author's {w['kind']} at {w['step']}",
                        'show the author what the gate shows and run approve on their word; do not go on before it')
         s['step'] = a.step
@@ -258,12 +258,6 @@ def text(v):
     v = v.strip()
     if not v or '\n' in v or '\r' in v:
         raise argparse.ArgumentTypeError('must be non-empty, on one line')
-    return v
-
-
-def door(v):
-    if not re.fullmatch(r'[a-z-]+', v):
-        raise argparse.ArgumentTypeError('one lowercase word naming where the words came from, e.g. live')
     return v
 
 
@@ -329,7 +323,8 @@ def parser():
 
     v = verb(sub, 'approve', "clear an approval or publish stop on the author's first-hand word",
              '"$REEL" --via live --quote "aprovado, segue"', cmd_approve)
-    v.add_argument('--via', required=True, type=door, help='where the words came from, e.g. live')
+    v.add_argument('--via', required=True, choices=DOORS,
+                   help='where the words came from: live (this session), openbot (a bot channel), github')
     v.add_argument('--quote', required=True, type=text, help="the author's words, verbatim")
     v.add_argument('--file', **{**files, 'help': 'required for a publish stop: the approved files, hashed'})
 

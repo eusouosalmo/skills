@@ -81,6 +81,7 @@ class Validation(Base):
             code, out, _ = run(args[0], str(self.reel), *args[1:])
             self.assertEqual(out['_tag'], 'StateInvalid')
             self.assertIn('Saída', out['message'])
+            self.assertNotIn('format', out['next'])
         self.assertEqual(self.state.read_text(encoding='utf-8'), broken)
 
     def test_an_unknown_waiting_kind_is_invalid(self):
@@ -148,6 +149,7 @@ class Approve(Base):
         self.assertNotEqual(run('approve', str(self.reel), '--via', 'live')[0], 0)
         self.assertNotEqual(run('approve', str(self.reel), '--quote', 'ok')[0], 0)
         self.assertNotEqual(run('approve', str(self.reel), '--via', 'live', '--quote', '  ')[0], 0)
+        self.assertNotEqual(run('approve', str(self.reel), '--via', 'whatever', '--quote', 'ok')[0], 0)
 
     def test_approve_with_no_approval_stop_is_refused(self):
         self.start()
